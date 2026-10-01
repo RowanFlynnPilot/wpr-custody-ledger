@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Statewide from "./Statewide.jsx";
 import CloseToHome from "./CloseToHome.jsx";
+import Counties from "./Counties.jsx";
 import WomenMen from "./WomenMen.jsx";
 import ContractBeds from "./ContractBeds.jsx";
 import Juvenile from "./Juvenile.jsx";
@@ -9,7 +10,7 @@ import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
 import { apDate, apMonthYear, num, ordinal, pct1, signed } from "./format.js";
 
-const FILES = ["statewide", "facilities", "latest", "changes"];
+const FILES = ["statewide", "facilities", "latest", "changes", "counties"];
 const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more than one week
 
 export default function App() {
@@ -22,14 +23,14 @@ export default function App() {
         if (!r.ok) throw new Error(`${name}.json: ${r.status}`);
         return r.json();
       })
-    )).then(([statewide, facilities, latest, changes]) => setData({ statewide, facilities, latest, changes }))
+    )).then(([statewide, facilities, latest, changes, counties]) => setData({ statewide, facilities, latest, changes, counties }))
       .catch(setError);
   }, []);
 
   if (error) return <div className="load-error">The Custody Ledger could not load its data. Refresh the page to try again.</div>;
   if (!data) return <div className="loading">Loading the ledger…</div>;
 
-  const { statewide, facilities, latest, changes } = data;
+  const { statewide, facilities, latest, changes, counties } = data;
   const { population, crowding, women, county_jails: jails } = changes;
   const ageDays = Math.floor((Date.now() - new Date(`${latest.report_date}T12:00:00Z`)) / 864e5);
   const design = crowding.capacity_type === "design";
@@ -94,6 +95,7 @@ export default function App() {
 
       <Statewide statewide={statewide} changes={changes} />
       <CloseToHome facilities={facilities} statewide={statewide} changes={changes} />
+      <Counties counties={counties} home={changes.home_counties} />
       <WomenMen statewide={statewide} />
       <ContractBeds statewide={statewide} />
       <Juvenile statewide={statewide} facilities={facilities} />

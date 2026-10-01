@@ -11,6 +11,7 @@ import pytest
 
 from brief import ap_date, brief, flags, moved, title
 from build import HOME_COUNTIES, changes, check_series, year_before
+from counties import aggregate, check_against_weekly_report
 from parse import parse_date, parse_report
 from series import supervision_as_of, week
 from snapshot import facilities, juvenile
@@ -181,6 +182,51 @@ def test_changes_counts_the_record_streak_and_finds_the_prior_peak():
     assert (result['population']['record'], result['population']['record_streak']) == (False, 0)
     assert result['population']['prior_peak']['value'] == 110
     assert result['crowding']['record_percent'] == 110.0
+
+
+def monthly_file(people: list[tuple[str, str, str]]) -> bytes:
+    """A stand-in for DOC's monthly file: (county, original admission type, updated type) per person. No real records."""
+    lines = ['RPT_DT;"DOC_NUM";"LAST_NAME";"CONVICTION_COUNTY";"ORIG_ADM_TYPE";"UPDT_ADM_TYPE"']
+    lines += [f'2026/07/31 00:00:00;{i};"Person {i}";"{county}";"{orig}";"{updated}"'
+              for i, (county, orig, updated) in enumerate(people)]
+    return ('\ufeff' + '\n'.join(lines)).encode('utf-8')
+
+
+NEW = 'Admitted Inmate with New JOC - Adult Offender'
+REVOKED = 'Returned from Extended Supervision (ES) - No New Sentence / ES Violator'
+HOLD = 'Admitted DCC Hold - Violation of Supervision'
+
+
+def test_county_counts_withhold_anything_under_ten():
+    people = ([('Marathon', NEW, '')] * 30 + [('Marathon', REVOKED, '')] * 12 +
+              [('Marathon', HOLD, 'Admission Status Change - No New Sentence / ES Violator')] * 3 +  # revoked after admission
+              [('Taylor', NEW, '')] * 25 + [('Taylor', REVOKED, '')] * 4 +   # split would describe 4 people
+              [('Lincoln', NEW, '')] * 6 + [('Lincoln', REVOKED, '')] * 20 +  # the other half would describe 6
+              [('Menominee', NEW, '')] * 3 + [('', NEW, '')] * 2)
+    result = aggregate(monthly_file(people), 'test')
+    by_county = {c['county']: c for c in result['counties']}
+    assert len(result['counties']) == 72
+    assert (result['as_of'], result['people'], result['no_new_sentence']) == ('2026-07-31', 105, 39)
+    assert by_county['Marathon'] == {'county': 'Marathon', 'people': 45, 'no_new_sentence': 15}
+    assert by_county['Taylor'] == {'county': 'Taylor', 'people': 29, 'no_new_sentence': None}
+    assert by_county['Lincoln'] == {'county': 'Lincoln', 'people': 26, 'no_new_sentence': None}
+    assert by_county['Menominee'] == {'county': 'Menominee', 'people': None, 'no_new_sentence': None}
+    assert result['people_not_shown_by_county'] == 3 + 2  # Menominee's three and two with no county, together
+    assert 'Person' not in str(result)
+
+
+def test_county_file_is_checked_for_layout_and_against_the_weekly_report():
+    with pytest.raises(ValueError, match='not Wisconsin counties'):
+        aggregate(monthly_file([('Cook', NEW, '')]), 'test')
+    with pytest.raises(ValueError, match='changed the file layout'):
+        aggregate(b'RPT_DT;"NAME"\n2026/07/31 00:00:00;"x"', 'test')
+    result = aggregate(monthly_file([('Marathon', NEW, '')] * 100), 'test')
+    report = {'report_date': '2026-07-31', 'adult_institutions': {'dai': 100}}
+    check_against_weekly_report(result, [report])
+    with pytest.raises(ValueError, match='weekly report'):
+        check_against_weekly_report(result, [{**report, 'adult_institutions': {'dai': 150}}])
+    with pytest.raises(ValueError, match='weekly report'):
+        check_against_weekly_report(result, [{**report, 'report_date': '2026-06-05'}])
 
 
 def synthetic_facility(population: list[int], **extra) -> dict:

@@ -2,7 +2,7 @@
 import { cpSync, mkdirSync } from "node:fs";
 
 mkdirSync("public/data", { recursive: true });
-for (const f of ["statewide.json", "facilities.json", "latest.json", "changes.json"]) {
+for (const f of ["statewide.json", "facilities.json", "latest.json", "changes.json", "counties.json"]) {
   cpSync(`../data/${f}`, `public/data/${f}`);
 }
 cpSync("../data/csv", "public/data/csv", { recursive: true });

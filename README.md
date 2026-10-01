@@ -17,6 +17,7 @@ center, contract jail and juvenile facility, and the number of people on probati
 | `data/latest.json` | The newest report: the statewide row plus every facility listed that week |
 | `data/changes.json` | What moved in the newest report: records, streaks, year-over-year change, most crowded, biggest movers, close to home |
 | `data/brief.md` | The same, drafted by rule as sentences for the newsroom |
+| `data/counties.json` | People in state prison by county of conviction, and how many are in with no new sentence, from DOC's monthly data file. Counts under 10 are withheld |
 | `data/csv/` | The same series as spreadsheets: `statewide.csv`, `facility_population.csv`, `facility_capacity.csv` (one column per facility), `facility_names.csv` |
 | `data/reports/YYYY-MM-DD.json` | Every row of every report as DOC printed it, plus the source address and SHA-256 of the PDF it came from |
 
@@ -43,6 +44,11 @@ center, contract jail and juvenile facility, and the number of people on probati
   facilities, which the same form reports in a separate section.
 - **Supervision** is the probation and parole count printed at the top of each form. It runs
   one to several months behind; `supervision_as_of` gives its date.
+- **County counts** come from a different DOC source, the monthly Persons in Our Care data file, which
+  lists every person in prison. Only counts are kept here: by county of conviction, and how many
+  are in on a violation of supervision with no new sentence. Any count under 10 is withheld, and
+  so is any split whose other half would be under 10. DOC publishes no definitions for that file;
+  "no new sentence" follows the admission type recorded for each person.
 - **Report dates** are read from each PDF's header, not its file name. Almost all are Fridays.
 - **Three weeks are missing.** DOC's archive has no report for Aug. 22, 2003 or Aug. 13,
   2021, and the Jan. 4, 2013 PDF was published without its population columns.

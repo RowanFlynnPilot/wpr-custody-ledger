@@ -46,6 +46,7 @@ export default function Methodology({ latest }) {
         <li><a href={csv("facility_population")} download>Population by facility, weekly</a> <span>one column per facility</span></li>
         <li><a href={csv("facility_capacity")} download>Capacity by facility, weekly</a></li>
         <li><a href={csv("facility_names")} download>Facility names, types and counties</a></li>
+        <li><a href={csv("counties")} download>People in prison by county of conviction</a> <span>counts under 10 withheld</span></li>
       </ul>
       <p className="chart-note">
         Free to reuse with credit to &ldquo;The Custody Ledger, Wausau Pilot &amp; Review.&rdquo; Code and

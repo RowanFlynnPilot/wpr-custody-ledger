@@ -173,6 +173,13 @@ tr.detail > td { padding: 0 0.6rem 1rem; background: #fbf8f0; }
 .detail-facts { font-size: 0.86rem; margin: 0 0 0.6rem; }
 .spark { display: block; }
 
+/* by county of conviction */
+.county-table { background: var(--white); border: 1px solid var(--line); max-width: 44rem; }
+.county-table tr.home th { font-weight: 700; }
+.county-table tfoot th, .county-table tfoot td { border-top: 2px solid var(--ink); border-bottom: 0; font-weight: 700; }
+.withheld { font-family: var(--body); font-size: 0.78rem; color: var(--ink-soft); }
+.more { font: 500 0.86rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.5rem 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
 /* methodology */
 .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
 .method p { font-size: 0.92rem; margin: 0 0 0.6rem; }

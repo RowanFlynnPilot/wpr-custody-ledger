@@ -7,7 +7,7 @@ import { chromium } from "playwright-core";
 
 const PORT = 4173;
 const URL = `http://localhost:${PORT}/`;
-const SECTIONS = 8; // h2 headings on the page; change it when a section is added or removed
+const SECTIONS = 9; // h2 headings on the page; change it when a section is added or removed
 const failures = [];
 const check = (ok, message) => { if (!ok) failures.push(message); };
 
