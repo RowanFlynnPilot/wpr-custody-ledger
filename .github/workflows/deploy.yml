@@ -35,10 +35,16 @@ jobs:
           node-version: '24'
           cache: npm
           cache-dependency-path: site/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
       - name: Build site from committed data
         working-directory: site
         run: |
           npm ci
+          # The share card shows this week's numbers, so it is drawn here, not committed.
+          python -m pip install pillow==12.2.0
+          python og-card.py
           npm run build
           # Older iPhones (Safari < 16.4) ignore media-query range syntax, which silently turns off
           # the responsive layout. vite.config.js pins targets to prevent it; this proves it.

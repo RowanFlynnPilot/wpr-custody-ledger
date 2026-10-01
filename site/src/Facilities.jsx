@@ -57,7 +57,7 @@ export default function Facilities({ facilities, latest }) {
     window.history.replaceState(null, "", next ? `#facility=${next}` : window.location.pathname + window.location.search);
   };
   const heading = (key, text, numeric) => (
-    <th scope="col" className={numeric ? "n" : undefined} aria-sort={(sort || active.sort) === key ? (key === "name" ? "ascending" : "descending") : undefined}>
+    <th scope="col" role="columnheader" className={numeric ? "n" : undefined} aria-sort={(sort || active.sort) === key ? (key === "name" ? "ascending" : "descending") : undefined}>
       <button type="button" className="sort" onClick={() => setSort(key)}>{text}</button>
     </th>
   );
@@ -84,24 +84,24 @@ export default function Facilities({ facilities, latest }) {
         </p>
       )}
       <div className="table-wrap">
-      <table className="roster">
-        <thead>
-          <tr>
+      <table className="roster" role="table">
+        <thead role="rowgroup">
+          <tr role="row">
             {heading("name", "Facility")}
             {heading("population", active.key === "juvenile" ? "Youth" : "People", true)}
-            {hasCapacity && <th scope="col" className="n wide">Capacity</th>}
+            {hasCapacity && <th scope="col" role="columnheader" className="n wide">Capacity</th>}
             {hasCapacity && heading("percent", "Percent of capacity")}
             {heading("yearChange", "In a year", true)}
-            <th scope="col" className="wide">Five years</th>
+            <th scope="col" role="columnheader" className="wide">Five years</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody role="rowgroup">
           {shown.map((r) => {
             const h = history[r.id];
             return (
               <React.Fragment key={r.id}>
-                <tr id={`facility-${r.id}`} className={open === r.id ? "open" : undefined}>
-                  <th scope="row">
+                <tr role="row" id={`facility-${r.id}`} className={open === r.id ? "open" : undefined}>
+                  <th scope="row" role="rowheader">
                     <button type="button" className="name" aria-expanded={open === r.id} onClick={() => toggle(r.id)}>{r.name}</button>
                     <span className="where">
                       <span className="wide">
@@ -111,10 +111,10 @@ export default function Facilities({ facilities, latest }) {
                       {r.type !== "county_jail" && r.county && `${r.county} County`}
                     </span>
                   </th>
-                  <td className="n">{num(r.population)}</td>
-                  {hasCapacity && <td className="n wide">{num(r.capacity)}</td>}
+                  <td role="cell" className="n" data-label={active.key === "juvenile" ? "youth" : "people"}>{num(r.population)}</td>
+                  {hasCapacity && <td role="cell" className="n wide">{num(r.capacity)}</td>}
                   {hasCapacity && (
-                    <td className="meter-cell">
+                    <td role="cell" className="meter-cell">
                       {r.percent != null && (
                         <>
                           <span className="meter" aria-hidden="true">
@@ -126,12 +126,14 @@ export default function Facilities({ facilities, latest }) {
                       )}
                     </td>
                   )}
-                  <td className="n">{r.yearChange == null ? "new" : r.yearChange === 0 ? "0" : signed(r.yearChange)}</td>
-                  <td className="wide"><Sparkline values={h.population.slice(-SPARK_WEEKS)} width={110} height={26} /></td>
+                  <td role="cell" className="n change" data-label={r.yearChange == null ? "this year" : "in a year"}>
+                    {r.yearChange == null ? "new" : r.yearChange === 0 ? "0" : signed(r.yearChange)}
+                  </td>
+                  <td role="cell" className="wide"><Sparkline values={h.population.slice(-SPARK_WEEKS)} width={110} height={26} /></td>
                 </tr>
                 {open === r.id && (
-                  <tr className="detail">
-                    <td colSpan={hasCapacity ? 6 : 4}><Detail facility={h} dates={facilities.dates} /></td>
+                  <tr role="row" className="detail">
+                    <td role="cell" colSpan={hasCapacity ? 6 : 4}><Detail facility={h} dates={facilities.dates} /></td>
                   </tr>
                 )}
               </React.Fragment>

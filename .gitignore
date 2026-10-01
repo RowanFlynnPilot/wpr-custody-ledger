@@ -3,4 +3,5 @@ __pycache__/
 node_modules/
 site/dist/
 site/public/data/
+site/public/og-image.png
 .claude/

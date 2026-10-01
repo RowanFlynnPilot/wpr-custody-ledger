@@ -110,6 +110,8 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 - **Chart marks use their own three colors** (`--chart-1` teal `#12917d`, `--chart-2` rust `#c2573a`, `--chart-3` violet `#6a63b3`): the brand teal is too gray to work as a data color. The three pass the dataviz skill's palette validator on `#fffdf8`. Capacity is always the neutral gray line.
 - **Copy is computed from the data** (lede, stat strip, headings with years, annotations), so nothing on the page goes stale when the record does. Dates are AP style, from `format.js`.
 - **Close to home** is Marathon County, the counties bordering it, and Oneida, Vilas, Forest and Price (`HOME_COUNTIES` in `CloseToHome.jsx`). That list is an editorial choice.
+- **Share card**: `site/og-card.py` (Pillow, fonts from `@fontsource`) draws `og-image.png` in the Watch Ledger's layout. Its row of marks is one per 500 people, rust for those beyond capacity, read from `data/latest.json`; so `deploy.yml` draws it on every deploy and the PNG is not committed.
+- **Facility table on phones** (560px and under): CSS turns each row into a block, name on top, figures beneath, with a fixed first column so every bar is on one scale. The table carries explicit ARIA roles because that CSS strips table semantics in some browsers.
 - **Deep links**: `#facility=<id>` opens that facility's history. The embed script forwards the article's hash into the frame.
 - **The page reports its height** to the embedding page (`source: "wpr-custody-ledger"`), same scheme as the Watch Ledger.
 - Local preview: `.claude/launch.json` starts the dev server on port 5173. After scripted multi-step edits to one file, touch it: Vite once served a stale transform.
@@ -119,7 +121,7 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 
 Phase 0, the data model and a first version of the site are done. Still open: embed it on the news site, tell DOC about the female subtotal error and the capacity misprints.
 
-0. **Site leftovers.** A social card (`og-image.png`, generated, 1200x630); where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel; the phone layout of the facility table is serviceable, not good.
+0. **Site leftovers.** Where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel.
 
 1. **Registry leftovers.** City and coordinates for state facilities (needed for the map; take addresses from DOC's facility pages and geocode, don't type them from memory). Security-level statewide series if the front end wants one.
 3. **Local layer.** Marathon County residents in prison and admissions by type, from DOC's monthly Persons in Our Care data files (April 2020 on; columns not yet inspected). Staffing vacancies by facility from DOC's staffing dashboard. A records request for the Lincoln County jail contract.

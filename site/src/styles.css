@@ -195,14 +195,30 @@ tr.detail > td { padding: 0 0.6rem 1rem; background: #fbf8f0; }
   .chart { padding: 0.7rem 0.2rem 0.3rem; }
   .mark-text { font-size: 11px; }
   th, td { padding: 0.45rem 0.3rem; }
-  .meter-cell { min-width: 5.4rem; }
-  .meter { width: calc(100% - 3.4rem); }
-  .name { font-size: 0.88rem; }
-  .roster tbody th { width: 42%; }
-  .meter-cell { width: 34%; }
   thead th { font-size: 0.66rem; letter-spacing: 0.02em; }
-  .meter-num { width: 3rem; margin-left: 0.25rem; font-size: 0.74rem; }
-  .n { font-size: 0.8rem; }
+}
+/* The facility table on a phone: the header row becomes a line of sort buttons, and each
+   facility is a block with its name on top and its figures on one line beneath. */
+@media (max-width: 560px) {
+  .roster, .roster thead, .roster tbody, .roster tr, .roster th, .roster td { display: block; }
+  .roster thead tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1rem; padding: 0.55rem 0.7rem; border-bottom: 2px solid var(--ink); }
+  .roster thead tr::before { content: "Sort by"; font-size: 0.72rem; color: var(--ink-soft); }
+  .roster thead th { border: 0; padding: 0; }
+  .roster thead .wide { display: none; }
+  /* Fixed first column and fixed-width percent, so every bar is drawn on the same scale. */
+  .roster tbody tr { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); align-items: center; gap: 0.3rem 0.6rem; padding: 0.7rem; border-bottom: 1px solid var(--line); }
+  .roster tbody th, .roster tbody td { border: 0; padding: 0; }
+  .roster tbody th { grid-area: 1 / 1 / 2 / -1; }
+  .roster tbody td.wide { display: none; }
+  .roster td.n { grid-area: 2 / 1; text-align: left; font-size: 0.9rem; }
+  .roster td.n::after { content: " " attr(data-label); font-family: var(--body); font-size: 0.76rem; color: var(--ink-soft); }
+  .roster td.meter-cell { grid-area: 2 / 2; min-width: 0; display: flex; align-items: center; }
+  /* The year's change shares the county's line, at the right. */
+  .roster td.change { grid-area: 1 / 1 / 2 / -1; justify-self: end; align-self: end; font-size: 0.8rem; }
+  .roster .meter { flex: 1; width: auto; }
+  .roster .meter-num { width: 3.4rem; margin-left: 0.3rem; }
+  .roster tr.detail { display: block; padding: 0 0.4rem 0.8rem; }
+  .roster tr.open { border-bottom: 0; background: #fbf8f0; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .name, .tabs button { transition: color 0.12s, background-color 0.12s, text-decoration-color 0.12s; }
