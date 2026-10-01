@@ -1,0 +1,98 @@
+id,name,type,county,first,last
+dodge,Dodge Correctional Institution,institution,Dodge,1999-01-01,2026-09-25
+waupun,Waupun Correctional Institution,institution,Dodge,1999-01-01,2026-09-25
+green-bay,Green Bay Correctional Institution,institution,Brown,1999-01-01,2026-09-25
+columbia,Columbia Correctional Institution,institution,Columbia,1999-01-01,2026-09-25
+racine-youthful-offender,Racine Youthful Offender Correctional Facility,institution,Racine,1999-01-01,2026-09-25
+fox-lake,Fox Lake Correctional Institution,institution,Dodge,1999-01-01,2026-09-25
+jackson,Jackson Correctional Institution,institution,Jackson,1999-01-01,2026-09-25
+kettle-moraine,Kettle Moraine Correctional Institution,institution,Sheboygan,1999-01-01,2026-09-25
+oshkosh,Oshkosh Correctional Institution,institution,Winnebago,1999-01-01,2026-09-25
+racine,Racine Correctional Institution,institution,Racine,1999-01-01,2026-09-25
+oakhill,Oakhill Correctional Institution,institution,Dane,1999-01-01,2026-09-25
+black-river,Black River Correctional Center,center,Jackson,1999-01-01,2026-09-25
+drug-abuse,Drug Abuse Correctional Center,center,Winnebago,1999-01-01,2026-09-25
+flambeau,Flambeau Correctional Center,center,Sawyer,1999-01-01,2026-09-25
+gordon,Gordon Correctional Center,center,Douglas,1999-01-01,2026-09-25
+mcnaughton,McNaughton Correctional Center,center,Oneida,1999-01-01,2026-09-25
+st-croix,St. Croix Correctional Center,center,St. Croix,1999-01-01,2026-09-25
+sanger-powers,Sanger B. Powers Correctional Center,center,Outagamie,1999-01-01,2026-09-25
+winnebago,Winnebago Correctional Center,center,Winnebago,1999-01-01,2026-09-25
+abode,Abode Correctional Center,center,,1999-01-01,2000-09-08
+john-burke,John C. Burke Correctional Center,center,Dodge,1999-01-01,2026-09-25
+kenosha,Kenosha Correctional Center,center,Kenosha,1999-01-01,2026-09-25
+marshall-sherrer,Marshall E. Sherrer Correctional Center,center,Milwaukee,1999-01-01,2026-09-25
+oregon,Oregon Correctional Center,center,Dane,1999-01-01,2026-09-25
+st-johns,St. John's Correctional Center,center,,1999-01-01,2000-09-08
+thompson,Thompson Correctional Center,center,Dane,1999-01-01,2026-09-25
+federal-other,Federal facilities (up to 50 beds),federal,,1999-01-01,2008-07-11
+federal-duluth,"Federal facility, Duluth",federal,,1999-01-01,2003-12-05
+federal-oxford,"Federal facility, Oxford",federal,,1999-01-01,2003-12-05
+jefferson-county-jail,Jefferson County Jail,county_jail,Jefferson,1999-01-01,2026-09-25
+manitowoc-county-jail,Manitowoc County Jail,county_jail,Manitowoc,1999-01-01,2019-09-13
+outagamie-county-jail,Outagamie County Jail,county_jail,Outagamie,1999-01-01,2026-09-25
+prairie-du-chien,Prairie du Chien Correctional Institution,institution,Crawford,1999-01-01,2026-09-25
+st-croix-county-jail,St. Croix County Jail,county_jail,St. Croix,1999-01-01,2001-09-28
+texas-county-jails,Texas county jails,out_of_state,,1999-01-01,2000-09-08
+north-fork-ok,"North Fork, Okla.",out_of_state,,1999-01-01,2003-12-05
+hardeman-tn,"Hardeman, Tenn.",out_of_state,,1999-01-01,2003-07-25
+whiteville-tn,"Whiteville, Tenn.",out_of_state,,1999-01-01,2003-07-25
+wrc,Wisconsin Resource Center,treatment,Winnebago,1999-01-01,2026-09-25
+taycheedah,Taycheedah Correctional Institution,institution,Fond du Lac,1999-01-01,2026-09-25
+milwaukee-womens,Milwaukee Women's Correctional Center,center,Milwaukee,1999-01-01,2026-09-25
+ellsworth,Robert E. Ellsworth Correctional Center,center,Racine,1999-01-01,2026-09-25
+federal-alderson,"Federal facility, Alderson",federal,,1999-01-01,2000-12-15
+ethan-allen,Ethan Allen School,juvenile,,1999-01-01,2012-01-20
+lincoln-hills,Lincoln Hills School,juvenile,Lincoln,1999-01-01,2026-09-25
+mendota-juvenile,Mendota Juvenile Treatment Center,juvenile,Dane,1999-01-01,2026-09-25
+sprite,SPRITE,juvenile,,1999-01-01,2012-01-20
+youth-leadership,Youth Leadership Training Center,juvenile,,1999-01-01,2002-02-22
+southern-oaks,Southern Oaks Girls School,juvenile,,1999-01-01,2011-06-24
+vilas-county-jail,Vilas County Jail,county_jail,Vilas,1999-08-27,2026-09-25
+oneida-county-jail,Oneida County Jail,county_jail,Oneida,1999-10-08,2026-09-25
+wspf,Wisconsin Secure Program Facility,institution,Grant,1999-11-12,2026-09-25
+appleton-mn,"Appleton, Minn.",out_of_state,,1999-12-31,2005-10-21
+mcloud-ok,"McLoud, Okla.",out_of_state,,1999-12-31,2001-01-19
+mason-tn,"Mason, Tenn.",out_of_state,,2000-01-21,2003-07-25
+felmers-chaney,Felmers O. Chaney Correctional Center,center,Milwaukee,2000-05-26,2026-09-25
+tallahatchie-ms,"Tallahatchie, Miss.",out_of_state,,2000-05-26,2001-09-28
+columbia-county-jail,Columbia County Jail,county_jail,Columbia,2000-07-07,2026-09-25
+redgranite,Redgranite Correctional Institution,institution,Waushara,2001-01-12,2026-09-25
+dodge-county-jail,Dodge County Jail,county_jail,Dodge,2001-03-02,2003-12-05
+msdf,Milwaukee Secure Detention Facility,secure,Milwaukee,2001-10-05,2026-09-25
+stanley,Stanley Correctional Institution,institution,Chippewa,2002-09-06,2026-09-25
+watonga-ok,"Watonga, Okla.",out_of_state,,2003-08-01,2004-11-12
+sturtevant,Sturtevant Transitional Facility,institution,Racine,2003-12-12,2026-09-25
+florence-county-jail,Florence County Jail,county_jail,Florence,2003-12-12,2019-12-27
+forest-county-jail,Forest County Jail,county_jail,Forest,2003-12-12,2026-09-25
+langlade-county-jail,Langlade County Jail,county_jail,Langlade,2003-12-12,2026-09-25
+sheboygan-county-jail,Sheboygan County Jail,county_jail,Sheboygan,2003-12-12,2019-10-18
+waushara-county-jail,Waushara County Jail,county_jail,Waushara,2003-12-12,2026-09-25
+winnebago-county-jail,Winnebago County Jail,county_jail,Winnebago,2003-12-12,2026-09-25
+new-lisbon,New Lisbon Correctional Institution,institution,Juneau,2004-04-02,2026-09-25
+chippewa-valley,Chippewa Valley Correctional Treatment Facility,institution,Chippewa,2004-04-02,2026-09-25
+milwaukee-county-jail,Milwaukee County Jail,county_jail,Milwaukee,2004-04-09,2019-09-13
+douglas-county-jail,Douglas County Jail,county_jail,Douglas,2004-11-19,2026-09-25
+fond-du-lac-county-jail,Fond du Lac County Jail,county_jail,Fond du Lac,2006-07-07,2026-09-25
+ozaukee-county-jail,Ozaukee County Jail,county_jail,Ozaukee,2006-11-03,2026-09-25
+brown-county-jail,Brown County Jail,county_jail,Brown,2007-01-12,2009-08-14
+adams-county-jail,Adams County Jail,county_jail,Adams,2007-04-13,2007-08-17
+racine-county-jail,Racine County Jail,county_jail,Racine,2008-01-04,2026-09-25
+juneau-county-jail,Juneau County Jail,county_jail,Juneau,2008-01-25,2026-09-25
+sauk-county-jail,Sauk County Jail,county_jail,Sauk,2008-02-22,2026-09-25
+door-county-jail,Door County Jail,county_jail,Door,2008-02-29,2019-09-13
+bayfield-county-jail,Bayfield County Jail,county_jail,Bayfield,2008-03-07,2019-12-27
+intergovernmental-agreements,Intergovernmental agreements (up to 50 beds),other,,2008-07-18,2019-12-27
+copper-lake,Copper Lake School,juvenile,Lincoln,2011-07-01,2026-09-25
+grow-academy,Grow Academy,juvenile,,2014-06-13,2026-09-25
+not-itemized,Contract beds DOC did not itemize,other,,2017-03-10,2017-03-10
+vernon-county-jail,Vernon County Jail,county_jail,Vernon,2017-03-17,2026-09-25
+milwaukee-house-of-correction,Milwaukee County House of Correction,county_jail,Milwaukee,2017-10-27,2026-09-25
+dunn-county-jail,Dunn County Jail,county_jail,Dunn,2017-11-03,2026-09-25
+interstate-compact,Interstate Corrections Compact (up to 50 beds),other,,2019-09-20,2026-09-25
+rock-county-jail,Rock County Jail,county_jail,Rock,2020-09-04,2026-09-25
+marquette-county-jail,Marquette County Jail,county_jail,Marquette,2021-07-16,2026-09-25
+lincoln-county-jail,Lincoln County Jail,county_jail,Lincoln,2025-05-23,2026-09-25
+washington-county-jail,Washington County Jail,county_jail,Washington,2026-02-06,2026-09-25
+waupaca-county-jail,Waupaca County Jail,county_jail,Waupaca,2026-02-06,2026-09-25
+green-lake-county-jail,Green Lake County Jail,county_jail,Green Lake,2026-03-06,2026-09-25

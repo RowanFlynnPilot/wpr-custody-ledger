@@ -4,13 +4,15 @@ Expected headline values were checked against a second extractor (poppler's pdft
 and 2019-08-09 / 2026-08-28-era figures match Wisconsin Watch's published numbers.
 """
 import copy
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
 
-from build import check_series
+from build import changes, check_series, year_before
 from parse import parse_date, parse_report
-from snapshot import facilities
+from series import supervision_as_of, week
+from snapshot import facilities, juvenile
 
 FIXTURES = Path(__file__).parent / 'fixtures'
 
@@ -38,26 +40,153 @@ def test_headline(name):
     assert report['adult_institutions'] == {'capacity': capacity, 'population': population, 'dai': dai, 'dcc': dcc}
 
 
+def row_index(report: dict, name: str) -> int:
+    return next(i for i, r in enumerate(report['rows']) if r['name'] == name)
+
+
+@pytest.mark.parametrize('name', EXPECTED)
+def test_every_era_reconciles_at_facility_level(name):
+    # breakdown() and juvenile() throw unless the rows add up to DOC's own totals.
+    report = load(name)
+    assert sum(f['population'] for f in facilities(report)) == EXPECTED[name][1][1]
+    assert juvenile(report)
+
+
 def test_current_form_facilities():
-    by_name = {f['name']: f for f in facilities(load('2026-09-25'))}
-    assert by_name["Milwaukee Women's Center"] == {'name': "Milwaukee Women's Center", 'capacity': 42, 'population': 107}
-    assert by_name['Lincoln County Jail'] == {'name': 'Lincoln County Jail', 'capacity': None, 'population': 74}
-    assert by_name['Waushara County Jail']['population'] == 24  # 17 men + 7 women, merged across blocks
+    by_id = {f['id']: f for f in facilities(load('2026-09-25'))}
+    assert by_id['milwaukee-womens'] == {
+        'id': 'milwaukee-womens', 'name': "Milwaukee Women's Correctional Center", 'type': 'center',
+        'county': 'Milwaukee', 'security': 'minimum', 'sex': 'female', 'capacity': 42, 'population': 107}
+    assert by_id['lincoln-county-jail'] == {
+        'id': 'lincoln-county-jail', 'name': 'Lincoln County Jail', 'type': 'county_jail', 'county': 'Lincoln',
+        'security': None, 'sex': 'both', 'capacity': None, 'population': 74}
+    assert by_id['waushara-county-jail']['population'] == 24  # 17 men + 7 women, merged across blocks
+    assert by_id['mcnaughton']['county'] == 'Oneida'
+
+
+def test_rows_of_one_facility_are_merged_across_label_changes():
+    # 1999: "John C. Burke", a men's center. 2009: "John Burke Center", listed with the women, and Fox Lake's
+    # minimum unit on its own row. Both resolve to one facility each.
+    assert {f['id']: f for f in facilities(load('1999-01-08'))}['john-burke']['sex'] == 'male'
+    by_id = {f['id']: f for f in facilities(load('2009-04-17'))}
+    assert by_id['john-burke']['sex'] == 'female'
+    report = load('2009-04-17')
+    fox_lake = [r['values'] for r in report['rows'] if r['name'] in ('Fox Lake', 'Fox Lake Min')]
+    assert len(fox_lake) == 2
+    assert by_id['fox-lake']['population'] == sum(v[1] for v in fox_lake)
+    assert by_id['fox-lake']['capacity'] == sum(v[0] for v in fox_lake)
+
+
+def test_out_of_state_era_is_classified():
+    row, _, _ = week(load('1999-01-08'))
+    assert row['contract_population'] == 3720
+    assert row['contract_out_of_state'] + row['contract_federal'] + row['contract_county_jails'] == 3720 - 297
+    # the other 297 are at Prairie du Chien, a state facility DOC listed under contract beds until 2002
+    assert row['contract_out_of_state'] == 699 + 692 + 4 + 1252  # Texas jails, North Fork, Hardeman, Whiteville
+
+
+def test_statewide_row():
+    row, _, _ = week(load('2026-09-25'))
+    assert row == {
+        'date': '2026-09-25', 'population': 23905, 'capacity': 17860, 'capacity_type': 'design',
+        'capacity_printed': 17860, 'men_population': 22155, 'men_capacity': 16886, 'women_population': 1750,
+        'women_capacity': 974, 'contract_population': 490, 'contract_county_jails': 461,
+        'contract_out_of_state': 0, 'contract_federal': 0, 'juvenile_population': 122,
+        'supervision_population': 64051, 'supervision_as_of': '2026-07-31', 'supervision_holds': 840}
+
+
+def test_capacity_is_the_sum_of_the_rows_where_doc_misprinted_its_total():
+    # Mar 23, 2001 falls in a CAPACITY_MISPRINTS stretch: Redgranite's 750 beds are missing from the printed total.
+    row, _, _ = week(load('2001-03-23'))
+    assert row['capacity_printed'] == 16696
+    assert row['capacity'] == 16696 + 750
+
+
+def test_capacity_mismatch_outside_a_known_stretch_throws():
+    report = load('2026-09-25')
+    report['rows'][row_index(report, 'Dodge')]['values'][0] += 100
+    with pytest.raises(ValueError, match='they should match'):
+        facilities(report)
+
+
+def test_juvenile_facilities():
+    by_id = {f['id']: f for f in juvenile(load('2026-09-25'))}
+    assert (by_id['lincoln-hills']['capacity'], by_id['lincoln-hills']['population']) == (519, 63)
+    assert by_id['lincoln-hills']['county'] == 'Lincoln'
+    assert by_id['mendota-juvenile']['population'] == 39 + 11  # boys' and girls' rows merged
+    assert by_id['mendota-juvenile']['sex'] == 'both'
+    report = load('2026-09-25')
+    del report['rows'][row_index(report, 'Lincoln Hills School')]
+    with pytest.raises(ValueError, match='juvenile facilities sum to'):
+        juvenile(report)
 
 
 def test_snapshot_throws_when_a_facility_row_goes_missing():
     report = load('2026-09-25')
     report['rows'] = [r for r in report['rows'] if r['name'] != 'Oakhill']
-    with pytest.raises(ValueError, match='sums to'):
+    with pytest.raises(ValueError, match='sum to'):
         facilities(report)
 
 
-def test_snapshot_throws_on_an_unknown_subtotal_row():
+def test_snapshot_throws_on_an_unknown_row():
     report = load('2026-09-25')
-    i = next(i for i, r in enumerate(report['rows']) if r['name'] == 'Dodge')
-    report['rows'].insert(i, {'name': 'NEW SUBTOTAL', 'values': [1165, 1771, 1758, 13]})  # double counts Dodge
-    with pytest.raises(ValueError, match='sums to'):
+    report['rows'].insert(row_index(report, 'Dodge'), {'name': 'NEW SUBTOTAL', 'values': [1165, 1771, 1758, 13]})
+    with pytest.raises(ValueError, match='registry.py'):
         facilities(report)
+
+
+def test_a_newly_contracted_county_jail_needs_no_registry_entry():
+    report = load('2026-09-25')
+    report['rows'].insert(row_index(report, 'Lincoln County Jail'), {'name': 'Marathon County Jail', 'values': [0, 0, 0]})
+    marathon = next(f for f in facilities(report) if f['id'] == 'marathon-county-jail')
+    assert (marathon['type'], marathon['county']) == ('county_jail', 'Marathon')
+    # ...but only a Wisconsin county, and only inside a contract-beds block
+    report['rows'].insert(row_index(report, 'Lincoln County Jail'), {'name': 'Cook County Jail', 'values': [0, 0, 0]})
+    with pytest.raises(ValueError, match='registry.py'):
+        facilities(report)
+
+
+def test_a_blank_cell_throws_with_a_pointer_to_the_fix():
+    report = load('2026-09-25')
+    report['rows'][row_index(report, 'Oneida County Jail')]['values'] = [120, 120]  # DCC cell blank
+    with pytest.raises(ValueError, match='ROW_FIXES'):
+        facilities(report)
+
+
+def test_supervision_as_of():
+    label = 'TOTAL PROBATION/PAROLE POPULATION (as of {})'
+    assert supervision_as_of(label.format('8/31/98'), '1999-01-08') == '1998-08-31'
+    assert supervision_as_of(label.format('07/31/2026'), '2026-09-25') == '2026-07-31'
+    assert supervision_as_of(label.format('04/303/31/04'), '2004-09-03') is None  # DOC's typo; never guessed
+    assert supervision_as_of(label.format('10/312009'), '2010-01-08') is None
+
+
+def synthetic_weeks(populations: list[int]) -> list[dict]:
+    start = date(2025, 9, 26)
+    return [{'date': (start + timedelta(weeks=i)).isoformat(), 'population': p, 'capacity': 100,
+             'capacity_type': 'design', 'men_population': p - 10, 'men_capacity': 90, 'women_population': 10,
+             'women_capacity': 10, 'contract_county_jails': 5, 'juvenile_population': 3,
+             'supervision_population': 1, 'supervision_as_of': None, 'supervision_holds': None}
+            for i, p in enumerate(populations)]
+
+
+def test_changes_counts_the_record_streak_and_finds_the_prior_peak():
+    weeks = synthetic_weeks([100, 110, 105, 111, 112])
+    result = changes(weeks, [])
+    assert result['population'] == {'value': 112, 'week_change': 1, 'year_change': 12, 'record': True,
+                                    'record_streak': 2, 'prior_peak': {'date': weeks[1]['date'], 'value': 110}}
+    assert result['crowding']['percent'] == 112.0 and result['crowding']['over_capacity'] == 12
+    result = changes(synthetic_weeks([100, 110, 105]), [])
+    assert (result['population']['record'], result['population']['record_streak']) == (False, 0)
+    assert result['population']['prior_peak']['value'] == 110
+    assert result['crowding']['record_percent'] == 110.0
+
+
+def test_year_before_picks_the_report_closest_to_52_weeks_back():
+    weeks = synthetic_weeks(list(range(100, 160)))  # 60 consecutive weeks
+    assert year_before(weeks) == 59 - 52
+    del weeks[59 - 52]  # a missing week, as in DOC's archive
+    assert weeks[year_before(weeks)]['date'] in (weeks[5]['date'], weeks[6]['date'], weeks[7]['date'])
 
 
 def test_parse_date_rejects_non_report_weekday():

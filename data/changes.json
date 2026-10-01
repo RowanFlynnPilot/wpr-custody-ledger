@@ -1,0 +1,226 @@
+{
+ "report_date": "2026-09-25",
+ "previous_date": "2026-09-18",
+ "year_ago_date": "2025-09-26",
+ "population": {
+  "value": 23905,
+  "week_change": 8,
+  "year_change": 355,
+  "record": true,
+  "record_streak": 5,
+  "prior_peak": {
+   "date": "2019-08-09",
+   "value": 23826
+  }
+ },
+ "crowding": {
+  "capacity": 17860,
+  "capacity_type": "design",
+  "percent": 133.8,
+  "over_capacity": 6045,
+  "record_percent": 134.1,
+  "record_date": "2018-08-10"
+ },
+ "men": {
+  "value": 22155,
+  "week_change": 3,
+  "year_change": 237,
+  "record": false,
+  "percent": 131.2
+ },
+ "women": {
+  "value": 1750,
+  "week_change": 5,
+  "year_change": 118,
+  "record": true,
+  "percent": 179.7
+ },
+ "county_jails": {
+  "value": 461,
+  "week_change": -4,
+  "year_change": 167,
+  "record": false,
+  "jails_holding": 12,
+  "jails_listed": 24
+ },
+ "juvenile": {
+  "value": 122,
+  "week_change": 2,
+  "year_change": 11,
+  "record": false
+ },
+ "supervision": {
+  "population": 64051,
+  "as_of": "2026-07-31",
+  "holds": 840
+ },
+ "facilities": {
+  "over_capacity": 34,
+  "with_capacity": 37,
+  "most_crowded": [
+   {
+    "id": "milwaukee-womens",
+    "name": "Milwaukee Women's Correctional Center",
+    "population": 107,
+    "capacity": 42,
+    "percent": 254.8
+   },
+   {
+    "id": "drug-abuse",
+    "name": "Drug Abuse Correctional Center",
+    "population": 295,
+    "capacity": 125,
+    "percent": 236.0
+   },
+   {
+    "id": "ellsworth",
+    "name": "Robert E. Ellsworth Correctional Center",
+    "population": 506,
+    "capacity": 230,
+    "percent": 220.0
+   },
+   {
+    "id": "mcnaughton",
+    "name": "McNaughton Correctional Center",
+    "population": 118,
+    "capacity": 55,
+    "percent": 214.5
+   },
+   {
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 865,
+    "capacity": 409,
+    "percent": 211.5
+   }
+  ],
+  "largest_gains": [
+   {
+    "id": "chippewa-valley",
+    "name": "Chippewa Valley Correctional Treatment Facility",
+    "population": 510,
+    "week_change": 15
+   },
+   {
+    "id": "dodge",
+    "name": "Dodge Correctional Institution",
+    "population": 1771,
+    "week_change": 14
+   },
+   {
+    "id": "st-croix",
+    "name": "St. Croix Correctional Center",
+    "population": 111,
+    "week_change": 6
+   },
+   {
+    "id": "taycheedah",
+    "name": "Taycheedah Correctional Institution",
+    "population": 1088,
+    "week_change": 6
+   },
+   {
+    "id": "fox-lake",
+    "name": "Fox Lake Correctional Institution",
+    "population": 1400,
+    "week_change": 5
+   }
+  ],
+  "largest_drops": [
+   {
+    "id": "jackson",
+    "name": "Jackson Correctional Institution",
+    "population": 969,
+    "week_change": -19
+   },
+   {
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 865,
+    "week_change": -9
+   },
+   {
+    "id": "kettle-moraine",
+    "name": "Kettle Moraine Correctional Institution",
+    "population": 1185,
+    "week_change": -5
+   },
+   {
+    "id": "prairie-du-chien",
+    "name": "Prairie du Chien Correctional Institution",
+    "population": 531,
+    "week_change": -5
+   },
+   {
+    "id": "stanley",
+    "name": "Stanley Correctional Institution",
+    "population": 1574,
+    "week_change": -5
+   }
+  ],
+  "largest_gains_year": [
+   {
+    "id": "waupun",
+    "name": "Waupun Correctional Institution",
+    "population": 966,
+    "year_change": 117
+   },
+   {
+    "id": "taycheedah",
+    "name": "Taycheedah Correctional Institution",
+    "population": 1088,
+    "year_change": 98
+   },
+   {
+    "id": "kettle-moraine",
+    "name": "Kettle Moraine Correctional Institution",
+    "population": 1185,
+    "year_change": 47
+   },
+   {
+    "id": "lincoln-county-jail",
+    "name": "Lincoln County Jail",
+    "population": 74,
+    "year_change": 47
+   },
+   {
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 865,
+    "year_change": 43
+   }
+  ],
+  "at_record": [
+   {
+    "id": "racine-youthful-offender",
+    "name": "Racine Youthful Offender Correctional Facility",
+    "population": 474
+   },
+   {
+    "id": "oshkosh",
+    "name": "Oshkosh Correctional Institution",
+    "population": 2133
+   },
+   {
+    "id": "taycheedah",
+    "name": "Taycheedah Correctional Institution",
+    "population": 1088
+   },
+   {
+    "id": "vernon-county-jail",
+    "name": "Vernon County Jail",
+    "population": 56
+   },
+   {
+    "id": "marquette-county-jail",
+    "name": "Marquette County Jail",
+    "population": 5
+   },
+   {
+    "id": "lincoln-county-jail",
+    "name": "Lincoln County Jail",
+    "population": 74
+   }
+  ]
+ }
+}

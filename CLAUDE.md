@@ -16,19 +16,21 @@ Working name: The Custody Ledger. A Wausau Pilot & Review tracker of Wisconsin's
 | `scraper/update.py` | Each run: read index page, store any report not yet stored, download the 8 newest again and compare |
 | `scraper/backfill.py` | One-time: load the 1999-2025 archive zips (already run; data is committed) |
 | `scraper/corrections.py` | Hand-verified skips and date fixes, each with a reason; used by backfill and update |
-| `scraper/snapshot.py` | Facility breakdown of the latest report, reconciled to the headline |
-| `scraper/build.py` | `data/reports/*.json` -> `data/statewide.json` + `data/latest.json` |
+| `scraper/registry.py` | Every DOC row label -> facility id, name, type, county. Hand-built |
+| `scraper/snapshot.py` | Facility breakdown of any report (adult and juvenile), reconciled to DOC's totals |
+| `scraper/series.py` | One statewide row per report: headline, men/women, contract beds, juvenile, supervision |
+| `scraper/build.py` | `data/reports/*.json` -> `statewide.json`, `facilities.json`, `latest.json`, `changes.json`, `csv/` |
 | `tests/` | Regression tests on one real PDF per format era, plus failure-mode tests |
 | `.github/workflows/update.yml` | Mon, Wed, Sat: test, update, build, commit. Saturday is the usual pickup; the others catch late postings and corrections |
 
-`data/reports/YYYY-MM-DD.json` is the stored truth (one per report, ~1,450 files). `statewide.json` and `latest.json` are derived and rebuilt every run.
+`data/reports/YYYY-MM-DD.json` is the stored truth (one per report, ~1,450 files). Everything else in `data/` is derived and rebuilt every run: `statewide.json` (one row per report, one per line), `facilities.json` (each facility's weekly population and capacity; arrays start at index `start` of `dates`), `latest.json`, `changes.json` (records, streaks, movers: the input for briefs and alerts) and `csv/`.
 
 ## Checks (every one holds for all 1,446 reports, 1999-2026)
 
 The pipeline throws rather than publish when any of these fail:
 
 - **Per report** (`parse.py`): date readable and a Thursday or Friday; headline has 4 columns; population == DAI + DCC; the separately printed "TOTAL ... (DAI)" line equals the headline DAI.
-- **Latest facilities** (`snapshot.py`): leaves sum to the headline in population, DAI, DCC and capacity. Contract-bed capacity comes from the CONTRACT BEDS subtotals; Dodge Infirmary holds patients but has no capacity.
+- **Facilities, every report** (`snapshot.py`): facility rows sum to the headline population; contract-bed rows sum to the 'Contract Facilities' row; women's and men's rows sum to DOC's subtotals; juvenile rows sum to 'Total On-Grounds Population'; capacities sum to the headline capacity except in `CAPACITY_MISPRINTS`; every label is in `registry.py`. Contract-bed capacity comes from the CONTRACT BEDS subtotals; Dodge Infirmary holds patients but has no capacity. DAI and DCC are not read from facility rows: those cells have typos in about 25 reports.
 - **Whole series** (`build.py`): week-to-week population change under 3% (largest real move: 1.15%); exactly one operating -> design capacity switch.
 - **Freshness** (`update.py`): throws if the newest stored report is more than 21 days old, so a silent DOC page change can't freeze the tracker.
 - **Storage** (`store.py`): compares by the PDF's SHA-256. Same address with different bytes throws (DOC changed a file in place). Two addresses with different bytes claiming one date throws, with a pointer to `corrections.py`. Same bytes at a new address is the same report, and the new address is kept.
@@ -40,7 +42,10 @@ A full rebuild from scratch (backfill + update + build) reproduces the committed
 
 GitHub emails on a failed scheduled run. Read the error first; each one names the file and the broken check.
 - **Duplicate date** (DOC re-issued a week): add the superseded URL to `SKIP` in `corrections.py`, delete that date's file in `data/reports/`, rerun `update.py`.
-- **Snapshot sums don't match** (DOC changed the form): rows in the latest PDF no longer match `SUBTOTALS` / `START` / `END` in `snapshot.py`. Update them, add the new PDF as a test fixture.
+- **"Unknown facility row"**: DOC added or renamed a row. Add the label to `LABELS` in `registry.py` (a new Wisconsin county jail in a contract block needs nothing). If it is a new subtotal, add it to the header sets in `snapshot.py`. Add the PDF as a test fixture if the form changed.
+- **"fits no column layout"**: a row was printed with a blank cell. Open the PDF, add the row to `ROW_FIXES` in `corrections.py`.
+- **Sums don't match** (population, contract, women, men, juvenile): open the PDF. Either the form changed or DOC's rows don't add up that week; fix in `snapshot.py` or record it in `corrections.py`, never by loosening a check.
+- **"facility capacities sum to ... they should match"**: DOC's printed total capacity disagrees with its rows. If the PDF confirms it, add the stretch to `CAPACITY_MISPRINTS` with the cause.
 - **"DOC changed ... after it was stored"**: DOC replaced a PDF at the same address. Compare the new PDF with the stored JSON; to accept it, delete that date's file in `data/reports/` and rerun `update.py`.
 - **Weekly change over 3%**: open the source PDF and verify before touching `MAX_WEEKLY_CHANGE`.
 
@@ -60,7 +65,10 @@ DOC moves the finished year's weekly PDFs into `{year}.zip`. Add that year to `Y
 - **MIT license** for code and compiled data.
 - **Funded by grants, not sponsor slots.** No sponsor inventory on this tool.
 - **Never publish the DAI/DCC columns of DOC's subtotal rows.** Use the population column or sum the leaves (see Source errors).
-- **Facility snapshot is current-form only** (Rev. 03_04_2026). Leaves must sum to the headline population, DAI and DCC, so a DOC form change fails the build loudly. Update `SUBTOTALS` / `START` / `END` in `snapshot.py` when that happens.
+- **Capacity is the sum of DOC's facility rows**, not the printed total. They are equal in 1,310 reports; in the other 136 the printed total is an arithmetic error inside DOC's form (`CAPACITY_MISPRINTS`). `capacity_printed` keeps DOC's figure. A mismatch outside the listed stretches throws.
+- **A facility is one place.** Rows are merged by facility id across renames (SMCI -> WSPF), units on separate rows (Fox Lake Min, WSGP, the MSDF programs) and sex (St. Croix, county jails). `sex` and `security` are the form sections the facility sits in, latest report; `type` and `county` come from `registry.py`.
+- **Facility parsing is by structure, with explicit header sets**: rows between the headline and the men's subtotal are summaries; parenthesized rows are splits of the row above; a row with a capacity ends a contract-beds block. An unknown label throws.
+- **County of state facilities** is from DHS's BadgerCare Plus handbook, section 45.9 (release 22-02), not from memory. City and coordinates are not in the registry yet.
 
 ## Known gaps
 
@@ -68,6 +76,8 @@ DOC's archive has no report for 2003-08-22 or 2021-08-13. The 2013-01-04 PDF is 
 
 ## Source errors and open questions
 
+- **Printed total capacity is wrong in 136 reports** (five stretches, 2001-2008; see `CAPACITY_MISPRINTS`). The one that matters: for the first 12 weeks of design capacity (2008-03-14 to 05-30) the total repeats the men's subtotal and leaves out 1,123 women's beds. Read from the printed total, May 30, 2008 looks like 138.0% of capacity; it was 129.2%.
+- **18 rows with a blank or mistyped cell** are in `ROW_FIXES`; one week's contract subtotal counts 19 people no row lists (`NOT_ITEMIZED`); one juvenile row is dropped by the parser because of a typed note (`JUVENILE_ROWS_DROPPED`).
 - **Female subtotal, DAI column.** On every report since the form split contract beds by sex (2026-01-30 on), "SUB-TOTAL FEMALES (ALL LOCATIONS)" prints a DAI figure short by exactly that week's "CONTRACT BEDS (FEMALE)" DAI. Sep 25, 2026: population 1,750, DAI 1,728, DCC 15. The population column and the headline are right. DOC has not been told.
 - **2004-08-05.** The header reads "August 5, 2004" (a Thursday); the file is `2004.08.06.pdf`. Nothing in the PDF settles which is the typo, so it is stored as the header reads.
 - **1999-11-25 and 1999-11-26** are separate files with different counts, one day apart (Thanksgiving week). Both are stored.
@@ -77,8 +87,9 @@ DOC's archive has no report for 2003-08-22 or 2021-08-13. The 2013-01-04 PDF is 
 - Five straight record weeks: 23,854 (Aug 28) -> 23,870 -> 23,890 -> 23,897 -> 23,905 (Sep 25), each the highest in the archive back to 1999.
 - Most crowded vs design capacity: Milwaukee Women's Center 255% (107/42), Drug Abuse Center 236%, Robert E. Ellsworth Center 220%, McNaughton 215%, Oakhill 211%.
 - Local: Lincoln County Jail (Merrill) holds 74 state prisoners on contract, up from 16 when it first appeared (May 23, 2025) and 54 in January 2026. Oneida County Jail holds 120, Vilas 27. Lincoln Hills School holds 63 youth; its listed capacity is 519.
-- Crowding rate: 133.8% of design capacity (6,045 over); 34 of 37 facilities with a design capacity are over it. The design-era record rate is 138.0% (May 30, 2008), so the head count is a record but the rate is not.
-- Women: 1,750 on a design capacity of 974 (180%), the highest women's count in the archive. Men: 131%.
+- Crowding rate: 133.8% of design capacity (6,045 over); 34 of 37 facilities with a design capacity are over it. The design-era record rate is 134.1% (23,782 on 17,739, Aug 10, 2018), so the head count is a record and the rate is 40 people short of one at today's capacity.
+- Women: 1,750 on a design capacity of 974 (179.7%), the highest women's count and the highest women's rate in the archive. Men: 131.2%.
+- At their own all-time highs on Sep 25: Oshkosh (2,133), Taycheedah (1,088), Racine Youthful Offender (474), Lincoln County Jail (74), Vernon County Jail (56).
 - Out-of-state era: contract facilities peaked at 5,729 people on Aug 11, 2000 (Whiteville, Tenn.; Appleton, Minn.; Texas county jails; federal prisons).
 - Since the pandemic low of 19,381 (May 14, 2021): +4,524. Probation and parole: 64,051, with 840 held in custody.
 
@@ -92,9 +103,9 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 
 ## Next
 
-Phase 0 (hash check, three runs a week, README, license) is done. Still open from it: tell DOC about the female subtotal error.
+Phase 0 (hash check, three runs a week, README, license) and the data model (facility registry, facility history for all 1,446 reports, statewide series, CSVs, `changes.json`) are done. Still open: tell DOC about the female subtotal error and the capacity misprints.
 
-1. **Data model.** A hand-built facility registry (`data/facilities.json`: DOC label, display name, type, security level, sex, city, county, coordinates). Section-aware facility history across the archive: most institutions keep one label for all 1,446 reports, so the obstacle is labels that repeat within a report ("Racine", "St. Croix", "Milwaukee"), not naming. Gate it on leaves summing to the headline, as `snapshot.py` does now (it reconciles back to 2026-01-30 only). Series for women/men, contract beds, juvenile facilities, supervision. CSV exports. A weekly changes file: records, streaks, biggest movers.
+1. **Registry leftovers.** City and coordinates for state facilities (needed for the map; take addresses from DOC's facility pages and geocode, don't type them from memory). Security-level statewide series if the front end wants one.
 2. **Front end** (React/Vite -> GitHub Pages -> WordPress iframe). Lead with what Wisconsin Watch's chart lacks: the 27-year line with the 2000 out-of-state peak and the 2008 capacity break, a close-to-home panel (Lincoln, Oneida, Vilas jails; Lincoln Hills; McNaughton), the women's system, jail contracts, facility pages. Ledger-family design tokens, as in `wpr-watch-ledger`: teal `#3A867C`, cream `#F6F2E9`, Fraunces display, Public Sans body, JetBrains Mono for data. Before building routes, settle where indexable text lives: an iframe from github.io earns the news site no search credit.
 3. **Local layer.** Marathon County residents in prison and admissions by type, from DOC's monthly Persons in Our Care data files (April 2020 on; columns not yet inspected). Staffing vacancies by facility from DOC's staffing dashboard. A records request for the Lincoln County jail contract.
 4. **Jail layer.** Office of Detention Facilities annual report (county jail admissions, ADP, suicides).
