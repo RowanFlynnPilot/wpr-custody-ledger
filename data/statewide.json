@@ -1,0 +1,8678 @@
+[
+ {
+  "date": "1999-01-01",
+  "capacity": 14107,
+  "capacity_type": "operating",
+  "population": 17967
+ },
+ {
+  "date": "1999-01-08",
+  "capacity": 14193,
+  "capacity_type": "operating",
+  "population": 17986
+ },
+ {
+  "date": "1999-01-15",
+  "capacity": 14640,
+  "capacity_type": "operating",
+  "population": 17999
+ },
+ {
+  "date": "1999-01-22",
+  "capacity": 14644,
+  "capacity_type": "operating",
+  "population": 18029
+ },
+ {
+  "date": "1999-01-29",
+  "capacity": 14729,
+  "capacity_type": "operating",
+  "population": 18071
+ },
+ {
+  "date": "1999-02-05",
+  "capacity": 14726,
+  "capacity_type": "operating",
+  "population": 18163
+ },
+ {
+  "date": "1999-02-12",
+  "capacity": 14796,
+  "capacity_type": "operating",
+  "population": 18193
+ },
+ {
+  "date": "1999-02-19",
+  "capacity": 14881,
+  "capacity_type": "operating",
+  "population": 18251
+ },
+ {
+  "date": "1999-02-26",
+  "capacity": 15035,
+  "capacity_type": "operating",
+  "population": 18307
+ },
+ {
+  "date": "1999-03-05",
+  "capacity": 15035,
+  "capacity_type": "operating",
+  "population": 18374
+ },
+ {
+  "date": "1999-03-12",
+  "capacity": 15026,
+  "capacity_type": "operating",
+  "population": 18459
+ },
+ {
+  "date": "1999-03-19",
+  "capacity": 15101,
+  "capacity_type": "operating",
+  "population": 18474
+ },
+ {
+  "date": "1999-03-26",
+  "capacity": 15186,
+  "capacity_type": "operating",
+  "population": 18543
+ },
+ {
+  "date": "1999-04-02",
+  "capacity": 15215,
+  "capacity_type": "operating",
+  "population": 18594
+ },
+ {
+  "date": "1999-04-09",
+  "capacity": 15205,
+  "capacity_type": "operating",
+  "population": 18562
+ },
+ {
+  "date": "1999-04-16",
+  "capacity": 15223,
+  "capacity_type": "operating",
+  "population": 18597
+ },
+ {
+  "date": "1999-04-23",
+  "capacity": 15218,
+  "capacity_type": "operating",
+  "population": 18672
+ },
+ {
+  "date": "1999-04-30",
+  "capacity": 15185,
+  "capacity_type": "operating",
+  "population": 18666
+ },
+ {
+  "date": "1999-05-07",
+  "capacity": 15206,
+  "capacity_type": "operating",
+  "population": 18679
+ },
+ {
+  "date": "1999-05-14",
+  "capacity": 15203,
+  "capacity_type": "operating",
+  "population": 18613
+ },
+ {
+  "date": "1999-05-21",
+  "capacity": 15203,
+  "capacity_type": "operating",
+  "population": 18692
+ },
+ {
+  "date": "1999-05-28",
+  "capacity": 15217,
+  "capacity_type": "operating",
+  "population": 18714
+ },
+ {
+  "date": "1999-06-04",
+  "capacity": 15222,
+  "capacity_type": "operating",
+  "population": 18717
+ },
+ {
+  "date": "1999-06-11",
+  "capacity": 15221,
+  "capacity_type": "operating",
+  "population": 18789
+ },
+ {
+  "date": "1999-06-18",
+  "capacity": 15224,
+  "capacity_type": "operating",
+  "population": 18875
+ },
+ {
+  "date": "1999-06-25",
+  "capacity": 15240,
+  "capacity_type": "operating",
+  "population": 18962
+ },
+ {
+  "date": "1999-07-02",
+  "capacity": 15284,
+  "capacity_type": "operating",
+  "population": 18996
+ },
+ {
+  "date": "1999-07-09",
+  "capacity": 15270,
+  "capacity_type": "operating",
+  "population": 19043
+ },
+ {
+  "date": "1999-07-16",
+  "capacity": 15261,
+  "capacity_type": "operating",
+  "population": 19110
+ },
+ {
+  "date": "1999-07-23",
+  "capacity": 15234,
+  "capacity_type": "operating",
+  "population": 19205
+ },
+ {
+  "date": "1999-07-30",
+  "capacity": 15238,
+  "capacity_type": "operating",
+  "population": 19253
+ },
+ {
+  "date": "1999-08-06",
+  "capacity": 15235,
+  "capacity_type": "operating",
+  "population": 19320
+ },
+ {
+  "date": "1999-08-13",
+  "capacity": 15237,
+  "capacity_type": "operating",
+  "population": 19398
+ },
+ {
+  "date": "1999-08-20",
+  "capacity": 15269,
+  "capacity_type": "operating",
+  "population": 19412
+ },
+ {
+  "date": "1999-08-27",
+  "capacity": 15288,
+  "capacity_type": "operating",
+  "population": 19350
+ },
+ {
+  "date": "1999-09-03",
+  "capacity": 15274,
+  "capacity_type": "operating",
+  "population": 19348
+ },
+ {
+  "date": "1999-09-10",
+  "capacity": 15276,
+  "capacity_type": "operating",
+  "population": 19389
+ },
+ {
+  "date": "1999-09-17",
+  "capacity": 15261,
+  "capacity_type": "operating",
+  "population": 19446
+ },
+ {
+  "date": "1999-09-24",
+  "capacity": 15244,
+  "capacity_type": "operating",
+  "population": 19528
+ },
+ {
+  "date": "1999-10-01",
+  "capacity": 15301,
+  "capacity_type": "operating",
+  "population": 19545
+ },
+ {
+  "date": "1999-10-08",
+  "capacity": 15396,
+  "capacity_type": "operating",
+  "population": 19636
+ },
+ {
+  "date": "1999-10-15",
+  "capacity": 15470,
+  "capacity_type": "operating",
+  "population": 19702
+ },
+ {
+  "date": "1999-10-22",
+  "capacity": 15499,
+  "capacity_type": "operating",
+  "population": 19777
+ },
+ {
+  "date": "1999-10-29",
+  "capacity": 15524,
+  "capacity_type": "operating",
+  "population": 19859
+ },
+ {
+  "date": "1999-11-05",
+  "capacity": 15517,
+  "capacity_type": "operating",
+  "population": 19874
+ },
+ {
+  "date": "1999-11-12",
+  "capacity": 15511,
+  "capacity_type": "operating",
+  "population": 19944
+ },
+ {
+  "date": "1999-11-19",
+  "capacity": 15547,
+  "capacity_type": "operating",
+  "population": 20012
+ },
+ {
+  "date": "1999-11-25",
+  "capacity": 15550,
+  "capacity_type": "operating",
+  "population": 20027
+ },
+ {
+  "date": "1999-11-26",
+  "capacity": 15550,
+  "capacity_type": "operating",
+  "population": 20024
+ },
+ {
+  "date": "1999-12-03",
+  "capacity": 15571,
+  "capacity_type": "operating",
+  "population": 20035
+ },
+ {
+  "date": "1999-12-10",
+  "capacity": 15600,
+  "capacity_type": "operating",
+  "population": 20059
+ },
+ {
+  "date": "1999-12-17",
+  "capacity": 15659,
+  "capacity_type": "operating",
+  "population": 20164
+ },
+ {
+  "date": "1999-12-24",
+  "capacity": 15630,
+  "capacity_type": "operating",
+  "population": 20167
+ },
+ {
+  "date": "1999-12-31",
+  "capacity": 16015,
+  "capacity_type": "operating",
+  "population": 20191
+ },
+ {
+  "date": "2000-01-07",
+  "capacity": 16023,
+  "capacity_type": "operating",
+  "population": 20177
+ },
+ {
+  "date": "2000-01-14",
+  "capacity": 16146,
+  "capacity_type": "operating",
+  "population": 20215
+ },
+ {
+  "date": "2000-01-21",
+  "capacity": 16191,
+  "capacity_type": "operating",
+  "population": 20264
+ },
+ {
+  "date": "2000-01-28",
+  "capacity": 16269,
+  "capacity_type": "operating",
+  "population": 20266
+ },
+ {
+  "date": "2000-02-04",
+  "capacity": 16261,
+  "capacity_type": "operating",
+  "population": 20240
+ },
+ {
+  "date": "2000-02-11",
+  "capacity": 16267,
+  "capacity_type": "operating",
+  "population": 20211
+ },
+ {
+  "date": "2000-02-18",
+  "capacity": 16313,
+  "capacity_type": "operating",
+  "population": 20264
+ },
+ {
+  "date": "2000-02-25",
+  "capacity": 16436,
+  "capacity_type": "operating",
+  "population": 20281
+ },
+ {
+  "date": "2000-03-03",
+  "capacity": 16416,
+  "capacity_type": "operating",
+  "population": 20289
+ },
+ {
+  "date": "2000-03-10",
+  "capacity": 16465,
+  "capacity_type": "operating",
+  "population": 20284
+ },
+ {
+  "date": "2000-03-17",
+  "capacity": 16529,
+  "capacity_type": "operating",
+  "population": 20325
+ },
+ {
+  "date": "2000-03-24",
+  "capacity": 16497,
+  "capacity_type": "operating",
+  "population": 20363
+ },
+ {
+  "date": "2000-03-31",
+  "capacity": 16478,
+  "capacity_type": "operating",
+  "population": 20375
+ },
+ {
+  "date": "2000-04-07",
+  "capacity": 16470,
+  "capacity_type": "operating",
+  "population": 20415
+ },
+ {
+  "date": "2000-04-14",
+  "capacity": 16423,
+  "capacity_type": "operating",
+  "population": 20427
+ },
+ {
+  "date": "2000-04-21",
+  "capacity": 16400,
+  "capacity_type": "operating",
+  "population": 20486
+ },
+ {
+  "date": "2000-04-28",
+  "capacity": 16421,
+  "capacity_type": "operating",
+  "population": 20471
+ },
+ {
+  "date": "2000-05-05",
+  "capacity": 16439,
+  "capacity_type": "operating",
+  "population": 20469
+ },
+ {
+  "date": "2000-05-12",
+  "capacity": 16384,
+  "capacity_type": "operating",
+  "population": 20514
+ },
+ {
+  "date": "2000-05-19",
+  "capacity": 16347,
+  "capacity_type": "operating",
+  "population": 20538
+ },
+ {
+  "date": "2000-05-26",
+  "capacity": 16544,
+  "capacity_type": "operating",
+  "population": 20585
+ },
+ {
+  "date": "2000-06-02",
+  "capacity": 16532,
+  "capacity_type": "operating",
+  "population": 20529
+ },
+ {
+  "date": "2000-06-09",
+  "capacity": 16639,
+  "capacity_type": "operating",
+  "population": 20557
+ },
+ {
+  "date": "2000-06-16",
+  "capacity": 16734,
+  "capacity_type": "operating",
+  "population": 20597
+ },
+ {
+  "date": "2000-06-23",
+  "capacity": 16802,
+  "capacity_type": "operating",
+  "population": 20583
+ },
+ {
+  "date": "2000-06-30",
+  "capacity": 16806,
+  "capacity_type": "operating",
+  "population": 20555
+ },
+ {
+  "date": "2000-07-07",
+  "capacity": 16830,
+  "capacity_type": "operating",
+  "population": 20552
+ },
+ {
+  "date": "2000-07-14",
+  "capacity": 16869,
+  "capacity_type": "operating",
+  "population": 20559
+ },
+ {
+  "date": "2000-07-21",
+  "capacity": 16877,
+  "capacity_type": "operating",
+  "population": 20608
+ },
+ {
+  "date": "2000-07-28",
+  "capacity": 16891,
+  "capacity_type": "operating",
+  "population": 20682
+ },
+ {
+  "date": "2000-08-04",
+  "capacity": 16885,
+  "capacity_type": "operating",
+  "population": 20664
+ },
+ {
+  "date": "2000-08-11",
+  "capacity": 16896,
+  "capacity_type": "operating",
+  "population": 20672
+ },
+ {
+  "date": "2000-08-18",
+  "capacity": 16883,
+  "capacity_type": "operating",
+  "population": 20671
+ },
+ {
+  "date": "2000-08-25",
+  "capacity": 17171,
+  "capacity_type": "operating",
+  "population": 20624
+ },
+ {
+  "date": "2000-09-01",
+  "capacity": 17169,
+  "capacity_type": "operating",
+  "population": 20625
+ },
+ {
+  "date": "2000-09-08",
+  "capacity": 17138,
+  "capacity_type": "operating",
+  "population": 20604
+ },
+ {
+  "date": "2000-09-15",
+  "capacity": 17068,
+  "capacity_type": "operating",
+  "population": 20651
+ },
+ {
+  "date": "2000-09-22",
+  "capacity": 17051,
+  "capacity_type": "operating",
+  "population": 20690
+ },
+ {
+  "date": "2000-09-29",
+  "capacity": 17059,
+  "capacity_type": "operating",
+  "population": 20627
+ },
+ {
+  "date": "2000-10-06",
+  "capacity": 17057,
+  "capacity_type": "operating",
+  "population": 20592
+ },
+ {
+  "date": "2000-10-13",
+  "capacity": 17054,
+  "capacity_type": "operating",
+  "population": 20604
+ },
+ {
+  "date": "2000-10-20",
+  "capacity": 17018,
+  "capacity_type": "operating",
+  "population": 20631
+ },
+ {
+  "date": "2000-10-27",
+  "capacity": 16968,
+  "capacity_type": "operating",
+  "population": 20659
+ },
+ {
+  "date": "2000-11-03",
+  "capacity": 16934,
+  "capacity_type": "operating",
+  "population": 20601
+ },
+ {
+  "date": "2000-11-10",
+  "capacity": 16930,
+  "capacity_type": "operating",
+  "population": 20639
+ },
+ {
+  "date": "2000-11-17",
+  "capacity": 16833,
+  "capacity_type": "operating",
+  "population": 20663
+ },
+ {
+  "date": "2000-11-24",
+  "capacity": 16823,
+  "capacity_type": "operating",
+  "population": 20646
+ },
+ {
+  "date": "2000-12-01",
+  "capacity": 16810,
+  "capacity_type": "operating",
+  "population": 20583
+ },
+ {
+  "date": "2000-12-08",
+  "capacity": 16857,
+  "capacity_type": "operating",
+  "population": 20596
+ },
+ {
+  "date": "2000-12-15",
+  "capacity": 16821,
+  "capacity_type": "operating",
+  "population": 20622
+ },
+ {
+  "date": "2000-12-22",
+  "capacity": 16731,
+  "capacity_type": "operating",
+  "population": 20599
+ },
+ {
+  "date": "2000-12-29",
+  "capacity": 16745,
+  "capacity_type": "operating",
+  "population": 20590
+ },
+ {
+  "date": "2001-01-05",
+  "capacity": 16738,
+  "capacity_type": "operating",
+  "population": 20536
+ },
+ {
+  "date": "2001-01-12",
+  "capacity": 17468,
+  "capacity_type": "operating",
+  "population": 20546
+ },
+ {
+  "date": "2001-01-19",
+  "capacity": 16705,
+  "capacity_type": "operating",
+  "population": 20590
+ },
+ {
+  "date": "2001-01-26",
+  "capacity": 16711,
+  "capacity_type": "operating",
+  "population": 20627
+ },
+ {
+  "date": "2001-02-02",
+  "capacity": 16702,
+  "capacity_type": "operating",
+  "population": 20569
+ },
+ {
+  "date": "2001-02-09",
+  "capacity": 16704,
+  "capacity_type": "operating",
+  "population": 20588
+ },
+ {
+  "date": "2001-02-16",
+  "capacity": 16667,
+  "capacity_type": "operating",
+  "population": 20556
+ },
+ {
+  "date": "2001-02-23",
+  "capacity": 16575,
+  "capacity_type": "operating",
+  "population": 20626
+ },
+ {
+  "date": "2001-03-02",
+  "capacity": 16601,
+  "capacity_type": "operating",
+  "population": 20635
+ },
+ {
+  "date": "2001-03-09",
+  "capacity": 16607,
+  "capacity_type": "operating",
+  "population": 20631
+ },
+ {
+  "date": "2001-03-16",
+  "capacity": 16641,
+  "capacity_type": "operating",
+  "population": 20646
+ },
+ {
+  "date": "2001-03-23",
+  "capacity": 16696,
+  "capacity_type": "operating",
+  "population": 20684
+ },
+ {
+  "date": "2001-03-30",
+  "capacity": 16669,
+  "capacity_type": "operating",
+  "population": 20782
+ },
+ {
+  "date": "2001-04-06",
+  "capacity": 16666,
+  "capacity_type": "operating",
+  "population": 20789
+ },
+ {
+  "date": "2001-04-13",
+  "capacity": 16629,
+  "capacity_type": "operating",
+  "population": 20764
+ },
+ {
+  "date": "2001-04-20",
+  "capacity": 16613,
+  "capacity_type": "operating",
+  "population": 20780
+ },
+ {
+  "date": "2001-04-27",
+  "capacity": 17348,
+  "capacity_type": "operating",
+  "population": 20742
+ },
+ {
+  "date": "2001-05-04",
+  "capacity": 17387,
+  "capacity_type": "operating",
+  "population": 20791
+ },
+ {
+  "date": "2001-05-11",
+  "capacity": 17368,
+  "capacity_type": "operating",
+  "population": 20788
+ },
+ {
+  "date": "2001-05-18",
+  "capacity": 17379,
+  "capacity_type": "operating",
+  "population": 20797
+ },
+ {
+  "date": "2001-05-25",
+  "capacity": 17334,
+  "capacity_type": "operating",
+  "population": 20801
+ },
+ {
+  "date": "2001-06-01",
+  "capacity": 17379,
+  "capacity_type": "operating",
+  "population": 20720
+ },
+ {
+  "date": "2001-06-08",
+  "capacity": 17276,
+  "capacity_type": "operating",
+  "population": 20744
+ },
+ {
+  "date": "2001-06-15",
+  "capacity": 17298,
+  "capacity_type": "operating",
+  "population": 20755
+ },
+ {
+  "date": "2001-06-22",
+  "capacity": 17308,
+  "capacity_type": "operating",
+  "population": 20750
+ },
+ {
+  "date": "2001-06-29",
+  "capacity": 17299,
+  "capacity_type": "operating",
+  "population": 20737
+ },
+ {
+  "date": "2001-07-06",
+  "capacity": 17297,
+  "capacity_type": "operating",
+  "population": 20711
+ },
+ {
+  "date": "2001-07-13",
+  "capacity": 17244,
+  "capacity_type": "operating",
+  "population": 20677
+ },
+ {
+  "date": "2001-07-20",
+  "capacity": 17241,
+  "capacity_type": "operating",
+  "population": 20725
+ },
+ {
+  "date": "2001-07-27",
+  "capacity": 17226,
+  "capacity_type": "operating",
+  "population": 20730
+ },
+ {
+  "date": "2001-08-03",
+  "capacity": 17223,
+  "capacity_type": "operating",
+  "population": 20760
+ },
+ {
+  "date": "2001-08-10",
+  "capacity": 17209,
+  "capacity_type": "operating",
+  "population": 20769
+ },
+ {
+  "date": "2001-08-17",
+  "capacity": 17216,
+  "capacity_type": "operating",
+  "population": 20772
+ },
+ {
+  "date": "2001-08-24",
+  "capacity": 17185,
+  "capacity_type": "operating",
+  "population": 20787
+ },
+ {
+  "date": "2001-08-31",
+  "capacity": 17178,
+  "capacity_type": "operating",
+  "population": 20742
+ },
+ {
+  "date": "2001-09-07",
+  "capacity": 17186,
+  "capacity_type": "operating",
+  "population": 20780
+ },
+ {
+  "date": "2001-09-14",
+  "capacity": 17218,
+  "capacity_type": "operating",
+  "population": 20780
+ },
+ {
+  "date": "2001-09-21",
+  "capacity": 17177,
+  "capacity_type": "operating",
+  "population": 20833
+ },
+ {
+  "date": "2001-09-28",
+  "capacity": 17167,
+  "capacity_type": "operating",
+  "population": 20841
+ },
+ {
+  "date": "2001-10-05",
+  "capacity": 18337,
+  "capacity_type": "operating",
+  "population": 20885
+ },
+ {
+  "date": "2001-10-12",
+  "capacity": 18305,
+  "capacity_type": "operating",
+  "population": 20901
+ },
+ {
+  "date": "2001-10-19",
+  "capacity": 18281,
+  "capacity_type": "operating",
+  "population": 20977
+ },
+ {
+  "date": "2001-10-26",
+  "capacity": 17328,
+  "capacity_type": "operating",
+  "population": 20860
+ },
+ {
+  "date": "2001-11-02",
+  "capacity": 17267,
+  "capacity_type": "operating",
+  "population": 20868
+ },
+ {
+  "date": "2001-11-09",
+  "capacity": 17199,
+  "capacity_type": "operating",
+  "population": 20871
+ },
+ {
+  "date": "2001-11-16",
+  "capacity": 17138,
+  "capacity_type": "operating",
+  "population": 20857
+ },
+ {
+  "date": "2001-11-23",
+  "capacity": 17069,
+  "capacity_type": "operating",
+  "population": 20807
+ },
+ {
+  "date": "2001-11-30",
+  "capacity": 17048,
+  "capacity_type": "operating",
+  "population": 20767
+ },
+ {
+  "date": "2001-12-07",
+  "capacity": 16987,
+  "capacity_type": "operating",
+  "population": 20798
+ },
+ {
+  "date": "2001-12-14",
+  "capacity": 16894,
+  "capacity_type": "operating",
+  "population": 20812
+ },
+ {
+  "date": "2001-12-21",
+  "capacity": 16810,
+  "capacity_type": "operating",
+  "population": 20804
+ },
+ {
+  "date": "2001-12-28",
+  "capacity": 16804,
+  "capacity_type": "operating",
+  "population": 20813
+ },
+ {
+  "date": "2002-01-04",
+  "capacity": 16804,
+  "capacity_type": "operating",
+  "population": 20729
+ },
+ {
+  "date": "2002-01-11",
+  "capacity": 16755,
+  "capacity_type": "operating",
+  "population": 20646
+ },
+ {
+  "date": "2002-01-18",
+  "capacity": 16681,
+  "capacity_type": "operating",
+  "population": 20676
+ },
+ {
+  "date": "2002-01-25",
+  "capacity": 16635,
+  "capacity_type": "operating",
+  "population": 20666
+ },
+ {
+  "date": "2002-02-01",
+  "capacity": 16653,
+  "capacity_type": "operating",
+  "population": 20669
+ },
+ {
+  "date": "2002-02-08",
+  "capacity": 16818,
+  "capacity_type": "operating",
+  "population": 20703
+ },
+ {
+  "date": "2002-02-15",
+  "capacity": 16791,
+  "capacity_type": "operating",
+  "population": 20714
+ },
+ {
+  "date": "2002-02-22",
+  "capacity": 16794,
+  "capacity_type": "operating",
+  "population": 20746
+ },
+ {
+  "date": "2002-03-01",
+  "capacity": 17045,
+  "capacity_type": "operating",
+  "population": 20984
+ },
+ {
+  "date": "2002-03-08",
+  "capacity": 17044,
+  "capacity_type": "operating",
+  "population": 21027
+ },
+ {
+  "date": "2002-03-15",
+  "capacity": 17039,
+  "capacity_type": "operating",
+  "population": 21052
+ },
+ {
+  "date": "2002-03-22",
+  "capacity": 17018,
+  "capacity_type": "operating",
+  "population": 21103
+ },
+ {
+  "date": "2002-03-29",
+  "capacity": 17021,
+  "capacity_type": "operating",
+  "population": 21120
+ },
+ {
+  "date": "2002-04-05",
+  "capacity": 17015,
+  "capacity_type": "operating",
+  "population": 21120
+ },
+ {
+  "date": "2002-04-12",
+  "capacity": 17000,
+  "capacity_type": "operating",
+  "population": 21134
+ },
+ {
+  "date": "2002-04-19",
+  "capacity": 17050,
+  "capacity_type": "operating",
+  "population": 21152
+ },
+ {
+  "date": "2002-04-26",
+  "capacity": 17077,
+  "capacity_type": "operating",
+  "population": 21143
+ },
+ {
+  "date": "2002-05-03",
+  "capacity": 17072,
+  "capacity_type": "operating",
+  "population": 21189
+ },
+ {
+  "date": "2002-05-10",
+  "capacity": 17067,
+  "capacity_type": "operating",
+  "population": 21184
+ },
+ {
+  "date": "2002-05-17",
+  "capacity": 17082,
+  "capacity_type": "operating",
+  "population": 21198
+ },
+ {
+  "date": "2002-05-24",
+  "capacity": 17078,
+  "capacity_type": "operating",
+  "population": 21185
+ },
+ {
+  "date": "2002-05-31",
+  "capacity": 17082,
+  "capacity_type": "operating",
+  "population": 21147
+ },
+ {
+  "date": "2002-06-07",
+  "capacity": 17088,
+  "capacity_type": "operating",
+  "population": 21229
+ },
+ {
+  "date": "2002-06-14",
+  "capacity": 17093,
+  "capacity_type": "operating",
+  "population": 21235
+ },
+ {
+  "date": "2002-06-21",
+  "capacity": 17073,
+  "capacity_type": "operating",
+  "population": 21213
+ },
+ {
+  "date": "2002-06-28",
+  "capacity": 17072,
+  "capacity_type": "operating",
+  "population": 21261
+ },
+ {
+  "date": "2002-07-05",
+  "capacity": 17111,
+  "capacity_type": "operating",
+  "population": 21256
+ },
+ {
+  "date": "2002-07-12",
+  "capacity": 17126,
+  "capacity_type": "operating",
+  "population": 21247
+ },
+ {
+  "date": "2002-07-19",
+  "capacity": 17088,
+  "capacity_type": "operating",
+  "population": 21234
+ },
+ {
+  "date": "2002-07-26",
+  "capacity": 17120,
+  "capacity_type": "operating",
+  "population": 21245
+ },
+ {
+  "date": "2002-08-02",
+  "capacity": 17118,
+  "capacity_type": "operating",
+  "population": 21295
+ },
+ {
+  "date": "2002-08-09",
+  "capacity": 17111,
+  "capacity_type": "operating",
+  "population": 21257
+ },
+ {
+  "date": "2002-08-16",
+  "capacity": 17134,
+  "capacity_type": "operating",
+  "population": 21289
+ },
+ {
+  "date": "2002-08-23",
+  "capacity": 17135,
+  "capacity_type": "operating",
+  "population": 21291
+ },
+ {
+  "date": "2002-08-30",
+  "capacity": 17137,
+  "capacity_type": "operating",
+  "population": 21319
+ },
+ {
+  "date": "2002-09-06",
+  "capacity": 18625,
+  "capacity_type": "operating",
+  "population": 21315
+ },
+ {
+  "date": "2002-09-13",
+  "capacity": 18630,
+  "capacity_type": "operating",
+  "population": 21348
+ },
+ {
+  "date": "2002-09-20",
+  "capacity": 18631,
+  "capacity_type": "operating",
+  "population": 21365
+ },
+ {
+  "date": "2002-09-27",
+  "capacity": 18622,
+  "capacity_type": "operating",
+  "population": 21405
+ },
+ {
+  "date": "2002-10-04",
+  "capacity": 18610,
+  "capacity_type": "operating",
+  "population": 21409
+ },
+ {
+  "date": "2002-10-11",
+  "capacity": 18607,
+  "capacity_type": "operating",
+  "population": 21433
+ },
+ {
+  "date": "2002-10-18",
+  "capacity": 18640,
+  "capacity_type": "operating",
+  "population": 21449
+ },
+ {
+  "date": "2002-10-25",
+  "capacity": 18599,
+  "capacity_type": "operating",
+  "population": 21438
+ },
+ {
+  "date": "2002-11-01",
+  "capacity": 18626,
+  "capacity_type": "operating",
+  "population": 21474
+ },
+ {
+  "date": "2002-11-08",
+  "capacity": 18658,
+  "capacity_type": "operating",
+  "population": 21524
+ },
+ {
+  "date": "2002-11-15",
+  "capacity": 18642,
+  "capacity_type": "operating",
+  "population": 21529
+ },
+ {
+  "date": "2002-11-22",
+  "capacity": 18638,
+  "capacity_type": "operating",
+  "population": 21608
+ },
+ {
+  "date": "2002-11-29",
+  "capacity": 18637,
+  "capacity_type": "operating",
+  "population": 21580
+ },
+ {
+  "date": "2002-12-06",
+  "capacity": 18628,
+  "capacity_type": "operating",
+  "population": 21554
+ },
+ {
+  "date": "2002-12-13",
+  "capacity": 18639,
+  "capacity_type": "operating",
+  "population": 21550
+ },
+ {
+  "date": "2002-12-20",
+  "capacity": 18643,
+  "capacity_type": "operating",
+  "population": 21503
+ },
+ {
+  "date": "2002-12-27",
+  "capacity": 18655,
+  "capacity_type": "operating",
+  "population": 21576
+ },
+ {
+  "date": "2003-01-03",
+  "capacity": 18655,
+  "capacity_type": "operating",
+  "population": 21602
+ },
+ {
+  "date": "2003-01-10",
+  "capacity": 18633,
+  "capacity_type": "operating",
+  "population": 21553
+ },
+ {
+  "date": "2003-01-17",
+  "capacity": 18600,
+  "capacity_type": "operating",
+  "population": 21562
+ },
+ {
+  "date": "2003-01-24",
+  "capacity": 18565,
+  "capacity_type": "operating",
+  "population": 21512
+ },
+ {
+  "date": "2003-01-31",
+  "capacity": 18511,
+  "capacity_type": "operating",
+  "population": 21513
+ },
+ {
+  "date": "2003-02-07",
+  "capacity": 18483,
+  "capacity_type": "operating",
+  "population": 21554
+ },
+ {
+  "date": "2003-02-14",
+  "capacity": 18394,
+  "capacity_type": "operating",
+  "population": 21593
+ },
+ {
+  "date": "2003-02-21",
+  "capacity": 18318,
+  "capacity_type": "operating",
+  "population": 21569
+ },
+ {
+  "date": "2003-02-28",
+  "capacity": 18226,
+  "capacity_type": "operating",
+  "population": 21531
+ },
+ {
+  "date": "2003-03-07",
+  "capacity": 18132,
+  "capacity_type": "operating",
+  "population": 21548
+ },
+ {
+  "date": "2003-03-14",
+  "capacity": 18040,
+  "capacity_type": "operating",
+  "population": 21534
+ },
+ {
+  "date": "2003-03-21",
+  "capacity": 17974,
+  "capacity_type": "operating",
+  "population": 21543
+ },
+ {
+  "date": "2003-03-28",
+  "capacity": 17886,
+  "capacity_type": "operating",
+  "population": 21539
+ },
+ {
+  "date": "2003-04-04",
+  "capacity": 17895,
+  "capacity_type": "operating",
+  "population": 21589
+ },
+ {
+  "date": "2003-04-11",
+  "capacity": 17840,
+  "capacity_type": "operating",
+  "population": 21573
+ },
+ {
+  "date": "2003-04-18",
+  "capacity": 17769,
+  "capacity_type": "operating",
+  "population": 21580
+ },
+ {
+  "date": "2003-04-25",
+  "capacity": 17710,
+  "capacity_type": "operating",
+  "population": 21566
+ },
+ {
+  "date": "2003-05-02",
+  "capacity": 17656,
+  "capacity_type": "operating",
+  "population": 21565
+ },
+ {
+  "date": "2003-05-09",
+  "capacity": 17598,
+  "capacity_type": "operating",
+  "population": 21560
+ },
+ {
+  "date": "2003-05-16",
+  "capacity": 17546,
+  "capacity_type": "operating",
+  "population": 21579
+ },
+ {
+  "date": "2003-05-23",
+  "capacity": 17488,
+  "capacity_type": "operating",
+  "population": 21612
+ },
+ {
+  "date": "2003-05-30",
+  "capacity": 17485,
+  "capacity_type": "operating",
+  "population": 21581
+ },
+ {
+  "date": "2003-06-06",
+  "capacity": 17467,
+  "capacity_type": "operating",
+  "population": 21623
+ },
+ {
+  "date": "2003-06-13",
+  "capacity": 17468,
+  "capacity_type": "operating",
+  "population": 21646
+ },
+ {
+  "date": "2003-06-20",
+  "capacity": 17497,
+  "capacity_type": "operating",
+  "population": 21623
+ },
+ {
+  "date": "2003-06-27",
+  "capacity": 17478,
+  "capacity_type": "operating",
+  "population": 21615
+ },
+ {
+  "date": "2003-07-04",
+  "capacity": 17459,
+  "capacity_type": "operating",
+  "population": 21619
+ },
+ {
+  "date": "2003-07-11",
+  "capacity": 17448,
+  "capacity_type": "operating",
+  "population": 21573
+ },
+ {
+  "date": "2003-07-18",
+  "capacity": 17451,
+  "capacity_type": "operating",
+  "population": 21596
+ },
+ {
+  "date": "2003-07-25",
+  "capacity": 17429,
+  "capacity_type": "operating",
+  "population": 21598
+ },
+ {
+  "date": "2003-08-01",
+  "capacity": 17422,
+  "capacity_type": "operating",
+  "population": 21644
+ },
+ {
+  "date": "2003-08-08",
+  "capacity": 17472,
+  "capacity_type": "operating",
+  "population": 21650
+ },
+ {
+  "date": "2003-08-15",
+  "capacity": 17477,
+  "capacity_type": "operating",
+  "population": 21623
+ },
+ {
+  "date": "2003-08-29",
+  "capacity": 17371,
+  "capacity_type": "operating",
+  "population": 21632
+ },
+ {
+  "date": "2003-09-05",
+  "capacity": 17376,
+  "capacity_type": "operating",
+  "population": 21566
+ },
+ {
+  "date": "2003-09-12",
+  "capacity": 17392,
+  "capacity_type": "operating",
+  "population": 21540
+ },
+ {
+  "date": "2003-09-19",
+  "capacity": 17390,
+  "capacity_type": "operating",
+  "population": 21564
+ },
+ {
+  "date": "2003-09-26",
+  "capacity": 17332,
+  "capacity_type": "operating",
+  "population": 21598
+ },
+ {
+  "date": "2003-10-03",
+  "capacity": 17338,
+  "capacity_type": "operating",
+  "population": 21634
+ },
+ {
+  "date": "2003-10-10",
+  "capacity": 17346,
+  "capacity_type": "operating",
+  "population": 21674
+ },
+ {
+  "date": "2003-10-17",
+  "capacity": 17327,
+  "capacity_type": "operating",
+  "population": 21698
+ },
+ {
+  "date": "2003-10-24",
+  "capacity": 17266,
+  "capacity_type": "operating",
+  "population": 21687
+ },
+ {
+  "date": "2003-10-31",
+  "capacity": 17263,
+  "capacity_type": "operating",
+  "population": 21747
+ },
+ {
+  "date": "2003-11-07",
+  "capacity": 17265,
+  "capacity_type": "operating",
+  "population": 21761
+ },
+ {
+  "date": "2003-11-14",
+  "capacity": 17246,
+  "capacity_type": "operating",
+  "population": 21792
+ },
+ {
+  "date": "2003-11-21",
+  "capacity": 17243,
+  "capacity_type": "operating",
+  "population": 21799
+ },
+ {
+  "date": "2003-11-28",
+  "capacity": 17220,
+  "capacity_type": "operating",
+  "population": 21798
+ },
+ {
+  "date": "2003-12-05",
+  "capacity": 17218,
+  "capacity_type": "operating",
+  "population": 21752
+ },
+ {
+  "date": "2003-12-12",
+  "capacity": 16781,
+  "capacity_type": "operating",
+  "population": 21769
+ },
+ {
+  "date": "2003-12-19",
+  "capacity": 16748,
+  "capacity_type": "operating",
+  "population": 21801
+ },
+ {
+  "date": "2003-12-26",
+  "capacity": 16749,
+  "capacity_type": "operating",
+  "population": 21795
+ },
+ {
+  "date": "2004-01-02",
+  "capacity": 16749,
+  "capacity_type": "operating",
+  "population": 21773
+ },
+ {
+  "date": "2004-01-09",
+  "capacity": 16709,
+  "capacity_type": "operating",
+  "population": 21780
+ },
+ {
+  "date": "2004-01-16",
+  "capacity": 16779,
+  "capacity_type": "operating",
+  "population": 21782
+ },
+ {
+  "date": "2004-01-23",
+  "capacity": 16789,
+  "capacity_type": "operating",
+  "population": 21780
+ },
+ {
+  "date": "2004-01-30",
+  "capacity": 16737,
+  "capacity_type": "operating",
+  "population": 21842
+ },
+ {
+  "date": "2004-02-06",
+  "capacity": 16729,
+  "capacity_type": "operating",
+  "population": 21876
+ },
+ {
+  "date": "2004-02-13",
+  "capacity": 16740,
+  "capacity_type": "operating",
+  "population": 21896
+ },
+ {
+  "date": "2004-02-20",
+  "capacity": 16751,
+  "capacity_type": "operating",
+  "population": 21926
+ },
+ {
+  "date": "2004-02-27",
+  "capacity": 16684,
+  "capacity_type": "operating",
+  "population": 21926
+ },
+ {
+  "date": "2004-03-05",
+  "capacity": 16698,
+  "capacity_type": "operating",
+  "population": 21903
+ },
+ {
+  "date": "2004-03-12",
+  "capacity": 16682,
+  "capacity_type": "operating",
+  "population": 21946
+ },
+ {
+  "date": "2004-03-19",
+  "capacity": 16671,
+  "capacity_type": "operating",
+  "population": 21945
+ },
+ {
+  "date": "2004-03-26",
+  "capacity": 16664,
+  "capacity_type": "operating",
+  "population": 21946
+ },
+ {
+  "date": "2004-04-02",
+  "capacity": 18308,
+  "capacity_type": "operating",
+  "population": 22040
+ },
+ {
+  "date": "2004-04-09",
+  "capacity": 18360,
+  "capacity_type": "operating",
+  "population": 22014
+ },
+ {
+  "date": "2004-04-16",
+  "capacity": 18311,
+  "capacity_type": "operating",
+  "population": 22033
+ },
+ {
+  "date": "2004-04-23",
+  "capacity": 18247,
+  "capacity_type": "operating",
+  "population": 22020
+ },
+ {
+  "date": "2004-04-30",
+  "capacity": 18159,
+  "capacity_type": "operating",
+  "population": 21994
+ },
+ {
+  "date": "2004-05-07",
+  "capacity": 18027,
+  "capacity_type": "operating",
+  "population": 21922
+ },
+ {
+  "date": "2004-05-14",
+  "capacity": 17952,
+  "capacity_type": "operating",
+  "population": 21946
+ },
+ {
+  "date": "2004-05-21",
+  "capacity": 17786,
+  "capacity_type": "operating",
+  "population": 21996
+ },
+ {
+  "date": "2004-05-28",
+  "capacity": 17669,
+  "capacity_type": "operating",
+  "population": 22005
+ },
+ {
+  "date": "2004-06-04",
+  "capacity": 17680,
+  "capacity_type": "operating",
+  "population": 21990
+ },
+ {
+  "date": "2004-06-11",
+  "capacity": 17558,
+  "capacity_type": "operating",
+  "population": 21963
+ },
+ {
+  "date": "2004-06-18",
+  "capacity": 17436,
+  "capacity_type": "operating",
+  "population": 22010
+ },
+ {
+  "date": "2004-06-25",
+  "capacity": 17926,
+  "capacity_type": "operating",
+  "population": 21977
+ },
+ {
+  "date": "2004-07-02",
+  "capacity": 16827,
+  "capacity_type": "operating",
+  "population": 22034
+ },
+ {
+  "date": "2004-07-09",
+  "capacity": 16833,
+  "capacity_type": "operating",
+  "population": 22003
+ },
+ {
+  "date": "2004-07-16",
+  "capacity": 16771,
+  "capacity_type": "operating",
+  "population": 22041
+ },
+ {
+  "date": "2004-07-23",
+  "capacity": 16759,
+  "capacity_type": "operating",
+  "population": 22041
+ },
+ {
+  "date": "2004-07-30",
+  "capacity": 16745,
+  "capacity_type": "operating",
+  "population": 22090
+ },
+ {
+  "date": "2004-08-05",
+  "capacity": 16748,
+  "capacity_type": "operating",
+  "population": 22099
+ },
+ {
+  "date": "2004-08-13",
+  "capacity": 16723,
+  "capacity_type": "operating",
+  "population": 22101
+ },
+ {
+  "date": "2004-08-20",
+  "capacity": 16730,
+  "capacity_type": "operating",
+  "population": 22138
+ },
+ {
+  "date": "2004-08-27",
+  "capacity": 16732,
+  "capacity_type": "operating",
+  "population": 22219
+ },
+ {
+  "date": "2004-09-03",
+  "capacity": 16732,
+  "capacity_type": "operating",
+  "population": 22204
+ },
+ {
+  "date": "2004-09-10",
+  "capacity": 16733,
+  "capacity_type": "operating",
+  "population": 22154
+ },
+ {
+  "date": "2004-09-17",
+  "capacity": 16726,
+  "capacity_type": "operating",
+  "population": 22172
+ },
+ {
+  "date": "2004-09-24",
+  "capacity": 16736,
+  "capacity_type": "operating",
+  "population": 22177
+ },
+ {
+  "date": "2004-10-01",
+  "capacity": 16744,
+  "capacity_type": "operating",
+  "population": 22165
+ },
+ {
+  "date": "2004-10-08",
+  "capacity": 16748,
+  "capacity_type": "operating",
+  "population": 22124
+ },
+ {
+  "date": "2004-10-15",
+  "capacity": 16738,
+  "capacity_type": "operating",
+  "population": 22139
+ },
+ {
+  "date": "2004-10-22",
+  "capacity": 16737,
+  "capacity_type": "operating",
+  "population": 22116
+ },
+ {
+  "date": "2004-10-29",
+  "capacity": 16746,
+  "capacity_type": "operating",
+  "population": 22085
+ },
+ {
+  "date": "2004-11-05",
+  "capacity": 16748,
+  "capacity_type": "operating",
+  "population": 22062
+ },
+ {
+  "date": "2004-11-12",
+  "capacity": 16670,
+  "capacity_type": "operating",
+  "population": 22071
+ },
+ {
+  "date": "2004-11-19",
+  "capacity": 16689,
+  "capacity_type": "operating",
+  "population": 22055
+ },
+ {
+  "date": "2004-11-26",
+  "capacity": 16303,
+  "capacity_type": "operating",
+  "population": 22200
+ },
+ {
+  "date": "2004-12-03",
+  "capacity": 16680,
+  "capacity_type": "operating",
+  "population": 22160
+ },
+ {
+  "date": "2004-12-10",
+  "capacity": 16699,
+  "capacity_type": "operating",
+  "population": 22204
+ },
+ {
+  "date": "2004-12-17",
+  "capacity": 16611,
+  "capacity_type": "operating",
+  "population": 22168
+ },
+ {
+  "date": "2004-12-24",
+  "capacity": 16564,
+  "capacity_type": "operating",
+  "population": 22242
+ },
+ {
+  "date": "2004-12-31",
+  "capacity": 16550,
+  "capacity_type": "operating",
+  "population": 22181
+ },
+ {
+  "date": "2005-01-07",
+  "capacity": 17634,
+  "capacity_type": "operating",
+  "population": 22145
+ },
+ {
+  "date": "2005-01-14",
+  "capacity": 17574,
+  "capacity_type": "operating",
+  "population": 22122
+ },
+ {
+  "date": "2005-01-21",
+  "capacity": 17557,
+  "capacity_type": "operating",
+  "population": 22079
+ },
+ {
+  "date": "2005-01-28",
+  "capacity": 17554,
+  "capacity_type": "operating",
+  "population": 22095
+ },
+ {
+  "date": "2005-02-04",
+  "capacity": 17532,
+  "capacity_type": "operating",
+  "population": 22055
+ },
+ {
+  "date": "2005-02-11",
+  "capacity": 17527,
+  "capacity_type": "operating",
+  "population": 21984
+ },
+ {
+  "date": "2005-02-18",
+  "capacity": 17514,
+  "capacity_type": "operating",
+  "population": 21998
+ },
+ {
+  "date": "2005-02-25",
+  "capacity": 17505,
+  "capacity_type": "operating",
+  "population": 21942
+ },
+ {
+  "date": "2005-03-04",
+  "capacity": 17501,
+  "capacity_type": "operating",
+  "population": 21930
+ },
+ {
+  "date": "2005-03-11",
+  "capacity": 17488,
+  "capacity_type": "operating",
+  "population": 21907
+ },
+ {
+  "date": "2005-03-18",
+  "capacity": 17488,
+  "capacity_type": "operating",
+  "population": 21908
+ },
+ {
+  "date": "2005-03-25",
+  "capacity": 17495,
+  "capacity_type": "operating",
+  "population": 21954
+ },
+ {
+  "date": "2005-04-01",
+  "capacity": 17501,
+  "capacity_type": "operating",
+  "population": 21895
+ },
+ {
+  "date": "2005-04-08",
+  "capacity": 17494,
+  "capacity_type": "operating",
+  "population": 21870
+ },
+ {
+  "date": "2005-04-15",
+  "capacity": 17454,
+  "capacity_type": "operating",
+  "population": 21910
+ },
+ {
+  "date": "2005-04-22",
+  "capacity": 17437,
+  "capacity_type": "operating",
+  "population": 21869
+ },
+ {
+  "date": "2005-04-29",
+  "capacity": 17440,
+  "capacity_type": "operating",
+  "population": 21862
+ },
+ {
+  "date": "2005-05-06",
+  "capacity": 17391,
+  "capacity_type": "operating",
+  "population": 21856
+ },
+ {
+  "date": "2005-05-13",
+  "capacity": 17400,
+  "capacity_type": "operating",
+  "population": 21809
+ },
+ {
+  "date": "2005-05-20",
+  "capacity": 17398,
+  "capacity_type": "operating",
+  "population": 21783
+ },
+ {
+  "date": "2005-05-27",
+  "capacity": 17405,
+  "capacity_type": "operating",
+  "population": 21796
+ },
+ {
+  "date": "2005-06-03",
+  "capacity": 17402,
+  "capacity_type": "operating",
+  "population": 21750
+ },
+ {
+  "date": "2005-06-10",
+  "capacity": 17405,
+  "capacity_type": "operating",
+  "population": 21722
+ },
+ {
+  "date": "2005-06-17",
+  "capacity": 17384,
+  "capacity_type": "operating",
+  "population": 21689
+ },
+ {
+  "date": "2005-06-24",
+  "capacity": 17387,
+  "capacity_type": "operating",
+  "population": 21720
+ },
+ {
+  "date": "2005-07-01",
+  "capacity": 17395,
+  "capacity_type": "operating",
+  "population": 21741
+ },
+ {
+  "date": "2005-07-08",
+  "capacity": 17401,
+  "capacity_type": "operating",
+  "population": 21773
+ },
+ {
+  "date": "2005-07-15",
+  "capacity": 17393,
+  "capacity_type": "operating",
+  "population": 21746
+ },
+ {
+  "date": "2005-07-22",
+  "capacity": 17384,
+  "capacity_type": "operating",
+  "population": 21714
+ },
+ {
+  "date": "2005-07-29",
+  "capacity": 17399,
+  "capacity_type": "operating",
+  "population": 21737
+ },
+ {
+  "date": "2005-08-05",
+  "capacity": 17404,
+  "capacity_type": "operating",
+  "population": 21733
+ },
+ {
+  "date": "2005-08-12",
+  "capacity": 17358,
+  "capacity_type": "operating",
+  "population": 21697
+ },
+ {
+  "date": "2005-08-19",
+  "capacity": 17378,
+  "capacity_type": "operating",
+  "population": 21758
+ },
+ {
+  "date": "2005-08-26",
+  "capacity": 17390,
+  "capacity_type": "operating",
+  "population": 21666
+ },
+ {
+  "date": "2005-09-02",
+  "capacity": 17379,
+  "capacity_type": "operating",
+  "population": 21654
+ },
+ {
+  "date": "2005-09-09",
+  "capacity": 17403,
+  "capacity_type": "operating",
+  "population": 21648
+ },
+ {
+  "date": "2005-09-16",
+  "capacity": 17399,
+  "capacity_type": "operating",
+  "population": 21636
+ },
+ {
+  "date": "2005-09-23",
+  "capacity": 17402,
+  "capacity_type": "operating",
+  "population": 21623
+ },
+ {
+  "date": "2005-09-30",
+  "capacity": 17403,
+  "capacity_type": "operating",
+  "population": 21600
+ },
+ {
+  "date": "2005-10-07",
+  "capacity": 17391,
+  "capacity_type": "operating",
+  "population": 21583
+ },
+ {
+  "date": "2005-10-14",
+  "capacity": 17390,
+  "capacity_type": "operating",
+  "population": 21638
+ },
+ {
+  "date": "2005-10-21",
+  "capacity": 17384,
+  "capacity_type": "operating",
+  "population": 21657
+ },
+ {
+  "date": "2005-10-28",
+  "capacity": 17377,
+  "capacity_type": "operating",
+  "population": 21718
+ },
+ {
+  "date": "2005-11-04",
+  "capacity": 17381,
+  "capacity_type": "operating",
+  "population": 21717
+ },
+ {
+  "date": "2005-11-11",
+  "capacity": 17371,
+  "capacity_type": "operating",
+  "population": 21777
+ },
+ {
+  "date": "2005-11-18",
+  "capacity": 17364,
+  "capacity_type": "operating",
+  "population": 21810
+ },
+ {
+  "date": "2005-11-25",
+  "capacity": 17373,
+  "capacity_type": "operating",
+  "population": 21769
+ },
+ {
+  "date": "2005-12-02",
+  "capacity": 17357,
+  "capacity_type": "operating",
+  "population": 21758
+ },
+ {
+  "date": "2005-12-09",
+  "capacity": 17349,
+  "capacity_type": "operating",
+  "population": 21770
+ },
+ {
+  "date": "2005-12-16",
+  "capacity": 17336,
+  "capacity_type": "operating",
+  "population": 21735
+ },
+ {
+  "date": "2005-12-23",
+  "capacity": 17338,
+  "capacity_type": "operating",
+  "population": 21785
+ },
+ {
+  "date": "2005-12-30",
+  "capacity": 17325,
+  "capacity_type": "operating",
+  "population": 21763
+ },
+ {
+  "date": "2006-01-06",
+  "capacity": 17304,
+  "capacity_type": "operating",
+  "population": 21779
+ },
+ {
+  "date": "2006-01-13",
+  "capacity": 17302,
+  "capacity_type": "operating",
+  "population": 21779
+ },
+ {
+  "date": "2006-01-20",
+  "capacity": 17259,
+  "capacity_type": "operating",
+  "population": 21710
+ },
+ {
+  "date": "2006-01-27",
+  "capacity": 17247,
+  "capacity_type": "operating",
+  "population": 21776
+ },
+ {
+  "date": "2006-02-03",
+  "capacity": 17242,
+  "capacity_type": "operating",
+  "population": 21850
+ },
+ {
+  "date": "2006-02-10",
+  "capacity": 17231,
+  "capacity_type": "operating",
+  "population": 21840
+ },
+ {
+  "date": "2006-02-17",
+  "capacity": 17214,
+  "capacity_type": "operating",
+  "population": 21851
+ },
+ {
+  "date": "2006-02-24",
+  "capacity": 17219,
+  "capacity_type": "operating",
+  "population": 21863
+ },
+ {
+  "date": "2006-03-03",
+  "capacity": 17221,
+  "capacity_type": "operating",
+  "population": 21870
+ },
+ {
+  "date": "2006-03-10",
+  "capacity": 17234,
+  "capacity_type": "operating",
+  "population": 21857
+ },
+ {
+  "date": "2006-03-17",
+  "capacity": 17228,
+  "capacity_type": "operating",
+  "population": 21792
+ },
+ {
+  "date": "2006-03-24",
+  "capacity": 17235,
+  "capacity_type": "operating",
+  "population": 21853
+ },
+ {
+  "date": "2006-03-31",
+  "capacity": 17250,
+  "capacity_type": "operating",
+  "population": 21898
+ },
+ {
+  "date": "2006-04-07",
+  "capacity": 17245,
+  "capacity_type": "operating",
+  "population": 21921
+ },
+ {
+  "date": "2006-04-14",
+  "capacity": 17233,
+  "capacity_type": "operating",
+  "population": 21896
+ },
+ {
+  "date": "2006-04-21",
+  "capacity": 17228,
+  "capacity_type": "operating",
+  "population": 21865
+ },
+ {
+  "date": "2006-04-28",
+  "capacity": 17228,
+  "capacity_type": "operating",
+  "population": 21904
+ },
+ {
+  "date": "2006-05-05",
+  "capacity": 17226,
+  "capacity_type": "operating",
+  "population": 21905
+ },
+ {
+  "date": "2006-05-12",
+  "capacity": 17211,
+  "capacity_type": "operating",
+  "population": 21946
+ },
+ {
+  "date": "2006-05-19",
+  "capacity": 17208,
+  "capacity_type": "operating",
+  "population": 21937
+ },
+ {
+  "date": "2006-05-26",
+  "capacity": 17219,
+  "capacity_type": "operating",
+  "population": 21976
+ },
+ {
+  "date": "2006-06-02",
+  "capacity": 17238,
+  "capacity_type": "operating",
+  "population": 22021
+ },
+ {
+  "date": "2006-06-09",
+  "capacity": 17231,
+  "capacity_type": "operating",
+  "population": 21997
+ },
+ {
+  "date": "2006-06-16",
+  "capacity": 17285,
+  "capacity_type": "operating",
+  "population": 22059
+ },
+ {
+  "date": "2006-06-23",
+  "capacity": 17293,
+  "capacity_type": "operating",
+  "population": 22029
+ },
+ {
+  "date": "2006-06-30",
+  "capacity": 17583,
+  "capacity_type": "operating",
+  "population": 22120
+ },
+ {
+  "date": "2006-07-07",
+  "capacity": 17278,
+  "capacity_type": "operating",
+  "population": 22045
+ },
+ {
+  "date": "2006-07-14",
+  "capacity": 17341,
+  "capacity_type": "operating",
+  "population": 22104
+ },
+ {
+  "date": "2006-07-21",
+  "capacity": 17341,
+  "capacity_type": "operating",
+  "population": 22120
+ },
+ {
+  "date": "2006-07-28",
+  "capacity": 17340,
+  "capacity_type": "operating",
+  "population": 22126
+ },
+ {
+  "date": "2006-08-04",
+  "capacity": 17355,
+  "capacity_type": "operating",
+  "population": 22166
+ },
+ {
+  "date": "2006-08-11",
+  "capacity": 17361,
+  "capacity_type": "operating",
+  "population": 22117
+ },
+ {
+  "date": "2006-08-18",
+  "capacity": 17353,
+  "capacity_type": "operating",
+  "population": 22150
+ },
+ {
+  "date": "2006-08-25",
+  "capacity": 17352,
+  "capacity_type": "operating",
+  "population": 22156
+ },
+ {
+  "date": "2006-09-01",
+  "capacity": 17352,
+  "capacity_type": "operating",
+  "population": 22212
+ },
+ {
+  "date": "2006-09-08",
+  "capacity": 17358,
+  "capacity_type": "operating",
+  "population": 22217
+ },
+ {
+  "date": "2006-09-15",
+  "capacity": 17357,
+  "capacity_type": "operating",
+  "population": 22209
+ },
+ {
+  "date": "2006-09-22",
+  "capacity": 17364,
+  "capacity_type": "operating",
+  "population": 22269
+ },
+ {
+  "date": "2006-09-29",
+  "capacity": 17359,
+  "capacity_type": "operating",
+  "population": 22231
+ },
+ {
+  "date": "2006-10-06",
+  "capacity": 17344,
+  "capacity_type": "operating",
+  "population": 22259
+ },
+ {
+  "date": "2006-10-13",
+  "capacity": 17352,
+  "capacity_type": "operating",
+  "population": 22246
+ },
+ {
+  "date": "2006-10-20",
+  "capacity": 17360,
+  "capacity_type": "operating",
+  "population": 22310
+ },
+ {
+  "date": "2006-10-27",
+  "capacity": 17347,
+  "capacity_type": "operating",
+  "population": 22355
+ },
+ {
+  "date": "2006-11-03",
+  "capacity": 17364,
+  "capacity_type": "operating",
+  "population": 22370
+ },
+ {
+  "date": "2006-11-10",
+  "capacity": 17383,
+  "capacity_type": "operating",
+  "population": 22401
+ },
+ {
+  "date": "2006-11-17",
+  "capacity": 17383,
+  "capacity_type": "operating",
+  "population": 22398
+ },
+ {
+  "date": "2006-11-24",
+  "capacity": 17396,
+  "capacity_type": "operating",
+  "population": 22408
+ },
+ {
+  "date": "2006-12-01",
+  "capacity": 17399,
+  "capacity_type": "operating",
+  "population": 22449
+ },
+ {
+  "date": "2006-12-08",
+  "capacity": 17403,
+  "capacity_type": "operating",
+  "population": 22459
+ },
+ {
+  "date": "2006-12-15",
+  "capacity": 17404,
+  "capacity_type": "operating",
+  "population": 22436
+ },
+ {
+  "date": "2006-12-22",
+  "capacity": 17397,
+  "capacity_type": "operating",
+  "population": 22519
+ },
+ {
+  "date": "2006-12-29",
+  "capacity": 17412,
+  "capacity_type": "operating",
+  "population": 22501
+ },
+ {
+  "date": "2007-01-05",
+  "capacity": 17416,
+  "capacity_type": "operating",
+  "population": 22494
+ },
+ {
+  "date": "2007-01-12",
+  "capacity": 17403,
+  "capacity_type": "operating",
+  "population": 22583
+ },
+ {
+  "date": "2007-01-19",
+  "capacity": 17434,
+  "capacity_type": "operating",
+  "population": 22550
+ },
+ {
+  "date": "2007-01-26",
+  "capacity": 17421,
+  "capacity_type": "operating",
+  "population": 22584
+ },
+ {
+  "date": "2007-02-02",
+  "capacity": 17414,
+  "capacity_type": "operating",
+  "population": 22618
+ },
+ {
+  "date": "2007-02-09",
+  "capacity": 17418,
+  "capacity_type": "operating",
+  "population": 22617
+ },
+ {
+  "date": "2007-02-16",
+  "capacity": 17424,
+  "capacity_type": "operating",
+  "population": 22616
+ },
+ {
+  "date": "2007-02-23",
+  "capacity": 17408,
+  "capacity_type": "operating",
+  "population": 22650
+ },
+ {
+  "date": "2007-03-02",
+  "capacity": 17410,
+  "capacity_type": "operating",
+  "population": 22648
+ },
+ {
+  "date": "2007-03-09",
+  "capacity": 17405,
+  "capacity_type": "operating",
+  "population": 22694
+ },
+ {
+  "date": "2007-03-16",
+  "capacity": 17401,
+  "capacity_type": "operating",
+  "population": 22687
+ },
+ {
+  "date": "2007-03-23",
+  "capacity": 17407,
+  "capacity_type": "operating",
+  "population": 22685
+ },
+ {
+  "date": "2007-03-30",
+  "capacity": 17404,
+  "capacity_type": "operating",
+  "population": 22671
+ },
+ {
+  "date": "2007-04-06",
+  "capacity": 17404,
+  "capacity_type": "operating",
+  "population": 22710
+ },
+ {
+  "date": "2007-04-13",
+  "capacity": 17413,
+  "capacity_type": "operating",
+  "population": 22734
+ },
+ {
+  "date": "2007-04-20",
+  "capacity": 17405,
+  "capacity_type": "operating",
+  "population": 22731
+ },
+ {
+  "date": "2007-04-27",
+  "capacity": 17407,
+  "capacity_type": "operating",
+  "population": 22723
+ },
+ {
+  "date": "2007-05-04",
+  "capacity": 17395,
+  "capacity_type": "operating",
+  "population": 22754
+ },
+ {
+  "date": "2007-05-11",
+  "capacity": 17427,
+  "capacity_type": "operating",
+  "population": 22794
+ },
+ {
+  "date": "2007-05-18",
+  "capacity": 17394,
+  "capacity_type": "operating",
+  "population": 22770
+ },
+ {
+  "date": "2007-05-25",
+  "capacity": 17379,
+  "capacity_type": "operating",
+  "population": 22772
+ },
+ {
+  "date": "2007-06-01",
+  "capacity": 17367,
+  "capacity_type": "operating",
+  "population": 22737
+ },
+ {
+  "date": "2007-06-08",
+  "capacity": 17362,
+  "capacity_type": "operating",
+  "population": 22776
+ },
+ {
+  "date": "2007-06-15",
+  "capacity": 17369,
+  "capacity_type": "operating",
+  "population": 22735
+ },
+ {
+  "date": "2007-06-22",
+  "capacity": 17376,
+  "capacity_type": "operating",
+  "population": 22683
+ },
+ {
+  "date": "2007-06-29",
+  "capacity": 17372,
+  "capacity_type": "operating",
+  "population": 22729
+ },
+ {
+  "date": "2007-07-06",
+  "capacity": 17428,
+  "capacity_type": "operating",
+  "population": 22715
+ },
+ {
+  "date": "2007-07-13",
+  "capacity": 17362,
+  "capacity_type": "operating",
+  "population": 22733
+ },
+ {
+  "date": "2007-07-20",
+  "capacity": 17357,
+  "capacity_type": "operating",
+  "population": 22709
+ },
+ {
+  "date": "2007-07-27",
+  "capacity": 17359,
+  "capacity_type": "operating",
+  "population": 22720
+ },
+ {
+  "date": "2007-08-03",
+  "capacity": 17367,
+  "capacity_type": "operating",
+  "population": 22717
+ },
+ {
+  "date": "2007-08-10",
+  "capacity": 17368,
+  "capacity_type": "operating",
+  "population": 22652
+ },
+ {
+  "date": "2007-08-17",
+  "capacity": 17361,
+  "capacity_type": "operating",
+  "population": 22645
+ },
+ {
+  "date": "2007-08-24",
+  "capacity": 17359,
+  "capacity_type": "operating",
+  "population": 22666
+ },
+ {
+  "date": "2007-08-31",
+  "capacity": 17357,
+  "capacity_type": "operating",
+  "population": 22675
+ },
+ {
+  "date": "2007-09-07",
+  "capacity": 17355,
+  "capacity_type": "operating",
+  "population": 22650
+ },
+ {
+  "date": "2007-09-14",
+  "capacity": 17365,
+  "capacity_type": "operating",
+  "population": 22666
+ },
+ {
+  "date": "2007-09-21",
+  "capacity": 17370,
+  "capacity_type": "operating",
+  "population": 22714
+ },
+ {
+  "date": "2007-09-28",
+  "capacity": 17373,
+  "capacity_type": "operating",
+  "population": 22758
+ },
+ {
+  "date": "2007-10-05",
+  "capacity": 17379,
+  "capacity_type": "operating",
+  "population": 22793
+ },
+ {
+  "date": "2007-10-12",
+  "capacity": 17380,
+  "capacity_type": "operating",
+  "population": 22794
+ },
+ {
+  "date": "2007-10-19",
+  "capacity": 17374,
+  "capacity_type": "operating",
+  "population": 22799
+ },
+ {
+  "date": "2007-10-26",
+  "capacity": 17371,
+  "capacity_type": "operating",
+  "population": 22750
+ },
+ {
+  "date": "2007-11-02",
+  "capacity": 17380,
+  "capacity_type": "operating",
+  "population": 22791
+ },
+ {
+  "date": "2007-11-09",
+  "capacity": 17393,
+  "capacity_type": "operating",
+  "population": 22781
+ },
+ {
+  "date": "2007-11-16",
+  "capacity": 17397,
+  "capacity_type": "operating",
+  "population": 22743
+ },
+ {
+  "date": "2007-11-23",
+  "capacity": 17385,
+  "capacity_type": "operating",
+  "population": 22724
+ },
+ {
+  "date": "2007-11-30",
+  "capacity": 17381,
+  "capacity_type": "operating",
+  "population": 22725
+ },
+ {
+  "date": "2007-12-07",
+  "capacity": 17390,
+  "capacity_type": "operating",
+  "population": 22749
+ },
+ {
+  "date": "2007-12-14",
+  "capacity": 17395,
+  "capacity_type": "operating",
+  "population": 22765
+ },
+ {
+  "date": "2007-12-21",
+  "capacity": 17384,
+  "capacity_type": "operating",
+  "population": 22714
+ },
+ {
+  "date": "2007-12-28",
+  "capacity": 17383,
+  "capacity_type": "operating",
+  "population": 22690
+ },
+ {
+  "date": "2008-01-04",
+  "capacity": 17413,
+  "capacity_type": "operating",
+  "population": 22663
+ },
+ {
+  "date": "2008-01-11",
+  "capacity": 17413,
+  "capacity_type": "operating",
+  "population": 22655
+ },
+ {
+  "date": "2008-01-18",
+  "capacity": 17428,
+  "capacity_type": "operating",
+  "population": 22634
+ },
+ {
+  "date": "2008-01-25",
+  "capacity": 17441,
+  "capacity_type": "operating",
+  "population": 22639
+ },
+ {
+  "date": "2008-02-01",
+  "capacity": 17465,
+  "capacity_type": "operating",
+  "population": 22723
+ },
+ {
+  "date": "2008-02-08",
+  "capacity": 17513,
+  "capacity_type": "operating",
+  "population": 22677
+ },
+ {
+  "date": "2008-02-15",
+  "capacity": 17478,
+  "capacity_type": "operating",
+  "population": 22633
+ },
+ {
+  "date": "2008-02-22",
+  "capacity": 17500,
+  "capacity_type": "operating",
+  "population": 22706
+ },
+ {
+  "date": "2008-02-29",
+  "capacity": 17891,
+  "capacity_type": "operating",
+  "population": 22668
+ },
+ {
+  "date": "2008-03-07",
+  "capacity": 17600,
+  "capacity_type": "operating",
+  "population": 22795
+ },
+ {
+  "date": "2008-03-14",
+  "capacity": 16591,
+  "capacity_type": "design",
+  "population": 22800
+ },
+ {
+  "date": "2008-03-21",
+  "capacity": 17022,
+  "capacity_type": "design",
+  "population": 22796
+ },
+ {
+  "date": "2008-03-28",
+  "capacity": 16638,
+  "capacity_type": "design",
+  "population": 22825
+ },
+ {
+  "date": "2008-04-04",
+  "capacity": 16657,
+  "capacity_type": "design",
+  "population": 22858
+ },
+ {
+  "date": "2008-04-11",
+  "capacity": 16654,
+  "capacity_type": "design",
+  "population": 22885
+ },
+ {
+  "date": "2008-04-18",
+  "capacity": 16644,
+  "capacity_type": "design",
+  "population": 22930
+ },
+ {
+  "date": "2008-04-25",
+  "capacity": 16644,
+  "capacity_type": "design",
+  "population": 22930
+ },
+ {
+  "date": "2008-05-02",
+  "capacity": 16648,
+  "capacity_type": "design",
+  "population": 22936
+ },
+ {
+  "date": "2008-05-09",
+  "capacity": 16624,
+  "capacity_type": "design",
+  "population": 22911
+ },
+ {
+  "date": "2008-05-16",
+  "capacity": 16653,
+  "capacity_type": "design",
+  "population": 22949
+ },
+ {
+  "date": "2008-05-23",
+  "capacity": 16631,
+  "capacity_type": "design",
+  "population": 22931
+ },
+ {
+  "date": "2008-05-30",
+  "capacity": 16637,
+  "capacity_type": "design",
+  "population": 22953
+ },
+ {
+  "date": "2008-06-06",
+  "capacity": 17750,
+  "capacity_type": "design",
+  "population": 22965
+ },
+ {
+  "date": "2008-06-13",
+  "capacity": 17727,
+  "capacity_type": "design",
+  "population": 22927
+ },
+ {
+  "date": "2008-06-20",
+  "capacity": 17727,
+  "capacity_type": "design",
+  "population": 22789
+ },
+ {
+  "date": "2008-06-27",
+  "capacity": 17717,
+  "capacity_type": "design",
+  "population": 22772
+ },
+ {
+  "date": "2008-07-04",
+  "capacity": 17713,
+  "capacity_type": "design",
+  "population": 22859
+ },
+ {
+  "date": "2008-07-11",
+  "capacity": 17711,
+  "capacity_type": "design",
+  "population": 22829
+ },
+ {
+  "date": "2008-07-18",
+  "capacity": 17725,
+  "capacity_type": "design",
+  "population": 22797
+ },
+ {
+  "date": "2008-07-25",
+  "capacity": 17724,
+  "capacity_type": "design",
+  "population": 22809
+ },
+ {
+  "date": "2008-08-01",
+  "capacity": 17719,
+  "capacity_type": "design",
+  "population": 22828
+ },
+ {
+  "date": "2008-08-08",
+  "capacity": 17744,
+  "capacity_type": "design",
+  "population": 22887
+ },
+ {
+  "date": "2008-08-15",
+  "capacity": 17738,
+  "capacity_type": "design",
+  "population": 22858
+ },
+ {
+  "date": "2008-08-22",
+  "capacity": 17738,
+  "capacity_type": "design",
+  "population": 22882
+ },
+ {
+  "date": "2008-08-29",
+  "capacity": 17710,
+  "capacity_type": "design",
+  "population": 22821
+ },
+ {
+  "date": "2008-09-05",
+  "capacity": 17749,
+  "capacity_type": "design",
+  "population": 22815
+ },
+ {
+  "date": "2008-09-12",
+  "capacity": 17755,
+  "capacity_type": "design",
+  "population": 22788
+ },
+ {
+  "date": "2008-09-19",
+  "capacity": 17767,
+  "capacity_type": "design",
+  "population": 22776
+ },
+ {
+  "date": "2008-09-26",
+  "capacity": 17762,
+  "capacity_type": "design",
+  "population": 22846
+ },
+ {
+  "date": "2008-10-03",
+  "capacity": 17762,
+  "capacity_type": "design",
+  "population": 22804
+ },
+ {
+  "date": "2008-10-10",
+  "capacity": 17778,
+  "capacity_type": "design",
+  "population": 22803
+ },
+ {
+  "date": "2008-10-17",
+  "capacity": 17779,
+  "capacity_type": "design",
+  "population": 22786
+ },
+ {
+  "date": "2008-10-24",
+  "capacity": 17797,
+  "capacity_type": "design",
+  "population": 22811
+ },
+ {
+  "date": "2008-10-31",
+  "capacity": 17800,
+  "capacity_type": "design",
+  "population": 22816
+ },
+ {
+  "date": "2008-11-07",
+  "capacity": 17791,
+  "capacity_type": "design",
+  "population": 22794
+ },
+ {
+  "date": "2008-11-14",
+  "capacity": 17793,
+  "capacity_type": "design",
+  "population": 22800
+ },
+ {
+  "date": "2008-11-21",
+  "capacity": 17772,
+  "capacity_type": "design",
+  "population": 22797
+ },
+ {
+  "date": "2008-11-28",
+  "capacity": 17790,
+  "capacity_type": "design",
+  "population": 22741
+ },
+ {
+  "date": "2008-12-05",
+  "capacity": 17774,
+  "capacity_type": "design",
+  "population": 22760
+ },
+ {
+  "date": "2008-12-12",
+  "capacity": 17800,
+  "capacity_type": "design",
+  "population": 22795
+ },
+ {
+  "date": "2008-12-19",
+  "capacity": 17783,
+  "capacity_type": "design",
+  "population": 22706
+ },
+ {
+  "date": "2008-12-26",
+  "capacity": 17778,
+  "capacity_type": "design",
+  "population": 22611
+ },
+ {
+  "date": "2009-01-02",
+  "capacity": 17773,
+  "capacity_type": "design",
+  "population": 22624
+ },
+ {
+  "date": "2009-01-09",
+  "capacity": 17774,
+  "capacity_type": "design",
+  "population": 22648
+ },
+ {
+  "date": "2009-01-16",
+  "capacity": 17784,
+  "capacity_type": "design",
+  "population": 22644
+ },
+ {
+  "date": "2009-01-23",
+  "capacity": 17783,
+  "capacity_type": "design",
+  "population": 22606
+ },
+ {
+  "date": "2009-01-30",
+  "capacity": 17773,
+  "capacity_type": "design",
+  "population": 22722
+ },
+ {
+  "date": "2009-02-06",
+  "capacity": 17786,
+  "capacity_type": "design",
+  "population": 22700
+ },
+ {
+  "date": "2009-02-13",
+  "capacity": 17762,
+  "capacity_type": "design",
+  "population": 22637
+ },
+ {
+  "date": "2009-02-20",
+  "capacity": 17757,
+  "capacity_type": "design",
+  "population": 22641
+ },
+ {
+  "date": "2009-02-27",
+  "capacity": 17758,
+  "capacity_type": "design",
+  "population": 22596
+ },
+ {
+  "date": "2009-03-06",
+  "capacity": 17760,
+  "capacity_type": "design",
+  "population": 22589
+ },
+ {
+  "date": "2009-03-13",
+  "capacity": 17764,
+  "capacity_type": "design",
+  "population": 22579
+ },
+ {
+  "date": "2009-03-20",
+  "capacity": 17762,
+  "capacity_type": "design",
+  "population": 22614
+ },
+ {
+  "date": "2009-03-27",
+  "capacity": 17753,
+  "capacity_type": "design",
+  "population": 22621
+ },
+ {
+  "date": "2009-04-03",
+  "capacity": 17749,
+  "capacity_type": "design",
+  "population": 22618
+ },
+ {
+  "date": "2009-04-10",
+  "capacity": 17735,
+  "capacity_type": "design",
+  "population": 22608
+ },
+ {
+  "date": "2009-04-17",
+  "capacity": 17731,
+  "capacity_type": "design",
+  "population": 22562
+ },
+ {
+  "date": "2009-04-24",
+  "capacity": 17724,
+  "capacity_type": "design",
+  "population": 22586
+ },
+ {
+  "date": "2009-05-01",
+  "capacity": 17749,
+  "capacity_type": "design",
+  "population": 22557
+ },
+ {
+  "date": "2009-05-08",
+  "capacity": 17740,
+  "capacity_type": "design",
+  "population": 22548
+ },
+ {
+  "date": "2009-05-15",
+  "capacity": 17747,
+  "capacity_type": "design",
+  "population": 22562
+ },
+ {
+  "date": "2009-05-22",
+  "capacity": 17731,
+  "capacity_type": "design",
+  "population": 22598
+ },
+ {
+  "date": "2009-05-29",
+  "capacity": 17740,
+  "capacity_type": "design",
+  "population": 22569
+ },
+ {
+  "date": "2009-06-05",
+  "capacity": 17731,
+  "capacity_type": "design",
+  "population": 22514
+ },
+ {
+  "date": "2009-06-12",
+  "capacity": 17736,
+  "capacity_type": "design",
+  "population": 22545
+ },
+ {
+  "date": "2009-06-19",
+  "capacity": 17730,
+  "capacity_type": "design",
+  "population": 22563
+ },
+ {
+  "date": "2009-06-26",
+  "capacity": 17722,
+  "capacity_type": "design",
+  "population": 22616
+ },
+ {
+  "date": "2009-07-03",
+  "capacity": 17714,
+  "capacity_type": "design",
+  "population": 22612
+ },
+ {
+  "date": "2009-07-10",
+  "capacity": 17714,
+  "capacity_type": "design",
+  "population": 22557
+ },
+ {
+  "date": "2009-07-17",
+  "capacity": 17708,
+  "capacity_type": "design",
+  "population": 22572
+ },
+ {
+  "date": "2009-07-24",
+  "capacity": 17714,
+  "capacity_type": "design",
+  "population": 22615
+ },
+ {
+  "date": "2009-07-31",
+  "capacity": 17703,
+  "capacity_type": "design",
+  "population": 22647
+ },
+ {
+  "date": "2009-08-07",
+  "capacity": 17696,
+  "capacity_type": "design",
+  "population": 22590
+ },
+ {
+  "date": "2009-08-14",
+  "capacity": 17686,
+  "capacity_type": "design",
+  "population": 22629
+ },
+ {
+  "date": "2009-08-21",
+  "capacity": 17695,
+  "capacity_type": "design",
+  "population": 22584
+ },
+ {
+  "date": "2009-08-28",
+  "capacity": 17690,
+  "capacity_type": "design",
+  "population": 22610
+ },
+ {
+  "date": "2009-09-04",
+  "capacity": 17704,
+  "capacity_type": "design",
+  "population": 22522
+ },
+ {
+  "date": "2009-09-11",
+  "capacity": 17694,
+  "capacity_type": "design",
+  "population": 22458
+ },
+ {
+  "date": "2009-09-18",
+  "capacity": 17691,
+  "capacity_type": "design",
+  "population": 22439
+ },
+ {
+  "date": "2009-09-25",
+  "capacity": 17683,
+  "capacity_type": "design",
+  "population": 22417
+ },
+ {
+  "date": "2009-10-02",
+  "capacity": 17691,
+  "capacity_type": "design",
+  "population": 22463
+ },
+ {
+  "date": "2009-10-09",
+  "capacity": 17676,
+  "capacity_type": "design",
+  "population": 22436
+ },
+ {
+  "date": "2009-10-16",
+  "capacity": 17694,
+  "capacity_type": "design",
+  "population": 22466
+ },
+ {
+  "date": "2009-10-23",
+  "capacity": 17688,
+  "capacity_type": "design",
+  "population": 22462
+ },
+ {
+  "date": "2009-10-30",
+  "capacity": 17680,
+  "capacity_type": "design",
+  "population": 22497
+ },
+ {
+  "date": "2009-11-06",
+  "capacity": 17652,
+  "capacity_type": "design",
+  "population": 22525
+ },
+ {
+  "date": "2009-11-13",
+  "capacity": 17618,
+  "capacity_type": "design",
+  "population": 22494
+ },
+ {
+  "date": "2009-11-20",
+  "capacity": 17592,
+  "capacity_type": "design",
+  "population": 22556
+ },
+ {
+  "date": "2009-11-27",
+  "capacity": 17589,
+  "capacity_type": "design",
+  "population": 22513
+ },
+ {
+  "date": "2009-12-04",
+  "capacity": 17591,
+  "capacity_type": "design",
+  "population": 22501
+ },
+ {
+  "date": "2009-12-11",
+  "capacity": 17573,
+  "capacity_type": "design",
+  "population": 22498
+ },
+ {
+  "date": "2009-12-18",
+  "capacity": 17561,
+  "capacity_type": "design",
+  "population": 22551
+ },
+ {
+  "date": "2009-12-25",
+  "capacity": 17560,
+  "capacity_type": "design",
+  "population": 22486
+ },
+ {
+  "date": "2010-01-01",
+  "capacity": 17561,
+  "capacity_type": "design",
+  "population": 22431
+ },
+ {
+  "date": "2010-01-08",
+  "capacity": 17551,
+  "capacity_type": "design",
+  "population": 22449
+ },
+ {
+  "date": "2010-01-15",
+  "capacity": 17485,
+  "capacity_type": "design",
+  "population": 22472
+ },
+ {
+  "date": "2010-01-22",
+  "capacity": 17493,
+  "capacity_type": "design",
+  "population": 22463
+ },
+ {
+  "date": "2010-01-29",
+  "capacity": 17482,
+  "capacity_type": "design",
+  "population": 22509
+ },
+ {
+  "date": "2010-02-05",
+  "capacity": 17485,
+  "capacity_type": "design",
+  "population": 22545
+ },
+ {
+  "date": "2010-02-12",
+  "capacity": 17496,
+  "capacity_type": "design",
+  "population": 22561
+ },
+ {
+  "date": "2010-02-19",
+  "capacity": 17481,
+  "capacity_type": "design",
+  "population": 22528
+ },
+ {
+  "date": "2010-02-26",
+  "capacity": 17464,
+  "capacity_type": "design",
+  "population": 22514
+ },
+ {
+  "date": "2010-03-05",
+  "capacity": 17476,
+  "capacity_type": "design",
+  "population": 22543
+ },
+ {
+  "date": "2010-03-12",
+  "capacity": 17455,
+  "capacity_type": "design",
+  "population": 22511
+ },
+ {
+  "date": "2010-03-19",
+  "capacity": 17463,
+  "capacity_type": "design",
+  "population": 22488
+ },
+ {
+  "date": "2010-03-26",
+  "capacity": 17460,
+  "capacity_type": "design",
+  "population": 22521
+ },
+ {
+  "date": "2010-04-02",
+  "capacity": 17431,
+  "capacity_type": "design",
+  "population": 22520
+ },
+ {
+  "date": "2010-04-09",
+  "capacity": 17425,
+  "capacity_type": "design",
+  "population": 22493
+ },
+ {
+  "date": "2010-04-16",
+  "capacity": 17407,
+  "capacity_type": "design",
+  "population": 22445
+ },
+ {
+  "date": "2010-04-23",
+  "capacity": 17408,
+  "capacity_type": "design",
+  "population": 22481
+ },
+ {
+  "date": "2010-04-30",
+  "capacity": 17407,
+  "capacity_type": "design",
+  "population": 22451
+ },
+ {
+  "date": "2010-05-07",
+  "capacity": 17410,
+  "capacity_type": "design",
+  "population": 22436
+ },
+ {
+  "date": "2010-05-14",
+  "capacity": 17412,
+  "capacity_type": "design",
+  "population": 22416
+ },
+ {
+  "date": "2010-05-21",
+  "capacity": 17425,
+  "capacity_type": "design",
+  "population": 22511
+ },
+ {
+  "date": "2010-05-28",
+  "capacity": 17447,
+  "capacity_type": "design",
+  "population": 22480
+ },
+ {
+  "date": "2010-06-04",
+  "capacity": 17451,
+  "capacity_type": "design",
+  "population": 22425
+ },
+ {
+  "date": "2010-06-11",
+  "capacity": 17459,
+  "capacity_type": "design",
+  "population": 22389
+ },
+ {
+  "date": "2010-06-18",
+  "capacity": 17452,
+  "capacity_type": "design",
+  "population": 22398
+ },
+ {
+  "date": "2010-06-25",
+  "capacity": 17453,
+  "capacity_type": "design",
+  "population": 22417
+ },
+ {
+  "date": "2010-07-02",
+  "capacity": 17613,
+  "capacity_type": "design",
+  "population": 22393
+ },
+ {
+  "date": "2010-07-09",
+  "capacity": 17611,
+  "capacity_type": "design",
+  "population": 22357
+ },
+ {
+  "date": "2010-07-16",
+  "capacity": 17612,
+  "capacity_type": "design",
+  "population": 22322
+ },
+ {
+  "date": "2010-07-23",
+  "capacity": 17617,
+  "capacity_type": "design",
+  "population": 22340
+ },
+ {
+  "date": "2010-07-30",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 22322
+ },
+ {
+  "date": "2010-08-06",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 22271
+ },
+ {
+  "date": "2010-08-13",
+  "capacity": 17650,
+  "capacity_type": "design",
+  "population": 22287
+ },
+ {
+  "date": "2010-08-20",
+  "capacity": 17640,
+  "capacity_type": "design",
+  "population": 22320
+ },
+ {
+  "date": "2010-08-27",
+  "capacity": 17636,
+  "capacity_type": "design",
+  "population": 22306
+ },
+ {
+  "date": "2010-09-03",
+  "capacity": 17633,
+  "capacity_type": "design",
+  "population": 22252
+ },
+ {
+  "date": "2010-09-10",
+  "capacity": 17637,
+  "capacity_type": "design",
+  "population": 22169
+ },
+ {
+  "date": "2010-09-17",
+  "capacity": 17644,
+  "capacity_type": "design",
+  "population": 22133
+ },
+ {
+  "date": "2010-09-24",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 22152
+ },
+ {
+  "date": "2010-10-01",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 22166
+ },
+ {
+  "date": "2010-10-08",
+  "capacity": 17641,
+  "capacity_type": "design",
+  "population": 22160
+ },
+ {
+  "date": "2010-10-15",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 22154
+ },
+ {
+  "date": "2010-10-22",
+  "capacity": 17635,
+  "capacity_type": "design",
+  "population": 22091
+ },
+ {
+  "date": "2010-10-29",
+  "capacity": 17630,
+  "capacity_type": "design",
+  "population": 22143
+ },
+ {
+  "date": "2010-11-05",
+  "capacity": 17630,
+  "capacity_type": "design",
+  "population": 22144
+ },
+ {
+  "date": "2010-11-12",
+  "capacity": 17629,
+  "capacity_type": "design",
+  "population": 22104
+ },
+ {
+  "date": "2010-11-19",
+  "capacity": 17619,
+  "capacity_type": "design",
+  "population": 22128
+ },
+ {
+  "date": "2010-11-26",
+  "capacity": 17610,
+  "capacity_type": "design",
+  "population": 22136
+ },
+ {
+  "date": "2010-12-03",
+  "capacity": 17602,
+  "capacity_type": "design",
+  "population": 22130
+ },
+ {
+  "date": "2010-12-10",
+  "capacity": 17597,
+  "capacity_type": "design",
+  "population": 22098
+ },
+ {
+  "date": "2010-12-17",
+  "capacity": 17590,
+  "capacity_type": "design",
+  "population": 22027
+ },
+ {
+  "date": "2010-12-24",
+  "capacity": 17595,
+  "capacity_type": "design",
+  "population": 22019
+ },
+ {
+  "date": "2010-12-31",
+  "capacity": 17596,
+  "capacity_type": "design",
+  "population": 22027
+ },
+ {
+  "date": "2011-01-07",
+  "capacity": 17591,
+  "capacity_type": "design",
+  "population": 22003
+ },
+ {
+  "date": "2011-01-14",
+  "capacity": 17585,
+  "capacity_type": "design",
+  "population": 21914
+ },
+ {
+  "date": "2011-01-21",
+  "capacity": 17577,
+  "capacity_type": "design",
+  "population": 21949
+ },
+ {
+  "date": "2011-01-28",
+  "capacity": 17575,
+  "capacity_type": "design",
+  "population": 21923
+ },
+ {
+  "date": "2011-02-04",
+  "capacity": 17571,
+  "capacity_type": "design",
+  "population": 21878
+ },
+ {
+  "date": "2011-02-11",
+  "capacity": 17567,
+  "capacity_type": "design",
+  "population": 21879
+ },
+ {
+  "date": "2011-02-18",
+  "capacity": 17567,
+  "capacity_type": "design",
+  "population": 21890
+ },
+ {
+  "date": "2011-02-25",
+  "capacity": 17559,
+  "capacity_type": "design",
+  "population": 21839
+ },
+ {
+  "date": "2011-03-04",
+  "capacity": 17503,
+  "capacity_type": "design",
+  "population": 21819
+ },
+ {
+  "date": "2011-03-11",
+  "capacity": 17486,
+  "capacity_type": "design",
+  "population": 21874
+ },
+ {
+  "date": "2011-03-18",
+  "capacity": 17465,
+  "capacity_type": "design",
+  "population": 21878
+ },
+ {
+  "date": "2011-03-25",
+  "capacity": 17429,
+  "capacity_type": "design",
+  "population": 21845
+ },
+ {
+  "date": "2011-04-01",
+  "capacity": 17379,
+  "capacity_type": "design",
+  "population": 21865
+ },
+ {
+  "date": "2011-04-08",
+  "capacity": 17377,
+  "capacity_type": "design",
+  "population": 21790
+ },
+ {
+  "date": "2011-04-15",
+  "capacity": 17368,
+  "capacity_type": "design",
+  "population": 21803
+ },
+ {
+  "date": "2011-04-22",
+  "capacity": 17360,
+  "capacity_type": "design",
+  "population": 21800
+ },
+ {
+  "date": "2011-04-29",
+  "capacity": 17351,
+  "capacity_type": "design",
+  "population": 21805
+ },
+ {
+  "date": "2011-05-06",
+  "capacity": 17352,
+  "capacity_type": "design",
+  "population": 21807
+ },
+ {
+  "date": "2011-05-13",
+  "capacity": 17351,
+  "capacity_type": "design",
+  "population": 21812
+ },
+ {
+  "date": "2011-05-20",
+  "capacity": 17345,
+  "capacity_type": "design",
+  "population": 21864
+ },
+ {
+  "date": "2011-05-27",
+  "capacity": 17340,
+  "capacity_type": "design",
+  "population": 21880
+ },
+ {
+  "date": "2011-06-03",
+  "capacity": 17339,
+  "capacity_type": "design",
+  "population": 21787
+ },
+ {
+  "date": "2011-06-10",
+  "capacity": 17337,
+  "capacity_type": "design",
+  "population": 21779
+ },
+ {
+  "date": "2011-06-17",
+  "capacity": 17336,
+  "capacity_type": "design",
+  "population": 21788
+ },
+ {
+  "date": "2011-06-24",
+  "capacity": 17343,
+  "capacity_type": "design",
+  "population": 21792
+ },
+ {
+  "date": "2011-07-01",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 21812
+ },
+ {
+  "date": "2011-07-08",
+  "capacity": 17348,
+  "capacity_type": "design",
+  "population": 21779
+ },
+ {
+  "date": "2011-07-15",
+  "capacity": 17356,
+  "capacity_type": "design",
+  "population": 21790
+ },
+ {
+  "date": "2011-07-22",
+  "capacity": 17350,
+  "capacity_type": "design",
+  "population": 21791
+ },
+ {
+  "date": "2011-07-29",
+  "capacity": 17348,
+  "capacity_type": "design",
+  "population": 21810
+ },
+ {
+  "date": "2011-08-05",
+  "capacity": 17350,
+  "capacity_type": "design",
+  "population": 21817
+ },
+ {
+  "date": "2011-08-12",
+  "capacity": 17356,
+  "capacity_type": "design",
+  "population": 21770
+ },
+ {
+  "date": "2011-08-19",
+  "capacity": 17355,
+  "capacity_type": "design",
+  "population": 21800
+ },
+ {
+  "date": "2011-08-26",
+  "capacity": 17357,
+  "capacity_type": "design",
+  "population": 21816
+ },
+ {
+  "date": "2011-09-02",
+  "capacity": 17348,
+  "capacity_type": "design",
+  "population": 21811
+ },
+ {
+  "date": "2011-09-09",
+  "capacity": 17345,
+  "capacity_type": "design",
+  "population": 21758
+ },
+ {
+  "date": "2011-09-16",
+  "capacity": 17354,
+  "capacity_type": "design",
+  "population": 21719
+ },
+ {
+  "date": "2011-09-23",
+  "capacity": 17353,
+  "capacity_type": "design",
+  "population": 21748
+ },
+ {
+  "date": "2011-09-30",
+  "capacity": 17348,
+  "capacity_type": "design",
+  "population": 21794
+ },
+ {
+  "date": "2011-10-07",
+  "capacity": 17342,
+  "capacity_type": "design",
+  "population": 21822
+ },
+ {
+  "date": "2011-10-14",
+  "capacity": 17313,
+  "capacity_type": "design",
+  "population": 21797
+ },
+ {
+  "date": "2011-10-21",
+  "capacity": 17277,
+  "capacity_type": "design",
+  "population": 21776
+ },
+ {
+  "date": "2011-10-28",
+  "capacity": 17265,
+  "capacity_type": "design",
+  "population": 21807
+ },
+ {
+  "date": "2011-11-04",
+  "capacity": 17257,
+  "capacity_type": "design",
+  "population": 21833
+ },
+ {
+  "date": "2011-11-11",
+  "capacity": 17246,
+  "capacity_type": "design",
+  "population": 21797
+ },
+ {
+  "date": "2011-11-18",
+  "capacity": 17242,
+  "capacity_type": "design",
+  "population": 21809
+ },
+ {
+  "date": "2011-11-25",
+  "capacity": 17241,
+  "capacity_type": "design",
+  "population": 21787
+ },
+ {
+  "date": "2011-12-02",
+  "capacity": 17243,
+  "capacity_type": "design",
+  "population": 21816
+ },
+ {
+  "date": "2011-12-09",
+  "capacity": 17243,
+  "capacity_type": "design",
+  "population": 21815
+ },
+ {
+  "date": "2011-12-16",
+  "capacity": 17241,
+  "capacity_type": "design",
+  "population": 21847
+ },
+ {
+  "date": "2011-12-23",
+  "capacity": 16936,
+  "capacity_type": "design",
+  "population": 21882
+ },
+ {
+  "date": "2011-12-30",
+  "capacity": 17210,
+  "capacity_type": "design",
+  "population": 21884
+ },
+ {
+  "date": "2012-01-06",
+  "capacity": 17212,
+  "capacity_type": "design",
+  "population": 21812
+ },
+ {
+  "date": "2012-01-13",
+  "capacity": 17172,
+  "capacity_type": "design",
+  "population": 21808
+ },
+ {
+  "date": "2012-01-20",
+  "capacity": 17164,
+  "capacity_type": "design",
+  "population": 21775
+ },
+ {
+  "date": "2012-01-27",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 21823
+ },
+ {
+  "date": "2012-02-03",
+  "capacity": 17152,
+  "capacity_type": "design",
+  "population": 21913
+ },
+ {
+  "date": "2012-02-10",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 21907
+ },
+ {
+  "date": "2012-02-17",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 21881
+ },
+ {
+  "date": "2012-02-24",
+  "capacity": 17156,
+  "capacity_type": "design",
+  "population": 21884
+ },
+ {
+  "date": "2012-03-02",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 21899
+ },
+ {
+  "date": "2012-03-09",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 21929
+ },
+ {
+  "date": "2012-03-16",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 21920
+ },
+ {
+  "date": "2012-03-23",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 21963
+ },
+ {
+  "date": "2012-03-30",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 21984
+ },
+ {
+  "date": "2012-04-06",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 21981
+ },
+ {
+  "date": "2012-04-13",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 21972
+ },
+ {
+  "date": "2012-04-20",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 22014
+ },
+ {
+  "date": "2012-04-27",
+  "capacity": 17146,
+  "capacity_type": "design",
+  "population": 21995
+ },
+ {
+  "date": "2012-05-04",
+  "capacity": 17152,
+  "capacity_type": "design",
+  "population": 21984
+ },
+ {
+  "date": "2012-05-11",
+  "capacity": 17147,
+  "capacity_type": "design",
+  "population": 21997
+ },
+ {
+  "date": "2012-05-18",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22003
+ },
+ {
+  "date": "2012-05-25",
+  "capacity": 17139,
+  "capacity_type": "design",
+  "population": 22011
+ },
+ {
+  "date": "2012-06-01",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 21973
+ },
+ {
+  "date": "2012-06-08",
+  "capacity": 17126,
+  "capacity_type": "design",
+  "population": 22014
+ },
+ {
+  "date": "2012-06-15",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22016
+ },
+ {
+  "date": "2012-06-22",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 22034
+ },
+ {
+  "date": "2012-06-29",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 22045
+ },
+ {
+  "date": "2012-07-06",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 21999
+ },
+ {
+  "date": "2012-07-13",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 22026
+ },
+ {
+  "date": "2012-07-20",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 22007
+ },
+ {
+  "date": "2012-07-27",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22077
+ },
+ {
+  "date": "2012-08-03",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 22081
+ },
+ {
+  "date": "2012-08-10",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 22052
+ },
+ {
+  "date": "2012-08-17",
+  "capacity": 17139,
+  "capacity_type": "design",
+  "population": 22039
+ },
+ {
+  "date": "2012-08-24",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 22023
+ },
+ {
+  "date": "2012-08-31",
+  "capacity": 17139,
+  "capacity_type": "design",
+  "population": 22039
+ },
+ {
+  "date": "2012-09-07",
+  "capacity": 17138,
+  "capacity_type": "design",
+  "population": 22025
+ },
+ {
+  "date": "2012-09-14",
+  "capacity": 17134,
+  "capacity_type": "design",
+  "population": 21991
+ },
+ {
+  "date": "2012-09-21",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 21968
+ },
+ {
+  "date": "2012-09-28",
+  "capacity": 17138,
+  "capacity_type": "design",
+  "population": 21970
+ },
+ {
+  "date": "2012-10-05",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 21967
+ },
+ {
+  "date": "2012-10-12",
+  "capacity": 17166,
+  "capacity_type": "design",
+  "population": 22017
+ },
+ {
+  "date": "2012-10-19",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22041
+ },
+ {
+  "date": "2012-10-26",
+  "capacity": 17130,
+  "capacity_type": "design",
+  "population": 22045
+ },
+ {
+  "date": "2012-11-02",
+  "capacity": 17130,
+  "capacity_type": "design",
+  "population": 22065
+ },
+ {
+  "date": "2012-11-09",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22061
+ },
+ {
+  "date": "2012-11-16",
+  "capacity": 17134,
+  "capacity_type": "design",
+  "population": 22064
+ },
+ {
+  "date": "2012-11-23",
+  "capacity": 17132,
+  "capacity_type": "design",
+  "population": 22039
+ },
+ {
+  "date": "2012-11-30",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22060
+ },
+ {
+  "date": "2012-12-07",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 22041
+ },
+ {
+  "date": "2012-12-14",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 21985
+ },
+ {
+  "date": "2012-12-21",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 21995
+ },
+ {
+  "date": "2012-12-28",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 21963
+ },
+ {
+  "date": "2013-01-11",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22034
+ },
+ {
+  "date": "2013-01-18",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 21927
+ },
+ {
+  "date": "2013-01-25",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 21896
+ },
+ {
+  "date": "2013-02-01",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 21905
+ },
+ {
+  "date": "2013-02-08",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 21941
+ },
+ {
+  "date": "2013-02-15",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 21917
+ },
+ {
+  "date": "2013-02-22",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 21925
+ },
+ {
+  "date": "2013-03-01",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 21931
+ },
+ {
+  "date": "2013-03-08",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 21949
+ },
+ {
+  "date": "2013-03-15",
+  "capacity": 17146,
+  "capacity_type": "design",
+  "population": 21944
+ },
+ {
+  "date": "2013-03-22",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 21942
+ },
+ {
+  "date": "2013-03-29",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 21940
+ },
+ {
+  "date": "2013-04-05",
+  "capacity": 17139,
+  "capacity_type": "design",
+  "population": 21984
+ },
+ {
+  "date": "2013-04-12",
+  "capacity": 17138,
+  "capacity_type": "design",
+  "population": 21948
+ },
+ {
+  "date": "2013-04-19",
+  "capacity": 17136,
+  "capacity_type": "design",
+  "population": 21994
+ },
+ {
+  "date": "2013-04-26",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 22003
+ },
+ {
+  "date": "2013-05-03",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 21991
+ },
+ {
+  "date": "2013-05-10",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 22032
+ },
+ {
+  "date": "2013-05-17",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22106
+ },
+ {
+  "date": "2013-05-24",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 22093
+ },
+ {
+  "date": "2013-05-31",
+  "capacity": 17138,
+  "capacity_type": "design",
+  "population": 22060
+ },
+ {
+  "date": "2013-06-07",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 22104
+ },
+ {
+  "date": "2013-06-14",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 22094
+ },
+ {
+  "date": "2013-06-21",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 22109
+ },
+ {
+  "date": "2013-06-28",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 22083
+ },
+ {
+  "date": "2013-07-05",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22091
+ },
+ {
+  "date": "2013-07-12",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 22071
+ },
+ {
+  "date": "2013-07-19",
+  "capacity": 17116,
+  "capacity_type": "design",
+  "population": 22016
+ },
+ {
+  "date": "2013-07-26",
+  "capacity": 17116,
+  "capacity_type": "design",
+  "population": 22023
+ },
+ {
+  "date": "2013-08-02",
+  "capacity": 17123,
+  "capacity_type": "design",
+  "population": 22054
+ },
+ {
+  "date": "2013-08-09",
+  "capacity": 17124,
+  "capacity_type": "design",
+  "population": 22041
+ },
+ {
+  "date": "2013-08-16",
+  "capacity": 17124,
+  "capacity_type": "design",
+  "population": 22015
+ },
+ {
+  "date": "2013-08-23",
+  "capacity": 17125,
+  "capacity_type": "design",
+  "population": 22040
+ },
+ {
+  "date": "2013-08-30",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 22143
+ },
+ {
+  "date": "2013-09-06",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 22039
+ },
+ {
+  "date": "2013-09-13",
+  "capacity": 17126,
+  "capacity_type": "design",
+  "population": 22017
+ },
+ {
+  "date": "2013-09-20",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 22030
+ },
+ {
+  "date": "2013-09-27",
+  "capacity": 17122,
+  "capacity_type": "design",
+  "population": 22034
+ },
+ {
+  "date": "2013-10-04",
+  "capacity": 17122,
+  "capacity_type": "design",
+  "population": 22021
+ },
+ {
+  "date": "2013-10-11",
+  "capacity": 17118,
+  "capacity_type": "design",
+  "population": 22000
+ },
+ {
+  "date": "2013-10-18",
+  "capacity": 17116,
+  "capacity_type": "design",
+  "population": 22055
+ },
+ {
+  "date": "2013-10-25",
+  "capacity": 17119,
+  "capacity_type": "design",
+  "population": 22059
+ },
+ {
+  "date": "2013-11-01",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 22081
+ },
+ {
+  "date": "2013-11-08",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 22078
+ },
+ {
+  "date": "2013-11-15",
+  "capacity": 17134,
+  "capacity_type": "design",
+  "population": 22078
+ },
+ {
+  "date": "2013-11-22",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22074
+ },
+ {
+  "date": "2013-11-29",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22074
+ },
+ {
+  "date": "2013-12-06",
+  "capacity": 17130,
+  "capacity_type": "design",
+  "population": 22065
+ },
+ {
+  "date": "2013-12-13",
+  "capacity": 17132,
+  "capacity_type": "design",
+  "population": 22038
+ },
+ {
+  "date": "2013-12-20",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22068
+ },
+ {
+  "date": "2013-12-27",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22031
+ },
+ {
+  "date": "2014-01-03",
+  "capacity": 17132,
+  "capacity_type": "design",
+  "population": 21987
+ },
+ {
+  "date": "2014-01-10",
+  "capacity": 17135,
+  "capacity_type": "design",
+  "population": 21981
+ },
+ {
+  "date": "2014-01-17",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 21918
+ },
+ {
+  "date": "2014-01-24",
+  "capacity": 17130,
+  "capacity_type": "design",
+  "population": 21913
+ },
+ {
+  "date": "2014-01-31",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 21940
+ },
+ {
+  "date": "2014-02-07",
+  "capacity": 17123,
+  "capacity_type": "design",
+  "population": 21916
+ },
+ {
+  "date": "2014-02-14",
+  "capacity": 17120,
+  "capacity_type": "design",
+  "population": 21914
+ },
+ {
+  "date": "2014-02-21",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 21937
+ },
+ {
+  "date": "2014-02-28",
+  "capacity": 17137,
+  "capacity_type": "design",
+  "population": 21937
+ },
+ {
+  "date": "2014-03-07",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 21994
+ },
+ {
+  "date": "2014-03-14",
+  "capacity": 17128,
+  "capacity_type": "design",
+  "population": 22016
+ },
+ {
+  "date": "2014-03-21",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 22076
+ },
+ {
+  "date": "2014-03-28",
+  "capacity": 17126,
+  "capacity_type": "design",
+  "population": 22112
+ },
+ {
+  "date": "2014-04-04",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22109
+ },
+ {
+  "date": "2014-04-11",
+  "capacity": 17131,
+  "capacity_type": "design",
+  "population": 22100
+ },
+ {
+  "date": "2014-04-18",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 22052
+ },
+ {
+  "date": "2014-04-25",
+  "capacity": 17129,
+  "capacity_type": "design",
+  "population": 22068
+ },
+ {
+  "date": "2014-05-02",
+  "capacity": 17127,
+  "capacity_type": "design",
+  "population": 22080
+ },
+ {
+  "date": "2014-05-09",
+  "capacity": 17125,
+  "capacity_type": "design",
+  "population": 22068
+ },
+ {
+  "date": "2014-05-16",
+  "capacity": 17123,
+  "capacity_type": "design",
+  "population": 22091
+ },
+ {
+  "date": "2014-05-23",
+  "capacity": 17123,
+  "capacity_type": "design",
+  "population": 22090
+ },
+ {
+  "date": "2014-05-30",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22118
+ },
+ {
+  "date": "2014-06-06",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 22158
+ },
+ {
+  "date": "2014-06-13",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 22106
+ },
+ {
+  "date": "2014-06-20",
+  "capacity": 17146,
+  "capacity_type": "design",
+  "population": 22150
+ },
+ {
+  "date": "2014-06-27",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 22129
+ },
+ {
+  "date": "2014-07-04",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 22167
+ },
+ {
+  "date": "2014-07-11",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 22135
+ },
+ {
+  "date": "2014-07-18",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22125
+ },
+ {
+  "date": "2014-07-25",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 22108
+ },
+ {
+  "date": "2014-08-01",
+  "capacity": 17138,
+  "capacity_type": "design",
+  "population": 22123
+ },
+ {
+  "date": "2014-08-08",
+  "capacity": 17133,
+  "capacity_type": "design",
+  "population": 22162
+ },
+ {
+  "date": "2014-08-15",
+  "capacity": 17142,
+  "capacity_type": "design",
+  "population": 22152
+ },
+ {
+  "date": "2014-08-22",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 22178
+ },
+ {
+  "date": "2014-08-29",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22143
+ },
+ {
+  "date": "2014-09-05",
+  "capacity": 17143,
+  "capacity_type": "design",
+  "population": 22088
+ },
+ {
+  "date": "2014-09-12",
+  "capacity": 17141,
+  "capacity_type": "design",
+  "population": 22122
+ },
+ {
+  "date": "2014-09-19",
+  "capacity": 17140,
+  "capacity_type": "design",
+  "population": 22143
+ },
+ {
+  "date": "2014-09-26",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22185
+ },
+ {
+  "date": "2014-10-03",
+  "capacity": 17147,
+  "capacity_type": "design",
+  "population": 22198
+ },
+ {
+  "date": "2014-10-10",
+  "capacity": 17144,
+  "capacity_type": "design",
+  "population": 22181
+ },
+ {
+  "date": "2014-10-17",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 22159
+ },
+ {
+  "date": "2014-10-24",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22153
+ },
+ {
+  "date": "2014-10-31",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22177
+ },
+ {
+  "date": "2014-11-07",
+  "capacity": 17153,
+  "capacity_type": "design",
+  "population": 22224
+ },
+ {
+  "date": "2014-11-14",
+  "capacity": 17154,
+  "capacity_type": "design",
+  "population": 22200
+ },
+ {
+  "date": "2014-11-21",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22229
+ },
+ {
+  "date": "2014-11-28",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22249
+ },
+ {
+  "date": "2014-12-05",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 22234
+ },
+ {
+  "date": "2014-12-12",
+  "capacity": 17154,
+  "capacity_type": "design",
+  "population": 22253
+ },
+ {
+  "date": "2014-12-19",
+  "capacity": 17153,
+  "capacity_type": "design",
+  "population": 22299
+ },
+ {
+  "date": "2014-12-26",
+  "capacity": 17149,
+  "capacity_type": "design",
+  "population": 22243
+ },
+ {
+  "date": "2015-01-02",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 22220
+ },
+ {
+  "date": "2015-01-09",
+  "capacity": 17152,
+  "capacity_type": "design",
+  "population": 22232
+ },
+ {
+  "date": "2015-01-16",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22239
+ },
+ {
+  "date": "2015-01-23",
+  "capacity": 17145,
+  "capacity_type": "design",
+  "population": 22227
+ },
+ {
+  "date": "2015-01-30",
+  "capacity": 17147,
+  "capacity_type": "design",
+  "population": 22269
+ },
+ {
+  "date": "2015-02-06",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 22263
+ },
+ {
+  "date": "2015-02-13",
+  "capacity": 17149,
+  "capacity_type": "design",
+  "population": 22279
+ },
+ {
+  "date": "2015-02-20",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22328
+ },
+ {
+  "date": "2015-02-27",
+  "capacity": 17153,
+  "capacity_type": "design",
+  "population": 22304
+ },
+ {
+  "date": "2015-03-06",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22355
+ },
+ {
+  "date": "2015-03-13",
+  "capacity": 17156,
+  "capacity_type": "design",
+  "population": 22324
+ },
+ {
+  "date": "2015-03-20",
+  "capacity": 17154,
+  "capacity_type": "design",
+  "population": 22355
+ },
+ {
+  "date": "2015-03-27",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22399
+ },
+ {
+  "date": "2015-04-03",
+  "capacity": 17159,
+  "capacity_type": "design",
+  "population": 22402
+ },
+ {
+  "date": "2015-04-10",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 22395
+ },
+ {
+  "date": "2015-04-17",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 22369
+ },
+ {
+  "date": "2015-04-24",
+  "capacity": 17161,
+  "capacity_type": "design",
+  "population": 22406
+ },
+ {
+  "date": "2015-05-01",
+  "capacity": 17149,
+  "capacity_type": "design",
+  "population": 22396
+ },
+ {
+  "date": "2015-05-08",
+  "capacity": 17160,
+  "capacity_type": "design",
+  "population": 22383
+ },
+ {
+  "date": "2015-05-15",
+  "capacity": 17160,
+  "capacity_type": "design",
+  "population": 22418
+ },
+ {
+  "date": "2015-05-22",
+  "capacity": 17159,
+  "capacity_type": "design",
+  "population": 22433
+ },
+ {
+  "date": "2015-05-29",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22443
+ },
+ {
+  "date": "2015-06-05",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22444
+ },
+ {
+  "date": "2015-06-12",
+  "capacity": 17147,
+  "capacity_type": "design",
+  "population": 22409
+ },
+ {
+  "date": "2015-06-19",
+  "capacity": 17152,
+  "capacity_type": "design",
+  "population": 22452
+ },
+ {
+  "date": "2015-06-26",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 22468
+ },
+ {
+  "date": "2015-07-03",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22489
+ },
+ {
+  "date": "2015-07-10",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22466
+ },
+ {
+  "date": "2015-07-17",
+  "capacity": 17154,
+  "capacity_type": "design",
+  "population": 22453
+ },
+ {
+  "date": "2015-07-24",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22457
+ },
+ {
+  "date": "2015-07-31",
+  "capacity": 17156,
+  "capacity_type": "design",
+  "population": 22487
+ },
+ {
+  "date": "2015-08-07",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22497
+ },
+ {
+  "date": "2015-08-14",
+  "capacity": 17160,
+  "capacity_type": "design",
+  "population": 22488
+ },
+ {
+  "date": "2015-08-21",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22454
+ },
+ {
+  "date": "2015-08-28",
+  "capacity": 17159,
+  "capacity_type": "design",
+  "population": 22498
+ },
+ {
+  "date": "2015-09-04",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22497
+ },
+ {
+  "date": "2015-09-11",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22445
+ },
+ {
+  "date": "2015-09-18",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 22506
+ },
+ {
+  "date": "2015-09-25",
+  "capacity": 17161,
+  "capacity_type": "design",
+  "population": 22508
+ },
+ {
+  "date": "2015-10-02",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22556
+ },
+ {
+  "date": "2015-10-09",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22609
+ },
+ {
+  "date": "2015-10-16",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22589
+ },
+ {
+  "date": "2015-10-23",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22559
+ },
+ {
+  "date": "2015-10-30",
+  "capacity": 17158,
+  "capacity_type": "design",
+  "population": 22594
+ },
+ {
+  "date": "2015-11-06",
+  "capacity": 17161,
+  "capacity_type": "design",
+  "population": 22650
+ },
+ {
+  "date": "2015-11-13",
+  "capacity": 17151,
+  "capacity_type": "design",
+  "population": 22613
+ },
+ {
+  "date": "2015-11-20",
+  "capacity": 17154,
+  "capacity_type": "design",
+  "population": 22566
+ },
+ {
+  "date": "2015-11-27",
+  "capacity": 17155,
+  "capacity_type": "design",
+  "population": 22487
+ },
+ {
+  "date": "2015-12-04",
+  "capacity": 17148,
+  "capacity_type": "design",
+  "population": 22522
+ },
+ {
+  "date": "2015-12-11",
+  "capacity": 17157,
+  "capacity_type": "design",
+  "population": 22520
+ },
+ {
+  "date": "2015-12-18",
+  "capacity": 17168,
+  "capacity_type": "design",
+  "population": 22556
+ },
+ {
+  "date": "2015-12-25",
+  "capacity": 17172,
+  "capacity_type": "design",
+  "population": 22583
+ },
+ {
+  "date": "2016-01-01",
+  "capacity": 17176,
+  "capacity_type": "design",
+  "population": 22557
+ },
+ {
+  "date": "2016-01-08",
+  "capacity": 17176,
+  "capacity_type": "design",
+  "population": 22541
+ },
+ {
+  "date": "2016-01-15",
+  "capacity": 17185,
+  "capacity_type": "design",
+  "population": 22567
+ },
+ {
+  "date": "2016-01-22",
+  "capacity": 17191,
+  "capacity_type": "design",
+  "population": 22591
+ },
+ {
+  "date": "2016-01-29",
+  "capacity": 17194,
+  "capacity_type": "design",
+  "population": 22596
+ },
+ {
+  "date": "2016-02-05",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 22607
+ },
+ {
+  "date": "2016-02-12",
+  "capacity": 17346,
+  "capacity_type": "design",
+  "population": 22607
+ },
+ {
+  "date": "2016-02-19",
+  "capacity": 17196,
+  "capacity_type": "design",
+  "population": 22632
+ },
+ {
+  "date": "2016-02-26",
+  "capacity": 17345,
+  "capacity_type": "design",
+  "population": 22608
+ },
+ {
+  "date": "2016-03-04",
+  "capacity": 17343,
+  "capacity_type": "design",
+  "population": 22542
+ },
+ {
+  "date": "2016-03-11",
+  "capacity": 17338,
+  "capacity_type": "design",
+  "population": 22566
+ },
+ {
+  "date": "2016-03-18",
+  "capacity": 17339,
+  "capacity_type": "design",
+  "population": 22599
+ },
+ {
+  "date": "2016-03-25",
+  "capacity": 17200,
+  "capacity_type": "design",
+  "population": 22604
+ },
+ {
+  "date": "2016-04-01",
+  "capacity": 17351,
+  "capacity_type": "design",
+  "population": 22637
+ },
+ {
+  "date": "2016-04-08",
+  "capacity": 17352,
+  "capacity_type": "design",
+  "population": 22584
+ },
+ {
+  "date": "2016-04-15",
+  "capacity": 17357,
+  "capacity_type": "design",
+  "population": 22553
+ },
+ {
+  "date": "2016-04-22",
+  "capacity": 17356,
+  "capacity_type": "design",
+  "population": 22639
+ },
+ {
+  "date": "2016-04-29",
+  "capacity": 17351,
+  "capacity_type": "design",
+  "population": 22646
+ },
+ {
+  "date": "2016-05-06",
+  "capacity": 17348,
+  "capacity_type": "design",
+  "population": 22604
+ },
+ {
+  "date": "2016-05-13",
+  "capacity": 17347,
+  "capacity_type": "design",
+  "population": 22603
+ },
+ {
+  "date": "2016-05-20",
+  "capacity": 17341,
+  "capacity_type": "design",
+  "population": 22644
+ },
+ {
+  "date": "2016-05-27",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 22687
+ },
+ {
+  "date": "2016-06-03",
+  "capacity": 17345,
+  "capacity_type": "design",
+  "population": 22678
+ },
+ {
+  "date": "2016-06-10",
+  "capacity": 17356,
+  "capacity_type": "design",
+  "population": 22650
+ },
+ {
+  "date": "2016-06-17",
+  "capacity": 17359,
+  "capacity_type": "design",
+  "population": 22674
+ },
+ {
+  "date": "2016-06-24",
+  "capacity": 17215,
+  "capacity_type": "design",
+  "population": 22700
+ },
+ {
+  "date": "2016-07-01",
+  "capacity": 17385,
+  "capacity_type": "design",
+  "population": 22736
+ },
+ {
+  "date": "2016-07-08",
+  "capacity": 17242,
+  "capacity_type": "design",
+  "population": 22733
+ },
+ {
+  "date": "2016-07-15",
+  "capacity": 17401,
+  "capacity_type": "design",
+  "population": 22710
+ },
+ {
+  "date": "2016-07-22",
+  "capacity": 17413,
+  "capacity_type": "design",
+  "population": 22695
+ },
+ {
+  "date": "2016-07-29",
+  "capacity": 17421,
+  "capacity_type": "design",
+  "population": 22732
+ },
+ {
+  "date": "2016-08-05",
+  "capacity": 17419,
+  "capacity_type": "design",
+  "population": 22773
+ },
+ {
+  "date": "2016-08-12",
+  "capacity": 17417,
+  "capacity_type": "design",
+  "population": 22716
+ },
+ {
+  "date": "2016-08-19",
+  "capacity": 17419,
+  "capacity_type": "design",
+  "population": 22768
+ },
+ {
+  "date": "2016-08-26",
+  "capacity": 17415,
+  "capacity_type": "design",
+  "population": 22787
+ },
+ {
+  "date": "2016-09-02",
+  "capacity": 17431,
+  "capacity_type": "design",
+  "population": 22819
+ },
+ {
+  "date": "2016-09-09",
+  "capacity": 17436,
+  "capacity_type": "design",
+  "population": 22789
+ },
+ {
+  "date": "2016-09-16",
+  "capacity": 17433,
+  "capacity_type": "design",
+  "population": 22741
+ },
+ {
+  "date": "2016-09-23",
+  "capacity": 17437,
+  "capacity_type": "design",
+  "population": 22796
+ },
+ {
+  "date": "2016-09-30",
+  "capacity": 17429,
+  "capacity_type": "design",
+  "population": 22775
+ },
+ {
+  "date": "2016-10-07",
+  "capacity": 17427,
+  "capacity_type": "design",
+  "population": 22783
+ },
+ {
+  "date": "2016-10-14",
+  "capacity": 17432,
+  "capacity_type": "design",
+  "population": 22752
+ },
+ {
+  "date": "2016-10-21",
+  "capacity": 17428,
+  "capacity_type": "design",
+  "population": 22718
+ },
+ {
+  "date": "2016-10-28",
+  "capacity": 17428,
+  "capacity_type": "design",
+  "population": 22748
+ },
+ {
+  "date": "2016-11-04",
+  "capacity": 17427,
+  "capacity_type": "design",
+  "population": 22823
+ },
+ {
+  "date": "2016-11-11",
+  "capacity": 17436,
+  "capacity_type": "design",
+  "population": 22853
+ },
+ {
+  "date": "2016-11-18",
+  "capacity": 17450,
+  "capacity_type": "design",
+  "population": 22901
+ },
+ {
+  "date": "2016-11-25",
+  "capacity": 17473,
+  "capacity_type": "design",
+  "population": 22863
+ },
+ {
+  "date": "2016-12-02",
+  "capacity": 17479,
+  "capacity_type": "design",
+  "population": 22849
+ },
+ {
+  "date": "2016-12-09",
+  "capacity": 17478,
+  "capacity_type": "design",
+  "population": 22880
+ },
+ {
+  "date": "2016-12-16",
+  "capacity": 17339,
+  "capacity_type": "design",
+  "population": 22886
+ },
+ {
+  "date": "2016-12-23",
+  "capacity": 17338,
+  "capacity_type": "design",
+  "population": 22863
+ },
+ {
+  "date": "2016-12-30",
+  "capacity": 17339,
+  "capacity_type": "design",
+  "population": 22878
+ },
+ {
+  "date": "2017-01-06",
+  "capacity": 17487,
+  "capacity_type": "design",
+  "population": 22870
+ },
+ {
+  "date": "2017-01-13",
+  "capacity": 17489,
+  "capacity_type": "design",
+  "population": 22881
+ },
+ {
+  "date": "2017-01-20",
+  "capacity": 17487,
+  "capacity_type": "design",
+  "population": 22856
+ },
+ {
+  "date": "2017-01-27",
+  "capacity": 17485,
+  "capacity_type": "design",
+  "population": 22864
+ },
+ {
+  "date": "2017-02-03",
+  "capacity": 17337,
+  "capacity_type": "design",
+  "population": 22929
+ },
+ {
+  "date": "2017-02-10",
+  "capacity": 17332,
+  "capacity_type": "design",
+  "population": 22956
+ },
+ {
+  "date": "2017-02-17",
+  "capacity": 17480,
+  "capacity_type": "design",
+  "population": 22943
+ },
+ {
+  "date": "2017-02-24",
+  "capacity": 17472,
+  "capacity_type": "design",
+  "population": 22903
+ },
+ {
+  "date": "2017-03-03",
+  "capacity": 17476,
+  "capacity_type": "design",
+  "population": 22952
+ },
+ {
+  "date": "2017-03-10",
+  "capacity": 17495,
+  "capacity_type": "design",
+  "population": 22978
+ },
+ {
+  "date": "2017-03-17",
+  "capacity": 17508,
+  "capacity_type": "design",
+  "population": 22942
+ },
+ {
+  "date": "2017-03-24",
+  "capacity": 17507,
+  "capacity_type": "design",
+  "population": 22994
+ },
+ {
+  "date": "2017-03-31",
+  "capacity": 17500,
+  "capacity_type": "design",
+  "population": 23027
+ },
+ {
+  "date": "2017-04-07",
+  "capacity": 17499,
+  "capacity_type": "design",
+  "population": 23071
+ },
+ {
+  "date": "2017-04-14",
+  "capacity": 17505,
+  "capacity_type": "design",
+  "population": 23089
+ },
+ {
+  "date": "2017-04-21",
+  "capacity": 17505,
+  "capacity_type": "design",
+  "population": 23085
+ },
+ {
+  "date": "2017-04-28",
+  "capacity": 17507,
+  "capacity_type": "design",
+  "population": 23088
+ },
+ {
+  "date": "2017-05-05",
+  "capacity": 17512,
+  "capacity_type": "design",
+  "population": 23079
+ },
+ {
+  "date": "2017-05-12",
+  "capacity": 17505,
+  "capacity_type": "design",
+  "population": 23021
+ },
+ {
+  "date": "2017-05-19",
+  "capacity": 17500,
+  "capacity_type": "design",
+  "population": 23107
+ },
+ {
+  "date": "2017-05-26",
+  "capacity": 17520,
+  "capacity_type": "design",
+  "population": 23131
+ },
+ {
+  "date": "2017-06-02",
+  "capacity": 17542,
+  "capacity_type": "design",
+  "population": 23102
+ },
+ {
+  "date": "2017-06-09",
+  "capacity": 17556,
+  "capacity_type": "design",
+  "population": 23137
+ },
+ {
+  "date": "2017-06-16",
+  "capacity": 17573,
+  "capacity_type": "design",
+  "population": 23133
+ },
+ {
+  "date": "2017-06-23",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 23121
+ },
+ {
+  "date": "2017-06-30",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 23140
+ },
+ {
+  "date": "2017-07-07",
+  "capacity": 17584,
+  "capacity_type": "design",
+  "population": 23113
+ },
+ {
+  "date": "2017-07-14",
+  "capacity": 17587,
+  "capacity_type": "design",
+  "population": 23094
+ },
+ {
+  "date": "2017-07-21",
+  "capacity": 17599,
+  "capacity_type": "design",
+  "population": 23131
+ },
+ {
+  "date": "2017-07-28",
+  "capacity": 17610,
+  "capacity_type": "design",
+  "population": 23164
+ },
+ {
+  "date": "2017-08-04",
+  "capacity": 17611,
+  "capacity_type": "design",
+  "population": 23164
+ },
+ {
+  "date": "2017-08-11",
+  "capacity": 17618,
+  "capacity_type": "design",
+  "population": 23180
+ },
+ {
+  "date": "2017-08-18",
+  "capacity": 17629,
+  "capacity_type": "design",
+  "population": 23228
+ },
+ {
+  "date": "2017-08-25",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 23232
+ },
+ {
+  "date": "2017-09-01",
+  "capacity": 17650,
+  "capacity_type": "design",
+  "population": 23323
+ },
+ {
+  "date": "2017-09-08",
+  "capacity": 17659,
+  "capacity_type": "design",
+  "population": 23277
+ },
+ {
+  "date": "2017-09-15",
+  "capacity": 17669,
+  "capacity_type": "design",
+  "population": 23281
+ },
+ {
+  "date": "2017-09-22",
+  "capacity": 17678,
+  "capacity_type": "design",
+  "population": 23275
+ },
+ {
+  "date": "2017-09-29",
+  "capacity": 17683,
+  "capacity_type": "design",
+  "population": 23253
+ },
+ {
+  "date": "2017-10-06",
+  "capacity": 17688,
+  "capacity_type": "design",
+  "population": 23290
+ },
+ {
+  "date": "2017-10-13",
+  "capacity": 17699,
+  "capacity_type": "design",
+  "population": 23251
+ },
+ {
+  "date": "2017-10-20",
+  "capacity": 17699,
+  "capacity_type": "design",
+  "population": 23348
+ },
+ {
+  "date": "2017-10-27",
+  "capacity": 17702,
+  "capacity_type": "design",
+  "population": 23361
+ },
+ {
+  "date": "2017-11-03",
+  "capacity": 17710,
+  "capacity_type": "design",
+  "population": 23378
+ },
+ {
+  "date": "2017-11-10",
+  "capacity": 17725,
+  "capacity_type": "design",
+  "population": 23397
+ },
+ {
+  "date": "2017-11-17",
+  "capacity": 17723,
+  "capacity_type": "design",
+  "population": 23377
+ },
+ {
+  "date": "2017-11-24",
+  "capacity": 17720,
+  "capacity_type": "design",
+  "population": 23457
+ },
+ {
+  "date": "2017-12-01",
+  "capacity": 17720,
+  "capacity_type": "design",
+  "population": 23413
+ },
+ {
+  "date": "2017-12-08",
+  "capacity": 17725,
+  "capacity_type": "design",
+  "population": 23453
+ },
+ {
+  "date": "2017-12-15",
+  "capacity": 17741,
+  "capacity_type": "design",
+  "population": 23453
+ },
+ {
+  "date": "2017-12-22",
+  "capacity": 17733,
+  "capacity_type": "design",
+  "population": 23476
+ },
+ {
+  "date": "2017-12-29",
+  "capacity": 17732,
+  "capacity_type": "design",
+  "population": 23498
+ },
+ {
+  "date": "2018-01-05",
+  "capacity": 17720,
+  "capacity_type": "design",
+  "population": 23493
+ },
+ {
+  "date": "2018-01-12",
+  "capacity": 17730,
+  "capacity_type": "design",
+  "population": 23444
+ },
+ {
+  "date": "2018-01-19",
+  "capacity": 17729,
+  "capacity_type": "design",
+  "population": 23399
+ },
+ {
+  "date": "2018-01-26",
+  "capacity": 17734,
+  "capacity_type": "design",
+  "population": 23418
+ },
+ {
+  "date": "2018-02-02",
+  "capacity": 17747,
+  "capacity_type": "design",
+  "population": 23452
+ },
+ {
+  "date": "2018-02-09",
+  "capacity": 17748,
+  "capacity_type": "design",
+  "population": 23484
+ },
+ {
+  "date": "2018-02-16",
+  "capacity": 17745,
+  "capacity_type": "design",
+  "population": 23439
+ },
+ {
+  "date": "2018-02-23",
+  "capacity": 17740,
+  "capacity_type": "design",
+  "population": 23428
+ },
+ {
+  "date": "2018-03-02",
+  "capacity": 17746,
+  "capacity_type": "design",
+  "population": 23440
+ },
+ {
+  "date": "2018-03-09",
+  "capacity": 17746,
+  "capacity_type": "design",
+  "population": 23510
+ },
+ {
+  "date": "2018-03-16",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23506
+ },
+ {
+  "date": "2018-03-23",
+  "capacity": 17741,
+  "capacity_type": "design",
+  "population": 23542
+ },
+ {
+  "date": "2018-03-30",
+  "capacity": 17745,
+  "capacity_type": "design",
+  "population": 23637
+ },
+ {
+  "date": "2018-04-06",
+  "capacity": 17743,
+  "capacity_type": "design",
+  "population": 23634
+ },
+ {
+  "date": "2018-04-13",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23568
+ },
+ {
+  "date": "2018-04-20",
+  "capacity": 17756,
+  "capacity_type": "design",
+  "population": 23588
+ },
+ {
+  "date": "2018-04-27",
+  "capacity": 17748,
+  "capacity_type": "design",
+  "population": 23596
+ },
+ {
+  "date": "2018-05-04",
+  "capacity": 17734,
+  "capacity_type": "design",
+  "population": 23568
+ },
+ {
+  "date": "2018-05-11",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23563
+ },
+ {
+  "date": "2018-05-18",
+  "capacity": 17740,
+  "capacity_type": "design",
+  "population": 23627
+ },
+ {
+  "date": "2018-05-25",
+  "capacity": 17743,
+  "capacity_type": "design",
+  "population": 23644
+ },
+ {
+  "date": "2018-06-01",
+  "capacity": 17737,
+  "capacity_type": "design",
+  "population": 23621
+ },
+ {
+  "date": "2018-06-08",
+  "capacity": 17746,
+  "capacity_type": "design",
+  "population": 23647
+ },
+ {
+  "date": "2018-06-15",
+  "capacity": 17736,
+  "capacity_type": "design",
+  "population": 23594
+ },
+ {
+  "date": "2018-06-22",
+  "capacity": 17740,
+  "capacity_type": "design",
+  "population": 23585
+ },
+ {
+  "date": "2018-06-29",
+  "capacity": 17749,
+  "capacity_type": "design",
+  "population": 23621
+ },
+ {
+  "date": "2018-07-06",
+  "capacity": 17747,
+  "capacity_type": "design",
+  "population": 23661
+ },
+ {
+  "date": "2018-07-13",
+  "capacity": 17748,
+  "capacity_type": "design",
+  "population": 23669
+ },
+ {
+  "date": "2018-07-20",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23655
+ },
+ {
+  "date": "2018-07-27",
+  "capacity": 17744,
+  "capacity_type": "design",
+  "population": 23691
+ },
+ {
+  "date": "2018-08-03",
+  "capacity": 17745,
+  "capacity_type": "design",
+  "population": 23724
+ },
+ {
+  "date": "2018-08-10",
+  "capacity": 17739,
+  "capacity_type": "design",
+  "population": 23782
+ },
+ {
+  "date": "2018-08-17",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23784
+ },
+ {
+  "date": "2018-08-24",
+  "capacity": 17787,
+  "capacity_type": "design",
+  "population": 23791
+ },
+ {
+  "date": "2018-08-31",
+  "capacity": 17789,
+  "capacity_type": "design",
+  "population": 23791
+ },
+ {
+  "date": "2018-09-07",
+  "capacity": 17797,
+  "capacity_type": "design",
+  "population": 23732
+ },
+ {
+  "date": "2018-09-14",
+  "capacity": 17812,
+  "capacity_type": "design",
+  "population": 23709
+ },
+ {
+  "date": "2018-09-21",
+  "capacity": 17834,
+  "capacity_type": "design",
+  "population": 23699
+ },
+ {
+  "date": "2018-09-28",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23704
+ },
+ {
+  "date": "2018-10-05",
+  "capacity": 17841,
+  "capacity_type": "design",
+  "population": 23676
+ },
+ {
+  "date": "2018-10-12",
+  "capacity": 17845,
+  "capacity_type": "design",
+  "population": 23646
+ },
+ {
+  "date": "2018-10-19",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23658
+ },
+ {
+  "date": "2018-10-26",
+  "capacity": 17836,
+  "capacity_type": "design",
+  "population": 23670
+ },
+ {
+  "date": "2018-11-02",
+  "capacity": 17830,
+  "capacity_type": "design",
+  "population": 23720
+ },
+ {
+  "date": "2018-11-09",
+  "capacity": 17834,
+  "capacity_type": "design",
+  "population": 23725
+ },
+ {
+  "date": "2018-11-16",
+  "capacity": 17826,
+  "capacity_type": "design",
+  "population": 23692
+ },
+ {
+  "date": "2018-11-23",
+  "capacity": 17821,
+  "capacity_type": "design",
+  "population": 23626
+ },
+ {
+  "date": "2018-11-30",
+  "capacity": 17829,
+  "capacity_type": "design",
+  "population": 23637
+ },
+ {
+  "date": "2018-12-07",
+  "capacity": 17844,
+  "capacity_type": "design",
+  "population": 23647
+ },
+ {
+  "date": "2018-12-14",
+  "capacity": 17844,
+  "capacity_type": "design",
+  "population": 23636
+ },
+ {
+  "date": "2018-12-21",
+  "capacity": 17861,
+  "capacity_type": "design",
+  "population": 23675
+ },
+ {
+  "date": "2018-12-28",
+  "capacity": 17866,
+  "capacity_type": "design",
+  "population": 23641
+ },
+ {
+  "date": "2019-01-04",
+  "capacity": 17871,
+  "capacity_type": "design",
+  "population": 23566
+ },
+ {
+  "date": "2019-01-11",
+  "capacity": 17885,
+  "capacity_type": "design",
+  "population": 23562
+ },
+ {
+  "date": "2019-01-18",
+  "capacity": 17887,
+  "capacity_type": "design",
+  "population": 23561
+ },
+ {
+  "date": "2019-01-25",
+  "capacity": 17886,
+  "capacity_type": "design",
+  "population": 23589
+ },
+ {
+  "date": "2019-02-01",
+  "capacity": 17874,
+  "capacity_type": "design",
+  "population": 23641
+ },
+ {
+  "date": "2019-02-08",
+  "capacity": 17876,
+  "capacity_type": "design",
+  "population": 23642
+ },
+ {
+  "date": "2019-02-15",
+  "capacity": 17867,
+  "capacity_type": "design",
+  "population": 23636
+ },
+ {
+  "date": "2019-02-22",
+  "capacity": 17869,
+  "capacity_type": "design",
+  "population": 23715
+ },
+ {
+  "date": "2019-03-01",
+  "capacity": 17859,
+  "capacity_type": "design",
+  "population": 23746
+ },
+ {
+  "date": "2019-03-08",
+  "capacity": 17856,
+  "capacity_type": "design",
+  "population": 23721
+ },
+ {
+  "date": "2019-03-15",
+  "capacity": 17860,
+  "capacity_type": "design",
+  "population": 23680
+ },
+ {
+  "date": "2019-03-22",
+  "capacity": 17856,
+  "capacity_type": "design",
+  "population": 23654
+ },
+ {
+  "date": "2019-03-29",
+  "capacity": 17843,
+  "capacity_type": "design",
+  "population": 23725
+ },
+ {
+  "date": "2019-04-05",
+  "capacity": 17845,
+  "capacity_type": "design",
+  "population": 23722
+ },
+ {
+  "date": "2019-04-12",
+  "capacity": 17833,
+  "capacity_type": "design",
+  "population": 23685
+ },
+ {
+  "date": "2019-04-19",
+  "capacity": 17841,
+  "capacity_type": "design",
+  "population": 23700
+ },
+ {
+  "date": "2019-04-26",
+  "capacity": 17839,
+  "capacity_type": "design",
+  "population": 23725
+ },
+ {
+  "date": "2019-05-03",
+  "capacity": 17844,
+  "capacity_type": "design",
+  "population": 23752
+ },
+ {
+  "date": "2019-05-10",
+  "capacity": 17842,
+  "capacity_type": "design",
+  "population": 23719
+ },
+ {
+  "date": "2019-05-17",
+  "capacity": 17845,
+  "capacity_type": "design",
+  "population": 23734
+ },
+ {
+  "date": "2019-05-24",
+  "capacity": 17847,
+  "capacity_type": "design",
+  "population": 23741
+ },
+ {
+  "date": "2019-05-31",
+  "capacity": 17838,
+  "capacity_type": "design",
+  "population": 23707
+ },
+ {
+  "date": "2019-06-07",
+  "capacity": 17826,
+  "capacity_type": "design",
+  "population": 23757
+ },
+ {
+  "date": "2019-06-14",
+  "capacity": 17821,
+  "capacity_type": "design",
+  "population": 23722
+ },
+ {
+  "date": "2019-06-21",
+  "capacity": 17830,
+  "capacity_type": "design",
+  "population": 23755
+ },
+ {
+  "date": "2019-06-28",
+  "capacity": 17826,
+  "capacity_type": "design",
+  "population": 23784
+ },
+ {
+  "date": "2019-07-05",
+  "capacity": 17825,
+  "capacity_type": "design",
+  "population": 23771
+ },
+ {
+  "date": "2019-07-12",
+  "capacity": 17825,
+  "capacity_type": "design",
+  "population": 23741
+ },
+ {
+  "date": "2019-07-19",
+  "capacity": 17824,
+  "capacity_type": "design",
+  "population": 23721
+ },
+ {
+  "date": "2019-07-26",
+  "capacity": 17829,
+  "capacity_type": "design",
+  "population": 23741
+ },
+ {
+  "date": "2019-08-02",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23786
+ },
+ {
+  "date": "2019-08-09",
+  "capacity": 17830,
+  "capacity_type": "design",
+  "population": 23826
+ },
+ {
+  "date": "2019-08-16",
+  "capacity": 17812,
+  "capacity_type": "design",
+  "population": 23781
+ },
+ {
+  "date": "2019-08-23",
+  "capacity": 17831,
+  "capacity_type": "design",
+  "population": 23756
+ },
+ {
+  "date": "2019-08-30",
+  "capacity": 17818,
+  "capacity_type": "design",
+  "population": 23761
+ },
+ {
+  "date": "2019-09-06",
+  "capacity": 17824,
+  "capacity_type": "design",
+  "population": 23733
+ },
+ {
+  "date": "2019-09-13",
+  "capacity": 17854,
+  "capacity_type": "design",
+  "population": 23707
+ },
+ {
+  "date": "2019-09-20",
+  "capacity": 17836,
+  "capacity_type": "design",
+  "population": 23721
+ },
+ {
+  "date": "2019-09-27",
+  "capacity": 17830,
+  "capacity_type": "design",
+  "population": 23708
+ },
+ {
+  "date": "2019-10-04",
+  "capacity": 17823,
+  "capacity_type": "design",
+  "population": 23719
+ },
+ {
+  "date": "2019-10-11",
+  "capacity": 17833,
+  "capacity_type": "design",
+  "population": 23692
+ },
+ {
+  "date": "2019-10-18",
+  "capacity": 17838,
+  "capacity_type": "design",
+  "population": 23701
+ },
+ {
+  "date": "2019-10-25",
+  "capacity": 17825,
+  "capacity_type": "design",
+  "population": 23722
+ },
+ {
+  "date": "2019-11-01",
+  "capacity": 17819,
+  "capacity_type": "design",
+  "population": 23671
+ },
+ {
+  "date": "2019-11-08",
+  "capacity": 17819,
+  "capacity_type": "design",
+  "population": 23721
+ },
+ {
+  "date": "2019-11-15",
+  "capacity": 17840,
+  "capacity_type": "design",
+  "population": 23731
+ },
+ {
+  "date": "2019-11-22",
+  "capacity": 17842,
+  "capacity_type": "design",
+  "population": 23782
+ },
+ {
+  "date": "2019-11-29",
+  "capacity": 17838,
+  "capacity_type": "design",
+  "population": 23752
+ },
+ {
+  "date": "2019-12-06",
+  "capacity": 17839,
+  "capacity_type": "design",
+  "population": 23752
+ },
+ {
+  "date": "2019-12-13",
+  "capacity": 17849,
+  "capacity_type": "design",
+  "population": 23751
+ },
+ {
+  "date": "2019-12-20",
+  "capacity": 17849,
+  "capacity_type": "design",
+  "population": 23786
+ },
+ {
+  "date": "2019-12-27",
+  "capacity": 17848,
+  "capacity_type": "design",
+  "population": 23723
+ },
+ {
+  "date": "2020-01-03",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23672
+ },
+ {
+  "date": "2020-01-10",
+  "capacity": 17831,
+  "capacity_type": "design",
+  "population": 23616
+ },
+ {
+  "date": "2020-01-17",
+  "capacity": 17823,
+  "capacity_type": "design",
+  "population": 23605
+ },
+ {
+  "date": "2020-01-24",
+  "capacity": 17828,
+  "capacity_type": "design",
+  "population": 23555
+ },
+ {
+  "date": "2020-01-31",
+  "capacity": 17834,
+  "capacity_type": "design",
+  "population": 23629
+ },
+ {
+  "date": "2020-02-07",
+  "capacity": 17837,
+  "capacity_type": "design",
+  "population": 23609
+ },
+ {
+  "date": "2020-02-14",
+  "capacity": 17836,
+  "capacity_type": "design",
+  "population": 23608
+ },
+ {
+  "date": "2020-02-21",
+  "capacity": 17840,
+  "capacity_type": "design",
+  "population": 23590
+ },
+ {
+  "date": "2020-02-28",
+  "capacity": 17843,
+  "capacity_type": "design",
+  "population": 23471
+ },
+ {
+  "date": "2020-03-06",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23485
+ },
+ {
+  "date": "2020-03-13",
+  "capacity": 17828,
+  "capacity_type": "design",
+  "population": 23436
+ },
+ {
+  "date": "2020-03-20",
+  "capacity": 17824,
+  "capacity_type": "design",
+  "population": 23416
+ },
+ {
+  "date": "2020-03-27",
+  "capacity": 17815,
+  "capacity_type": "design",
+  "population": 23288
+ },
+ {
+  "date": "2020-04-03",
+  "capacity": 17804,
+  "capacity_type": "design",
+  "population": 23046
+ },
+ {
+  "date": "2020-04-10",
+  "capacity": 17793,
+  "capacity_type": "design",
+  "population": 22805
+ },
+ {
+  "date": "2020-04-17",
+  "capacity": 17779,
+  "capacity_type": "design",
+  "population": 22642
+ },
+ {
+  "date": "2020-04-24",
+  "capacity": 17769,
+  "capacity_type": "design",
+  "population": 22506
+ },
+ {
+  "date": "2020-05-01",
+  "capacity": 17758,
+  "capacity_type": "design",
+  "population": 22342
+ },
+ {
+  "date": "2020-05-08",
+  "capacity": 17748,
+  "capacity_type": "design",
+  "population": 22231
+ },
+ {
+  "date": "2020-05-15",
+  "capacity": 17739,
+  "capacity_type": "design",
+  "population": 22104
+ },
+ {
+  "date": "2020-05-22",
+  "capacity": 17734,
+  "capacity_type": "design",
+  "population": 21947
+ },
+ {
+  "date": "2020-05-29",
+  "capacity": 17727,
+  "capacity_type": "design",
+  "population": 21819
+ },
+ {
+  "date": "2020-06-05",
+  "capacity": 17721,
+  "capacity_type": "design",
+  "population": 21742
+ },
+ {
+  "date": "2020-06-12",
+  "capacity": 17714,
+  "capacity_type": "design",
+  "population": 21632
+ },
+ {
+  "date": "2020-06-19",
+  "capacity": 17700,
+  "capacity_type": "design",
+  "population": 21552
+ },
+ {
+  "date": "2020-06-26",
+  "capacity": 17703,
+  "capacity_type": "design",
+  "population": 21444
+ },
+ {
+  "date": "2020-07-03",
+  "capacity": 17697,
+  "capacity_type": "design",
+  "population": 21388
+ },
+ {
+  "date": "2020-07-10",
+  "capacity": 17730,
+  "capacity_type": "design",
+  "population": 21360
+ },
+ {
+  "date": "2020-07-17",
+  "capacity": 17729,
+  "capacity_type": "design",
+  "population": 21368
+ },
+ {
+  "date": "2020-07-24",
+  "capacity": 17718,
+  "capacity_type": "design",
+  "population": 21390
+ },
+ {
+  "date": "2020-07-31",
+  "capacity": 17719,
+  "capacity_type": "design",
+  "population": 21402
+ },
+ {
+  "date": "2020-08-07",
+  "capacity": 17703,
+  "capacity_type": "design",
+  "population": 21400
+ },
+ {
+  "date": "2020-08-14",
+  "capacity": 17708,
+  "capacity_type": "design",
+  "population": 21395
+ },
+ {
+  "date": "2020-08-21",
+  "capacity": 17706,
+  "capacity_type": "design",
+  "population": 21351
+ },
+ {
+  "date": "2020-08-28",
+  "capacity": 17702,
+  "capacity_type": "design",
+  "population": 21337
+ },
+ {
+  "date": "2020-09-04",
+  "capacity": 17702,
+  "capacity_type": "design",
+  "population": 21285
+ },
+ {
+  "date": "2020-09-11",
+  "capacity": 17687,
+  "capacity_type": "design",
+  "population": 21245
+ },
+ {
+  "date": "2020-09-18",
+  "capacity": 17684,
+  "capacity_type": "design",
+  "population": 21187
+ },
+ {
+  "date": "2020-09-25",
+  "capacity": 17661,
+  "capacity_type": "design",
+  "population": 21098
+ },
+ {
+  "date": "2020-10-02",
+  "capacity": 17650,
+  "capacity_type": "design",
+  "population": 21052
+ },
+ {
+  "date": "2020-10-09",
+  "capacity": 17652,
+  "capacity_type": "design",
+  "population": 20983
+ },
+ {
+  "date": "2020-10-16",
+  "capacity": 17654,
+  "capacity_type": "design",
+  "population": 20957
+ },
+ {
+  "date": "2020-10-23",
+  "capacity": 17656,
+  "capacity_type": "design",
+  "population": 20897
+ },
+ {
+  "date": "2020-10-30",
+  "capacity": 17644,
+  "capacity_type": "design",
+  "population": 20867
+ },
+ {
+  "date": "2020-11-06",
+  "capacity": 17649,
+  "capacity_type": "design",
+  "population": 20798
+ },
+ {
+  "date": "2020-11-13",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 20693
+ },
+ {
+  "date": "2020-11-20",
+  "capacity": 17653,
+  "capacity_type": "design",
+  "population": 20631
+ },
+ {
+  "date": "2020-11-27",
+  "capacity": 17643,
+  "capacity_type": "design",
+  "population": 20535
+ },
+ {
+  "date": "2020-12-04",
+  "capacity": 17635,
+  "capacity_type": "design",
+  "population": 20423
+ },
+ {
+  "date": "2020-12-11",
+  "capacity": 17630,
+  "capacity_type": "design",
+  "population": 20346
+ },
+ {
+  "date": "2020-12-18",
+  "capacity": 17617,
+  "capacity_type": "design",
+  "population": 20265
+ },
+ {
+  "date": "2020-12-25",
+  "capacity": 17611,
+  "capacity_type": "design",
+  "population": 20155
+ },
+ {
+  "date": "2021-01-01",
+  "capacity": 17618,
+  "capacity_type": "design",
+  "population": 20093
+ },
+ {
+  "date": "2021-01-08",
+  "capacity": 17621,
+  "capacity_type": "design",
+  "population": 20024
+ },
+ {
+  "date": "2021-01-15",
+  "capacity": 17601,
+  "capacity_type": "design",
+  "population": 19976
+ },
+ {
+  "date": "2021-01-22",
+  "capacity": 17596,
+  "capacity_type": "design",
+  "population": 19903
+ },
+ {
+  "date": "2021-01-29",
+  "capacity": 17609,
+  "capacity_type": "design",
+  "population": 19858
+ },
+ {
+  "date": "2021-02-05",
+  "capacity": 17603,
+  "capacity_type": "design",
+  "population": 19812
+ },
+ {
+  "date": "2021-02-12",
+  "capacity": 17601,
+  "capacity_type": "design",
+  "population": 19759
+ },
+ {
+  "date": "2021-02-19",
+  "capacity": 17584,
+  "capacity_type": "design",
+  "population": 19707
+ },
+ {
+  "date": "2021-02-26",
+  "capacity": 17587,
+  "capacity_type": "design",
+  "population": 19607
+ },
+ {
+  "date": "2021-03-05",
+  "capacity": 17579,
+  "capacity_type": "design",
+  "population": 19564
+ },
+ {
+  "date": "2021-03-12",
+  "capacity": 17585,
+  "capacity_type": "design",
+  "population": 19523
+ },
+ {
+  "date": "2021-03-19",
+  "capacity": 17585,
+  "capacity_type": "design",
+  "population": 19495
+ },
+ {
+  "date": "2021-03-26",
+  "capacity": 17584,
+  "capacity_type": "design",
+  "population": 19480
+ },
+ {
+  "date": "2021-04-02",
+  "capacity": 17582,
+  "capacity_type": "design",
+  "population": 19470
+ },
+ {
+  "date": "2021-04-09",
+  "capacity": 17579,
+  "capacity_type": "design",
+  "population": 19470
+ },
+ {
+  "date": "2021-04-16",
+  "capacity": 17582,
+  "capacity_type": "design",
+  "population": 19459
+ },
+ {
+  "date": "2021-04-23",
+  "capacity": 17589,
+  "capacity_type": "design",
+  "population": 19462
+ },
+ {
+  "date": "2021-04-30",
+  "capacity": 17592,
+  "capacity_type": "design",
+  "population": 19433
+ },
+ {
+  "date": "2021-05-07",
+  "capacity": 17595,
+  "capacity_type": "design",
+  "population": 19404
+ },
+ {
+  "date": "2021-05-14",
+  "capacity": 17590,
+  "capacity_type": "design",
+  "population": 19381
+ },
+ {
+  "date": "2021-05-21",
+  "capacity": 17592,
+  "capacity_type": "design",
+  "population": 19384
+ },
+ {
+  "date": "2021-05-28",
+  "capacity": 17597,
+  "capacity_type": "design",
+  "population": 19400
+ },
+ {
+  "date": "2021-06-04",
+  "capacity": 17611,
+  "capacity_type": "design",
+  "population": 19416
+ },
+ {
+  "date": "2021-06-11",
+  "capacity": 17619,
+  "capacity_type": "design",
+  "population": 19413
+ },
+ {
+  "date": "2021-06-18",
+  "capacity": 17627,
+  "capacity_type": "design",
+  "population": 19428
+ },
+ {
+  "date": "2021-06-25",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 19419
+ },
+ {
+  "date": "2021-07-02",
+  "capacity": 17635,
+  "capacity_type": "design",
+  "population": 19445
+ },
+ {
+  "date": "2021-07-09",
+  "capacity": 17629,
+  "capacity_type": "design",
+  "population": 19455
+ },
+ {
+  "date": "2021-07-16",
+  "capacity": 17632,
+  "capacity_type": "design",
+  "population": 19462
+ },
+ {
+  "date": "2021-07-23",
+  "capacity": 17627,
+  "capacity_type": "design",
+  "population": 19526
+ },
+ {
+  "date": "2021-07-30",
+  "capacity": 17609,
+  "capacity_type": "design",
+  "population": 19592
+ },
+ {
+  "date": "2021-08-06",
+  "capacity": 17585,
+  "capacity_type": "design",
+  "population": 19658
+ },
+ {
+  "date": "2021-08-20",
+  "capacity": 17547,
+  "capacity_type": "design",
+  "population": 19784
+ },
+ {
+  "date": "2021-08-27",
+  "capacity": 17518,
+  "capacity_type": "design",
+  "population": 19849
+ },
+ {
+  "date": "2021-09-03",
+  "capacity": 17496,
+  "capacity_type": "design",
+  "population": 19931
+ },
+ {
+  "date": "2021-09-10",
+  "capacity": 17472,
+  "capacity_type": "design",
+  "population": 20013
+ },
+ {
+  "date": "2021-09-17",
+  "capacity": 17455,
+  "capacity_type": "design",
+  "population": 20061
+ },
+ {
+  "date": "2021-09-24",
+  "capacity": 17441,
+  "capacity_type": "design",
+  "population": 20132
+ },
+ {
+  "date": "2021-10-01",
+  "capacity": 17412,
+  "capacity_type": "design",
+  "population": 20177
+ },
+ {
+  "date": "2021-10-08",
+  "capacity": 17397,
+  "capacity_type": "design",
+  "population": 20202
+ },
+ {
+  "date": "2021-10-15",
+  "capacity": 17377,
+  "capacity_type": "design",
+  "population": 20228
+ },
+ {
+  "date": "2021-10-22",
+  "capacity": 17369,
+  "capacity_type": "design",
+  "population": 20220
+ },
+ {
+  "date": "2021-10-29",
+  "capacity": 17353,
+  "capacity_type": "design",
+  "population": 20236
+ },
+ {
+  "date": "2021-11-05",
+  "capacity": 17350,
+  "capacity_type": "design",
+  "population": 20251
+ },
+ {
+  "date": "2021-11-12",
+  "capacity": 17351,
+  "capacity_type": "design",
+  "population": 20242
+ },
+ {
+  "date": "2021-11-19",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 20207
+ },
+ {
+  "date": "2021-11-26",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 20196
+ },
+ {
+  "date": "2021-12-03",
+  "capacity": 17341,
+  "capacity_type": "design",
+  "population": 20151
+ },
+ {
+  "date": "2021-12-10",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 20113
+ },
+ {
+  "date": "2021-12-17",
+  "capacity": 17343,
+  "capacity_type": "design",
+  "population": 20088
+ },
+ {
+  "date": "2021-12-24",
+  "capacity": 17345,
+  "capacity_type": "design",
+  "population": 20051
+ },
+ {
+  "date": "2021-12-31",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 20027
+ },
+ {
+  "date": "2022-01-07",
+  "capacity": 17344,
+  "capacity_type": "design",
+  "population": 19997
+ },
+ {
+  "date": "2022-01-14",
+  "capacity": 17339,
+  "capacity_type": "design",
+  "population": 19989
+ },
+ {
+  "date": "2022-01-21",
+  "capacity": 17340,
+  "capacity_type": "design",
+  "population": 19921
+ },
+ {
+  "date": "2022-01-28",
+  "capacity": 17338,
+  "capacity_type": "design",
+  "population": 19924
+ },
+ {
+  "date": "2022-02-04",
+  "capacity": 17330,
+  "capacity_type": "design",
+  "population": 19888
+ },
+ {
+  "date": "2022-02-11",
+  "capacity": 17335,
+  "capacity_type": "design",
+  "population": 19873
+ },
+ {
+  "date": "2022-02-18",
+  "capacity": 17325,
+  "capacity_type": "design",
+  "population": 19898
+ },
+ {
+  "date": "2022-02-25",
+  "capacity": 17322,
+  "capacity_type": "design",
+  "population": 19864
+ },
+ {
+  "date": "2022-03-04",
+  "capacity": 17316,
+  "capacity_type": "design",
+  "population": 19849
+ },
+ {
+  "date": "2022-03-11",
+  "capacity": 17312,
+  "capacity_type": "design",
+  "population": 19882
+ },
+ {
+  "date": "2022-03-18",
+  "capacity": 17316,
+  "capacity_type": "design",
+  "population": 19949
+ },
+ {
+  "date": "2022-03-25",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 19918
+ },
+ {
+  "date": "2022-04-01",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 19939
+ },
+ {
+  "date": "2022-04-08",
+  "capacity": 17305,
+  "capacity_type": "design",
+  "population": 19937
+ },
+ {
+  "date": "2022-04-15",
+  "capacity": 17306,
+  "capacity_type": "design",
+  "population": 19951
+ },
+ {
+  "date": "2022-04-22",
+  "capacity": 17310,
+  "capacity_type": "design",
+  "population": 19978
+ },
+ {
+  "date": "2022-04-29",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 20003
+ },
+ {
+  "date": "2022-05-06",
+  "capacity": 17306,
+  "capacity_type": "design",
+  "population": 19998
+ },
+ {
+  "date": "2022-05-13",
+  "capacity": 17307,
+  "capacity_type": "design",
+  "population": 20025
+ },
+ {
+  "date": "2022-05-20",
+  "capacity": 17304,
+  "capacity_type": "design",
+  "population": 20043
+ },
+ {
+  "date": "2022-05-27",
+  "capacity": 17305,
+  "capacity_type": "design",
+  "population": 20085
+ },
+ {
+  "date": "2022-06-03",
+  "capacity": 17305,
+  "capacity_type": "design",
+  "population": 20099
+ },
+ {
+  "date": "2022-06-10",
+  "capacity": 17298,
+  "capacity_type": "design",
+  "population": 20114
+ },
+ {
+  "date": "2022-06-17",
+  "capacity": 17287,
+  "capacity_type": "design",
+  "population": 20092
+ },
+ {
+  "date": "2022-06-24",
+  "capacity": 17284,
+  "capacity_type": "design",
+  "population": 20128
+ },
+ {
+  "date": "2022-07-01",
+  "capacity": 17287,
+  "capacity_type": "design",
+  "population": 20169
+ },
+ {
+  "date": "2022-07-08",
+  "capacity": 17289,
+  "capacity_type": "design",
+  "population": 20155
+ },
+ {
+  "date": "2022-07-15",
+  "capacity": 17296,
+  "capacity_type": "design",
+  "population": 20135
+ },
+ {
+  "date": "2022-07-22",
+  "capacity": 17294,
+  "capacity_type": "design",
+  "population": 20154
+ },
+ {
+  "date": "2022-07-29",
+  "capacity": 17287,
+  "capacity_type": "design",
+  "population": 20183
+ },
+ {
+  "date": "2022-08-05",
+  "capacity": 17291,
+  "capacity_type": "design",
+  "population": 20183
+ },
+ {
+  "date": "2022-08-12",
+  "capacity": 17296,
+  "capacity_type": "design",
+  "population": 20218
+ },
+ {
+  "date": "2022-08-19",
+  "capacity": 17289,
+  "capacity_type": "design",
+  "population": 20243
+ },
+ {
+  "date": "2022-08-26",
+  "capacity": 17291,
+  "capacity_type": "design",
+  "population": 20265
+ },
+ {
+  "date": "2022-09-02",
+  "capacity": 17298,
+  "capacity_type": "design",
+  "population": 20281
+ },
+ {
+  "date": "2022-09-09",
+  "capacity": 17298,
+  "capacity_type": "design",
+  "population": 20291
+ },
+ {
+  "date": "2022-09-16",
+  "capacity": 17300,
+  "capacity_type": "design",
+  "population": 20299
+ },
+ {
+  "date": "2022-09-23",
+  "capacity": 17298,
+  "capacity_type": "design",
+  "population": 20330
+ },
+ {
+  "date": "2022-09-30",
+  "capacity": 17301,
+  "capacity_type": "design",
+  "population": 20339
+ },
+ {
+  "date": "2022-10-07",
+  "capacity": 17308,
+  "capacity_type": "design",
+  "population": 20362
+ },
+ {
+  "date": "2022-10-14",
+  "capacity": 17312,
+  "capacity_type": "design",
+  "population": 20358
+ },
+ {
+  "date": "2022-10-21",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 20388
+ },
+ {
+  "date": "2022-10-28",
+  "capacity": 17309,
+  "capacity_type": "design",
+  "population": 20441
+ },
+ {
+  "date": "2022-11-04",
+  "capacity": 17318,
+  "capacity_type": "design",
+  "population": 20468
+ },
+ {
+  "date": "2022-11-11",
+  "capacity": 17325,
+  "capacity_type": "design",
+  "population": 20475
+ },
+ {
+  "date": "2022-11-18",
+  "capacity": 17320,
+  "capacity_type": "design",
+  "population": 20493
+ },
+ {
+  "date": "2022-11-25",
+  "capacity": 17322,
+  "capacity_type": "design",
+  "population": 20515
+ },
+ {
+  "date": "2022-12-02",
+  "capacity": 17320,
+  "capacity_type": "design",
+  "population": 20547
+ },
+ {
+  "date": "2022-12-09",
+  "capacity": 17319,
+  "capacity_type": "design",
+  "population": 20558
+ },
+ {
+  "date": "2022-12-16",
+  "capacity": 17310,
+  "capacity_type": "design",
+  "population": 20552
+ },
+ {
+  "date": "2022-12-23",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 20590
+ },
+ {
+  "date": "2022-12-30",
+  "capacity": 17310,
+  "capacity_type": "design",
+  "population": 20613
+ },
+ {
+  "date": "2023-01-06",
+  "capacity": 17309,
+  "capacity_type": "design",
+  "population": 20594
+ },
+ {
+  "date": "2023-01-13",
+  "capacity": 17309,
+  "capacity_type": "design",
+  "population": 20574
+ },
+ {
+  "date": "2023-01-20",
+  "capacity": 17309,
+  "capacity_type": "design",
+  "population": 20585
+ },
+ {
+  "date": "2023-01-27",
+  "capacity": 17319,
+  "capacity_type": "design",
+  "population": 20621
+ },
+ {
+  "date": "2023-02-03",
+  "capacity": 17319,
+  "capacity_type": "design",
+  "population": 20663
+ },
+ {
+  "date": "2023-02-10",
+  "capacity": 17317,
+  "capacity_type": "design",
+  "population": 20689
+ },
+ {
+  "date": "2023-02-17",
+  "capacity": 17318,
+  "capacity_type": "design",
+  "population": 20725
+ },
+ {
+  "date": "2023-02-24",
+  "capacity": 17317,
+  "capacity_type": "design",
+  "population": 20767
+ },
+ {
+  "date": "2023-03-03",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 20809
+ },
+ {
+  "date": "2023-03-10",
+  "capacity": 17311,
+  "capacity_type": "design",
+  "population": 20817
+ },
+ {
+  "date": "2023-03-17",
+  "capacity": 17321,
+  "capacity_type": "design",
+  "population": 20846
+ },
+ {
+  "date": "2023-03-24",
+  "capacity": 17323,
+  "capacity_type": "design",
+  "population": 20920
+ },
+ {
+  "date": "2023-03-31",
+  "capacity": 17322,
+  "capacity_type": "design",
+  "population": 20977
+ },
+ {
+  "date": "2023-04-07",
+  "capacity": 17318,
+  "capacity_type": "design",
+  "population": 21037
+ },
+ {
+  "date": "2023-04-14",
+  "capacity": 17318,
+  "capacity_type": "design",
+  "population": 21069
+ },
+ {
+  "date": "2023-04-21",
+  "capacity": 17312,
+  "capacity_type": "design",
+  "population": 21124
+ },
+ {
+  "date": "2023-04-28",
+  "capacity": 17379,
+  "capacity_type": "design",
+  "population": 21169
+ },
+ {
+  "date": "2023-05-05",
+  "capacity": 17375,
+  "capacity_type": "design",
+  "population": 21184
+ },
+ {
+  "date": "2023-05-12",
+  "capacity": 17373,
+  "capacity_type": "design",
+  "population": 21200
+ },
+ {
+  "date": "2023-05-19",
+  "capacity": 17376,
+  "capacity_type": "design",
+  "population": 21217
+ },
+ {
+  "date": "2023-05-26",
+  "capacity": 17382,
+  "capacity_type": "design",
+  "population": 21240
+ },
+ {
+  "date": "2023-06-02",
+  "capacity": 17383,
+  "capacity_type": "design",
+  "population": 21259
+ },
+ {
+  "date": "2023-06-09",
+  "capacity": 17408,
+  "capacity_type": "design",
+  "population": 21263
+ },
+ {
+  "date": "2023-06-16",
+  "capacity": 17424,
+  "capacity_type": "design",
+  "population": 21300
+ },
+ {
+  "date": "2023-06-23",
+  "capacity": 17434,
+  "capacity_type": "design",
+  "population": 21337
+ },
+ {
+  "date": "2023-06-30",
+  "capacity": 17449,
+  "capacity_type": "design",
+  "population": 21401
+ },
+ {
+  "date": "2023-07-07",
+  "capacity": 17446,
+  "capacity_type": "design",
+  "population": 21417
+ },
+ {
+  "date": "2023-07-14",
+  "capacity": 17447,
+  "capacity_type": "design",
+  "population": 21393
+ },
+ {
+  "date": "2023-07-21",
+  "capacity": 17451,
+  "capacity_type": "design",
+  "population": 21430
+ },
+ {
+  "date": "2023-07-28",
+  "capacity": 17448,
+  "capacity_type": "design",
+  "population": 21488
+ },
+ {
+  "date": "2023-08-04",
+  "capacity": 17453,
+  "capacity_type": "design",
+  "population": 21524
+ },
+ {
+  "date": "2023-08-11",
+  "capacity": 17450,
+  "capacity_type": "design",
+  "population": 21545
+ },
+ {
+  "date": "2023-08-18",
+  "capacity": 17446,
+  "capacity_type": "design",
+  "population": 21566
+ },
+ {
+  "date": "2023-08-25",
+  "capacity": 17450,
+  "capacity_type": "design",
+  "population": 21590
+ },
+ {
+  "date": "2023-09-01",
+  "capacity": 17454,
+  "capacity_type": "design",
+  "population": 21660
+ },
+ {
+  "date": "2023-09-08",
+  "capacity": 17464,
+  "capacity_type": "design",
+  "population": 21685
+ },
+ {
+  "date": "2023-09-15",
+  "capacity": 17484,
+  "capacity_type": "design",
+  "population": 21689
+ },
+ {
+  "date": "2023-09-22",
+  "capacity": 17507,
+  "capacity_type": "design",
+  "population": 21712
+ },
+ {
+  "date": "2023-09-29",
+  "capacity": 17502,
+  "capacity_type": "design",
+  "population": 21737
+ },
+ {
+  "date": "2023-10-06",
+  "capacity": 17502,
+  "capacity_type": "design",
+  "population": 21749
+ },
+ {
+  "date": "2023-10-13",
+  "capacity": 17521,
+  "capacity_type": "design",
+  "population": 21746
+ },
+ {
+  "date": "2023-10-20",
+  "capacity": 17534,
+  "capacity_type": "design",
+  "population": 21777
+ },
+ {
+  "date": "2023-10-27",
+  "capacity": 17554,
+  "capacity_type": "design",
+  "population": 21850
+ },
+ {
+  "date": "2023-11-03",
+  "capacity": 17570,
+  "capacity_type": "design",
+  "population": 21897
+ },
+ {
+  "date": "2023-11-10",
+  "capacity": 17571,
+  "capacity_type": "design",
+  "population": 21904
+ },
+ {
+  "date": "2023-11-17",
+  "capacity": 17574,
+  "capacity_type": "design",
+  "population": 21937
+ },
+ {
+  "date": "2023-11-24",
+  "capacity": 17575,
+  "capacity_type": "design",
+  "population": 21946
+ },
+ {
+  "date": "2023-12-01",
+  "capacity": 17572,
+  "capacity_type": "design",
+  "population": 21974
+ },
+ {
+  "date": "2023-12-08",
+  "capacity": 17571,
+  "capacity_type": "design",
+  "population": 21990
+ },
+ {
+  "date": "2023-12-15",
+  "capacity": 17577,
+  "capacity_type": "design",
+  "population": 22033
+ },
+ {
+  "date": "2023-12-22",
+  "capacity": 17575,
+  "capacity_type": "design",
+  "population": 22099
+ },
+ {
+  "date": "2023-12-29",
+  "capacity": 17565,
+  "capacity_type": "design",
+  "population": 22108
+ },
+ {
+  "date": "2024-01-05",
+  "capacity": 17573,
+  "capacity_type": "design",
+  "population": 22119
+ },
+ {
+  "date": "2024-01-12",
+  "capacity": 17577,
+  "capacity_type": "design",
+  "population": 22104
+ },
+ {
+  "date": "2024-01-19",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 22105
+ },
+ {
+  "date": "2024-01-26",
+  "capacity": 17579,
+  "capacity_type": "design",
+  "population": 22138
+ },
+ {
+  "date": "2024-02-02",
+  "capacity": 17578,
+  "capacity_type": "design",
+  "population": 22217
+ },
+ {
+  "date": "2024-02-09",
+  "capacity": 17574,
+  "capacity_type": "design",
+  "population": 22219
+ },
+ {
+  "date": "2024-02-16",
+  "capacity": 17576,
+  "capacity_type": "design",
+  "population": 22222
+ },
+ {
+  "date": "2024-02-23",
+  "capacity": 17572,
+  "capacity_type": "design",
+  "population": 22241
+ },
+ {
+  "date": "2024-03-01",
+  "capacity": 17572,
+  "capacity_type": "design",
+  "population": 22275
+ },
+ {
+  "date": "2024-03-08",
+  "capacity": 17569,
+  "capacity_type": "design",
+  "population": 22287
+ },
+ {
+  "date": "2024-03-15",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 22277
+ },
+ {
+  "date": "2024-03-22",
+  "capacity": 17575,
+  "capacity_type": "design",
+  "population": 22342
+ },
+ {
+  "date": "2024-03-29",
+  "capacity": 17582,
+  "capacity_type": "design",
+  "population": 22404
+ },
+ {
+  "date": "2024-04-05",
+  "capacity": 17583,
+  "capacity_type": "design",
+  "population": 22407
+ },
+ {
+  "date": "2024-04-12",
+  "capacity": 17579,
+  "capacity_type": "design",
+  "population": 22362
+ },
+ {
+  "date": "2024-04-19",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 22398
+ },
+ {
+  "date": "2024-04-26",
+  "capacity": 17576,
+  "capacity_type": "design",
+  "population": 22431
+ },
+ {
+  "date": "2024-05-03",
+  "capacity": 17580,
+  "capacity_type": "design",
+  "population": 22460
+ },
+ {
+  "date": "2024-05-10",
+  "capacity": 17590,
+  "capacity_type": "design",
+  "population": 22482
+ },
+ {
+  "date": "2024-05-17",
+  "capacity": 17603,
+  "capacity_type": "design",
+  "population": 22512
+ },
+ {
+  "date": "2024-05-24",
+  "capacity": 17619,
+  "capacity_type": "design",
+  "population": 22544
+ },
+ {
+  "date": "2024-05-31",
+  "capacity": 17622,
+  "capacity_type": "design",
+  "population": 22578
+ },
+ {
+  "date": "2024-06-07",
+  "capacity": 17629,
+  "capacity_type": "design",
+  "population": 22619
+ },
+ {
+  "date": "2024-06-14",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 22637
+ },
+ {
+  "date": "2024-06-21",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 22672
+ },
+ {
+  "date": "2024-06-28",
+  "capacity": 17644,
+  "capacity_type": "design",
+  "population": 22730
+ },
+ {
+  "date": "2024-07-05",
+  "capacity": 17648,
+  "capacity_type": "design",
+  "population": 22719
+ },
+ {
+  "date": "2024-07-12",
+  "capacity": 17649,
+  "capacity_type": "design",
+  "population": 22706
+ },
+ {
+  "date": "2024-07-19",
+  "capacity": 17647,
+  "capacity_type": "design",
+  "population": 22700
+ },
+ {
+  "date": "2024-07-26",
+  "capacity": 17643,
+  "capacity_type": "design",
+  "population": 22711
+ },
+ {
+  "date": "2024-08-02",
+  "capacity": 17639,
+  "capacity_type": "design",
+  "population": 22766
+ },
+ {
+  "date": "2024-08-09",
+  "capacity": 17640,
+  "capacity_type": "design",
+  "population": 22792
+ },
+ {
+  "date": "2024-08-16",
+  "capacity": 17644,
+  "capacity_type": "design",
+  "population": 22830
+ },
+ {
+  "date": "2024-08-23",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 22841
+ },
+ {
+  "date": "2024-08-30",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 22851
+ },
+ {
+  "date": "2024-09-06",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 22856
+ },
+ {
+  "date": "2024-09-13",
+  "capacity": 17632,
+  "capacity_type": "design",
+  "population": 22832
+ },
+ {
+  "date": "2024-09-20",
+  "capacity": 17641,
+  "capacity_type": "design",
+  "population": 22874
+ },
+ {
+  "date": "2024-09-27",
+  "capacity": 17633,
+  "capacity_type": "design",
+  "population": 22896
+ },
+ {
+  "date": "2024-10-04",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 22915
+ },
+ {
+  "date": "2024-10-11",
+  "capacity": 17643,
+  "capacity_type": "design",
+  "population": 22909
+ },
+ {
+  "date": "2024-10-18",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 22959
+ },
+ {
+  "date": "2024-10-25",
+  "capacity": 17648,
+  "capacity_type": "design",
+  "population": 22988
+ },
+ {
+  "date": "2024-11-01",
+  "capacity": 17652,
+  "capacity_type": "design",
+  "population": 23020
+ },
+ {
+  "date": "2024-11-08",
+  "capacity": 17646,
+  "capacity_type": "design",
+  "population": 23015
+ },
+ {
+  "date": "2024-11-15",
+  "capacity": 17656,
+  "capacity_type": "design",
+  "population": 23033
+ },
+ {
+  "date": "2024-11-22",
+  "capacity": 17654,
+  "capacity_type": "design",
+  "population": 23054
+ },
+ {
+  "date": "2024-11-29",
+  "capacity": 17653,
+  "capacity_type": "design",
+  "population": 23075
+ },
+ {
+  "date": "2024-12-06",
+  "capacity": 17653,
+  "capacity_type": "design",
+  "population": 23093
+ },
+ {
+  "date": "2024-12-13",
+  "capacity": 17653,
+  "capacity_type": "design",
+  "population": 23095
+ },
+ {
+  "date": "2024-12-20",
+  "capacity": 17654,
+  "capacity_type": "design",
+  "population": 23114
+ },
+ {
+  "date": "2024-12-27",
+  "capacity": 17653,
+  "capacity_type": "design",
+  "population": 23092
+ },
+ {
+  "date": "2025-01-03",
+  "capacity": 17648,
+  "capacity_type": "design",
+  "population": 23036
+ },
+ {
+  "date": "2025-01-10",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 23006
+ },
+ {
+  "date": "2025-01-17",
+  "capacity": 17635,
+  "capacity_type": "design",
+  "population": 23034
+ },
+ {
+  "date": "2025-01-24",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 23021
+ },
+ {
+  "date": "2025-01-31",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 23044
+ },
+ {
+  "date": "2025-02-07",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 23074
+ },
+ {
+  "date": "2025-02-14",
+  "capacity": 17631,
+  "capacity_type": "design",
+  "population": 23062
+ },
+ {
+  "date": "2025-02-21",
+  "capacity": 17629,
+  "capacity_type": "design",
+  "population": 23095
+ },
+ {
+  "date": "2025-02-27",
+  "capacity": 17627,
+  "capacity_type": "design",
+  "population": 23065
+ },
+ {
+  "date": "2025-03-07",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 23139
+ },
+ {
+  "date": "2025-03-14",
+  "capacity": 17635,
+  "capacity_type": "design",
+  "population": 23152
+ },
+ {
+  "date": "2025-03-21",
+  "capacity": 17640,
+  "capacity_type": "design",
+  "population": 23189
+ },
+ {
+  "date": "2025-03-28",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 23224
+ },
+ {
+  "date": "2025-04-04",
+  "capacity": 17645,
+  "capacity_type": "design",
+  "population": 23254
+ },
+ {
+  "date": "2025-04-11",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 23232
+ },
+ {
+  "date": "2025-04-18",
+  "capacity": 17638,
+  "capacity_type": "design",
+  "population": 23279
+ },
+ {
+  "date": "2025-04-25",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 23317
+ },
+ {
+  "date": "2025-05-02",
+  "capacity": 17642,
+  "capacity_type": "design",
+  "population": 23333
+ },
+ {
+  "date": "2025-05-09",
+  "capacity": 17652,
+  "capacity_type": "design",
+  "population": 23317
+ },
+ {
+  "date": "2025-05-16",
+  "capacity": 17654,
+  "capacity_type": "design",
+  "population": 23300
+ },
+ {
+  "date": "2025-05-23",
+  "capacity": 17668,
+  "capacity_type": "design",
+  "population": 23339
+ },
+ {
+  "date": "2025-05-30",
+  "capacity": 17673,
+  "capacity_type": "design",
+  "population": 23368
+ },
+ {
+  "date": "2025-06-06",
+  "capacity": 17678,
+  "capacity_type": "design",
+  "population": 23395
+ },
+ {
+  "date": "2025-06-13",
+  "capacity": 17683,
+  "capacity_type": "design",
+  "population": 23416
+ },
+ {
+  "date": "2025-06-20",
+  "capacity": 17680,
+  "capacity_type": "design",
+  "population": 23423
+ },
+ {
+  "date": "2025-06-27",
+  "capacity": 17681,
+  "capacity_type": "design",
+  "population": 23444
+ },
+ {
+  "date": "2025-07-04",
+  "capacity": 17676,
+  "capacity_type": "design",
+  "population": 23468
+ },
+ {
+  "date": "2025-07-11",
+  "capacity": 17673,
+  "capacity_type": "design",
+  "population": 23395
+ },
+ {
+  "date": "2025-07-18",
+  "capacity": 17670,
+  "capacity_type": "design",
+  "population": 23376
+ },
+ {
+  "date": "2025-07-25",
+  "capacity": 17668,
+  "capacity_type": "design",
+  "population": 23374
+ },
+ {
+  "date": "2025-08-01",
+  "capacity": 17663,
+  "capacity_type": "design",
+  "population": 23400
+ },
+ {
+  "date": "2025-08-08",
+  "capacity": 17658,
+  "capacity_type": "design",
+  "population": 23406
+ },
+ {
+  "date": "2025-08-15",
+  "capacity": 17658,
+  "capacity_type": "design",
+  "population": 23400
+ },
+ {
+  "date": "2025-08-22",
+  "capacity": 17658,
+  "capacity_type": "design",
+  "population": 23443
+ },
+ {
+  "date": "2025-08-29",
+  "capacity": 17658,
+  "capacity_type": "design",
+  "population": 23491
+ },
+ {
+  "date": "2025-09-05",
+  "capacity": 17657,
+  "capacity_type": "design",
+  "population": 23476
+ },
+ {
+  "date": "2025-09-12",
+  "capacity": 17664,
+  "capacity_type": "design",
+  "population": 23466
+ },
+ {
+  "date": "2025-09-19",
+  "capacity": 17671,
+  "capacity_type": "design",
+  "population": 23527
+ },
+ {
+  "date": "2025-09-26",
+  "capacity": 17673,
+  "capacity_type": "design",
+  "population": 23550
+ },
+ {
+  "date": "2025-10-03",
+  "capacity": 17677,
+  "capacity_type": "design",
+  "population": 23534
+ },
+ {
+  "date": "2025-10-10",
+  "capacity": 17683,
+  "capacity_type": "design",
+  "population": 23555
+ },
+ {
+  "date": "2025-10-17",
+  "capacity": 17696,
+  "capacity_type": "design",
+  "population": 23562
+ },
+ {
+  "date": "2025-10-24",
+  "capacity": 17699,
+  "capacity_type": "design",
+  "population": 23534
+ },
+ {
+  "date": "2025-10-31",
+  "capacity": 17706,
+  "capacity_type": "design",
+  "population": 23556
+ },
+ {
+  "date": "2025-11-07",
+  "capacity": 17706,
+  "capacity_type": "design",
+  "population": 23553
+ },
+ {
+  "date": "2025-11-14",
+  "capacity": 17714,
+  "capacity_type": "design",
+  "population": 23491
+ },
+ {
+  "date": "2025-11-21",
+  "capacity": 17712,
+  "capacity_type": "design",
+  "population": 23465
+ },
+ {
+  "date": "2025-11-28",
+  "capacity": 17719,
+  "capacity_type": "design",
+  "population": 23430
+ },
+ {
+  "date": "2025-12-05",
+  "capacity": 17722,
+  "capacity_type": "design",
+  "population": 23390
+ },
+ {
+  "date": "2025-12-12",
+  "capacity": 17721,
+  "capacity_type": "design",
+  "population": 23355
+ },
+ {
+  "date": "2025-12-19",
+  "capacity": 17742,
+  "capacity_type": "design",
+  "population": 23341
+ },
+ {
+  "date": "2025-12-26",
+  "capacity": 17739,
+  "capacity_type": "design",
+  "population": 23285
+ },
+ {
+  "date": "2026-01-02",
+  "capacity": 17743,
+  "capacity_type": "design",
+  "population": 23282
+ },
+ {
+  "date": "2026-01-09",
+  "capacity": 17751,
+  "capacity_type": "design",
+  "population": 23294
+ },
+ {
+  "date": "2026-01-16",
+  "capacity": 17755,
+  "capacity_type": "design",
+  "population": 23319
+ },
+ {
+  "date": "2026-01-23",
+  "capacity": 17765,
+  "capacity_type": "design",
+  "population": 23336
+ },
+ {
+  "date": "2026-01-30",
+  "capacity": 17767,
+  "capacity_type": "design",
+  "population": 23357
+ },
+ {
+  "date": "2026-02-06",
+  "capacity": 17803,
+  "capacity_type": "design",
+  "population": 23416
+ },
+ {
+  "date": "2026-02-13",
+  "capacity": 17807,
+  "capacity_type": "design",
+  "population": 23420
+ },
+ {
+  "date": "2026-02-20",
+  "capacity": 17822,
+  "capacity_type": "design",
+  "population": 23461
+ },
+ {
+  "date": "2026-02-27",
+  "capacity": 17830,
+  "capacity_type": "design",
+  "population": 23471
+ },
+ {
+  "date": "2026-03-06",
+  "capacity": 17835,
+  "capacity_type": "design",
+  "population": 23495
+ },
+ {
+  "date": "2026-03-13",
+  "capacity": 17828,
+  "capacity_type": "design",
+  "population": 23493
+ },
+ {
+  "date": "2026-03-20",
+  "capacity": 17829,
+  "capacity_type": "design",
+  "population": 23501
+ },
+ {
+  "date": "2026-03-27",
+  "capacity": 17842,
+  "capacity_type": "design",
+  "population": 23524
+ },
+ {
+  "date": "2026-04-03",
+  "capacity": 17839,
+  "capacity_type": "design",
+  "population": 23554
+ },
+ {
+  "date": "2026-04-10",
+  "capacity": 17847,
+  "capacity_type": "design",
+  "population": 23569
+ },
+ {
+  "date": "2026-04-17",
+  "capacity": 17854,
+  "capacity_type": "design",
+  "population": 23548
+ },
+ {
+  "date": "2026-04-24",
+  "capacity": 17859,
+  "capacity_type": "design",
+  "population": 23540
+ },
+ {
+  "date": "2026-05-01",
+  "capacity": 17860,
+  "capacity_type": "design",
+  "population": 23577
+ },
+ {
+  "date": "2026-05-08",
+  "capacity": 17858,
+  "capacity_type": "design",
+  "population": 23584
+ },
+ {
+  "date": "2026-05-15",
+  "capacity": 17855,
+  "capacity_type": "design",
+  "population": 23587
+ },
+ {
+  "date": "2026-05-22",
+  "capacity": 17857,
+  "capacity_type": "design",
+  "population": 23608
+ },
+ {
+  "date": "2026-05-29",
+  "capacity": 17859,
+  "capacity_type": "design",
+  "population": 23591
+ },
+ {
+  "date": "2026-06-05",
+  "capacity": 17856,
+  "capacity_type": "design",
+  "population": 23546
+ },
+ {
+  "date": "2026-06-12",
+  "capacity": 17852,
+  "capacity_type": "design",
+  "population": 23526
+ },
+ {
+  "date": "2026-06-19",
+  "capacity": 17847,
+  "capacity_type": "design",
+  "population": 23535
+ },
+ {
+  "date": "2026-06-26",
+  "capacity": 17857,
+  "capacity_type": "design",
+  "population": 23544
+ },
+ {
+  "date": "2026-07-03",
+  "capacity": 17854,
+  "capacity_type": "design",
+  "population": 23610
+ },
+ {
+  "date": "2026-07-10",
+  "capacity": 17848,
+  "capacity_type": "design",
+  "population": 23631
+ },
+ {
+  "date": "2026-07-17",
+  "capacity": 17854,
+  "capacity_type": "design",
+  "population": 23619
+ },
+ {
+  "date": "2026-07-24",
+  "capacity": 17854,
+  "capacity_type": "design",
+  "population": 23697
+ },
+ {
+  "date": "2026-07-31",
+  "capacity": 17855,
+  "capacity_type": "design",
+  "population": 23762
+ },
+ {
+  "date": "2026-08-07",
+  "capacity": 17855,
+  "capacity_type": "design",
+  "population": 23785
+ },
+ {
+  "date": "2026-08-14",
+  "capacity": 17855,
+  "capacity_type": "design",
+  "population": 23789
+ },
+ {
+  "date": "2026-08-21",
+  "capacity": 17856,
+  "capacity_type": "design",
+  "population": 23813
+ },
+ {
+  "date": "2026-08-28",
+  "capacity": 17867,
+  "capacity_type": "design",
+  "population": 23854
+ },
+ {
+  "date": "2026-09-04",
+  "capacity": 17863,
+  "capacity_type": "design",
+  "population": 23870
+ },
+ {
+  "date": "2026-09-11",
+  "capacity": 17859,
+  "capacity_type": "design",
+  "population": 23890
+ },
+ {
+  "date": "2026-09-18",
+  "capacity": 17865,
+  "capacity_type": "design",
+  "population": 23897
+ },
+ {
+  "date": "2026-09-25",
+  "capacity": 17860,
+  "capacity_type": "design",
+  "population": 23905
+ }
+]

@@ -1,0 +1,323 @@
+{
+ "report_date": "2026-09-25",
+ "source": "https://doc.wi.gov/DataResearch/WeeklyPopulationReports/fri_09_25_2026.pdf",
+ "capacity": 17860,
+ "population": 23905,
+ "facilities": [
+  {
+   "name": "Dodge",
+   "capacity": 1165,
+   "population": 1771
+  },
+  {
+   "name": "Waupun",
+   "capacity": 882,
+   "population": 966
+  },
+  {
+   "name": "Green Bay",
+   "capacity": 749,
+   "population": 1130
+  },
+  {
+   "name": "Columbia",
+   "capacity": 541,
+   "population": 683
+  },
+  {
+   "name": "WSPF",
+   "capacity": 501,
+   "population": 498
+  },
+  {
+   "name": "Fox Lake",
+   "capacity": 979,
+   "population": 1400
+  },
+  {
+   "name": "Jackson",
+   "capacity": 837,
+   "population": 969
+  },
+  {
+   "name": "Kettle Moraine",
+   "capacity": 783,
+   "population": 1185
+  },
+  {
+   "name": "New Lisbon",
+   "capacity": 950,
+   "population": 1040
+  },
+  {
+   "name": "Oshkosh",
+   "capacity": 1494,
+   "population": 2133
+  },
+  {
+   "name": "Racine",
+   "capacity": 1171,
+   "population": 1816
+  },
+  {
+   "name": "Racine Youthful Offender Correctional Facility",
+   "capacity": 400,
+   "population": 474
+  },
+  {
+   "name": "Redgranite",
+   "capacity": 990,
+   "population": 1022
+  },
+  {
+   "name": "Stanley",
+   "capacity": 1500,
+   "population": 1574
+  },
+  {
+   "name": "Chippewa Valley Corr. Treatment Facility",
+   "capacity": 450,
+   "population": 510
+  },
+  {
+   "name": "Oakhill",
+   "capacity": 409,
+   "population": 865
+  },
+  {
+   "name": "Prairie du Chien",
+   "capacity": 326,
+   "population": 531
+  },
+  {
+   "name": "Sturtevant Transitional Facility",
+   "capacity": 150,
+   "population": 150
+  },
+  {
+   "name": "Black River",
+   "capacity": 66,
+   "population": 126
+  },
+  {
+   "name": "Drug Abuse Center",
+   "capacity": 125,
+   "population": 295
+  },
+  {
+   "name": "Felmers O. Chaney",
+   "capacity": 100,
+   "population": 108
+  },
+  {
+   "name": "Flambeau",
+   "capacity": 50,
+   "population": 94
+  },
+  {
+   "name": "Gordon",
+   "capacity": 52,
+   "population": 100
+  },
+  {
+   "name": "John Burke Correctional Center",
+   "capacity": 186,
+   "population": 289
+  },
+  {
+   "name": "Kenosha",
+   "capacity": 60,
+   "population": 116
+  },
+  {
+   "name": "Marshall E. Sherrer",
+   "capacity": 32,
+   "population": 58
+  },
+  {
+   "name": "McNaughton",
+   "capacity": 55,
+   "population": 118
+  },
+  {
+   "name": "Oregon",
+   "capacity": 78,
+   "population": 132
+  },
+  {
+   "name": "Sanger B. Powers",
+   "capacity": 60,
+   "population": 119
+  },
+  {
+   "name": "St. Croix",
+   "capacity": 94,
+   "population": 111
+  },
+  {
+   "name": "Thompson",
+   "capacity": 118,
+   "population": 123
+  },
+  {
+   "name": "Winnebago",
+   "capacity": 210,
+   "population": 289
+  },
+  {
+   "name": "Interstate Corrections Compact (ICC) (up to 50 beds)",
+   "capacity": null,
+   "population": 29
+  },
+  {
+   "name": "Columbia County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Douglas County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Dunn County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Fond du Lac County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Forest County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Green Lake County Jail",
+   "capacity": null,
+   "population": 9
+  },
+  {
+   "name": "House of Correction",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Jefferson County Jail",
+   "capacity": null,
+   "population": 15
+  },
+  {
+   "name": "Juneau County Jail",
+   "capacity": null,
+   "population": 21
+  },
+  {
+   "name": "Langlade County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Lincoln County Jail",
+   "capacity": null,
+   "population": 74
+  },
+  {
+   "name": "Marquette County Jail",
+   "capacity": null,
+   "population": 5
+  },
+  {
+   "name": "Oneida County Jail",
+   "capacity": null,
+   "population": 120
+  },
+  {
+   "name": "Outagamie County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Ozaukee County Jail",
+   "capacity": null,
+   "population": 8
+  },
+  {
+   "name": "Racine County Jail",
+   "capacity": null,
+   "population": 80
+  },
+  {
+   "name": "Rock County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Sauk County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Vernon County Jail",
+   "capacity": null,
+   "population": 56
+  },
+  {
+   "name": "Vilas County Jail",
+   "capacity": null,
+   "population": 27
+  },
+  {
+   "name": "Washington County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "Waupaca County Jail",
+   "capacity": null,
+   "population": 22
+  },
+  {
+   "name": "Waushara County Jail",
+   "capacity": null,
+   "population": 24
+  },
+  {
+   "name": "Winnebago County Jail",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "WRC (DDES FACILITY)",
+   "capacity": 421,
+   "population": 421
+  },
+  {
+   "name": "Milwaukee Secure Detention Facility - PIOC Beds",
+   "capacity": 461,
+   "population": 498
+  },
+  {
+   "name": "DODGE INFIRMARY",
+   "capacity": null,
+   "population": 0
+  },
+  {
+   "name": "TAYCHEEDAH",
+   "capacity": 653,
+   "population": 1088
+  },
+  {
+   "name": "Milwaukee Women's Center",
+   "capacity": 42,
+   "population": 107
+  },
+  {
+   "name": "Robert E. Ellsworth Center",
+   "capacity": 230,
+   "population": 506
+  }
+ ]
+}
