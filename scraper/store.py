@@ -5,6 +5,7 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / 'data'
 REPORTS_DIR = DATA_DIR / 'reports'
+COUNTY_MONTHS_DIR = DATA_DIR / 'county_months'
 
 
 def write_report(report: dict) -> None:
@@ -22,6 +23,26 @@ def write_report(report: dict) -> None:
         # Same bytes from a new address (DOC moves each year's weekly files into a zip): the newest address wins.
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, separators=(',', ':')), encoding='utf-8')
+
+
+def write_county_month(snapshot: dict) -> None:
+    """Store one month's county counts. Counts only: the person-level file they come from is never stored."""
+    path = COUNTY_MONTHS_DIR / f"{snapshot['as_of']}.json"
+    if path.exists():
+        existing = json.loads(path.read_text(encoding='utf-8'))
+        if existing['source'] != snapshot['source']:
+            raise ValueError(f"{snapshot['as_of']} is already stored from {existing['source']}, and "
+                             f"{snapshot['source']} carries the same date. If DOC posted one snapshot under two "
+                             "months, add the repeat to MONTHLY_SKIP in corrections.py.")
+        if existing['sha256'] != snapshot['sha256']:
+            raise ValueError(f"{snapshot['as_of']}: DOC changed {snapshot['source']} after it was stored. To accept "
+                             f"the new file, delete data/county_months/{path.name} and rerun.")
+    COUNTY_MONTHS_DIR.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(snapshot, indent=1), encoding='utf-8', newline='\n')
+
+
+def read_county_months() -> list[dict]:
+    return [json.loads(p.read_text(encoding='utf-8')) for p in sorted(COUNTY_MONTHS_DIR.glob('*.json'))]
 
 
 def read_reports() -> list[dict]:

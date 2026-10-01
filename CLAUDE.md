@@ -20,7 +20,7 @@ Working name: The Custody Ledger. A Wausau Pilot & Review tracker of Wisconsin's
 | `scraper/snapshot.py` | Facility breakdown of any report (adult and juvenile), reconciled to DOC's totals |
 | `scraper/series.py` | One statewide row per report: headline, men/women, contract beds, juvenile, supervision |
 | `scraper/build.py` | `data/reports/*.json` -> `statewide.json`, `facilities.json`, `latest.json`, `changes.json`, `brief.md`, `csv/` |
-| `scraper/counties.py` | DOC's monthly person-level file -> `data/counties.json` + `csv/counties.csv`: counts by county of conviction. Run by hand; not in the weekly job. Never writes the raw file into the repo |
+| `scraper/counties.py` | DOC's monthly person-level file -> one stored snapshot of county counts in `data/county_months/`. Run by hand (`python scraper/counties.py 2026 9`, or `--all`); not in any workflow. Never writes the raw file into the repo. `build.py` turns the snapshots into `counties.json` + `csv/counties.csv` |
 | `scraper/brief.py` | `changes.json` -> `data/brief.md`: flags, a four-paragraph draft, close to home, what moved. Fixed rules, no generation |
 | `tests/` | Regression tests on one real PDF per format era, plus failure-mode tests |
 | `site/` | React/Vite page. `cpdata.mjs` copies `data/*.json` and `data/csv/` into `site/public/data/` (ignored by git) before dev and build |
@@ -45,6 +45,7 @@ A full rebuild from scratch (backfill + update + build) reproduces the committed
 ## When the weekly job fails
 
 GitHub emails on a failed scheduled run. Read the error first; each one names the file and the broken check.
+- **County month "is already stored from ..."** (run by hand, not the weekly job): DOC posted one snapshot under two months. Add the repeat to `MONTHLY_SKIP` in `corrections.py`.
 - **Duplicate date** (DOC re-issued a week): add the superseded URL to `SKIP` in `corrections.py`, delete that date's file in `data/reports/`, rerun `update.py`.
 - **"Unknown facility row"**: DOC added or renamed a row. Add the label to `LABELS` in `registry.py` (a new Wisconsin county jail in a contract block needs nothing). If it is a new subtotal, add it to the header sets in `snapshot.py`. Add the PDF as a test fixture if the form changed.
 - **"fits no column layout"**: a row was printed with a blank cell. Open the PDF, add the row to `ROW_FIXES` in `corrections.py`.
@@ -128,12 +129,12 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 
 ## Next
 
-Phase 0, the data model, the site and the weekly brief are done. Still open: embed it on the news site, tell DOC about the female subtotal error and the capacity misprints.
+Phase 0, the data model, the site and the weekly brief are done. Still open: embed it on the news site, tell DOC about the female subtotal error, the capacity misprints and the repeated August 2026 monthly file.
 
 0. **Site leftovers.** Where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel.
 
 1. **Registry leftovers.** City and coordinates for state facilities (needed for the map; take addresses from DOC's facility pages and geocode, don't type them from memory). Security-level statewide series if the front end wants one.
-3. **Local layer.** First version done from one month: `counties.py` built `data/counties.json` from the file DOC labels August 2026 (snapshot of July 31, 2026), and the site has a county table. File facts: `https://doc.wi.gov/DataResearch/PIOCDF/PIOCDF_YYYY_MM.csv`, behind a click-through disclaimer (DOC does not certify accuracy; no redistribution terms), 77 months back to April 2020, semicolon-delimited UTF-8 with BOM, 8 MB, one row per person, 26 columns (`CONVICTION_COUNTY`, `ORIG_ADM_TYPE`, `UPDT_ADM_TYPE`, `SUPERVISING_LOC`, `CUSTODY_CLS`, `GENDER`, `RACE`, `AGE`, admission and release dates). The file named for a month is the snapshot of the last day of the month before. July 31, 2026: 23,703 people against 23,694 DAI on that day's DOC-302; 446 convicted in Marathon County, 181 (40.6%) with no new sentence, against 33.3% statewide. Still to do, each needing the publisher's go-ahead because it means more downloads: the other 76 months (a monthly series per county), and fetching each new month automatically. Also: rates per 100,000 residents (needs Census county populations), and where each county's people are held.
+3. **Local layer.** Done through July 2026: 76 monthly snapshots (April 30, 2020 to July 31, 2026) in `data/county_months/`, a county table on the site. File facts: `https://doc.wi.gov/DataResearch/PIOCDF/PIOCDF_YYYY_MM.csv`, behind a click-through disclaimer (DOC does not certify accuracy; no redistribution terms), semicolon-delimited UTF-8 with BOM, 6-8 MB, one row per person with names and DOC numbers. The file named for a month is the snapshot of that month's last day. Three layouts so far (24 columns through November 2024, 26 after); December 2024 has every line wrapped as one quoted field, which `read_rows` unwraps. The file posted as August 2026 repeats July 31 row for row (`MONTHLY_SKIP`); DOC has not been told. Every month's head count is within 0.5% of the nearest DOC-302's DAI figure. July 31, 2026: 446 convicted in Marathon County (484 in April 2020; low 398, high 517), 181 of them (40.6%) with no new sentence, against 33.3% statewide. **To add a month, run `counties.py` by hand** when DOC posts it (about the 15th); automatic fetching has not been approved. Still to do: rates per 100,000 residents (needs Census county populations), where each county's people are held, a county line in the weekly brief.
 4. **Jail layer.** Office of Detention Facilities annual report (county jail admissions, ADP, suicides).
 5. **Distribution.** Reader analytics (the Packers tracker uses Plausible; this site has none), single-chart embeds for stories, a county-localized embed other Wisconsin newsrooms can run with credit.
 

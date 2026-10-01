@@ -1,0 +1,371 @@
+{
+ "as_of": "2023-08-31",
+ "source": "https://doc.wi.gov/DataResearch/PIOCDF/PIOCDF_2023_08.csv",
+ "sha256": "9760c2e13ad0caca307552c3823c69a2c9a7b182e8f83421487cc99d40d353c7",
+ "min_cell": 10,
+ "people": 21585,
+ "no_new_sentence": 7242,
+ "people_not_shown_by_county": 32,
+ "counties": [
+  {
+   "county": "Adams",
+   "people": 88,
+   "no_new_sentence": 39
+  },
+  {
+   "county": "Ashland",
+   "people": 86,
+   "no_new_sentence": 28
+  },
+  {
+   "county": "Barron",
+   "people": 133,
+   "no_new_sentence": 28
+  },
+  {
+   "county": "Bayfield",
+   "people": 26,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Brown",
+   "people": 1121,
+   "no_new_sentence": 453
+  },
+  {
+   "county": "Buffalo",
+   "people": 17,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Burnett",
+   "people": 66,
+   "no_new_sentence": 21
+  },
+  {
+   "county": "Calumet",
+   "people": 134,
+   "no_new_sentence": 41
+  },
+  {
+   "county": "Chippewa",
+   "people": 135,
+   "no_new_sentence": 43
+  },
+  {
+   "county": "Clark",
+   "people": 85,
+   "no_new_sentence": 20
+  },
+  {
+   "county": "Columbia",
+   "people": 191,
+   "no_new_sentence": 71
+  },
+  {
+   "county": "Crawford",
+   "people": 41,
+   "no_new_sentence": 11
+  },
+  {
+   "county": "Dane",
+   "people": 1079,
+   "no_new_sentence": 323
+  },
+  {
+   "county": "Dodge",
+   "people": 251,
+   "no_new_sentence": 104
+  },
+  {
+   "county": "Door",
+   "people": 68,
+   "no_new_sentence": 20
+  },
+  {
+   "county": "Douglas",
+   "people": 182,
+   "no_new_sentence": 24
+  },
+  {
+   "county": "Dunn",
+   "people": 108,
+   "no_new_sentence": 20
+  },
+  {
+   "county": "Eau Claire",
+   "people": 336,
+   "no_new_sentence": 139
+  },
+  {
+   "county": "Florence",
+   "people": 11,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Fond du Lac",
+   "people": 401,
+   "no_new_sentence": 160
+  },
+  {
+   "county": "Forest",
+   "people": 75,
+   "no_new_sentence": 31
+  },
+  {
+   "county": "Grant",
+   "people": 104,
+   "no_new_sentence": 33
+  },
+  {
+   "county": "Green",
+   "people": 53,
+   "no_new_sentence": 11
+  },
+  {
+   "county": "Green Lake",
+   "people": 69,
+   "no_new_sentence": 25
+  },
+  {
+   "county": "Iowa",
+   "people": 30,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Iron",
+   "people": 12,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Jackson",
+   "people": 72,
+   "no_new_sentence": 22
+  },
+  {
+   "county": "Jefferson",
+   "people": 221,
+   "no_new_sentence": 65
+  },
+  {
+   "county": "Juneau",
+   "people": 90,
+   "no_new_sentence": 24
+  },
+  {
+   "county": "Kenosha",
+   "people": 937,
+   "no_new_sentence": 317
+  },
+  {
+   "county": "Kewaunee",
+   "people": 35,
+   "no_new_sentence": 13
+  },
+  {
+   "county": "La Crosse",
+   "people": 192,
+   "no_new_sentence": 67
+  },
+  {
+   "county": "Lafayette",
+   "people": 42,
+   "no_new_sentence": 15
+  },
+  {
+   "county": "Langlade",
+   "people": 87,
+   "no_new_sentence": 35
+  },
+  {
+   "county": "Lincoln",
+   "people": 78,
+   "no_new_sentence": 34
+  },
+  {
+   "county": "Manitowoc",
+   "people": 235,
+   "no_new_sentence": 103
+  },
+  {
+   "county": "Marathon",
+   "people": 488,
+   "no_new_sentence": 200
+  },
+  {
+   "county": "Marinette",
+   "people": 270,
+   "no_new_sentence": 94
+  },
+  {
+   "county": "Marquette",
+   "people": 47,
+   "no_new_sentence": 12
+  },
+  {
+   "county": "Menominee",
+   "people": null,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Milwaukee",
+   "people": 6677,
+   "no_new_sentence": 2192
+  },
+  {
+   "county": "Monroe",
+   "people": 120,
+   "no_new_sentence": 30
+  },
+  {
+   "county": "Oconto",
+   "people": 143,
+   "no_new_sentence": 43
+  },
+  {
+   "county": "Oneida",
+   "people": 100,
+   "no_new_sentence": 23
+  },
+  {
+   "county": "Outagamie",
+   "people": 543,
+   "no_new_sentence": 195
+  },
+  {
+   "county": "Ozaukee",
+   "people": 241,
+   "no_new_sentence": 67
+  },
+  {
+   "county": "Pepin",
+   "people": 10,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Pierce",
+   "people": 45,
+   "no_new_sentence": 10
+  },
+  {
+   "county": "Polk",
+   "people": 87,
+   "no_new_sentence": 22
+  },
+  {
+   "county": "Portage",
+   "people": 167,
+   "no_new_sentence": 58
+  },
+  {
+   "county": "Price",
+   "people": 27,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Racine",
+   "people": 1055,
+   "no_new_sentence": 376
+  },
+  {
+   "county": "Richland",
+   "people": 29,
+   "no_new_sentence": null
+  },
+  {
+   "county": "Rock",
+   "people": 649,
+   "no_new_sentence": 252
+  },
+  {
+   "county": "Rusk",
+   "people": 57,
+   "no_new_sentence": 16
+  },
+  {
+   "county": "Sauk",
+   "people": 224,
+   "no_new_sentence": 66
+  },
+  {
+   "county": "Sawyer",
+   "people": 105,
+   "no_new_sentence": 40
+  },
+  {
+   "county": "Shawano",
+   "people": 150,
+   "no_new_sentence": 51
+  },
+  {
+   "county": "Sheboygan",
+   "people": 471,
+   "no_new_sentence": 159
+  },
+  {
+   "county": "St. Croix",
+   "people": 128,
+   "no_new_sentence": 20
+  },
+  {
+   "county": "Taylor",
+   "people": 36,
+   "no_new_sentence": 10
+  },
+  {
+   "county": "Trempealeau",
+   "people": 55,
+   "no_new_sentence": 17
+  },
+  {
+   "county": "Vernon",
+   "people": 38,
+   "no_new_sentence": 10
+  },
+  {
+   "county": "Vilas",
+   "people": 66,
+   "no_new_sentence": 26
+  },
+  {
+   "county": "Walworth",
+   "people": 364,
+   "no_new_sentence": 104
+  },
+  {
+   "county": "Washburn",
+   "people": 48,
+   "no_new_sentence": 16
+  },
+  {
+   "county": "Washington",
+   "people": 311,
+   "no_new_sentence": 134
+  },
+  {
+   "county": "Waukesha",
+   "people": 901,
+   "no_new_sentence": 272
+  },
+  {
+   "county": "Waupaca",
+   "people": 146,
+   "no_new_sentence": 42
+  },
+  {
+   "county": "Waushara",
+   "people": 108,
+   "no_new_sentence": 35
+  },
+  {
+   "county": "Winnebago",
+   "people": 489,
+   "no_new_sentence": 187
+  },
+  {
+   "county": "Wood",
+   "people": 267,
+   "no_new_sentence": 82
+  }
+ ]
+}

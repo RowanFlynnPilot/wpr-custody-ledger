@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 
 from brief import ap_date, brief, flags, moved, title
-from build import HOME_COUNTIES, changes, check_series, year_before
+from build import HOME_COUNTIES, changes, check_series, county_series, year_before
 from counties import aggregate, check_against_weekly_report
 from parse import parse_date, parse_report
 from series import supervision_as_of, week
@@ -213,6 +213,39 @@ def test_county_counts_withhold_anything_under_ten():
     assert by_county['Menominee'] == {'county': 'Menominee', 'people': None, 'no_new_sentence': None}
     assert result['people_not_shown_by_county'] == 3 + 2  # Menominee's three and two with no county, together
     assert 'Person' not in str(result)
+
+
+def test_a_month_exported_with_each_line_wrapped_in_quotes_reads_the_same():
+    # DOC's December 2024 file: every line is one quoted field holding the usual semicolon row.
+    plain = monthly_file([('Marathon', NEW, '')] * 12 + [('Wood', REVOKED, '')] * 11)
+    wrapped = '\n'.join('"' + line.replace('"', '""') + '"' for line in plain.decode('utf-8-sig').split('\n'))
+    a, b = aggregate(plain, 'test'), aggregate(('\ufeff' + wrapped).encode('utf-8'), 'test')
+    assert {k: v for k, v in a.items() if k != 'sha256'} == {k: v for k, v in b.items() if k != 'sha256'}
+
+
+def test_one_snapshot_under_two_months_fails_with_a_pointer_to_the_fix(tmp_path, monkeypatch):
+    import store
+    monkeypatch.setattr(store, 'COUNTY_MONTHS_DIR', tmp_path)
+    july = aggregate(monthly_file([('Marathon', NEW, '')] * 12), 'PIOCDF_2026_07.csv')
+    store.write_county_month(july)
+    store.write_county_month(july)  # a rerun is fine
+    with pytest.raises(ValueError, match='MONTHLY_SKIP'):
+        store.write_county_month({**july, 'source': 'PIOCDF_2026_08.csv'})
+    with pytest.raises(ValueError, match='DOC changed'):
+        store.write_county_month({**july, 'sha256': 'f' * 64})
+
+
+def test_county_series_needs_every_month():
+    def month(as_of, people):
+        return {'as_of': as_of, 'min_cell': 10, 'people': people, 'no_new_sentence': 0,
+                'counties': [{'county': 'Marathon', 'people': people, 'no_new_sentence': None}]}
+    head, rows = county_series([month('2026-05-31', 40), month('2026-06-30', 41), month('2026-07-31', 43)])
+    assert head['months'] == ['2026-05-31', '2026-06-30', '2026-07-31'] and head['people'] == [40, 41, 43]
+    assert rows == [{'county': 'Marathon', 'people': [40, 41, 43], 'no_new_sentence': [None, None, None]}]
+    with pytest.raises(ValueError, match='skip or repeat'):
+        county_series([month('2026-05-31', 40), month('2026-07-31', 43)])
+    with pytest.raises(ValueError, match='not the last day'):
+        county_series([month('2026-07-30', 43)])
 
 
 def test_county_file_is_checked_for_layout_and_against_the_weekly_report():

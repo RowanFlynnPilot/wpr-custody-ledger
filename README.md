@@ -17,7 +17,8 @@ center, contract jail and juvenile facility, and the number of people on probati
 | `data/latest.json` | The newest report: the statewide row plus every facility listed that week |
 | `data/changes.json` | What moved in the newest report: records, streaks, year-over-year change, most crowded, biggest movers, close to home |
 | `data/brief.md` | The same, drafted by rule as sentences for the newsroom |
-| `data/counties.json` | People in state prison by county of conviction, and how many are in with no new sentence, from DOC's monthly data file. Counts under 10 are withheld |
+| `data/counties.json` | People in state prison by county of conviction, and how many are in with no new sentence, monthly since April 2020, from DOC's monthly data files. Counts under 10 are withheld |
+| `data/county_months/YYYY-MM-DD.json` | The stored counts for each monthly snapshot, with the source address and SHA-256 of the file they came from |
 | `data/csv/` | The same series as spreadsheets: `statewide.csv`, `facility_population.csv`, `facility_capacity.csv` (one column per facility), `facility_names.csv` |
 | `data/reports/YYYY-MM-DD.json` | Every row of every report as DOC printed it, plus the source address and SHA-256 of the PDF it came from |
 

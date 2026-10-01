@@ -5,12 +5,14 @@
   latest.json       the newest report: statewide row plus every facility
   changes.json      what moved this week: records, streaks, year-over-year, biggest movers, close to home
   brief.md          the same, drafted as sentences for the newsroom (brief.py)
+  counties.json     people in prison by county of conviction, monthly since April 2020
   csv/              the same series as spreadsheets
 
 Every report is reconciled at facility level (snapshot.py) before anything is written, and
 the whole series is checked:
 - week-to-week population change stays under MAX_WEEKLY_CHANGE
 - capacity switches from 'operating' to 'design' exactly once
+- the monthly county snapshots are month-ends with no month missing
 """
 from datetime import date, timedelta
 
@@ -18,7 +20,7 @@ from brief import brief
 from registry import facility
 from series import week
 from snapshot import merge
-from store import read_reports, write_csv, write_output, write_rows, write_text
+from store import read_county_months, read_reports, write_csv, write_output, write_rows, write_text
 
 # Largest real weekly move, 1999-2026, was 1.15% (Mar 2002); COVID drops peaked near 1.05%.
 # A bigger jump is far more likely a parse error than news. Verify against the PDF before raising this.
@@ -40,6 +42,29 @@ def check_series(statewide: list[dict]) -> None:
     switches = [w['date'] for prev, w in zip(statewide, statewide[1:]) if prev['capacity_type'] != w['capacity_type']]
     if types[0] != 'operating' or types[-1] != 'design' or len(switches) != 1:
         raise ValueError(f'Expected one operating -> design capacity switch; found switches at {switches}')
+
+
+def county_series(months: list[dict]) -> tuple[dict, list[dict]]:
+    """Monthly county snapshots as one series per county; null where a count was withheld."""
+    dates = [date.fromisoformat(m['as_of']) for m in months]
+    for d in dates:
+        if (d + timedelta(days=1)).day != 1:
+            raise ValueError(f'County snapshot {d} is not the last day of a month')
+    steps = [(b.year - a.year) * 12 + b.month - a.month for a, b in zip(dates, dates[1:])]
+    if any(step != 1 for step in steps):
+        gaps = [f'{a} -> {b}' for a, b, step in zip(dates, dates[1:], steps) if step != 1]
+        raise ValueError(f'County snapshots skip or repeat a month: {gaps}')
+    if len({m['min_cell'] for m in months}) != 1:
+        raise ValueError('County snapshots were built with different withholding floors; rebuild them')
+    head = {'min_cell': months[0]['min_cell'], 'months': [m['as_of'] for m in months],
+            'people': [m['people'] for m in months], 'no_new_sentence': [m['no_new_sentence'] for m in months]}
+    names = [c['county'] for c in months[0]['counties']]
+    rows = [{'county': name, 'people': [m['counties'][i]['people'] for m in months],
+             'no_new_sentence': [m['counties'][i]['no_new_sentence'] for m in months]}
+            for i, name in enumerate(names)]
+    if any([c['county'] for c in m['counties']] != names for m in months):
+        raise ValueError('County snapshots do not list the same counties in the same order')
+    return head, rows
 
 
 def history(dates: list[str], weekly: list[list[dict]]) -> list[dict]:
@@ -186,6 +211,13 @@ def main() -> None:
             for offset, value in enumerate(f[measure]):
                 table[f['start'] + offset][c] = value
         write_csv(f'facility_{measure}.csv', ['date'] + [f['id'] for f in columns], table)
+
+    months = read_county_months()
+    if months:
+        head, counties = county_series(months)
+        write_rows('counties.json', counties, key='counties', head=head)
+        write_csv('counties.csv', ['as_of', 'county', 'people', 'no_new_sentence'],
+                  [[m['as_of'], c['county'], c['people'], c['no_new_sentence']] for m in months for c in m['counties']])
 
     peak = max(statewide, key=lambda w: w['population'])
     print(f"{len(statewide)} weeks, {len(facilities)} facilities; latest {dates[-1]}: "

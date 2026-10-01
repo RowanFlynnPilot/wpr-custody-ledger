@@ -105,6 +105,16 @@ CAPACITY_MISPRINTS = [
 ]
 
 
+# --- Monthly county file (used by counties.py) ----------------------------------------------
+#
+# Monthly files left out, with the reason. A file that claims a month already stored from another
+# file throws until it is listed here.
+MONTHLY_SKIP = {
+    # Posted Sept. 16, 2026 under "August 2026": its report date is July 31 and it matches PIOCDF_2026_07.csv row for row.
+    'PIOCDF_2026_08.csv': 'repeats the July 31, 2026 snapshot',
+}
+
+
 def apply_date_override(report: dict) -> dict:
     if report['source'] in DATE_OVERRIDES:
         report['date_corrected_from'] = report['report_date']
