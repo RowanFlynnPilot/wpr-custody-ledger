@@ -88,4 +88,23 @@ def test_reissued_week_fails_with_pointer_to_the_fix(tmp_path, monkeypatch):
     store.write_report(report)
     store.write_report(report)  # same source again is fine (rerun)
     with pytest.raises(ValueError, match='corrections.py'):
-        store.write_report({**report, 'source': 'fri_09_25_2026_Corrected.pdf'})
+        store.write_report({**report, 'source': 'fri_09_25_2026_Corrected.pdf', 'sha256': 'f' * 64})
+
+
+def test_file_changed_in_place_fails(tmp_path, monkeypatch):
+    import store
+    monkeypatch.setattr(store, 'REPORTS_DIR', tmp_path)
+    report = load('2026-09-25')
+    store.write_report(report)
+    with pytest.raises(ValueError, match='DOC changed'):
+        store.write_report({**report, 'sha256': 'f' * 64})
+
+
+def test_same_file_at_a_new_address_takes_the_new_address(tmp_path, monkeypatch):
+    # Each January DOC moves the finished year's weekly PDFs into a zip.
+    import store
+    monkeypatch.setattr(store, 'REPORTS_DIR', tmp_path)
+    report = load('2026-09-25')
+    store.write_report(report)
+    store.write_report({**report, 'source': '2026.zip#2026/fri_09_25_2026.pdf'})
+    assert [r['source'] for r in store.read_reports()] == ['2026.zip#2026/fri_09_25_2026.pdf']

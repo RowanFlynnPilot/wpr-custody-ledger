@@ -1,0 +1,78 @@
+# The Custody Ledger
+
+Wausau Pilot & Review's record of how many people Wisconsin holds in state prison, week by
+week since January 1999, set against what the prisons were built to hold. It is compiled
+from the Department of Corrections' weekly DOC-302 population reports: 1,446 of them so far.
+
+DOC publishes each report as a PDF. This repository turns the whole run into data that
+anyone can check, download and reuse.
+
+## What is here
+
+| File | Contents |
+|---|---|
+| `data/statewide.json` | One row per report: date, adult-institution population, capacity, and which kind of capacity |
+| `data/latest.json` | The newest report: statewide totals and every facility and contract jail, with capacity and population |
+| `data/reports/YYYY-MM-DD.json` | Every row of every report as DOC printed it, plus the source address and SHA-256 of the PDF it came from |
+
+The per-report files hold far more than the two summary files use yet: men's and women's
+subtotals, security levels, county-jail and out-of-state contract beds, juvenile facilities,
+and probation and parole counts.
+
+## How to read the numbers
+
+- **Population** is the Total Population column of DOC's ADULT INSTITUTIONS row: people in
+  Division of Adult Institutions custody plus Division of Community Corrections holds. It is
+  the figure news reports cite for the size of the prison system.
+- **Capacity changed meaning on March 14, 2008.** Before that date DOC reported operating
+  capacity; since then it reports design capacity. The two are not comparable, so
+  `capacity_type` travels with every row. Do not draw one capacity line across that date.
+- **Report dates** are read from each PDF's header, not its file name. Almost all are Fridays.
+- **Three weeks are missing.** DOC's archive has no report for Aug. 22, 2003 or Aug. 13,
+  2021, and the Jan. 4, 2013 PDF was published without its population columns.
+
+## How it is checked
+
+The pipeline stops, and publishes nothing, if any of these fail:
+
+- Each report's population equals DAI plus DCC, and matches the DAI total DOC prints
+  separately at the top of the form.
+- In the newest report, the individual facilities add up to the statewide population and
+  capacity.
+- No week moves more than 3% from the one before. The largest real move in 27 years is 1.15%.
+- A stored PDF has not changed. The eight newest reports are downloaded again on every run
+  and compared by SHA-256, so a correction DOC makes in place is caught.
+- The newest report is no more than 21 days old.
+
+Corrections to DOC's source files (superseded reports, one mistyped header date) are listed
+one by one, each with its reason, in `scraper/corrections.py`.
+
+A rebuild from nothing (`backfill.py`, `update.py`, `build.py`) reproduces the committed
+data byte for byte.
+
+## Run it
+
+```
+python -m pip install -r requirements.txt
+python -m pytest -q
+python scraper/update.py
+python scraper/build.py
+```
+
+Needs Python 3.10 or newer. `update.py` reads DOC's Data and Reports page and stores any
+report not yet in `data/reports/`. A GitHub Actions workflow does this three times a week.
+
+## Source
+
+Wisconsin Department of Corrections, weekly population reports and archive:
+<https://doc.wi.gov/Pages/DataResearch/DataAndReports.aspx>. The figures are DOC's,
+republished as printed; nothing here is estimated or adjusted.
+
+For a chart of each adult facility since 2006, see Wisconsin Watch's
+[prison population tracker](https://wisconsin-watch.github.io/wisconsin_prison_population_tracker/).
+
+## Reuse
+
+Code and compiled data are released under the [MIT License](LICENSE). The underlying
+reports are Wisconsin public records. If you use the data, please credit
+"The Custody Ledger, Wausau Pilot & Review" and tell us: editor@wausaupilotandreview.com.

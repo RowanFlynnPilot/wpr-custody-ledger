@@ -2,7 +2,9 @@ name: Weekly update
 
 on:
   schedule:
-    - cron: '0 14 * * 6'  # Saturdays 14:00 UTC; DOC posts each Friday's report by Friday afternoon
+    # 14:00 UTC. DOC posts each Friday's report by Friday afternoon, so Saturday usually picks it up;
+    # Monday and Wednesday catch a late posting (holiday weeks) and any correction to a recent week.
+    - cron: '0 14 * * 1,3,6'
   workflow_dispatch:
 
 permissions:

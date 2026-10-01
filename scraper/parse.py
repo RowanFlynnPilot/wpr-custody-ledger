@@ -7,7 +7,11 @@ DOC has published since 1999):
 - a report date can be read, and it falls on a Thursday or Friday
 - the ADULT INSTITUTIONS headline row has 4 columns and population == DAI + DCC
 - the separately printed "TOTAL ... (DAI)" line equals the headline's DAI column
+
+Each report carries the SHA-256 of the PDF it was read from, so store.py can tell a file
+DOC has moved (same bytes, new address) from one it has changed.
 """
+import hashlib
 import re
 from datetime import date
 
@@ -111,6 +115,7 @@ def parse_report(pdf_bytes: bytes, source: str) -> dict:
         'report_date': parse_date(lines, source),
         'revision': revision,
         'source': source,
+        'sha256': hashlib.sha256(pdf_bytes).hexdigest(),
         'capacity_type': capacity_type,
         'adult_institutions': {'capacity': capacity, 'population': population, 'dai': dai, 'dcc': dcc},
         'rows': rows,
