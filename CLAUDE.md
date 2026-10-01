@@ -113,11 +113,11 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 - **Deep links**: `#facility=<id>` opens that facility's history. The embed script forwards the article's hash into the frame.
 - **The page reports its height** to the embedding page (`source: "wpr-custody-ledger"`), same scheme as the Watch Ledger.
 - Local preview: `.claude/launch.json` starts the dev server on port 5173. After scripted multi-step edits to one file, touch it: Vite once served a stale transform.
-- **Not live yet**: GitHub Pages has to be switched on for the repo (source: GitHub Actions) before `deploy.yml` can publish.
+- **Live** at https://rowanflynnpilot.github.io/wpr-custody-ledger/ since Oct 1, 2026 (GitHub Pages, source: GitHub Actions). Not yet embedded on the news site.
 
 ## Next
 
-Phase 0, the data model and a first version of the site are done. Still open: switch on GitHub Pages, tell DOC about the female subtotal error and the capacity misprints.
+Phase 0, the data model and a first version of the site are done. Still open: embed it on the news site, tell DOC about the female subtotal error and the capacity misprints.
 
 0. **Site leftovers.** A social card (`og-image.png`, generated, 1200x630); where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel; the phone layout of the facility table is serviceable, not good.
 
