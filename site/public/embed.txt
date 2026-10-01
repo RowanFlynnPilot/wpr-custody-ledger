@@ -1,0 +1,60 @@
+THE CUSTODY LEDGER - EMBED CODE
+Copy from this page, not from an email: Gmail rewrites links into google.com redirects.
+
+============================================================
+OPTION A - editor with separate HTML and JavaScript tabs
+(no <script> tag anywhere; this avoids the "not a valid JSON response" save error)
+============================================================
+
+--- HTML tab ---
+
+<iframe id="custody-ledger" src="https://rowanflynnpilot.github.io/wpr-custody-ledger/" style="width:100%;border:none;height:1200px" title="The Custody Ledger" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+--- JavaScript tab ---
+
+window.addEventListener("message", function (e) {
+  if (!e.data || e.data.source !== "wpr-custody-ledger") return;
+  var frame = document.getElementById("custody-ledger");
+  if (!frame || e.origin !== new URL(frame.src).origin) return;
+  if (typeof e.data.height === "number" && e.data.height > 0) {
+    frame.style.height = Math.ceil(e.data.height) + "px";
+  }
+});
+// Optional: lets a shared link such as  your-article-url#facility=lincoln-hills  open that facility.
+(function () {
+  var f = document.getElementById("custody-ledger");
+  if (f && /^#facility=[a-z0-9-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
+})();
+
+============================================================
+OPTION B - single Custom HTML block (only if the editor has no JavaScript tab)
+============================================================
+
+<iframe id="custody-ledger" src="https://rowanflynnpilot.github.io/wpr-custody-ledger/" style="width:100%;border:none;height:1200px" title="The Custody Ledger" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<script>
+window.addEventListener("message", function (e) {
+  if (!e.data || e.data.source !== "wpr-custody-ledger") return;
+  var frame = document.getElementById("custody-ledger");
+  if (!frame || e.origin !== new URL(frame.src).origin) return;
+  if (typeof e.data.height === "number" && e.data.height > 0) {
+    frame.style.height = Math.ceil(e.data.height) + "px";
+  }
+});
+(function () {
+  var f = document.getElementById("custody-ledger");
+  if (f && /^#facility=[a-z0-9-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
+})();
+</script>
+
+============================================================
+OPTION C - iframe only, no script at all (if the save still fails)
+The frame scrolls inside itself; set the height to taste.
+============================================================
+
+<iframe src="https://rowanflynnpilot.github.io/wpr-custody-ledger/" style="width:100%;border:none;height:90vh;min-height:800px" title="The Custody Ledger" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+============================================================
+CHECK BEFORE SAVING
+============================================================
+The src must read exactly  https://rowanflynnpilot.github.io/wpr-custody-ledger/
+A wider page template (one column, no sidebar) helps: the tool is built for 700px or more.

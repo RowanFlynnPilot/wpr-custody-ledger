@@ -82,6 +82,17 @@ python scraper/build.py
 Needs Python 3.10 or newer. `update.py` reads DOC's Data and Reports page and stores any
 report not yet in `data/reports/`. A GitHub Actions workflow does this three times a week.
 
+## The site
+
+`site/` is the reader-facing page (React and Vite), built from the committed data and
+published to GitHub Pages; `site/public/embed.txt` has the code for embedding it in an article.
+
+```
+cd site
+npm install
+npm run dev
+```
+
 ## Source
 
 Wisconsin Department of Corrections, weekly population reports and archive:

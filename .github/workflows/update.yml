@@ -17,6 +17,8 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
       # Node 24 majors: GitHub removed Node 20 from Actions runners on Sep 16, 2026.
       - uses: actions/checkout@v6
@@ -28,6 +30,7 @@ jobs:
       - run: python scraper/update.py
       - run: python scraper/build.py
       - name: Commit new data
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -35,4 +38,15 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Weekly DOC-302 update"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+  # Publish the site with the new report. deploy.yml checks out the branch head, which now has it.
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Custody Ledger — Wausau Pilot &amp; Review</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F2E9'/%3E%3Crect x='4' y='7' width='4' height='18' fill='%233A867C'/%3E%3Crect x='11' y='7' width='4' height='18' fill='%233A867C'/%3E%3Crect x='18.75' y='7.75' width='2.5' height='16.5' fill='none' stroke='%2355594F' stroke-width='1.5'/%3E%3Crect x='25.75' y='7.75' width='2.5' height='16.5' fill='none' stroke='%2355594F' stroke-width='1.5'/%3E%3C/svg%3E" />
+    <meta name="description" content="How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold: every prison, contract jail and juvenile facility, from the Department of Corrections' weekly reports." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wausau Pilot &amp; Review" />
+    <meta property="og:title" content="The Custody Ledger" />
+    <meta property="og:description" content="How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold." />
+    <meta property="og:url" content="https://rowanflynnpilot.github.io/wpr-custody-ledger/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="The Custody Ledger" />
+    <meta name="twitter:description" content="How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold." />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "The Custody Ledger: Wisconsin prison population and capacity, weekly since 1999",
+        "description": "Weekly population and capacity of Wisconsin's adult prisons, correctional centers, contract jails and juvenile facilities since January 1999, compiled from the Department of Corrections' DOC-302 weekly population reports and reconciled to the department's own totals.",
+        "url": "https://rowanflynnpilot.github.io/wpr-custody-ledger/",
+        "keywords": ["Wisconsin prisons", "prison population", "prison overcrowding", "Wisconsin Department of Corrections", "county jails", "Lincoln Hills"],
+        "isAccessibleForFree": true,
+        "license": "https://opensource.org/license/mit",
+        "spatialCoverage": { "@type": "Place", "name": "Wisconsin, United States" },
+        "temporalCoverage": "1999-01-01/..",
+        "creator": { "@type": "NewsMediaOrganization", "name": "Wausau Pilot & Review", "url": "https://wausaupilotandreview.com" },
+        "distribution": [
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/statewide.csv" },
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_population.csv" },
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_capacity.csv" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="font: 16px/1.5 sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem;">
+        The Custody Ledger is an interactive tool and needs JavaScript to display. The underlying
+        data is published as spreadsheets:
+        <a href="data/csv/statewide.csv">statewide.csv</a> and
+        <a href="data/csv/facility_population.csv">facility_population.csv</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

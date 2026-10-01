@@ -21,6 +21,8 @@ Working name: The Custody Ledger. A Wausau Pilot & Review tracker of Wisconsin's
 | `scraper/series.py` | One statewide row per report: headline, men/women, contract beds, juvenile, supervision |
 | `scraper/build.py` | `data/reports/*.json` -> `statewide.json`, `facilities.json`, `latest.json`, `changes.json`, `csv/` |
 | `tests/` | Regression tests on one real PDF per format era, plus failure-mode tests |
+| `site/` | React/Vite page. `cpdata.mjs` copies `data/*.json` and `data/csv/` into `site/public/data/` (ignored by git) before dev and build |
+| `.github/workflows/deploy.yml` | Builds `site/` from committed data and publishes to GitHub Pages: on a push that touches `site/` or `data/`, and when called by `update.yml` after a weekly commit |
 | `.github/workflows/update.yml` | Mon, Wed, Sat: test, update, build, commit. Saturday is the usual pickup; the others catch late postings and corrections |
 
 `data/reports/YYYY-MM-DD.json` is the stored truth (one per report, ~1,450 files). Everything else in `data/` is derived and rebuilt every run: `statewide.json` (one row per report, one per line), `facilities.json` (each facility's weekly population and capacity; arrays start at index `start` of `dates`), `latest.json`, `changes.json` (records, streaks, movers: the input for briefs and alerts) and `csv/`.
@@ -101,12 +103,25 @@ python -m pip install -r requirements.txt; python -m pytest -q; python scraper/u
 
 The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24). GitHub removed Node 20 from runners on Sep 16, 2026, so older majors fail.
 
+## Site
+
+- **One page, six sections**: the weekly line since 1999, close to home, women and men, contract beds, every facility (with each one's history), how it is compiled. Sections live in `site/src/*.jsx`; `TimeChart.jsx` draws every chart.
+- **Design is the ledger family's** (`wpr-watch-ledger` is the model): cream `#f6f2e9`, teal `#3a867c`, Fraunces, Public Sans, JetBrains Mono for figures, fonts self-hosted through `@fontsource`. Light only, like its siblings.
+- **Chart marks use their own three colors** (`--chart-1` teal `#12917d`, `--chart-2` rust `#c2573a`, `--chart-3` violet `#6a63b3`): the brand teal is too gray to work as a data color. The three pass the dataviz skill's palette validator on `#fffdf8`. Capacity is always the neutral gray line.
+- **Copy is computed from the data** (lede, stat strip, headings with years, annotations), so nothing on the page goes stale when the record does. Dates are AP style, from `format.js`.
+- **Close to home** is Marathon County, the counties bordering it, and Oneida, Vilas, Forest and Price (`HOME_COUNTIES` in `CloseToHome.jsx`). That list is an editorial choice.
+- **Deep links**: `#facility=<id>` opens that facility's history. The embed script forwards the article's hash into the frame.
+- **The page reports its height** to the embedding page (`source: "wpr-custody-ledger"`), same scheme as the Watch Ledger.
+- Local preview: `.claude/launch.json` starts the dev server on port 5173. After scripted multi-step edits to one file, touch it: Vite once served a stale transform.
+- **Not live yet**: GitHub Pages has to be switched on for the repo (source: GitHub Actions) before `deploy.yml` can publish.
+
 ## Next
 
-Phase 0 (hash check, three runs a week, README, license) and the data model (facility registry, facility history for all 1,446 reports, statewide series, CSVs, `changes.json`) are done. Still open: tell DOC about the female subtotal error and the capacity misprints.
+Phase 0, the data model and a first version of the site are done. Still open: switch on GitHub Pages, tell DOC about the female subtotal error and the capacity misprints.
+
+0. **Site leftovers.** A social card (`og-image.png`, generated, 1200x630); where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel; the phone layout of the facility table is serviceable, not good.
 
 1. **Registry leftovers.** City and coordinates for state facilities (needed for the map; take addresses from DOC's facility pages and geocode, don't type them from memory). Security-level statewide series if the front end wants one.
-2. **Front end** (React/Vite -> GitHub Pages -> WordPress iframe). Lead with what Wisconsin Watch's chart lacks: the 27-year line with the 2000 out-of-state peak and the 2008 capacity break, a close-to-home panel (Lincoln, Oneida, Vilas jails; Lincoln Hills; McNaughton), the women's system, jail contracts, facility pages. Ledger-family design tokens, as in `wpr-watch-ledger`: teal `#3A867C`, cream `#F6F2E9`, Fraunces display, Public Sans body, JetBrains Mono for data. Before building routes, settle where indexable text lives: an iframe from github.io earns the news site no search credit.
 3. **Local layer.** Marathon County residents in prison and admissions by type, from DOC's monthly Persons in Our Care data files (April 2020 on; columns not yet inspected). Staffing vacancies by facility from DOC's staffing dashboard. A records request for the Lincoln County jail contract.
 4. **Jail layer.** Office of Detention Facilities annual report (county jail admissions, ADP, suicides).
 5. **Distribution.** Auto-drafted weekly brief for the newsletter, record and local-jail alerts, a county-localized embed other Wisconsin newsrooms can run with credit.
