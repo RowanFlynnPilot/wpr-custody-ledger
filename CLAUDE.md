@@ -26,6 +26,7 @@ Working name: The Custody Ledger. A Wausau Pilot & Review tracker of Wisconsin's
 | `site/` | React/Vite page. `cpdata.mjs` copies `data/*.json` and `data/csv/` into `site/public/data/` (ignored by git) before dev and build |
 | `.github/workflows/counties.yml` | Tue, Fri: test, `counties.py --new`, build, commit, and deploy if a month was added. Shares `update.yml`'s concurrency group so the two never commit at once. Approved by the publisher Oct 1, 2026: it accepts DOC's disclaimer on each download |
 | `.github/workflows/deploy.yml` | Builds `site/` from committed data and publishes to GitHub Pages: on a push that touches `site/` or `data/`, and when called by `update.yml` after a weekly commit |
+| `.github/workflows/doc-attempt.yml` | One attempt at either DOC pipeline on a fresh runner: checks it can reach doc.wi.gov, then test, fetch, build, commit. The state network drops connections from some GitHub runner addresses, so `update.yml` and `counties.yml` chain up to five attempts; a blocked one ends green and hands off, and five blocked in a row fails the run. Same scheme as `wpr-cleanup-ledger` |
 | `.github/workflows/update.yml` | Mon, Wed, Sat: test, update, build, commit. Saturday is the usual pickup; the others catch late postings and corrections. When a new report is stored it opens a GitHub issue holding `brief.md` (that is how the brief reaches the newsroom) and calls `deploy.yml` |
 
 `data/reports/YYYY-MM-DD.json` is the stored truth (one per report, ~1,450 files). Everything else in `data/` is derived and rebuilt every run: `statewide.json` (one row per report, one per line), `facilities.json` (each facility's weekly population and capacity; arrays start at index `start` of `dates`), `latest.json`, `changes.json` (records, streaks, movers: the input for briefs and alerts) and `csv/`.
@@ -45,7 +46,8 @@ A full rebuild from scratch (backfill + update + build) reproduces the committed
 
 ## When the weekly job fails
 
-GitHub emails on a failed scheduled run. Read the error first; each one names the file and the broken check.
+GitHub emails on a failed scheduled run. Read the error first; each one names the file and the broken check. A yellow "Runner blocked by the state network" warning on a green run is normal: that attempt handed off to another runner.
+- **"No runner could reach doc.wi.gov"**: five runners in a row were blocked. Rerun the workflow; if it persists, DOC's site is down or the block has widened.
 - **County month "is already stored from ..."** (`counties.yml`): DOC posted one snapshot under two months. Add the repeat to `MONTHLY_SKIP` in `corrections.py`, with the file's `Last-Modified` header.
 - **"DOC replaced PIOCDF_..."** (`counties.yml`): a file in `MONTHLY_SKIP` has changed on DOC's server, probably corrected. Remove it from `MONTHLY_SKIP` and run `python scraper/counties.py YEAR MONTH`.
 - **"The newest month accounted for is ..."** (`counties.yml`): nothing new in 80 days. Check DOC's monthly data page.
@@ -122,7 +124,7 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 - **Close to home** is Marathon County, the counties bordering it, and Oneida, Vilas, Forest and Price: `HOME_COUNTIES` in `scraper/build.py`, carried to the site and the brief in `changes.json`. That list is an editorial choice.
 - **Smoke test**: `site/smoke.mjs` (playwright-core driving the machine's own Chrome) loads the built site at desktop and phone widths and fails on a console error, a missing section, horizontal overflow or a facility link that does not open. `deploy.yml` runs it before publishing. It counts sections (`SECTIONS`), so update it when one is added.
 - **Facility group buttons are toggle buttons** (`aria-pressed`), not ARIA tabs: they have no tab keyboard behavior.
-- **Both workflows are pinned to `ubuntu-24.04`**; move them deliberately.
+- **Every workflow is pinned to `ubuntu-24.04`**; move them deliberately.
 - **The juvenile section's note on Lincoln Hills** (closure deadline of July 1, 2021; still operating January 2025; planned conversion to a men's prison) is from the Legislative Fiscal Bureau's Informational Paper 60, January 2025. Recheck it when that paper is reissued.
 - **Share card**: `site/og-card.py` (Pillow, fonts from `@fontsource`) draws `og-image.png` in the Watch Ledger's layout. Its row of marks is one per 500 people, rust for those beyond capacity, read from `data/latest.json`; so `deploy.yml` draws it on every deploy and the PNG is not committed.
 - **Facility table on phones** (560px and under): CSS turns each row into a block, name on top, figures beneath, with a fixed first column so every bar is on one scale. The table carries explicit ARIA roles because that CSS strips table semantics in some browsers.

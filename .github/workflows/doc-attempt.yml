@@ -1,0 +1,103 @@
+name: DOC pipeline attempt
+
+# One attempt at a DOC data pipeline, on whatever fresh runner GitHub hands out. update.yml and
+# counties.yml call this up to five times in a row.
+#
+# Why a retry has to change machines instead of waiting in place: the State of Wisconsin's
+# network silently drops TCP connections from a subset of GitHub's runner addresses (measured
+# on the Cleanup Ledger in September 2026: 6 of 16 runners could not open a connection to any
+# state host, however often they tried). On Oct 1, 2026 the first run of the county job died
+# that way on its first request to doc.wi.gov. A new job gets a new machine and a new address.
+#
+# So the first step asks whether THIS runner can reach doc.wi.gov. If not, the attempt ends
+# green with reached=false and the caller hands off to a fresh runner. Anything that goes wrong
+# after the preflight passes is a real failure and fails the run loudly.
+#
+# No concurrency block here: the caller's group already covers this run, and repeating it in a
+# called workflow deadlocks.
+on:
+  workflow_call:
+    inputs:
+      pipeline:
+        description: '"weekly" (DOC-302 reports) or "counties" (monthly county file)'
+        type: string
+        required: true
+      attempt:
+        description: Attempt number, for the logs
+        type: number
+        required: true
+    outputs:
+      reached:
+        description: '"true" if this runner could reach doc.wi.gov'
+        value: ${{ jobs.run.outputs.reached }}
+      changed:
+        description: '"true" if this attempt committed and pushed data'
+        value: ${{ jobs.run.outputs.changed }}
+
+jobs:
+  run:
+    name: ${{ inputs.pipeline }}
+    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
+    timeout-minutes: 15
+    outputs:
+      reached: ${{ steps.preflight.outputs.reached }}
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      # Any HTTP response at all proves the connection is open; a blocked runner never gets that far.
+      - name: Can this runner reach doc.wi.gov?
+        id: preflight
+        env:
+          ATTEMPT: ${{ inputs.attempt }}
+        run: |
+          for try in 1 2; do
+            if curl -s -o /dev/null --connect-timeout 10 --max-time 30 "https://doc.wi.gov/"; then
+              echo "reached=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::warning title=Runner blocked by the state network::Attempt $ATTEMPT could not connect to doc.wi.gov (the State of Wisconsin network drops some GitHub runner addresses). Handing off to a fresh runner."
+          echo "reached=false" >> "$GITHUB_OUTPUT"
+
+      # Node 24 majors: GitHub removed Node 20 from Actions runners on Sep 16, 2026.
+      - if: steps.preflight.outputs.reached == 'true'
+        uses: actions/checkout@v6
+      - if: steps.preflight.outputs.reached == 'true'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - if: steps.preflight.outputs.reached == 'true'
+        run: python -m pip install -r requirements.txt
+      - if: steps.preflight.outputs.reached == 'true'
+        run: python -m pytest -q
+
+      - if: steps.preflight.outputs.reached == 'true' && inputs.pipeline == 'weekly'
+        run: python scraper/update.py
+      - if: steps.preflight.outputs.reached == 'true' && inputs.pipeline == 'counties'
+        run: python scraper/counties.py --new
+      - if: steps.preflight.outputs.reached == 'true'
+        run: python scraper/build.py
+
+      - name: Commit new data
+        id: commit
+        if: steps.preflight.outputs.reached == 'true'
+        env:
+          MESSAGE: ${{ inputs.pipeline == 'counties' && 'Monthly county counts' || 'Weekly DOC-302 update' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "$MESSAGE"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # A new weekly report was stored: open an issue holding the drafted brief, so it reaches the newsroom by email.
+      - name: Deliver the weekly brief
+        if: steps.commit.outputs.changed == 'true' && inputs.pipeline == 'weekly'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "$(head -n 1 data/brief.md | sed 's/^# //')" --body-file data/brief.md

@@ -17,35 +17,45 @@ concurrency:
   group: weekly-update  # shared with update.yml: both commit to data/, so they never run at once
   cancel-in-progress: false
 
+# Up to five attempts, each on a FRESH runner: the state network drops connections from some
+# runner addresses (see doc-attempt.yml).
 jobs:
-  counties:
-    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
-    outputs:
-      changed: ${{ steps.commit.outputs.changed }}
+  attempt-1:
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: counties, attempt: 1 }
+  attempt-2:
+    needs: attempt-1
+    if: needs.attempt-1.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: counties, attempt: 2 }
+  attempt-3:
+    needs: attempt-2
+    if: needs.attempt-2.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: counties, attempt: 3 }
+  attempt-4:
+    needs: attempt-3
+    if: needs.attempt-3.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: counties, attempt: 4 }
+  attempt-5:
+    needs: attempt-4
+    if: needs.attempt-4.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: counties, attempt: 5 }
+
+  blocked:
+    needs: attempt-5
+    if: needs.attempt-5.outputs.reached == 'false'
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-      - run: python -m pip install -r requirements.txt
-      - run: python -m pytest -q
-      - run: python scraper/counties.py --new
-      - run: python scraper/build.py
-      - name: Commit new counts
-        id: commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
-          if ! git diff --cached --quiet; then
-            git commit -m "Monthly county counts"
-            git push
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+      - run: |
+          echo "::error title=No runner could reach doc.wi.gov::All five attempts were blocked by the state network. Nothing was updated."
+          exit 1
 
   deploy:
-    needs: counties
-    if: needs.counties.outputs.changed == 'true'
+    needs: [attempt-1, attempt-2, attempt-3, attempt-4, attempt-5]
+    if: ${{ !cancelled() && contains(needs.*.outputs.changed, 'true') }}
     permissions:
       contents: read
       pages: write

@@ -15,43 +15,48 @@ concurrency:
   group: weekly-update
   cancel-in-progress: false
 
+# Up to five attempts, each on a FRESH runner: the state network drops connections from some
+# runner addresses (see doc-attempt.yml). A blocked attempt ends green with reached=false and the
+# next one takes over; the attempt that gets through does the whole job.
 jobs:
-  update:
-    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
-    outputs:
-      changed: ${{ steps.commit.outputs.changed }}
+  attempt-1:
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: weekly, attempt: 1 }
+  attempt-2:
+    needs: attempt-1
+    if: needs.attempt-1.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: weekly, attempt: 2 }
+  attempt-3:
+    needs: attempt-2
+    if: needs.attempt-2.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: weekly, attempt: 3 }
+  attempt-4:
+    needs: attempt-3
+    if: needs.attempt-3.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: weekly, attempt: 4 }
+  attempt-5:
+    needs: attempt-4
+    if: needs.attempt-4.outputs.reached == 'false'
+    uses: ./.github/workflows/doc-attempt.yml
+    with: { pipeline: weekly, attempt: 5 }
+
+  # Five blocked runners in a row is not bad luck any more: fail, so the run is noticed.
+  blocked:
+    needs: attempt-5
+    if: needs.attempt-5.outputs.reached == 'false'
+    runs-on: ubuntu-24.04
     steps:
-      # Node 24 majors: GitHub removed Node 20 from Actions runners on Sep 16, 2026.
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-      - run: python -m pip install -r requirements.txt
-      - run: python -m pytest -q
-      - run: python scraper/update.py
-      - run: python scraper/build.py
-      - name: Commit new data
-        id: commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
-          if ! git diff --cached --quiet; then
-            git commit -m "Weekly DOC-302 update"
-            git push
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-      # A new report was stored: open an issue holding the drafted brief, so it reaches the newsroom by email.
-      - name: Deliver the weekly brief
-        if: steps.commit.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh issue create --title "$(head -n 1 data/brief.md | sed 's/^# //')" --body-file data/brief.md
+      - run: |
+          echo "::error title=No runner could reach doc.wi.gov::All five attempts were blocked by the state network. Nothing was updated."
+          exit 1
 
   # Publish the site with the new report. deploy.yml checks out the branch head, which now has it.
   deploy:
-    needs: update
-    if: needs.update.outputs.changed == 'true'
+    needs: [attempt-1, attempt-2, attempt-3, attempt-4, attempt-5]
+    if: ${{ !cancelled() && contains(needs.*.outputs.changed, 'true') }}
     permissions:
       contents: read
       pages: write
