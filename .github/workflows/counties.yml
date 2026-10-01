@@ -1,0 +1,53 @@
+name: Monthly county counts
+
+# DOC posts a person-level file about 15 days after each month ends. This job downloads any month
+# not yet stored, keeps only county counts (nothing under 10), and publishes. The file itself is
+# held in memory and never written to the repository. It runs twice a week so a late posting is
+# picked up within days; most runs find nothing new and change nothing.
+
+on:
+  schedule:
+    - cron: '0 15 * * 2,5'  # Tuesdays and Fridays, 15:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-update  # shared with update.yml: both commit to data/, so they never run at once
+  cancel-in-progress: false
+
+jobs:
+  counties:
+    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: python scraper/counties.py --new
+      - run: python scraper/build.py
+      - name: Commit new counts
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if ! git diff --cached --quiet; then
+            git commit -m "Monthly county counts"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: counties
+    if: needs.counties.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

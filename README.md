@@ -88,7 +88,8 @@ python scraper/build.py
 ```
 
 Needs Python 3.10 or newer. `update.py` reads DOC's Data and Reports page and stores any
-report not yet in `data/reports/`. A GitHub Actions workflow does this three times a week.
+report not yet in `data/reports/`. A GitHub Actions workflow does this three times a week, and another checks twice a week for a
+new monthly county file.
 
 ## The site
 

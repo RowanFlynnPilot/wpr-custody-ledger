@@ -17,6 +17,7 @@ the whole series is checked:
 from datetime import date, timedelta
 
 from brief import brief
+from corrections import MONTHLY_SKIP
 from registry import facility
 from series import week
 from snapshot import merge
@@ -50,10 +51,13 @@ def county_series(months: list[dict]) -> tuple[dict, list[dict]]:
     for d in dates:
         if (d + timedelta(days=1)).day != 1:
             raise ValueError(f'County snapshot {d} is not the last day of a month')
-    steps = [(b.year - a.year) * 12 + b.month - a.month for a, b in zip(dates, dates[1:])]
-    if any(step != 1 for step in steps):
-        gaps = [f'{a} -> {b}' for a, b, step in zip(dates, dates[1:], steps) if step != 1]
-        raise ValueError(f'County snapshots skip or repeat a month: {gaps}')
+    for a, b in zip(dates, dates[1:]):
+        between = [(a.year + (a.month + k - 1) // 12, (a.month + k - 1) % 12 + 1)
+                   for k in range(1, (b.year - a.year) * 12 + b.month - a.month)]
+        unexplained = [ym for ym in between if f'PIOCDF_{ym[0]}_{ym[1]:02d}.csv' not in MONTHLY_SKIP]
+        if b <= a or unexplained:
+            raise ValueError(f'County snapshots skip or repeat a month between {a} and {b}. A missing month is '
+                             'allowed only when its file is listed in MONTHLY_SKIP in corrections.py.')
     if len({m['min_cell'] for m in months}) != 1:
         raise ValueError('County snapshots were built with different withholding floors; rebuild them')
     head = {'min_cell': months[0]['min_cell'], 'months': [m['as_of'] for m in months],

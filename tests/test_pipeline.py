@@ -11,7 +11,7 @@ import pytest
 
 from brief import ap_date, brief, flags, moved, title
 from build import HOME_COUNTIES, changes, check_series, county_series, year_before
-from counties import aggregate, check_against_weekly_report
+from counties import aggregate, check_against_weekly_report, check_fresh, month_end, pending
 from parse import parse_date, parse_report
 from series import supervision_as_of, week
 from snapshot import facilities, juvenile
@@ -244,8 +244,21 @@ def test_county_series_needs_every_month():
     assert rows == [{'county': 'Marathon', 'people': [40, 41, 43], 'no_new_sentence': [None, None, None]}]
     with pytest.raises(ValueError, match='skip or repeat'):
         county_series([month('2026-05-31', 40), month('2026-07-31', 43)])
+    # ...unless the missing month's file is one DOC got wrong and corrections.py says so
+    head, _ = county_series([month('2026-07-31', 43), month('2026-09-30', 44)])
+    assert head['months'] == ['2026-07-31', '2026-09-30']
     with pytest.raises(ValueError, match='not the last day'):
         county_series([month('2026-07-30', 43)])
+
+
+def test_monthly_job_asks_for_the_months_after_the_newest_stored_and_notices_silence():
+    assert month_end(2024, 2) == date(2024, 2, 29) and month_end(2026, 12) == date(2026, 12, 31)
+    assert pending(date(2026, 7, 31), date(2026, 10, 1)) == [(2026, 8), (2026, 9), (2026, 10)]
+    assert pending(date(2026, 9, 30), date(2026, 10, 20)) == [(2026, 10)]
+    assert pending(date(2026, 11, 30), date(2027, 1, 16)) == [(2026, 12), (2027, 1)]
+    check_fresh([date(2026, 7, 31)], date(2026, 10, 1))        # August 2026 is accounted for as a skipped file
+    with pytest.raises(RuntimeError, match='stopped posting'):
+        check_fresh([date(2026, 7, 31)], date(2026, 12, 1))    # nothing since: 92 days after Aug. 31
 
 
 def test_county_file_is_checked_for_layout_and_against_the_weekly_report():

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Sparkline } from "./TimeChart.jsx";
 import { apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
-const YEAR = 12; // the series is monthly
 
 // People in state prison by the county that convicted them, from DOC's monthly file. The
 // pipeline withholds any count under `min_cell` before it reaches this page; null means withheld.
@@ -10,10 +9,12 @@ export default function Counties({ counties, home }) {
   const [all, setAll] = useState(false);
   const last = counties.months.length - 1;
   const asOf = counties.months[last];
+  // The same month a year earlier, found by date: a month DOC never posted leaves the series uneven.
+  const yearAgo = counties.months.findIndex((m) => m.startsWith(`${Number(asOf.slice(0, 4)) - 1}${asOf.slice(4, 7)}`));
   const now = (c) => ({
     county: c.county,
     people: c.people[last],
-    yearChange: c.people[last] == null || c.people[last - YEAR] == null ? null : c.people[last] - c.people[last - YEAR],
+    yearChange: c.people[last] == null || c.people[yearAgo] == null ? null : c.people[last] - c.people[yearAgo],
     noNew: c.no_new_sentence[last],
     series: c.people,
   });

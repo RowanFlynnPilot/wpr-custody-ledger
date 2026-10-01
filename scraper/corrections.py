@@ -108,10 +108,13 @@ CAPACITY_MISPRINTS = [
 # --- Monthly county file (used by counties.py) ----------------------------------------------
 #
 # Monthly files left out, with the reason. A file that claims a month already stored from another
-# file throws until it is listed here.
+# file throws until it is listed here. `last_modified` is the HTTP Last-Modified of the file that was
+# examined: the monthly job throws when DOC replaces it, so a corrected file is not skipped forever.
+# The month a skipped file stands for is the one gap build.py allows in the county series.
 MONTHLY_SKIP = {
-    # Posted Sept. 16, 2026 under "August 2026": its report date is July 31 and it matches PIOCDF_2026_07.csv row for row.
-    'PIOCDF_2026_08.csv': 'repeats the July 31, 2026 snapshot',
+    # Posted under "August 2026": its report date is July 31 and it matches PIOCDF_2026_07.csv row for row.
+    'PIOCDF_2026_08.csv': {'reason': 'repeats the July 31, 2026 snapshot',
+                           'last_modified': 'Wed, 16 Sep 2026 14:25:55 GMT'},
 }
 
 
