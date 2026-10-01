@@ -2,17 +2,16 @@ import React from "react";
 import { Sparkline } from "./TimeChart.jsx";
 import { TYPE_LABEL, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
-// Marathon County, the counties that border it, and the Northwoods counties to its north.
-export const HOME_COUNTIES = ["Marathon", "Lincoln", "Langlade", "Shawano", "Portage", "Wood", "Clark", "Taylor",
-  "Oneida", "Vilas", "Forest", "Price"];
+// Which counties count as home is set once, in scraper/build.py, and arrives in changes.json.
 const YEAR = 52;
 
 const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`);
 
-export default function CloseToHome({ facilities, statewide }) {
+export default function CloseToHome({ facilities, statewide, changes }) {
+  const home = changes.home_counties;
   const current = statewide.length - 1;
   const local = facilities.facilities
-    .filter((f) => HOME_COUNTIES.includes(f.county) && f.start + f.population.length - 1 === current)
+    .filter((f) => home.includes(f.county) && f.start + f.population.length - 1 === current)
     .map((f) => {
       const population = f.population[f.population.length - 1];
       const yearAgo = f.population[f.population.length - 1 - YEAR];

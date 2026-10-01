@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  issues: write  # the weekly brief is delivered as an issue
 
 concurrency:
   group: weekly-update
@@ -16,7 +17,7 @@ concurrency:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
@@ -40,6 +41,12 @@ jobs:
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+      # A new report was stored: open an issue holding the drafted brief, so it reaches the newsroom by email.
+      - name: Deliver the weekly brief
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "$(head -n 1 data/brief.md | sed 's/^# //')" --body-file data/brief.md
 
   # Publish the site with the new report. deploy.yml checks out the branch head, which now has it.
   deploy:

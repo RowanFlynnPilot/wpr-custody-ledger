@@ -69,9 +69,9 @@ export default function Facilities({ facilities, latest }) {
         The report of {apDate(latest.report_date)}, facility by facility. Select a name for its
         full history.
       </p>
-      <div className="tabs" role="tablist" aria-label="Kind of facility">
+      <div className="tabs" role="group" aria-label="Kind of facility">
         {GROUPS.map((g) => (
-          <button key={g.key} type="button" role="tab" aria-selected={g.key === group}
+          <button key={g.key} type="button" aria-pressed={g.key === group}
             onClick={() => { setGroup(g.key); setSort(null); }}>
             {g.label} <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
           </button>

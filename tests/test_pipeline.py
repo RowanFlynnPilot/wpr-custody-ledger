@@ -9,7 +9,8 @@ from pathlib import Path
 
 import pytest
 
-from build import changes, check_series, year_before
+from brief import ap_date, brief, flags, moved, title
+from build import HOME_COUNTIES, changes, check_series, year_before
 from parse import parse_date, parse_report
 from series import supervision_as_of, week
 from snapshot import facilities, juvenile
@@ -180,6 +181,46 @@ def test_changes_counts_the_record_streak_and_finds_the_prior_peak():
     assert (result['population']['record'], result['population']['record_streak']) == (False, 0)
     assert result['population']['prior_peak']['value'] == 110
     assert result['crowding']['record_percent'] == 110.0
+
+
+def synthetic_facility(population: list[int], **extra) -> dict:
+    return {'id': 'lincoln-county-jail', 'name': 'Lincoln County Jail', 'type': 'county_jail', 'county': 'Lincoln',
+            'start': 0, 'population': population, **extra}
+
+
+def test_changes_lists_home_county_facilities_and_only_those():
+    weeks = synthetic_weeks([100, 110, 105, 111, 112])
+    away = synthetic_facility([1, 1, 1, 1, 1], id='dane-county-jail', name='Dane County Jail', county='Dane')
+    result = changes(weeks, [synthetic_facility([10, 12, 12, 13, 19]), away])
+    assert result['home_counties'] == HOME_COUNTIES
+    assert result['local'] == [{'id': 'lincoln-county-jail', 'name': 'Lincoln County Jail', 'type': 'county_jail',
+                                'county': 'Lincoln', 'capacity': None, 'population': 19, 'week_change': 6,
+                                'year_change': 9, 'record': True}]
+
+
+def test_brief_wording():
+    assert ap_date('2026-09-25') == 'Sept. 25, 2026' and ap_date('2026-05-01', year=False) == 'May 1'
+    assert moved(8, 'a week earlier') == 'up 8 from a week earlier'
+    assert moved(-1204, 'a year earlier') == 'down 1,204 from a year earlier'
+    assert moved(0, 'a week earlier') == 'unchanged from a week earlier'
+
+
+def test_brief_on_a_record_week_and_an_ordinary_one():
+    weeks = synthetic_weeks([100, 110, 105, 111, 112])
+    record = changes(weeks, [synthetic_facility([10, 12, 12, 13, 19])])
+    assert title(record) == f"Custody Ledger brief, {ap_date(weeks[-1]['date'])}: record 112"
+    assert flags(record)[0] == 'Record: 112 people, the second straight weekly record'
+    assert 'Lincoln County Jail: 19 state prisoners, up 6 from a week earlier, its highest count on record' in flags(record)
+    text = brief(record, {'source': 'https://example.test/report.pdf'})
+    assert text.startswith('# Custody Ledger brief')
+    assert 'It is the most in weekly records that begin in 1999 and the second record in as many weeks.' in text
+    assert '- Lincoln County Jail (Lincoln County): 19 state prisoners, up 6 from a week earlier' in text
+
+    ordinary = changes(synthetic_weeks([100, 110, 105]), [synthetic_facility([10, 12, 12])])
+    assert title(ordinary).endswith(': 105, down 5 from a week earlier')
+    assert not any(flag.startswith('Record') for flag in flags(ordinary))
+    assert 'The record is 110, set' in brief(ordinary, {'source': 'x'})
+    assert 'Lincoln County Jail' not in ' '.join(flags(ordinary))  # unchanged in a week: nothing to flag
 
 
 def test_year_before_picks_the_report_closest_to_52_weeks_back():

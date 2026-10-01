@@ -19,11 +19,12 @@ Working name: The Custody Ledger. A Wausau Pilot & Review tracker of Wisconsin's
 | `scraper/registry.py` | Every DOC row label -> facility id, name, type, county. Hand-built |
 | `scraper/snapshot.py` | Facility breakdown of any report (adult and juvenile), reconciled to DOC's totals |
 | `scraper/series.py` | One statewide row per report: headline, men/women, contract beds, juvenile, supervision |
-| `scraper/build.py` | `data/reports/*.json` -> `statewide.json`, `facilities.json`, `latest.json`, `changes.json`, `csv/` |
+| `scraper/build.py` | `data/reports/*.json` -> `statewide.json`, `facilities.json`, `latest.json`, `changes.json`, `brief.md`, `csv/` |
+| `scraper/brief.py` | `changes.json` -> `data/brief.md`: flags, a four-paragraph draft, close to home, what moved. Fixed rules, no generation |
 | `tests/` | Regression tests on one real PDF per format era, plus failure-mode tests |
 | `site/` | React/Vite page. `cpdata.mjs` copies `data/*.json` and `data/csv/` into `site/public/data/` (ignored by git) before dev and build |
 | `.github/workflows/deploy.yml` | Builds `site/` from committed data and publishes to GitHub Pages: on a push that touches `site/` or `data/`, and when called by `update.yml` after a weekly commit |
-| `.github/workflows/update.yml` | Mon, Wed, Sat: test, update, build, commit. Saturday is the usual pickup; the others catch late postings and corrections |
+| `.github/workflows/update.yml` | Mon, Wed, Sat: test, update, build, commit. Saturday is the usual pickup; the others catch late postings and corrections. When a new report is stored it opens a GitHub issue holding `brief.md` (that is how the brief reaches the newsroom) and calls `deploy.yml` |
 
 `data/reports/YYYY-MM-DD.json` is the stored truth (one per report, ~1,450 files). Everything else in `data/` is derived and rebuilt every run: `statewide.json` (one row per report, one per line), `facilities.json` (each facility's weekly population and capacity; arrays start at index `start` of `dates`), `latest.json`, `changes.json` (records, streaks, movers: the input for briefs and alerts) and `csv/`.
 
@@ -105,11 +106,15 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 
 ## Site
 
-- **One page, six sections**: the weekly line since 1999, close to home, women and men, contract beds, every facility (with each one's history), how it is compiled. Sections live in `site/src/*.jsx`; `TimeChart.jsx` draws every chart.
+- **One page, eight sections**: the weekly line since 1999, close to home, women and men, contract beds, juvenile facilities, probation and parole, every facility (with each one's history), how it is compiled. Sections live in `site/src/*.jsx`; `TimeChart.jsx` draws every chart.
 - **Design is the ledger family's** (`wpr-watch-ledger` is the model): cream `#f6f2e9`, teal `#3a867c`, Fraunces, Public Sans, JetBrains Mono for figures, fonts self-hosted through `@fontsource`. Light only, like its siblings.
 - **Chart marks use their own three colors** (`--chart-1` teal `#12917d`, `--chart-2` rust `#c2573a`, `--chart-3` violet `#6a63b3`): the brand teal is too gray to work as a data color. The three pass the dataviz skill's palette validator on `#fffdf8`. Capacity is always the neutral gray line.
 - **Copy is computed from the data** (lede, stat strip, headings with years, annotations), so nothing on the page goes stale when the record does. Dates are AP style, from `format.js`.
-- **Close to home** is Marathon County, the counties bordering it, and Oneida, Vilas, Forest and Price (`HOME_COUNTIES` in `CloseToHome.jsx`). That list is an editorial choice.
+- **Close to home** is Marathon County, the counties bordering it, and Oneida, Vilas, Forest and Price: `HOME_COUNTIES` in `scraper/build.py`, carried to the site and the brief in `changes.json`. That list is an editorial choice.
+- **Smoke test**: `site/smoke.mjs` (playwright-core driving the machine's own Chrome) loads the built site at desktop and phone widths and fails on a console error, a missing section, horizontal overflow or a facility link that does not open. `deploy.yml` runs it before publishing. It counts sections (`SECTIONS`), so update it when one is added.
+- **Facility group buttons are toggle buttons** (`aria-pressed`), not ARIA tabs: they have no tab keyboard behavior.
+- **Both workflows are pinned to `ubuntu-24.04`**; move them deliberately.
+- **The juvenile section's note on Lincoln Hills** (closure deadline of July 1, 2021; still operating January 2025; planned conversion to a men's prison) is from the Legislative Fiscal Bureau's Informational Paper 60, January 2025. Recheck it when that paper is reissued.
 - **Share card**: `site/og-card.py` (Pillow, fonts from `@fontsource`) draws `og-image.png` in the Watch Ledger's layout. Its row of marks is one per 500 people, rust for those beyond capacity, read from `data/latest.json`; so `deploy.yml` draws it on every deploy and the PNG is not committed.
 - **Facility table on phones** (560px and under): CSS turns each row into a block, name on top, figures beneath, with a fixed first column so every bar is on one scale. The table carries explicit ARIA roles because that CSS strips table semantics in some browsers.
 - **Deep links**: `#facility=<id>` opens that facility's history. The embed script forwards the article's hash into the frame.
@@ -119,13 +124,13 @@ The workflow uses `actions/checkout@v6` and `actions/setup-python@v6` (Node 24).
 
 ## Next
 
-Phase 0, the data model and a first version of the site are done. Still open: embed it on the news site, tell DOC about the female subtotal error and the capacity misprints.
+Phase 0, the data model, the site and the weekly brief are done. Still open: embed it on the news site, tell DOC about the female subtotal error and the capacity misprints.
 
 0. **Site leftovers.** Where indexable text lives (an iframe from github.io earns the news site no search credit); a county picker so other newsrooms can localize the close-to-home panel.
 
 1. **Registry leftovers.** City and coordinates for state facilities (needed for the map; take addresses from DOC's facility pages and geocode, don't type them from memory). Security-level statewide series if the front end wants one.
-3. **Local layer.** Marathon County residents in prison and admissions by type, from DOC's monthly Persons in Our Care data files (April 2020 on; columns not yet inspected). Staffing vacancies by facility from DOC's staffing dashboard. A records request for the Lincoln County jail contract.
+3. **Local layer.** Marathon County residents in prison and admissions by type, from DOC's monthly Persons in Our Care data files. Inspected Oct 1, 2026 (the August 2026 file): `https://doc.wi.gov/DataResearch/PIOCDF/PIOCDF_YYYY_MM.csv`, behind a click-through disclaimer (DOC does not certify accuracy; no redistribution terms), 77 months back to April 2020, semicolon-delimited UTF-8 with BOM, 8 MB, one row per person, 26 columns. The file named for a month is the snapshot of the last day of the month before (`RPT_DT`). Useful columns: `CONVICTION_COUNTY` (all 72), `ORIG_ADM_TYPE` (24 values; "No New Sentence" marks revocations), `SUPERVISING_LOC`, `CUSTODY_CLS`, `GENDER`, `RACE`, `AGE`, `ORIG_ADM_DATE`, `MRES_BEF_DATE`. **It carries names and DOC numbers: never commit a raw file; store and publish county-level counts only, and decide a small-number rule first.** July 31, 2026: 23,703 people in the file against 23,694 DAI on that day's DOC-302; 446 convicted in Marathon County, 177 of them (39.7%) admitted with no new sentence, against 29.1% statewide. Staffing vacancies by facility from DOC's staffing dashboard. A records request for the Lincoln County jail contract.
 4. **Jail layer.** Office of Detention Facilities annual report (county jail admissions, ADP, suicides).
-5. **Distribution.** Auto-drafted weekly brief for the newsletter, record and local-jail alerts, a county-localized embed other Wisconsin newsrooms can run with credit.
+5. **Distribution.** Reader analytics (the Packers tracker uses Plausible; this site has none), single-chart embeds for stories, a county-localized embed other Wisconsin newsrooms can run with credit.
 
 Grant leads checked Oct 1, 2026: Data-Driven Reporting Project (Medill; $25,000-$40,000 in the 2026 cohort; next cycle date unconfirmed), Lipman Center at Columbia ($30,000-$50,000; applications Feb 15 - Mar 29, 2027), Fund for Investigative Journalism (up to $10,000; next deadline Jan 29, 2027). An application needs at least one published story and ideally a partner newsroom.

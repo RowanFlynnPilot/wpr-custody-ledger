@@ -3,7 +3,8 @@
   statewide.json    one row per report: headline, men/women, contract beds, juvenile, supervision
   facilities.json   every facility's weekly population and capacity since 1999
   latest.json       the newest report: statewide row plus every facility
-  changes.json      what moved this week: records, streaks, year-over-year, biggest movers
+  changes.json      what moved this week: records, streaks, year-over-year, biggest movers, close to home
+  brief.md          the same, drafted as sentences for the newsroom (brief.py)
   csv/              the same series as spreadsheets
 
 Every report is reconciled at facility level (snapshot.py) before anything is written, and
@@ -13,15 +14,20 @@ the whole series is checked:
 """
 from datetime import date, timedelta
 
+from brief import brief
 from registry import facility
 from series import week
 from snapshot import merge
-from store import read_reports, write_csv, write_output, write_rows
+from store import read_reports, write_csv, write_output, write_rows, write_text
 
 # Largest real weekly move, 1999-2026, was 1.15% (Mar 2002); COVID drops peaked near 1.05%.
 # A bigger jump is far more likely a parse error than news. Verify against the PDF before raising this.
 MAX_WEEKLY_CHANGE = 0.03
 TOP = 5  # entries in each ranked list of changes.json
+# Close to home: Marathon County, the counties that border it, and the Northwoods counties to its north.
+# An editorial choice. The site's panel and the weekly brief both take it from changes.json.
+HOME_COUNTIES = ['Marathon', 'Lincoln', 'Langlade', 'Shawano', 'Portage', 'Wood', 'Clark', 'Taylor',
+                 'Oneida', 'Vilas', 'Forest', 'Price']
 
 
 def check_series(statewide: list[dict]) -> None:
@@ -88,18 +94,20 @@ def changes(statewide: list[dict], facilities: list[dict]) -> dict:
     era = [w for w in statewide if w['capacity_type'] == now['capacity_type']]
     most_crowded = max(era, key=lambda w: w['population'] / w['capacity'])
 
-    current, rows = len(statewide) - 1, []
+    current, on_report = len(statewide) - 1, []
     for f in facilities:
-        if f['type'] == 'juvenile' or f['start'] + len(f['population']) - 1 != current:
+        if f['start'] + len(f['population']) - 1 != current:
             continue
         at = lambda i: f['population'][i - f['start']] if i >= f['start'] else None  # noqa: E731
         capacity = f['capacity'][-1] if 'capacity' in f else None
-        rows.append({'id': f['id'], 'name': f['name'], 'type': f['type'], 'capacity': capacity,
-                     'population': at(current), 'week_change': at(current) - (at(current - 1) or 0),
-                     'year_change': at(current) - (at(year) or 0),
-                     'record': at(current) > 0 and at(current) == max(p or 0 for p in f['population'])})
+        on_report.append({'id': f['id'], 'name': f['name'], 'type': f['type'], 'county': f.get('county'),
+                          'capacity': capacity, 'population': at(current),
+                          'week_change': at(current) - (at(current - 1) or 0),
+                          'year_change': at(current) - (at(year) or 0),
+                          'record': at(current) > 0 and at(current) == max(p or 0 for p in f['population'])})
+    rows = [r for r in on_report if r['type'] != 'juvenile']
     with_capacity = [r for r in rows if r['capacity']]
-    brief = lambda r, *keys: {k: r[k] for k in ('id', 'name', 'population', *keys)}  # noqa: E731
+    short = lambda r, *keys: {k: r[k] for k in ('id', 'name', 'population', *keys)}  # noqa: E731
     jails = [r for r in rows if r['type'] == 'county_jail']
 
     return {
@@ -126,17 +134,20 @@ def changes(statewide: list[dict], facilities: list[dict]) -> dict:
         'facilities': {
             'over_capacity': sum(1 for r in with_capacity if r['population'] > r['capacity']),
             'with_capacity': len(with_capacity),
-            'most_crowded': [{**brief(r, 'capacity'), 'percent': percent(r['population'], r['capacity'])}
+            'most_crowded': [{**short(r, 'capacity'), 'percent': percent(r['population'], r['capacity'])}
                              for r in sorted(with_capacity, key=lambda r: -r['population'] / r['capacity'])[:TOP]],
-            'largest_gains': [brief(r, 'week_change') for r in sorted(rows, key=lambda r: -r['week_change'])[:TOP]
+            'largest_gains': [short(r, 'week_change') for r in sorted(rows, key=lambda r: -r['week_change'])[:TOP]
                               if r['week_change'] > 0],
-            'largest_drops': [brief(r, 'week_change') for r in sorted(rows, key=lambda r: r['week_change'])[:TOP]
+            'largest_drops': [short(r, 'week_change') for r in sorted(rows, key=lambda r: r['week_change'])[:TOP]
                               if r['week_change'] < 0],
-            'largest_gains_year': [brief(r, 'year_change')
+            'largest_gains_year': [short(r, 'year_change')
                                    for r in sorted(rows, key=lambda r: -r['year_change'])[:TOP]
                                    if r['year_change'] > 0],
-            'at_record': [brief(r) for r in rows if r['record']],
+            'at_record': [short(r) for r in rows if r['record']],
         },
+        'home_counties': HOME_COUNTIES,
+        # every facility in those counties on this report, juvenile included, largest first
+        'local': sorted((r for r in on_report if r['county'] in HOME_COUNTIES), key=lambda r: -r['population']),
     }
 
 
@@ -161,7 +172,9 @@ def main() -> None:
     write_rows('facilities.json', facilities, key='facilities', head={'dates': dates})
     write_output('latest.json', {**{'report_date' if k == 'date' else k: v for k, v in statewide[-1].items()},
                                  'source': latest['source'], 'facilities': adult[-1], 'juvenile': youth[-1]})
-    write_output('changes.json', changes(statewide, facilities))
+    moved_this_week = changes(statewide, facilities)
+    write_output('changes.json', moved_this_week)
+    write_text('brief.md', brief(moved_this_week, {'source': latest['source']}))
 
     write_csv('statewide.csv', list(statewide[0]), [list(w.values()) for w in statewide])
     write_csv('facility_names.csv', ['id', 'name', 'type', 'county', 'first', 'last'],

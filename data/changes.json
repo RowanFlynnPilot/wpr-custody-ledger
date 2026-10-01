@@ -222,5 +222,109 @@
     "population": 74
    }
   ]
- }
+ },
+ "home_counties": [
+  "Marathon",
+  "Lincoln",
+  "Langlade",
+  "Shawano",
+  "Portage",
+  "Wood",
+  "Clark",
+  "Taylor",
+  "Oneida",
+  "Vilas",
+  "Forest",
+  "Price"
+ ],
+ "local": [
+  {
+   "id": "oneida-county-jail",
+   "name": "Oneida County Jail",
+   "type": "county_jail",
+   "county": "Oneida",
+   "capacity": null,
+   "population": 120,
+   "week_change": 0,
+   "year_change": 10,
+   "record": false
+  },
+  {
+   "id": "mcnaughton",
+   "name": "McNaughton Correctional Center",
+   "type": "center",
+   "county": "Oneida",
+   "capacity": 55,
+   "population": 118,
+   "week_change": -1,
+   "year_change": 0,
+   "record": false
+  },
+  {
+   "id": "lincoln-county-jail",
+   "name": "Lincoln County Jail",
+   "type": "county_jail",
+   "county": "Lincoln",
+   "capacity": null,
+   "population": 74,
+   "week_change": 0,
+   "year_change": 47,
+   "record": true
+  },
+  {
+   "id": "lincoln-hills",
+   "name": "Lincoln Hills School",
+   "type": "juvenile",
+   "county": "Lincoln",
+   "capacity": 519,
+   "population": 63,
+   "week_change": 3,
+   "year_change": -9,
+   "record": false
+  },
+  {
+   "id": "vilas-county-jail",
+   "name": "Vilas County Jail",
+   "type": "county_jail",
+   "county": "Vilas",
+   "capacity": null,
+   "population": 27,
+   "week_change": 0,
+   "year_change": 2,
+   "record": false
+  },
+  {
+   "id": "copper-lake",
+   "name": "Copper Lake School",
+   "type": "juvenile",
+   "county": "Lincoln",
+   "capacity": 29,
+   "population": 4,
+   "week_change": 0,
+   "year_change": -2,
+   "record": false
+  },
+  {
+   "id": "forest-county-jail",
+   "name": "Forest County Jail",
+   "type": "county_jail",
+   "county": "Forest",
+   "capacity": null,
+   "population": 0,
+   "week_change": 0,
+   "year_change": 0,
+   "record": false
+  },
+  {
+   "id": "langlade-county-jail",
+   "name": "Langlade County Jail",
+   "type": "county_jail",
+   "county": "Langlade",
+   "capacity": null,
+   "population": 0,
+   "week_change": 0,
+   "year_change": 0,
+   "record": false
+  }
+ ]
 }

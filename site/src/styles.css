@@ -150,7 +150,7 @@ thead .n { font-family: var(--body); white-space: normal; }
   font: 500 0.86rem var(--body); color: var(--ink); background: var(--white); border: 1px solid var(--line);
   padding: 0.4rem 0.75rem; cursor: pointer;
 }
-.tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.tabs button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--white); }
 .tabs .count { font-family: var(--mono); font-size: 0.74rem; opacity: 0.75; margin-left: 0.2rem; }
 .bar-key { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--ink-soft); margin: 0 0 0.4rem; }
 .bar-key .key-box:not(:first-child) { margin-left: 0.8rem; }

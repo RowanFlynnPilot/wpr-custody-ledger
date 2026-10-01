@@ -34,8 +34,8 @@ export default function Methodology({ latest }) {
           </p>
           <h3>What it does not show</h3>
           <p>
-            People in county jails who are not state prisoners, and people on probation or
-            parole, are not in these counts. For another view of each adult prison since 2006,
+            People in county jails who are not state prisoners are not in these counts, and
+            neither are youth in county-run detention. For another view of each adult prison since 2006,
             see Wisconsin Watch&rsquo;s <a href="https://wisconsin-watch.github.io/wisconsin_prison_population_tracker/" target="_blank" rel="noreferrer">prison population tracker</a>.
           </p>
         </div>

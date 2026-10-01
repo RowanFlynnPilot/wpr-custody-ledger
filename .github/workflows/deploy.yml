@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # pinned: ubuntu-latest moves to a new image on GitHub's schedule, not ours
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -52,6 +52,9 @@ jobs:
             echo "Built CSS contains media-query range syntax; check build.cssTarget in vite.config.js" >&2
             exit 1
           fi
+      - name: Load the built site in a browser before publishing it
+        working-directory: site
+        run: npm run smoke
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist

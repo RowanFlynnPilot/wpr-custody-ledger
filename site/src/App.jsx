@@ -3,6 +3,8 @@ import Statewide from "./Statewide.jsx";
 import CloseToHome from "./CloseToHome.jsx";
 import WomenMen from "./WomenMen.jsx";
 import ContractBeds from "./ContractBeds.jsx";
+import Juvenile from "./Juvenile.jsx";
+import Supervision from "./Supervision.jsx";
 import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
 import { apDate, apMonthYear, num, ordinal, pct1, signed } from "./format.js";
@@ -91,9 +93,11 @@ export default function App() {
       </section>
 
       <Statewide statewide={statewide} changes={changes} />
-      <CloseToHome facilities={facilities} statewide={statewide} />
+      <CloseToHome facilities={facilities} statewide={statewide} changes={changes} />
       <WomenMen statewide={statewide} />
       <ContractBeds statewide={statewide} />
+      <Juvenile statewide={statewide} facilities={facilities} />
+      <Supervision statewide={statewide} />
       <Facilities facilities={facilities} latest={latest} changes={changes} />
       <Methodology latest={latest} />
 

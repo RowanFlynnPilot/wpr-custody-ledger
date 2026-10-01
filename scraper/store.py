@@ -33,6 +33,10 @@ def write_output(name: str, payload) -> None:
     (DATA_DIR / name).write_text(json.dumps(payload, indent=1), encoding='utf-8', newline='\n')
 
 
+def write_text(name: str, text: str) -> None:
+    (DATA_DIR / name).write_text(text, encoding='utf-8', newline='\n')
+
+
 def write_rows(name: str, rows: list, key: str | None = None, head: dict | None = None) -> None:
     """A JSON array with one element per line, so a weekly update shows up as a short diff.
 
