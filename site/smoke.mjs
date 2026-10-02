@@ -131,14 +131,27 @@ try {
   try {
     for (const [hash, selector, what] of [["#counties", "#counties", "the county section"], ["#facility=lincoln-hills", "tr.open", "the open facility"]]) {
       const shared = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce" });
+      const heard = [];
+      shared.on("pageerror", (e) => heard.push(`page error: ${e.message}`));
+      shared.on("console", (m) => { if (m.type() === "error") heard.push(`console error: ${m.text()}`); });
       await shared.goto(`http://127.0.0.1:${PORT + 1}/${hash}`);
       const inside = shared.frameLocator("#custody-ledger");
-      await inside.locator(selector).first().waitFor({ timeout: 15000 }).catch(() => {});
+      const found = await inside.locator(selector).first().waitFor({ timeout: 15000 }).then(() => true, () => false);
       await shared.waitForTimeout(2000);
       const at = await shared.evaluate(() => ({ y: window.scrollY, top: document.getElementById("custody-ledger").getBoundingClientRect().top + window.scrollY }));
-      const want = await inside.locator(selector).first().evaluate((el) => el.getBoundingClientRect().top + window.scrollY).catch(() => null);
-      check(want != null && Math.abs(at.y - (at.top + want - 16)) < 40,
-        `embed: an article link ending ${hash} scrolled to ${at.y}px, expected ${want == null ? `${what} to exist` : `about ${Math.round(at.top + want - 16)}px`}`);
+      const want = await inside.locator(selector).first().evaluate((el) => el.getBoundingClientRect().top + window.scrollY, null, { timeout: 5000 }).catch(() => null);
+      const ok = want != null && Math.abs(at.y - (at.top + want - 16)) < 40;
+      // What the frame held when the check failed: enough to tell a page fault from a slow runner.
+      const state = ok ? "" : await inside.locator("body").evaluate(() => JSON.stringify({
+        hash: window.location.hash,
+        open: [...document.querySelectorAll("tr.open .name")].map((e) => e.textContent),
+        expanded: [...document.querySelectorAll('.name[aria-expanded="true"]')].map((e) => e.textContent),
+        group: document.querySelector('.tabs button[aria-pressed="true"]')?.textContent,
+        row: document.getElementById("facility-lincoln-hills")?.className ?? "no such row",
+        failed: !!document.querySelector(".load-error"),
+      }), null, { timeout: 5000 }).catch((e) => `frame unreadable: ${e.message.split("\n")[0]}`);
+      check(ok, `embed: an article link ending ${hash} scrolled to ${at.y}px, expected ${want == null ? `${what} to exist` : `about ${Math.round(at.top + want - 16)}px`}` +
+        ` (seen at first: ${found}; frames: ${shared.frames().map((f) => f.url()).join(" , ")}; frame state: ${state}; ${heard.join(" | ") || "no errors"})`);
       await shared.close();
     }
   } finally {
