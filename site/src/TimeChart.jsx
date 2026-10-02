@@ -8,7 +8,7 @@ import { apDate, num, time, yearOf } from "./format.js";
 // series: [{ key, label, color, values, width?, legend?, endLabel? }]  values[i] may be null
 // wash:   { upper, lower, color }   fills between two series where both exist
 // marks:  [{ index, value, text, place?, wideOnly? }]  a dot on the data with a short label
-// vrules: [{ index, text, short? }]   hrules: [{ value, text }]
+// vrules: [{ index, text, short?, top? }]   hrules: [{ value, text }]   (top: label at the head of the rule, for a chart whose line runs along the floor there)
 // table:  a yearly table of the same figures under the chart; a caller with its own passes it as children
 
 const MARGIN = { top: 26, right: 62, bottom: 26, left: 46 };
@@ -163,7 +163,7 @@ export default function TimeChart({
           {vrules.map((r) => (
             <g key={r.text}>
               <line className="rule" x1={x(r.index)} x2={x(r.index)} y1={margin.top - 6} y2={margin.top + plotH} />
-              <text className="note" x={x(r.index) + 5} y={margin.top + plotH - 8}>{narrow && r.short ? r.short : r.text}</text>
+              <text className="note" x={x(r.index) + 5} y={r.top ? margin.top + 6 : margin.top + plotH - 8}>{narrow && r.short ? r.short : r.text}</text>
             </g>
           ))}
 
