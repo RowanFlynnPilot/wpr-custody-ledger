@@ -2,10 +2,13 @@
 // deploy.yml runs this between the build and the upload, so a broken page is never published.
 //     npm run build && npm run smoke
 // Uses the Chrome already on the machine (GitHub's runners have it); set SMOKE_CHANNEL=msedge to use Edge.
+// It then repeats the page checks in WebKit, Safari's engine, if Playwright's build of it is installed
+// (npx playwright-core install webkit). deploy.yml installs it and sets SMOKE_WEBKIT, which makes a
+// missing engine an error instead of a skip.
 import { readFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { preview } from "vite";
-import { chromium } from "playwright-core";
+import { chromium, devices, webkit } from "playwright-core";
 
 const PORT = 4173;
 const URL = `http://localhost:${PORT}/`;
@@ -13,90 +16,103 @@ const SECTIONS = 9; // h2 headings on the page; change it when a section is adde
 const failures = [];
 const check = (ok, message) => { if (!ok) failures.push(message); };
 
+// Every check on the page itself, for one browser at one size. `options` are Playwright's context options.
+const visit = async (browser, name, options) => {
+  const page = await browser.newPage(options);
+  // Each of the five data files should be asked for once. A preload that a browser does not hand to
+  // fetch() makes it twice: Safari's engine did exactly that, and only that engine showed it.
+  const asked = {};
+  page.on("request", (r) => { const file = r.url().match(/\/data\/(\w+)\.json/); if (file) asked[file[1]] = (asked[file[1]] || 0) + 1; });
+  page.on("pageerror", (e) => failures.push(`${name}: page error: ${e.message}`));
+  page.on("console", (m) => { if (m.type() === "error") failures.push(`${name}: console error: ${m.text()}`); });
+
+  await page.goto(URL, { waitUntil: "networkidle" });
+  await page.waitForSelector(".stat-num", { timeout: 15000 });
+  const firstLoad = { ...asked };
+  check(Object.keys(firstLoad).length === 5 && Object.values(firstLoad).every((n) => n === 1),
+    `${name}: data files were asked for ${JSON.stringify(firstLoad)}; each of the five should be asked for once`);
+  const seen = await page.evaluate(() => ({
+    failed: !!document.querySelector(".load-error"),
+    stats: [...document.querySelectorAll(".stat-num")].map((e) => e.textContent.trim()),
+    headings: document.querySelectorAll("h2").length,
+    lines: document.querySelectorAll(".chart svg path.line").length,
+    areas: document.querySelectorAll(".chart svg path.area").length,
+    local: document.querySelectorAll(".local tbody tr").length,
+    rows: document.querySelectorAll(".facilities .roster tbody tr").length,
+    jumps: document.querySelectorAll(".section-nav a").length,
+    meter: !!document.querySelector(".hero-bar"),
+    clipped: [...document.querySelectorAll(".chart-frame")].filter((frame) =>
+      [...frame.querySelectorAll("svg text")].some((t) => {
+        const box = t.getBoundingClientRect(), outer = frame.getBoundingClientRect();
+        return box.left < outer.left - 0.5 || box.right > outer.right + 0.5;
+      })).length,
+    overflow: document.documentElement.scrollWidth - window.innerWidth,
+    sideways: [...document.querySelectorAll(".table-wrap")].filter((e) => e.scrollWidth > e.clientWidth + 1).length,
+  }));
+  check(!seen.failed, `${name}: the page shows its load-error message`);
+  check(seen.stats.length === 4 && seen.stats.every((s) => /\d/.test(s)), `${name}: stat strip reads ${JSON.stringify(seen.stats)}`);
+  check(seen.headings === SECTIONS, `${name}: ${seen.headings} sections, expected ${SECTIONS}`);
+  check(seen.lines >= 7, `${name}: only ${seen.lines} chart lines drawn`);
+  check(seen.areas === 4, `${name}: ${seen.areas} stacked areas, expected 4`);
+  check(seen.local >= 1, `${name}: the close-to-home list is empty`);
+  check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
+  check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
+  check(seen.meter, `${name}: the system-wide capacity bar is missing`);
+  check(seen.sideways === 0, `${name}: ${seen.sideways} table(s) run off the side of the screen`);
+  check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
+
+  // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.
+  await page.click(".facilities > .more");
+  const allRows = await page.locator(".facilities .roster tbody tr").count();
+  check(allRows >= 30, `${name}: only ${allRows} facility rows after "Show all"`);
+  await page.fill(".find input", "lincoln");
+  const found = await page.locator(".facilities .roster .name").allTextContents();
+  check(found.includes("Lincoln County Jail") && found.includes("Lincoln Hills School"),
+    `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
+  check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
+
+  // On a phone each row is a small grid: in every group, nothing may sit on top of a facility's name.
+  for (const tab of await page.locator(".tabs button").all()) {
+    await tab.click();
+    const more = page.locator(".facilities > .more");
+    if (await more.count()) await more.click();
+    const collisions = await page.evaluate(() =>
+      [...document.querySelectorAll(".facilities .roster tbody tr:not(.detail)")].filter((tr) => {
+        const a = tr.querySelector(".name").getBoundingClientRect(), b = tr.querySelector("td.change").getBoundingClientRect();
+        const slack = 2; // the name's tap padding may touch the line below it; two pixels is not a collision
+        return a.left < b.right - slack && b.left < a.right - slack && a.top < b.bottom - slack && b.top < a.bottom - slack;
+      }).map((tr) => tr.querySelector(".name").textContent));
+    check(collisions.length === 0, `${name}: the year's change sits on top of the name for ${JSON.stringify(collisions)}`);
+  }
+
+  // A shared link opens its facility, on the right tab, with its history drawn.
+  await page.goto(`${URL}#facility=lincoln-hills`, { waitUntil: "networkidle" });
+  await page.reload({ waitUntil: "networkidle" });
+  await page.waitForSelector("tr.detail .chart svg path.line", { timeout: 15000 }).catch(() => {});
+  const opened = await page.evaluate(() => ({
+    name: document.querySelector("tr.open .name")?.textContent,
+    chart: !!document.querySelector("tr.detail .chart svg path.line"),
+    overflow: document.documentElement.scrollWidth - window.innerWidth,
+  }));
+  check(opened.name === "Lincoln Hills School" && opened.chart, `${name}: #facility=lincoln-hills opened ${JSON.stringify(opened)}`);
+  check(opened.overflow <= 1, `${name}: with a facility open the page is ${opened.overflow}px wider than the screen`);
+
+  // A link to a section lands on it, though the section does not exist until the data arrives.
+  await page.goto(`${URL}#counties`, { waitUntil: "networkidle" });
+  await page.reload({ waitUntil: "networkidle" });
+  await page.waitForSelector("#counties", { timeout: 15000 });
+  await page.waitForTimeout(1500);
+  const landed = await page.evaluate(() => Math.round(document.getElementById("counties").getBoundingClientRect().top));
+  check(Math.abs(landed) < 80, `${name}: #counties left that section ${landed}px from the top of the screen`);
+  await page.close();
+};
+
 const server = await preview({ preview: { port: PORT, strictPort: true } });
 const browser = await chromium.launch({ channel: process.env.SMOKE_CHANNEL || "chrome" });
+let safariChecked = false;
 try {
   for (const [name, viewport] of [["desktop", { width: 1200, height: 900 }], ["phone", { width: 375, height: 812 }], ["small phone", { width: 320, height: 640 }]]) {
-    const page = await browser.newPage({ viewport });
-    page.on("pageerror", (e) => failures.push(`${name}: page error: ${e.message}`));
-    page.on("console", (m) => { if (m.type() === "error") failures.push(`${name}: console error: ${m.text()}`); });
-
-    await page.goto(URL, { waitUntil: "networkidle" });
-    await page.waitForSelector(".stat-num", { timeout: 15000 });
-    const seen = await page.evaluate(() => ({
-      failed: !!document.querySelector(".load-error"),
-      stats: [...document.querySelectorAll(".stat-num")].map((e) => e.textContent.trim()),
-      headings: document.querySelectorAll("h2").length,
-      lines: document.querySelectorAll(".chart svg path.line").length,
-      areas: document.querySelectorAll(".chart svg path.area").length,
-      local: document.querySelectorAll(".local tbody tr").length,
-      rows: document.querySelectorAll(".facilities .roster tbody tr").length,
-      jumps: document.querySelectorAll(".section-nav a").length,
-      meter: !!document.querySelector(".hero-bar"),
-      clipped: [...document.querySelectorAll(".chart-frame")].filter((frame) =>
-        [...frame.querySelectorAll("svg text")].some((t) => {
-          const box = t.getBoundingClientRect(), outer = frame.getBoundingClientRect();
-          return box.left < outer.left - 0.5 || box.right > outer.right + 0.5;
-        })).length,
-      overflow: document.documentElement.scrollWidth - window.innerWidth,
-      sideways: [...document.querySelectorAll(".table-wrap")].filter((e) => e.scrollWidth > e.clientWidth + 1).length,
-    }));
-    check(!seen.failed, `${name}: the page shows its load-error message`);
-    check(seen.stats.length === 4 && seen.stats.every((s) => /\d/.test(s)), `${name}: stat strip reads ${JSON.stringify(seen.stats)}`);
-    check(seen.headings === SECTIONS, `${name}: ${seen.headings} sections, expected ${SECTIONS}`);
-    check(seen.lines >= 7, `${name}: only ${seen.lines} chart lines drawn`);
-    check(seen.areas === 4, `${name}: ${seen.areas} stacked areas, expected 4`);
-    check(seen.local >= 1, `${name}: the close-to-home list is empty`);
-    check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
-    check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
-    check(seen.meter, `${name}: the system-wide capacity bar is missing`);
-    check(seen.sideways === 0, `${name}: ${seen.sideways} table(s) run off the side of the screen`);
-    check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
-
-    // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.
-    await page.click(".facilities > .more");
-    const allRows = await page.locator(".facilities .roster tbody tr").count();
-    check(allRows >= 30, `${name}: only ${allRows} facility rows after "Show all"`);
-    await page.fill(".find input", "lincoln");
-    const found = await page.locator(".facilities .roster .name").allTextContents();
-    check(found.includes("Lincoln County Jail") && found.includes("Lincoln Hills School"),
-      `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
-    check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
-
-    // On a phone each row is a small grid: in every group, nothing may sit on top of a facility's name.
-    for (const tab of await page.locator(".tabs button").all()) {
-      await tab.click();
-      const more = page.locator(".facilities > .more");
-      if (await more.count()) await more.click();
-      const collisions = await page.evaluate(() =>
-        [...document.querySelectorAll(".facilities .roster tbody tr:not(.detail)")].filter((tr) => {
-          const a = tr.querySelector(".name").getBoundingClientRect(), b = tr.querySelector("td.change").getBoundingClientRect();
-          const slack = 2; // the name's tap padding may touch the line below it; two pixels is not a collision
-          return a.left < b.right - slack && b.left < a.right - slack && a.top < b.bottom - slack && b.top < a.bottom - slack;
-        }).map((tr) => tr.querySelector(".name").textContent));
-      check(collisions.length === 0, `${name}: the year's change sits on top of the name for ${JSON.stringify(collisions)}`);
-    }
-
-    // A shared link opens its facility, on the right tab, with its history drawn.
-    await page.goto(`${URL}#facility=lincoln-hills`, { waitUntil: "networkidle" });
-    await page.reload({ waitUntil: "networkidle" });
-    await page.waitForSelector("tr.detail .chart svg path.line", { timeout: 15000 }).catch(() => {});
-    const opened = await page.evaluate(() => ({
-      name: document.querySelector("tr.open .name")?.textContent,
-      chart: !!document.querySelector("tr.detail .chart svg path.line"),
-      overflow: document.documentElement.scrollWidth - window.innerWidth,
-    }));
-    check(opened.name === "Lincoln Hills School" && opened.chart, `${name}: #facility=lincoln-hills opened ${JSON.stringify(opened)}`);
-    check(opened.overflow <= 1, `${name}: with a facility open the page is ${opened.overflow}px wider than the screen`);
-
-    // A link to a section lands on it, though the section does not exist until the data arrives.
-    await page.goto(`${URL}#counties`, { waitUntil: "networkidle" });
-    await page.reload({ waitUntil: "networkidle" });
-    await page.waitForSelector("#counties", { timeout: 15000 });
-    await page.waitForTimeout(1500);
-    const landed = await page.evaluate(() => Math.round(document.getElementById("counties").getBoundingClientRect().top));
-    check(Math.abs(landed) < 80, `${name}: #counties left that section ${landed}px from the top of the screen`);
-    await page.close();
+    await visit(browser, name, { viewport });
   }
 
   // The flag, the name and the dek are written into index.html so they paint before the script
@@ -184,6 +200,23 @@ try {
   } finally {
     await new Promise((done) => article.close(done));
   }
+
+  // The same page checks in Safari's engine, at desktop size and as an iPhone.
+  const safari = await webkit.launch().catch((e) => {
+    if (process.env.SMOKE_WEBKIT) throw e;
+    console.log(`${process.env.GITHUB_ACTIONS ? "::warning title=Safari's engine was not checked::" : ""}` +
+      "WebKit is not installed here, so the page was checked in Chrome only (npx playwright-core install webkit).");
+    return null;
+  });
+  if (safari) {
+    try {
+      await visit(safari, "Safari desktop", { viewport: { width: 1200, height: 900 } });
+      await visit(safari, "Safari iPhone", devices["iPhone 13"]);
+      safariChecked = true;
+    } finally {
+      await safari.close();
+    }
+  }
 } finally {
   await browser.close();
   await new Promise((done) => server.httpServer.close(done));
@@ -193,4 +226,5 @@ if (failures.length) {
   console.error(`Smoke test failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);
 }
-console.log("Smoke test passed: three widths render, facility and section links land, the embed resizes, scrolls and follows the article's link.");
+console.log(`Smoke test passed in ${safariChecked ? "Chrome and Safari's engine" : "Chrome"}: every width renders, facility and section links land, ` +
+  "the embed resizes, scrolls and follows the article's link.");

@@ -52,8 +52,18 @@ jobs:
             echo "Built CSS contains media-query range syntax; check build.cssTarget in vite.config.js" >&2
             exit 1
           fi
+      # Safari's engine, for the browser check below. Chrome is already on the runner; this is a download.
+      # If the download fails, the deploy still goes ahead on Chrome alone, with a warning: an outage at
+      # Playwright's servers should not hold back a week's data. A failed check in the engine does stop it.
+      - name: Install Safari's engine for the browser check
+        id: webkit
+        continue-on-error: true
+        working-directory: site
+        run: npx playwright-core install --with-deps webkit
       - name: Load the built site in a browser before publishing it
         working-directory: site
+        env:
+          SMOKE_WEBKIT: ${{ steps.webkit.outcome == 'success' && '1' || '' }}
         run: npm run smoke
       - uses: actions/upload-pages-artifact@v5
         with:
