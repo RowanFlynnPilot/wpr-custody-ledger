@@ -14,7 +14,8 @@
   --display: "Fraunces", Georgia, "Times New Roman", serif;
   --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
-  --measure: 44rem;       /* every block of running text ends on this line */
+  --measure: 44rem;       /* headlines and the lede end on this line */
+  --text: 68ch;           /* running text: about 68 characters a line at its own size */
   /* Chart marks. The brand teal is too gray to hold its own as a data color, so marks use a
      more saturated teal beside rust and violet; the three pass the dataviz palette checks
      (lightness, chroma, color-blind separation, contrast) on --white. */
@@ -28,6 +29,8 @@
 
 * { box-sizing: border-box; }
 ::selection { background: var(--teal-tint); color: var(--ink); }
+html { scrollbar-color: var(--line-strong) var(--cream); }
+p { text-wrap: pretty; }
 
 body {
   margin: 0;
@@ -57,8 +60,8 @@ section:focus { outline: none; }
 h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 4vw, 2rem); line-height: 1.15; letter-spacing: -0.005em; max-width: var(--measure); margin: 0 0 0.5rem; text-wrap: balance; }
 h3 { font-family: var(--body); font-weight: 700; font-size: 0.95rem; margin: 1.1rem 0 0.25rem; }
 section { margin-bottom: 3.25rem; }
-.section-dek { max-width: var(--measure); margin: 0 0 1.1rem; }
-.chart-note { max-width: var(--measure); font-size: 0.84rem; color: var(--ink-soft); margin: 0.6rem 0 0; }
+.section-dek { max-width: var(--text); margin: 0 0 1.1rem; }
+.chart-note { max-width: var(--text); font-size: 0.84rem; color: var(--ink-soft); margin: 0.6rem 0 0; }
 /* The family's double rule, here between the page's movements: now, near you, the long view, the method. */
 .rule-double { height: 5px; border: 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 0 0 2.5rem; }
 
@@ -82,7 +85,7 @@ section { margin-bottom: 3.25rem; }
   font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1.02;
   letter-spacing: -0.01em; margin: 0 0 0.8rem;
 }
-.dek { max-width: var(--measure); font-size: 1.08rem; margin: 0 0 0.75rem; }
+.dek { max-width: var(--text); font-size: 1.08rem; margin: 0 0 0.75rem; }
 .updated-late { font-size: 0.86rem; color: var(--rust-text); margin: 0.5rem 0 0; }
 
 .lede { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.5rem); line-height: 1.32; max-width: var(--measure); margin: 0 0 1.4rem; }
@@ -93,7 +96,7 @@ section { margin-bottom: 3.25rem; }
 .hero-meter { margin: 0 0 2rem; }
 .hero-bar { display: flex; gap: 2px; height: 22px; }
 .hero-in { background: var(--chart-1); border-radius: 4px 0 0 4px; }
-.hero-over { background: var(--chart-2); border-radius: 0 4px 4px 0; }
+.hero-over { background: var(--chart-2); border-radius: 0 4px 4px 0; transform-origin: left center; }
 .hero-key { display: flex; justify-content: space-between; gap: 0.3rem 1.5rem; flex-wrap: wrap; margin: 0.45rem 0 0; font-size: 0.9rem; }
 .hero-key strong { font-family: var(--mono); font-size: 1.05rem; letter-spacing: -0.01em; }
 .hero-key span:last-child { text-align: right; margin-left: auto; }
@@ -108,6 +111,7 @@ section { margin-bottom: 3.25rem; }
   font-family: var(--mono); font-weight: 700; font-size: 2.05rem; line-height: 1.05; letter-spacing: -0.02em;
   color: var(--teal-deep); margin-bottom: 0.35rem;
 }
+.stat-of { font-family: var(--body); font-weight: 500; font-size: 1rem; letter-spacing: 0; color: var(--ink-soft); }
 .stat-label { font-size: 0.88rem; font-weight: 500; line-height: 1.35; }
 .stat-sub { font-size: 0.8rem; color: var(--ink-soft); margin-top: auto; padding-top: 0.6rem; }
 
@@ -160,20 +164,14 @@ thead .n { font-family: var(--body); white-space: normal; }
 .table-view caption { padding-left: 0.6rem; }
 .table-wrap { overflow-x: auto; }
 
-/* close to home */
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.9rem; }
-.card { background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--teal-deep); padding: 0.9rem 1rem 0.8rem; }
-.card h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; margin: 0; }
-.card-where { font-size: 0.8rem; color: var(--ink-soft); margin: 0.1rem 0 0.55rem; }
-.card-figure { margin: 0 0 0.3rem; font-size: 0.9rem; }
-.card-num { font-family: var(--mono); font-weight: 700; font-size: 1.7rem; letter-spacing: -0.02em; color: var(--teal-deep); margin-right: 0.15rem; }
-.card-line { margin: 0; font-size: 0.86rem; }
-.card .spark { margin-top: 0.6rem; max-width: 100%; }
+/* close to home: the facility list's own rows, narrowed to the home counties */
 .spark { display: block; }
+.local a.name { display: inline-block; }
 
 /* every facility */
 .find { display: block; max-width: 24rem; margin: 0 0 0.9rem; font-size: 0.86rem; font-weight: 500; }
 .find input {
+  caret-color: var(--teal-deep);
   display: block; width: 100%; min-height: 44px; margin-top: 0.3rem; padding: 0.55rem 0.7rem;
   font: 400 1rem var(--body); color: var(--ink); background: var(--white);
   border: 1px solid var(--line-strong); border-radius: 0; accent-color: var(--teal-deep);
@@ -195,13 +193,19 @@ thead .n { font-family: var(--body); white-space: normal; }
 .sort { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0; padding: 0.2rem 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .sort:hover { color: var(--ink); }
 th[aria-sort] .sort { color: var(--ink); }
-th[aria-sort] .sort::after { content: " ▾"; }
-th[aria-sort="ascending"] .sort::after { content: " ▴"; }
+/* The sort mark is drawn, not typed: a small triangle pointing the way the column runs. */
+th[aria-sort] .sort::after {
+  content: ""; display: inline-block; margin-left: 0.4em; vertical-align: 0.12em;
+  border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor;
+}
+th[aria-sort="ascending"] .sort::after { border-top: 0; border-bottom: 5px solid currentColor; }
 .name { font: 600 0.95rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.15rem 0; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .name:hover { text-decoration-color: currentColor; }
 .where { display: block; font-size: 0.78rem; font-weight: 400; color: var(--ink-soft); }
 .meter-cell { min-width: 11rem; white-space: nowrap; }
-.meter { display: inline-flex; gap: 2px; width: calc(100% - 4rem); height: 8px; vertical-align: middle; }
+.meter { position: relative; display: inline-flex; gap: 2px; width: calc(100% - 4rem); height: 8px; vertical-align: middle; }
+.meter-mark { position: absolute; top: -4px; bottom: -4px; width: 1px; margin-left: -1px; background: var(--ink); }
+.key-mark { display: inline-block; width: 1px; height: 14px; background: var(--ink); margin-left: 0.8rem; }
 .meter-in { background: var(--chart-1); border-radius: 0; }
 .meter-over { background: var(--chart-2); border-radius: 0 4px 4px 0; }
 .meter-in:last-child { border-radius: 0 4px 4px 0; }
@@ -233,8 +237,19 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .colophon { background: #fff; border-top: 1px solid var(--ink); border-bottom: 4px solid var(--ink); padding: 1.1rem 1.25rem 1.2rem; }
 .colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: 980px; margin: 0 auto; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
 .colophon-seal { display: block; width: 56px; height: 56px; }
+.colophon-inner > div { flex: 1 1 0; min-width: 0; }
 .colophon p { margin: 0 0 0.3rem; max-width: var(--measure); }
 .colophon p:last-child { margin: 0; color: var(--ink); }
+.to-top { margin-left: auto; white-space: nowrap; padding: 0.2rem 0; }
+
+/* the long view: two shorter stories share a row, their headlines, text, charts and notes aligned */
+.pair section { margin-bottom: 3.25rem; }
+@media (min-width: 900px) {
+  .pair { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto auto; column-gap: 2rem; }
+  .pair section { display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start; min-width: 0; }
+  .pair h2 { font-size: 1.5rem; }
+  .pair .section-dek { margin-bottom: 1.1rem; }
+}
 
 @media (max-width: 760px) {
   .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -258,6 +273,9 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   .tabs button { min-height: 44px; }
   .table-view summary { padding: 0.7rem 0; }
   .colophon { padding: 1rem 0.9rem 1.1rem; }
+  .colophon-inner { flex-wrap: wrap; }
+  .to-top { flex-basis: 100%; margin-left: 72px; padding: 0.6rem 0; }
+  .downloads span { display: block; margin: -0.4rem 0 0.55rem; }
 }
 /* The facility table on a phone: the header row becomes a line of sort buttons, and each
    facility is a block with its name on top and its figures on one line beneath. */
@@ -265,6 +283,9 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   .roster, .roster thead, .roster tbody, .roster tr, .roster th, .roster td { display: block; }
   .roster thead tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1rem; padding: 0.3rem 0.7rem; border-bottom: 2px solid var(--ink); }
   .roster thead tr::before { content: "Sort by"; font-size: 0.75rem; color: var(--ink-soft); }
+  /* The local list has nothing to sort: its headings stay for screen readers only, and each figure names its unit. */
+  .local thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .local tbody tr { grid-template-columns: 9.5rem minmax(0, 1fr); }
   .roster thead th { border: 0; padding: 0; }
   .roster thead .wide { display: none; }
   .roster .sort { padding: 0.7rem 0; }
@@ -285,5 +306,8 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   .roster tr.open { border-bottom: 0; background: var(--tint); }
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
+  .hero-over { animation: beyond 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+  @keyframes beyond { from { transform: scaleX(0); } }
   .name, .sort, .tabs button, a, .more { transition: color 0.12s ease-out, background-color 0.12s ease-out, text-decoration-color 0.12s ease-out; }
 }

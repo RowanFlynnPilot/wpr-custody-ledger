@@ -8,7 +8,7 @@ import Juvenile from "./Juvenile.jsx";
 import Supervision from "./Supervision.jsx";
 import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
-import SectionNav, { SkipLink } from "./SectionNav.jsx";
+import SectionNav, { SkipLink, jump } from "./SectionNav.jsx";
 import { apDate, num, ordinal, pct1, signed } from "./format.js";
 import badge from "./assets/wpr-typewriter-badge.png";
 import wordmark from "./assets/wpr-wordmark.png";
@@ -21,7 +21,7 @@ const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more t
 // The newsroom's flag: seal and wordmark, tagline, dateline. The tool's own name sits below it.
 function Flag({ reportDate }) {
   return (
-    <div className="flag">
+    <div className="flag" id="top" tabIndex={-1}>
       <a className="flag-lockup" href={HOME} target="_blank" rel="noreferrer">
         <img className="flag-seal" src={badge} alt="" width="68" height="68" />
         <img className="flag-wordmark" src={wordmark} alt="Wausau Pilot & Review" width="640" height="82" />
@@ -54,7 +54,12 @@ export default function App() {
       <>
         <Flag />
         {error
-          ? <p className="load-error" role="alert">The Custody Ledger could not load its data. Refresh the page to try again.</p>
+          ? (
+            <p className="load-error" role="alert">
+              The Custody Ledger could not load its data.{" "}
+              <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
+            </p>
+          )
           : <p className="loading" role="status">Loading the ledger…</p>}
       </>
     );
@@ -124,7 +129,7 @@ export default function App() {
           <span className="stat-sub">{num(women.value)} women{women.record && ", the most on record"}</span>
         </div>
         <div className="stat">
-          <span className="stat-num">{changes.facilities.over_capacity} of {changes.facilities.with_capacity}</span>
+          <span className="stat-num">{changes.facilities.over_capacity}<span className="stat-of"> of {changes.facilities.with_capacity}</span></span>
           <span className="stat-label">prisons and centers hold more people than they were designed for</span>
           <span className="stat-sub">{crowded.name}: {pct1(crowded.percent)}</span>
         </div>
@@ -152,8 +157,11 @@ export default function App() {
       <hr className="rule-double" />
       <WomenMen statewide={statewide} />
       <ContractBeds statewide={statewide} />
-      <Juvenile statewide={statewide} facilities={facilities} />
-      <Supervision statewide={statewide} />
+      {/* Two shorter stories side by side where there is room; one under the other on a phone. */}
+      <div className="pair">
+        <Juvenile statewide={statewide} facilities={facilities} />
+        <Supervision statewide={statewide} />
+      </div>
 
       <hr className="rule-double" />
       <Methodology latest={latest} />
@@ -175,6 +183,7 @@ export default function App() {
             Questions or corrections: <a href={`mailto:${CONTACT}`}>{CONTACT}</a> · Wausau Pilot &amp; Review · 715-301-5539
           </p>
         </div>
+        <a className="to-top" href="#top" onClick={jump("top")}>Back to top</a>
       </div>
     </footer>
     </>

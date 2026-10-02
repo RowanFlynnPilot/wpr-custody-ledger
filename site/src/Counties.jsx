@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import { Sparkline } from "./TimeChart.jsx";
 import { apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
+const share = (r) => (r.noNew == null ? null : pct(r.noNew, r.people));
+// What each column sorts on. Numbers run largest first, names A to Z; a second click reverses.
+const COLUMNS = {
+  county: { text: "County of conviction", value: (r) => r.county },
+  people: { text: "In state prison", value: (r) => r.people },
+  yearChange: { text: "In a year", value: (r) => r.yearChange },
+  noNew: { text: "No new sentence", value: (r) => r.noNew },
+  share: { text: "Share of total", value: share },
+};
 
 // People in state prison by the county that convicted them, from DOC's monthly file. The
 // pipeline withholds any count under `min_cell` before it reaches this page; null means withheld.
 export default function Counties({ counties, home }) {
   const [all, setAll] = useState(false);
+  const [sort, setSort] = useState({ key: "people", reversed: false });
   const last = counties.months.length - 1;
   const asOf = counties.months[last];
   // The same month a year earlier, found by date: a month DOC never posted leaves the series uneven.
@@ -18,12 +28,20 @@ export default function Counties({ counties, home }) {
     noNew: c.no_new_sentence[last],
     series: c.people,
   });
-  const share = (r) => (r.noNew == null ? null : pct(r.noNew, r.people));
   const state = now({ county: "Wisconsin", people: counties.people, no_new_sentence: counties.no_new_sentence });
   const first = now(counties.counties.find((c) => c.county === home[0]));
+
+  // Withheld figures sort to the bottom whichever way the column runs.
+  const value = COLUMNS[sort.key].value;
+  const natural = (x, y) => (typeof x === "string" ? x.localeCompare(y) : y - x);
   const rows = counties.counties.map(now)
     .filter((r) => all || home.includes(r.county))
-    .sort((a, b) => (b.people ?? -1) - (a.people ?? -1));
+    .sort((a, b) => {
+      const x = value(a), y = value(b);
+      if (x == null || y == null) return (x == null) - (y == null);
+      return sort.reversed ? -natural(x, y) : natural(x, y);
+    });
+
   // A withheld total is under the floor. A withheld split means one of its halves is, without saying which.
   const under = <span className="withheld">under {counties.min_cell}</span>;
   const withheld = <span className="withheld">withheld</span>;
@@ -33,6 +51,18 @@ export default function Counties({ counties, home }) {
       {all ? "Show only Marathon County and its neighbors" : "Show all 72 counties"}
     </button>
   );
+  const heading = (key) => {
+    const on = sort.key === key;
+    const ascending = (key === "county") !== sort.reversed;
+    return (
+      <th key={key} scope="col" className={key === "county" ? undefined : "n"}
+        aria-sort={on ? (ascending ? "ascending" : "descending") : undefined}>
+        <button type="button" className="sort" onClick={() => setSort({ key, reversed: on && !sort.reversed })}>
+          {COLUMNS[key].text}
+        </button>
+      </th>
+    );
+  };
 
   const line = (r, footer) => (
     <tr key={r.county} className={!footer && all && home.includes(r.county) ? "home" : undefined}>
@@ -61,11 +91,7 @@ export default function Counties({ counties, home }) {
         <table className="county-table">
           <thead>
             <tr>
-              <th scope="col">County of conviction</th>
-              <th scope="col" className="n">In state prison</th>
-              <th scope="col" className="n">In a year</th>
-              <th scope="col" className="n">No new sentence</th>
-              <th scope="col" className="n">Share of total</th>
+              {Object.keys(COLUMNS).map(heading)}
               <th scope="col" className="wide">Since {apMonthYear(counties.months[0])}</th>
             </tr>
           </thead>

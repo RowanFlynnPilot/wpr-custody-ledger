@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
+import { scrollToElement } from "./SectionNav.jsx";
 import { TYPE_LABEL, apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
 const GROUPS = [
@@ -71,7 +72,7 @@ export default function Facilities({ facilities, latest }) {
       setGroup(groupOf(id));
       setQuery("");
       setAll(true);
-      setTimeout(() => document.getElementById(`facility-${id}`)?.scrollIntoView({ block: "start" }), 50);
+      setTimeout(() => scrollToElement(document.getElementById(`facility-${id}`)), 50);
     };
     if (readHash()) show();
     window.addEventListener("hashchange", show);
@@ -123,6 +124,7 @@ export default function Facilities({ facilities, latest }) {
         <p className="bar-key">
           <span className="key-box" style={{ background: "var(--chart-1)" }} /> up to capacity
           <span className="key-box" style={{ background: "var(--chart-2)" }} /> beyond it
+          <span className="key-mark" /> capacity
         </p>
       )}
       {listed.length > 0 && (
@@ -163,6 +165,7 @@ export default function Facilities({ facilities, latest }) {
                           <span className="meter" aria-hidden="true">
                             <span className="meter-in" style={{ width: `${(Math.min(r.percent, 100) / widest) * 100}%` }} />
                             {r.percent > 100 && <span className="meter-over" style={{ width: `${((r.percent - 100) / widest) * 100}%` }} />}
+                            <span className="meter-mark" style={{ left: `${(100 / widest) * 100}%` }} />
                           </span>
                           <span className="meter-num">{pct1(r.percent)}</span>
                         </>

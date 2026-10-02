@@ -2,6 +2,7 @@
 // deploy.yml runs this between the build and the upload, so a broken page is never published.
 //     npm run build && npm run smoke
 // Uses the Chrome already on the machine (GitHub's runners have it); set SMOKE_CHANNEL=msedge to use Edge.
+import { readFileSync } from "node:fs";
 import { preview } from "vite";
 import { chromium } from "playwright-core";
 
@@ -27,8 +28,8 @@ try {
       headings: document.querySelectorAll("h2").length,
       lines: document.querySelectorAll(".chart svg path.line").length,
       areas: document.querySelectorAll(".chart svg path.area").length,
-      cards: document.querySelectorAll(".card").length,
-      rows: document.querySelectorAll(".roster tbody tr").length,
+      local: document.querySelectorAll(".local tbody tr").length,
+      rows: document.querySelectorAll(".facilities .roster tbody tr").length,
       jumps: document.querySelectorAll(".section-nav a").length,
       meter: !!document.querySelector(".hero-bar"),
       clipped: [...document.querySelectorAll(".chart-frame")].filter((frame) =>
@@ -43,7 +44,7 @@ try {
     check(seen.headings === SECTIONS, `${name}: ${seen.headings} sections, expected ${SECTIONS}`);
     check(seen.lines >= 7, `${name}: only ${seen.lines} chart lines drawn`);
     check(seen.areas === 4, `${name}: ${seen.areas} stacked areas, expected 4`);
-    check(seen.cards >= 1, `${name}: no close-to-home cards`);
+    check(seen.local >= 1, `${name}: the close-to-home list is empty`);
     check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
     check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
     check(seen.meter, `${name}: the system-wide capacity bar is missing`);
@@ -51,10 +52,10 @@ try {
 
     // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.
     await page.click(".facilities > .more");
-    const allRows = await page.locator(".roster tbody tr").count();
+    const allRows = await page.locator(".facilities .roster tbody tr").count();
     check(allRows >= 30, `${name}: only ${allRows} facility rows after "Show all"`);
     await page.fill(".find input", "lincoln");
-    const found = await page.locator(".roster .name").allTextContents();
+    const found = await page.locator(".facilities .roster .name").allTextContents();
     check(found.includes("Lincoln County Jail") && found.includes("Lincoln Hills School"),
       `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
     check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
@@ -72,6 +73,29 @@ try {
     check(opened.overflow <= 1, `${name}: with a facility open the page is ${opened.overflow}px wider than the screen`);
     await page.close();
   }
+
+  // The embed code as shipped in public/embed.txt, in a stand-in article: the frame must grow to the
+  // tool's full height, and a jump link inside it must scroll the article to the right place.
+  const optionB = readFileSync("public/embed.txt", "utf8").split("OPTION B")[1].split("OPTION C")[0];
+  const snippet = optionB.slice(optionB.indexOf("<iframe"), optionB.lastIndexOf("</script>") + 9)
+    .replaceAll("https://rowanflynnpilot.github.io/wpr-custody-ledger/", URL).replace('loading="lazy"', "");
+  const host = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce" });
+  await host.setContent(`<!doctype html><body style="margin:0"><div style="height:600px">An article.</div>${snippet}<div style="height:600px"></div></body>`);
+  const tool = host.frameLocator("#custody-ledger");
+  await tool.locator(".stat-num").first().waitFor({ timeout: 15000 });
+  await host.waitForTimeout(1800);
+  const frame = await host.evaluate(() => {
+    const f = document.getElementById("custody-ledger");
+    return { height: f.offsetHeight, top: f.getBoundingClientRect().top + window.scrollY };
+  });
+  check(frame.height > 3000, `embed: the frame is ${frame.height}px tall; it did not grow to the tool's height`);
+  const target = await tool.locator("#facilities").evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  await tool.locator(".section-nav a", { hasText: "Find a facility" }).click();
+  await host.waitForTimeout(800);
+  const scrolled = await host.evaluate(() => window.scrollY);
+  check(Math.abs(scrolled - (frame.top + target - 16)) < 40,
+    `embed: "Find a facility" scrolled the article to ${scrolled}px, expected about ${Math.round(frame.top + target - 16)}px`);
+  await host.close();
 } finally {
   await browser.close();
   await new Promise((done) => server.httpServer.close(done));
@@ -81,4 +105,4 @@ if (failures.length) {
   console.error(`Smoke test failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);
 }
-console.log("Smoke test passed: desktop and phone render, a facility link opens.");
+console.log("Smoke test passed: desktop and phone render, a facility link opens, the embed resizes and scrolls.");

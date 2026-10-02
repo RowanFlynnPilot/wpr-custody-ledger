@@ -19,7 +19,7 @@ export default function Supervision({ statewide }) {
         on supervision held in custody, at the Milwaukee Secure Detention Facility and in county jails.</>}
       </p>
       <TimeChart
-        dates={statewide.map((w) => w.date)} height={220} yMin={0}
+        dates={statewide.map((w) => w.date)} height={250} yMin={0}
         series={[
           { key: "prison", label: "In prison", color: COLOR.population, values: statewide.map((w) => w.population), endLabel: num(now.population) },
           { key: "supervision", label: "On probation or parole", color: "var(--chart-2)",

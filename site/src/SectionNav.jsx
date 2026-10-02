@@ -9,11 +9,10 @@ const JUMPS = [
   ["method", "Get the data"],
 ];
 
-// Scroll to a section. Inside an article the page sits in a frame sized to its full height, so
-// the frame itself never scrolls: ask the embedding page to do it (public/embed.txt has the
-// listener). Standing alone, scroll here.
-export function goTo(id) {
-  const target = document.getElementById(id);
+// Bring an element to the top of the view. Inside an article the page sits in a frame sized to
+// its full height, so the frame itself never scrolls: ask the embedding page to do it
+// (public/embed.txt has the listener). Standing alone, scroll here.
+export function scrollToElement(target) {
   if (!target) return;
   if (window.parent !== window) {
     window.parent.postMessage(
@@ -23,10 +22,15 @@ export function goTo(id) {
   }
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   target.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
-  target.focus({ preventScroll: true });
 }
 
-const jump = (id) => (e) => { e.preventDefault(); goTo(id); };
+export function goTo(id) {
+  const target = document.getElementById(id);
+  scrollToElement(target);
+  target?.focus({ preventScroll: true });
+}
+
+export const jump = (id) => (e) => { e.preventDefault(); goTo(id); };
 
 // First thing in the page for keyboard and screen-reader users; shown only when it has focus.
 export function SkipLink() {

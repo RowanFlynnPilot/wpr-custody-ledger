@@ -23,7 +23,7 @@ export default function Juvenile({ statewide, facilities }) {
         schools in Lincoln County.
       </p>
       <TimeChart
-        dates={dates} height={280} yMin={0}
+        dates={dates} height={250} yMin={0}
         series={[{ key: "youth", label: "Youth held", color: "var(--chart-3)", values: youth, endLabel: num(youth[last]) }]}
         marks={[{ index: peak, value: youth[peak], color: "var(--chart-3)", text: `${apMonthYear(dates[peak])}: ${num(youth[peak])}` }]}
         label="Line chart: youth held in state juvenile facilities, weekly since 1999."
