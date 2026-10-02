@@ -18,7 +18,12 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error) { console.error("Custody Ledger render error", error); }
   render() {
     return this.state.failed
-      ? <div className="load-error">The Custody Ledger hit an error and could not display. Refresh the page to try again.</div>
+      ? (
+        <p className="load-error" role="alert">
+          The Custody Ledger hit an error and could not display.{" "}
+          <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
+        </p>
+      )
       : this.props.children;
   }
 }

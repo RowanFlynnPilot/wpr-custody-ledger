@@ -112,8 +112,8 @@ export default function App() {
             <span className="hero-over" style={{ flexGrow: over }} />
           </div>
           <p className="hero-key">
-            <span><strong>{num(crowding.capacity)}</strong> the prisons were designed to hold</span>
-            <span><strong>{num(over)}</strong> people beyond that</span>
+            <span><span className="key-box" style={{ background: "var(--chart-1)" }} /><strong>{num(crowding.capacity)}</strong> the prisons were designed to hold</span>
+            <span><span className="key-box" style={{ background: "var(--chart-2)" }} /><strong>{num(over)}</strong> people beyond that</span>
           </p>
           <p className="chart-note">
             That is {pct1(crowding.percent)} of design capacity: what each prison was built to

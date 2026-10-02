@@ -60,6 +60,20 @@ try {
       `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
     check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
 
+    // On a phone each row is a small grid: in every group, nothing may sit on top of a facility's name.
+    for (const tab of await page.locator(".tabs button").all()) {
+      await tab.click();
+      const more = page.locator(".facilities > .more");
+      if (await more.count()) await more.click();
+      const collisions = await page.evaluate(() =>
+        [...document.querySelectorAll(".facilities .roster tbody tr:not(.detail)")].filter((tr) => {
+          const a = tr.querySelector(".name").getBoundingClientRect(), b = tr.querySelector("td.change").getBoundingClientRect();
+          const slack = 2; // the name's tap padding may touch the line below it; two pixels is not a collision
+          return a.left < b.right - slack && b.left < a.right - slack && a.top < b.bottom - slack && b.top < a.bottom - slack;
+        }).map((tr) => tr.querySelector(".name").textContent));
+      check(collisions.length === 0, `${name}: the year's change sits on top of the name for ${JSON.stringify(collisions)}`);
+    }
+
     // A shared link opens its facility, on the right tab, with its history drawn.
     await page.goto(`${URL}#facility=lincoln-hills`, { waitUntil: "networkidle" });
     await page.reload({ waitUntil: "networkidle" });

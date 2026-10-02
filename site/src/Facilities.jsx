@@ -5,9 +5,9 @@ import { scrollToElement } from "./SectionNav.jsx";
 import { TYPE_LABEL, apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
 const GROUPS = [
-  { key: "prisons", label: "Prisons and centers", types: ["institution", "center", "secure", "treatment"], sort: "percent" },
-  { key: "jails", label: "County jails and contract beds", types: ["county_jail", "out_of_state", "federal", "other"], sort: "population" },
-  { key: "juvenile", label: "Juvenile facilities", types: ["juvenile"], sort: "population" },
+  { key: "prisons", label: "Prisons and centers", short: "Prisons", types: ["institution", "center", "secure", "treatment"], sort: "percent" },
+  { key: "jails", label: "County jails and contract beds", short: "Contract beds", types: ["county_jail", "out_of_state", "federal", "other"], sort: "population" },
+  { key: "juvenile", label: "Juvenile facilities", short: "Juvenile", types: ["juvenile"], sort: "population" },
 ];
 const YEAR = 52, TREND_WEEKS = 5 * 52;
 const FIRST_ROWS = 10; // shown before "Show all"
@@ -109,7 +109,7 @@ export default function Facilities({ facilities, latest }) {
         {GROUPS.map((g) => (
           <button key={g.key} type="button" aria-pressed={!needle && g.key === group}
             onClick={() => { setGroup(g.key); setSort(null); setQuery(""); setAll(false); }}>
-            {g.label} <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
+            <span className="wide">{g.label}</span><span className="narrow">{g.short}</span> <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
           </button>
         ))}
       </div>
@@ -147,12 +147,12 @@ export default function Facilities({ facilities, latest }) {
             const county = r.type !== "county_jail" && r.county ? `${r.county} County` : "";
             return (
               <React.Fragment key={r.id}>
-                <tr role="row" id={`facility-${r.id}`} className={open === r.id ? "open" : undefined}>
+                <tr role="row" id={`facility-${r.id}`} className={[open === r.id && "open", !kind && !county && "bare"].filter(Boolean).join(" ") || undefined}>
                   <th scope="row" role="rowheader">
                     <button type="button" className="name" aria-expanded={open === r.id} onClick={() => toggle(r.id)}>{r.name}</button>
                     {(kind || county) && (
                       <span className="where">
-                        <span className="wide">{kind}{kind && county && " · "}</span>{county}
+                        {county ? <><span className="wide">{kind}{kind && " · "}</span>{county}</> : kind}
                       </span>
                     )}
                   </th>
@@ -173,7 +173,7 @@ export default function Facilities({ facilities, latest }) {
                     </td>
                   )}
                   <td role="cell" className="n change" data-label={r.yearChange == null ? "" : "in a year"}>
-                    {r.yearChange != null ? (r.yearChange === 0 ? "0" : signed(r.yearChange)) : r.joined ? "new this year" : "back on the list"}
+                    {r.yearChange != null ? (r.yearChange === 0 ? "0" : signed(r.yearChange)) : <span className="aside">{r.joined ? "new this year" : "back on the list"}</span>}
                   </td>
                   <td role="cell" className="wide"><Sparkline values={recent(h, TREND_WEEKS, weeks)} width={110} height={26} /></td>
                 </tr>

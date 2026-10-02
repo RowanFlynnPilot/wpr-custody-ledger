@@ -41,6 +41,7 @@ export default function Methodology({ latest }) {
         </div>
       </div>
       <h3>Take the data</h3>
+      <p>Five spreadsheets in CSV form, rebuilt with every new report.</p>
       <ul className="downloads">
         <li><a href={csv("statewide")} download>Statewide, weekly</a> <span>population, capacity, women and men, contract beds, juvenile, supervision</span></li>
         <li><a href={csv("facility_population")} download>Population by facility, weekly</a> <span>one column per facility</span></li>

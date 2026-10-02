@@ -5,11 +5,11 @@ import { apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
 const share = (r) => (r.noNew == null ? null : pct(r.noNew, r.people));
 // What each column sorts on. Numbers run largest first, names A to Z; a second click reverses.
 const COLUMNS = {
-  county: { text: "County of conviction", value: (r) => r.county },
-  people: { text: "In state prison", value: (r) => r.people },
+  county: { text: "County of conviction", short: "County", value: (r) => r.county },
+  people: { text: "In state prison", short: "In prison", value: (r) => r.people },
   yearChange: { text: "In a year", value: (r) => r.yearChange },
   noNew: { text: "No new sentence", value: (r) => r.noNew },
-  share: { text: "Share of total", value: share },
+  share: { text: "Share of total", short: "Share", value: share },
 };
 
 // People in state prison by the county that convicted them, from DOC's monthly file. The
@@ -58,7 +58,9 @@ export default function Counties({ counties, home }) {
       <th key={key} scope="col" className={key === "county" ? undefined : "n"}
         aria-sort={on ? (ascending ? "ascending" : "descending") : undefined}>
         <button type="button" className="sort" onClick={() => setSort({ key, reversed: on && !sort.reversed })}>
-          {COLUMNS[key].text}
+          {COLUMNS[key].short
+            ? <><span className="wide">{COLUMNS[key].text}</span><span className="narrow">{COLUMNS[key].short}</span></>
+            : COLUMNS[key].text}
         </button>
       </th>
     );

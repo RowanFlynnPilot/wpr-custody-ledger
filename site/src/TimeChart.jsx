@@ -9,7 +9,7 @@ import { apDate, num, time, yearOf } from "./format.js";
 // wash:   { upper, lower, color }   fills between two series where both exist
 // marks:  [{ index, value, text, place?, wideOnly? }]  a dot on the data with a short label
 // vrules: [{ index, text, short? }]   hrules: [{ value, text }]
-// table:  a yearly table of the same figures under the chart (on unless the caller supplies its own)
+// table:  a yearly table of the same figures under the chart; a caller with its own passes it as children
 
 const MARGIN = { top: 26, right: 62, bottom: 26, left: 46 };
 
@@ -32,7 +32,7 @@ function path(points) {
 
 export default function TimeChart({
   dates, series, wash, marks = [], vrules = [], hrules = [], stacked = false,
-  height = 340, yMin, yMax, format = num, label, tooltipNote, table = true,
+  height = 340, yMin, yMax, format = num, label, tooltipNote, children, table = !children,
 }) {
   const wrap = useRef(null);
   const [width, setWidth] = useState(0);
@@ -263,6 +263,7 @@ export default function TimeChart({
           </table>
         </details>
       )}
+      {children}
     </figure>
   );
 }

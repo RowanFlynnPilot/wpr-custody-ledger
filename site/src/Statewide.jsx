@@ -47,7 +47,7 @@ export default function Statewide({ statewide, changes }) {
         beds were meant to hold; the shaded gap is everyone beyond it.
       </p>
       <TimeChart
-        dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380} table={false}
+        dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
         wash={{ upper: "population", lower: ["operating", "design"], color: COLOR.population }}
         vrules={[{ index: firstDesign, text: "Called design capacity from March 2008", short: "Renamed in 2008" }]}
         label="Line chart: people held in Wisconsin's adult prison system and its capacity, weekly since 1999."
@@ -55,7 +55,28 @@ export default function Statewide({ statewide, changes }) {
           const w = statewide[i];
           return `${num(w.population - w.capacity)} over capacity (${pct1(pct(w.population, w.capacity))})`;
         }}
-      />
+      >
+        <details className="table-view">
+          <summary>Show these figures as a table</summary>
+          <table>
+            <caption>Last report of each year. The full weekly record is in the downloads below.</caption>
+            <thead>
+              <tr><th scope="col">Report</th><th scope="col" className="n">People held</th><th scope="col" className="n">Capacity</th><th scope="col" className="n">Percent</th><th scope="col" className="wide">Capacity type</th></tr>
+            </thead>
+            <tbody>
+              {yearly.slice().reverse().map((w) => (
+                <tr key={w.date}>
+                  <th scope="row">{apDate(w.date)}</th>
+                  <td className="n">{num(w.population)}</td>
+                  <td className="n">{num(w.capacity)}</td>
+                  <td className="n">{pct1(pct(w.population, w.capacity))}</td>
+                  <td className="wide">{w.capacity_type}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      </TimeChart>
       <p className="chart-note">
         The vertical scale starts at {num(floor)}, not zero. Capacity is what each prison was
         built to hold, plus later expansions; it leaves out beds added to cope with crowding. In
@@ -63,26 +84,6 @@ export default function Statewide({ statewide, changes }) {
         capacity. The definition printed on its form did not change. Move across the chart, or
         select it and use the arrow keys, to read any week.
       </p>
-      <details className="table-view">
-        <summary>Show these figures as a table</summary>
-        <table>
-          <caption>Last report of each year. The full weekly record is in the downloads below.</caption>
-          <thead>
-            <tr><th scope="col">Report</th><th scope="col" className="n">People held</th><th scope="col" className="n">Capacity</th><th scope="col" className="n">Percent</th><th scope="col">Capacity type</th></tr>
-          </thead>
-          <tbody>
-            {yearly.slice().reverse().map((w) => (
-              <tr key={w.date}>
-                <th scope="row">{apDate(w.date)}</th>
-                <td className="n">{num(w.population)}</td>
-                <td className="n">{num(w.capacity)}</td>
-                <td className="n">{pct1(pct(w.population, w.capacity))}</td>
-                <td>{w.capacity_type}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
     </section>
   );
 }

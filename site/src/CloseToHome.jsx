@@ -57,7 +57,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
                   <span className="where">{f.county} County · {TYPE_LABEL[f.type].toLowerCase()}</span>
                 </th>
                 <td role="cell" className="n" data-label={UNIT[f.type] || "people"}>{num(f.now)}</td>
-                <td role="cell" className="n wide">{f.capacity == null ? "" : num(f.capacity)}</td>
+                <td role="cell" className="n wide">{num(f.capacity)}</td>
                 <td role="cell" className="meter-cell">
                   {f.percent != null && (
                     <>
@@ -71,7 +71,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
                   )}
                 </td>
                 <td role="cell" className="n change" data-label={f.yearChange == null ? "" : "in a year"}>
-                  {f.yearChange == null ? `since ${apMonthYear(f.first)}` : f.yearChange === 0 ? "0" : signed(f.yearChange)}
+                  {f.yearChange == null ? <span className="aside">since {apMonthYear(f.first)}</span> : f.yearChange === 0 ? "0" : signed(f.yearChange)}
                 </td>
                 <td role="cell" className="wide"><Sparkline values={recent(f, TREND_WEEKS, weeks)} width={110} height={26} /></td>
               </tr>
