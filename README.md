@@ -117,4 +117,4 @@ For a chart of each adult facility since 2006, see Wisconsin Watch's
 
 Code and compiled data are released under the [MIT License](LICENSE). The underlying
 reports are Wisconsin public records. If you use the data, please credit
-"The Custody Ledger, Wausau Pilot & Review" and tell us: editor@wausaupilotandreview.com.
+"The Custody Ledger, Wausau Pilot & Review" and tell us: rowan.flynn@wausaupilotandreview.com.

@@ -252,7 +252,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: 980px; margin: 0 auto; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
 .colophon-seal { display: block; width: 56px; height: 56px; }
 .colophon-inner > div { flex: 1 1 0; min-width: 0; }
-.colophon p { margin: 0 0 0.3rem; max-width: var(--measure); }
+.colophon p { margin: 0 0 0.3rem; max-width: var(--measure); overflow-wrap: anywhere; } /* the address is one long word */
 .colophon p:last-child { margin: 0; color: var(--ink); }
 .to-top { margin-left: auto; white-space: nowrap; padding: 0.2rem 0; }
 

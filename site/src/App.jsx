@@ -14,8 +14,8 @@ import badge from "./assets/wpr-typewriter-badge.png";
 import wordmark from "./assets/wpr-wordmark.png";
 
 const HOME = "https://wausaupilotandreview.com/";
-const CONTACT = "editor@wausaupilotandreview.com";
-const FILES = ["statewide", "facilities", "latest", "changes", "counties"];
+const CONTACT = "rowan.flynn@wausaupilotandreview.com";
+const FILES = ["statewide", "facilities", "latest", "changes", "counties"]; // vite.config.js preloads the same five
 const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more than one week
 
 // The newsroom's flag: seal and wordmark, tagline, dateline. The tool's own name sits below it.
@@ -104,6 +104,14 @@ export default function App() {
   const crowded = changes.facilities.most_crowded[0];
   const homeCounty = changes.home_counties[0];
   const fromHome = counties.counties.find((c) => c.county === homeCounty).people.at(-1);
+  // How the count moved. The report before is a week back unless the department skipped one.
+  const move = (n) => (n > 0 ? `rose by ${num(n)}` : n < 0 ? `fell by ${num(-n)}` : "did not change");
+  const weekBack = (new Date(latest.report_date) - new Date(changes.previous_date)) / 864e5 === 7
+    ? "in a week" : `since the report of ${apDate(changes.previous_date)}`;
+  const { week_change: week, year_change: year } = population;
+  const moved = week !== 0 && Math.sign(week) === Math.sign(year)
+    ? `${move(week)} ${weekBack} and by ${num(Math.abs(year))} in a year`
+    : `${move(week)} ${weekBack} and ${move(year)} in a year`;
 
   return (
     <>
@@ -143,7 +151,8 @@ export default function App() {
           </p>
           <p className="chart-note">
             That is {pct1(crowding.percent)} of design capacity: what each prison was built to
-            hold, plus later expansions, leaving out beds added to cope with crowding.
+            hold, plus later expansions, leaving out beds added to cope with crowding. The
+            count {moved}.
           </p>
         </div>
       )}

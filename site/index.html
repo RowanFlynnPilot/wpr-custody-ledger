@@ -8,6 +8,12 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
+    <!-- The faces on the first screen: the name, the lede, the body and the figures. Asked for here so they
+         arrive with the page; otherwise each waits until the text set in it is drawn, and swaps in late. -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/node_modules/@fontsource/fraunces/files/fraunces-latin-600-normal.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/node_modules/@fontsource/public-sans/files/public-sans-latin-400-normal.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2" />
     <meta name="description" content="How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold: every prison, contract jail and juvenile facility, from the Department of Corrections' weekly reports." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Wausau Pilot &amp; Review" />
@@ -38,14 +44,35 @@
         "distribution": [
           { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/statewide.csv" },
           { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_population.csv" },
-          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_capacity.csv" }
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_capacity.csv" },
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/facility_names.csv" },
+          { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rowanflynnpilot.github.io/wpr-custody-ledger/data/csv/counties.csv" }
         ]
       }
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- What is in #root is the page's own loading state (Flag, Masthead and the loading line in
+         src/App.jsx), written out so it paints as soon as the stylesheet arrives instead of waiting
+         for the script. React replaces it when it starts. Keep the two in step: the smoke test
+         compares the name and the dek here with what the script renders. -->
+    <div id="root"><header class="flag" id="top">
+        <a class="flag-lockup" href="https://wausaupilotandreview.com/" target="_blank" rel="noreferrer">
+          <img class="flag-seal" src="/src/assets/wpr-typewriter-badge.png" alt="" width="68" height="68" />
+          <img class="flag-wordmark" src="/src/assets/wpr-wordmark.png" alt="Wausau Pilot &amp; Review" width="640" height="82" />
+        </a>
+        <p class="flag-tagline">Where Locals Look First For News</p>
+        <p class="flag-dateline"><span>Updated weekly</span><span class="flag-place">Wausau, Wisconsin</span></p>
+      </header>
+      <main class="page">
+        <header class="masthead">
+          <h1>The Custody Ledger</h1>
+          <p class="dek">How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold. Every figure comes from the Department of Corrections&rsquo; own weekly reports.</p>
+        </header>
+        <p class="loading" role="status">Loading this week&rsquo;s figures…</p>
+      </main></div>
     <noscript>
+      <style>.loading { display: none; }</style>
       <p style="font: 16px/1.5 sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem;">
         The Custody Ledger is an interactive tool and needs JavaScript to display. The underlying
         data is published as spreadsheets:

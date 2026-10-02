@@ -99,6 +99,21 @@ try {
     await page.close();
   }
 
+  // The flag, the name and the dek are written into index.html so they paint before the script
+  // arrives. With scripts off, that is the whole page: it must say what the script then renders.
+  const words = (page) => page.evaluate(() => [".flag-tagline", "h1", ".dek"].map((q) => document.querySelector(q)?.textContent.replace(/\s+/g, " ").trim() ?? null));
+  const bare = await browser.newPage({ javaScriptEnabled: false });
+  await bare.goto(URL);
+  const written = await words(bare);
+  await bare.close();
+  const live = await browser.newPage();
+  await live.goto(URL, { waitUntil: "networkidle" });
+  await live.waitForSelector(".stat-num", { timeout: 15000 });
+  const rendered = await words(live);
+  await live.close();
+  check(written.every(Boolean) && JSON.stringify(written) === JSON.stringify(rendered),
+    `index.html's written-out masthead reads ${JSON.stringify(written)}; the script renders ${JSON.stringify(rendered)}`);
+
   // The embed code as shipped in public/embed.txt, in a stand-in article: the frame must grow to the
   // tool's full height, and a jump link inside it must scroll the article to the right place.
   const optionB = readFileSync("public/embed.txt", "utf8").split("OPTION B")[1].split("OPTION C")[0];

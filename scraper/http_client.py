@@ -1,6 +1,6 @@
 import requests
 
-HEADERS = {'User-Agent': 'wpr-custody-ledger (Wausau Pilot & Review; editor@wausaupilotandreview.com)'}
+HEADERS = {'User-Agent': 'wpr-custody-ledger (Wausau Pilot & Review; rowan.flynn@wausaupilotandreview.com)'}
 
 
 def head(url: str) -> requests.Response:
