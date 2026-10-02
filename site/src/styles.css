@@ -48,9 +48,12 @@ body {
 }
 
 .page { max-width: 980px; margin: 0 auto; padding: 2rem max(1.25rem, env(safe-area-inset-right, 0px)) 3rem max(1.25rem, env(safe-area-inset-left, 0px)); }
-.loading, .load-error { padding: 4rem 1.5rem; text-align: center; font-family: var(--mono); margin: 0; }
+.loading, .load-error { max-width: var(--text); margin: 0; padding: 0.5rem 0 6rem; color: var(--ink-soft); }
 .load-error { color: var(--rust-text); }
-/* Text that swaps for a shorter form on a narrow screen: .wide above 760px, .narrow at or below it. */
+.load-error .more { margin-left: 0.3rem; }
+/* Three steps down. Under 900px the tables drop their secondary columns (.wide). On a phone, 560px
+   and under, long labels swap for short ones (.full for .narrow). The article column the page is
+   embedded in is about 700px: it gets the simpler tables and the full labels. */
 .narrow { display: none; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
@@ -279,13 +282,16 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .pair .chart-frame { margin-top: auto; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 899px) {
   .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .method-grid { grid-template-columns: 1fr; }
   .wide { display: none; }
-  .narrow { display: inline; }
+}
+@media (max-width: 760px) {
+  .method-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
+  .full { display: none; }
+  .narrow { display: inline; }
   .page { padding: 1.5rem 0.9rem 2.5rem; }
   .flag { padding: 12px 0.9rem 8px; }
   .flag-seal { width: 52px; height: 52px; }
@@ -309,6 +315,13 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .colophon-inner { flex-wrap: wrap; }
   .to-top { flex-basis: 100%; margin-left: 72px; padding: 0.6rem 0; }
   .downloads span { display: block; margin: -0.4rem 0 0.55rem; }
+}
+@media (max-width: 380px) {
+  .county-table { font-size: 0.82rem; }
+  .county-table th, .county-table td { padding: 0.5rem 0.3rem; }
+}
+@media (max-width: 340px) {
+  .county-table .year { display: none; }
 }
 /* The facility table on a phone: the header row becomes a line of sort buttons, and each
    facility is a block with its name on top and its figures on one line beneath. */
@@ -345,7 +358,21 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
   .hero-over { animation: beyond 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
   @keyframes beyond { from { transform: scaleX(0); } }
+  /* A fast connection never sees the loading line. */
+  .loading { animation: appear 0.2s ease-out 0.5s both; }
+  @keyframes appear { from { opacity: 0; } }
   .name, .sort, .tabs button, a, .more, summary { transition: color 0.12s ease-out, background-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
+}
+/* High contrast (forced colors). The system repaints every background, and every bar on this page
+   is a background. So the bars, the keys and the chart panels keep their own colors, which were
+   chosen to be told apart; marks drawn in ink take the system's text color instead. */
+@media (forced-colors: active) {
+  .chart, .hero-bar, .meter, .key-box, .key-line, .key-mark { forced-color-adjust: none; }
+  .meter-mark, .key-mark { background: CanvasText; }
+  .tabs button[aria-pressed="true"] { forced-color-adjust: none; background: Highlight; border-color: Highlight; color: HighlightText; }
+  th[aria-sort] .sort::after { forced-color-adjust: none; border-top-color: CanvasText; }
+  th[aria-sort="ascending"] .sort::after { border-bottom-color: CanvasText; }
+  .find input::-webkit-search-cancel-button { forced-color-adjust: none; background: CanvasText; }
 }
 /* On paper: the figures and the charts, without the controls. */
 @media print {

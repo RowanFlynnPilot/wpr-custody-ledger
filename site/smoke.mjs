@@ -15,7 +15,7 @@ const check = (ok, message) => { if (!ok) failures.push(message); };
 const server = await preview({ preview: { port: PORT, strictPort: true } });
 const browser = await chromium.launch({ channel: process.env.SMOKE_CHANNEL || "chrome" });
 try {
-  for (const [name, viewport] of [["desktop", { width: 1200, height: 900 }], ["phone", { width: 375, height: 812 }]]) {
+  for (const [name, viewport] of [["desktop", { width: 1200, height: 900 }], ["phone", { width: 375, height: 812 }], ["small phone", { width: 320, height: 640 }]]) {
     const page = await browser.newPage({ viewport });
     page.on("pageerror", (e) => failures.push(`${name}: page error: ${e.message}`));
     page.on("console", (m) => { if (m.type() === "error") failures.push(`${name}: console error: ${m.text()}`); });
@@ -38,6 +38,7 @@ try {
           return box.left < outer.left - 0.5 || box.right > outer.right + 0.5;
         })).length,
       overflow: document.documentElement.scrollWidth - window.innerWidth,
+      sideways: [...document.querySelectorAll(".table-wrap")].filter((e) => e.scrollWidth > e.clientWidth + 1).length,
     }));
     check(!seen.failed, `${name}: the page shows its load-error message`);
     check(seen.stats.length === 4 && seen.stats.every((s) => /\d/.test(s)), `${name}: stat strip reads ${JSON.stringify(seen.stats)}`);
@@ -48,6 +49,7 @@ try {
     check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
     check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
     check(seen.meter, `${name}: the system-wide capacity bar is missing`);
+    check(seen.sideways === 0, `${name}: ${seen.sideways} table(s) run off the side of the screen`);
     check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
 
     // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.

@@ -55,11 +55,11 @@ export default function Counties({ counties, home }) {
     const on = sort.key === key;
     const ascending = (key === "county") !== sort.reversed;
     return (
-      <th key={key} scope="col" className={key === "county" ? undefined : "n"}
+      <th key={key} scope="col" className={key === "county" ? undefined : key === "yearChange" ? "n year" : "n"}
         aria-sort={on ? (ascending ? "ascending" : "descending") : undefined}>
         <button type="button" className="sort" onClick={() => setSort({ key, reversed: on && !sort.reversed })}>
           {COLUMNS[key].short
-            ? <><span className="wide">{COLUMNS[key].text}</span><span className="narrow">{COLUMNS[key].short}</span></>
+            ? <><span className="full">{COLUMNS[key].text}</span><span className="narrow">{COLUMNS[key].short}</span></>
             : COLUMNS[key].text}
         </button>
       </th>
@@ -70,7 +70,7 @@ export default function Counties({ counties, home }) {
     <tr key={r.county} className={!footer && all && home.includes(r.county) ? "home" : undefined}>
       <th scope="row">{r.county}</th>
       <td className="n">{r.people == null ? under : num(r.people)}</td>
-      <td className="n">{change(r)}</td>
+      <td className="n year">{change(r)}</td>
       <td className="n">{r.noNew == null ? withheld : num(r.noNew)}</td>
       <td className="n">{share(r) == null ? "" : pct1(share(r))}</td>
       <td className="wide"><Sparkline values={r.series} width={110} height={26} /></td>

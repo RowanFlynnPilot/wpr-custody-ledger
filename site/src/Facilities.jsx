@@ -111,7 +111,7 @@ export default function Facilities({ facilities, latest }) {
         {GROUPS.map((g) => (
           <button key={g.key} type="button" aria-pressed={!needle && g.key === group}
             onClick={() => { setGroup(g.key); setSort(null); setQuery(""); setAll(false); }}>
-            <span className="wide">{g.label}</span><span className="narrow">{g.short}</span> <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
+            <span className="full">{g.label}</span><span className="narrow">{g.short}</span> <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
           </button>
         ))}
       </div>

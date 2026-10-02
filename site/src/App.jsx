@@ -35,6 +35,21 @@ function Flag({ reportDate }) {
   );
 }
 
+// The tool's name and what it is. Neither waits for the data, so they are on the page at once.
+function Masthead({ children }) {
+  return (
+    <header className="masthead">
+      <h1>The Custody Ledger</h1>
+      <p className="dek">
+        How many people Wisconsin holds in state prison, week by week since 1999, against what
+        its prisons were built to hold. Every figure comes from the Department of
+        Corrections&rsquo; own weekly reports.
+      </p>
+      {children}
+    </header>
+  );
+}
+
 export default function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -53,14 +68,17 @@ export default function App() {
     return (
       <>
         <Flag />
-        {error
-          ? (
-            <p className="load-error" role="alert">
-              The Custody Ledger could not load its data.{" "}
-              <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
-            </p>
-          )
-          : <p className="loading" role="status">Loading the ledger…</p>}
+        <main className="page">
+          <Masthead />
+          {error
+            ? (
+              <p className="load-error" role="alert">
+                This week&rsquo;s figures could not be loaded.
+                <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
+              </p>
+            )
+            : <p className="loading" role="status">Loading this week&rsquo;s figures…</p>}
+        </main>
       </>
     );
   }
@@ -78,19 +96,13 @@ export default function App() {
     <SkipLink />
     <Flag reportDate={latest.report_date} />
     <main className="page">
-      <header className="masthead">
-        <h1>The Custody Ledger</h1>
-        <p className="dek">
-          How many people Wisconsin holds in state prison, week by week since 1999, against what
-          its prisons were built to hold. Every figure comes from the Department of
-          Corrections&rsquo; own weekly reports.
-        </p>
+      <Masthead>
         {ageDays > STALE_DAYS && (
           <p className="updated-late" role="status">
             No new report has been added for {ageDays} days, so these figures are older than usual.
           </p>
         )}
-      </header>
+      </Masthead>
 
       <p className="lede">
         Wisconsin&rsquo;s adult prison system held <strong>{num(population.value)}</strong> people on{" "}

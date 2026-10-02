@@ -19,10 +19,12 @@ class ErrorBoundary extends React.Component {
   render() {
     return this.state.failed
       ? (
-        <p className="load-error" role="alert">
-          The Custody Ledger hit an error and could not display.{" "}
-          <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
-        </p>
+        <main className="page">
+          <p className="load-error" role="alert">
+            The Custody Ledger hit an error and could not display.
+            <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
+          </p>
+        </main>
       )
       : this.props.children;
   }

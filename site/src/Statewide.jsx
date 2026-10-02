@@ -61,7 +61,7 @@ export default function Statewide({ statewide, changes }) {
           <table>
             <caption>Last report of each year. The full weekly record is in the downloads below.</caption>
             <thead>
-              <tr><th scope="col">Report</th><th scope="col" className="n">People held</th><th scope="col" className="n">Capacity</th><th scope="col" className="n">Percent</th><th scope="col" className="wide">Capacity type</th></tr>
+              <tr><th scope="col">Report</th><th scope="col" className="n">People held</th><th scope="col" className="n">Capacity</th><th scope="col" className="n">Percent</th><th scope="col" className="full">Capacity type</th></tr>
             </thead>
             <tbody>
               {yearly.slice().reverse().map((w) => (
@@ -70,7 +70,7 @@ export default function Statewide({ statewide, changes }) {
                   <td className="n">{num(w.population)}</td>
                   <td className="n">{num(w.capacity)}</td>
                   <td className="n">{pct1(pct(w.population, w.capacity))}</td>
-                  <td className="wide">{w.capacity_type}</td>
+                  <td className="full">{w.capacity_type}</td>
                 </tr>
               ))}
             </tbody>
