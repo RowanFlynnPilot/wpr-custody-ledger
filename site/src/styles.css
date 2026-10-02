@@ -31,7 +31,11 @@
 
 * { box-sizing: border-box; }
 ::selection { background: var(--teal-tint); color: var(--ink); }
-html { scrollbar-color: var(--line-strong) var(--cream); }
+html { scrollbar-color: var(--line-strong) var(--cream); -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* A tap acts at once: these never double-tap-zoom. */
+a, button, summary, input, label { touch-action: manipulation; }
+/* A control's label is not content: a long press should not select it. Facility names stay selectable. */
+.tabs button, .sort, .more, summary { user-select: none; -webkit-user-select: none; }
 p { text-wrap: pretty; }
 
 body {
@@ -43,7 +47,7 @@ body {
   line-height: 1.55;
 }
 
-.page { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+.page { max-width: 980px; margin: 0 auto; padding: 2rem max(1.25rem, env(safe-area-inset-right, 0px)) 3rem max(1.25rem, env(safe-area-inset-left, 0px)); }
 .loading, .load-error { padding: 4rem 1.5rem; text-align: center; font-family: var(--mono); margin: 0; }
 .load-error { color: var(--rust-text); }
 /* Text that swaps for a shorter form on a narrow screen: .wide above 760px, .narrow at or below it. */
@@ -51,7 +55,6 @@ body {
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 a { color: var(--teal-deep); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-a:hover { text-decoration-thickness: 2px; }
 a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, .chart-frame:focus-visible {
   outline: 2px solid var(--teal);
   outline-offset: 2px;
@@ -71,7 +74,7 @@ section { margin-bottom: 3.25rem; }
 
 /* The newsroom's flag. White, because the seal and the wordmark are drawn on white; the page
    below it stays cream. Thick rule over thin, as on the paper's own pages. */
-.flag { background: #fff; border-top: 4px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 16px 1.25rem 10px; text-align: center; }
+.flag { background: #fff; border-top: 4px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 16px max(1.25rem, env(safe-area-inset-right, 0px)) 10px max(1.25rem, env(safe-area-inset-left, 0px)); text-align: center; }
 .flag-lockup { display: inline-flex; align-items: center; gap: 16px; max-width: 100%; }
 .flag-seal { width: 68px; height: 68px; flex: none; }
 .flag-wordmark { height: 40px; width: auto; min-width: 0; max-width: calc(100% - 84px); object-fit: contain; }
@@ -127,7 +130,7 @@ section { margin-bottom: 3.25rem; }
 
 /* charts */
 .chart { margin: 0; background: var(--white); border: 1px solid var(--line); padding: 0.9rem 0.6rem 0.4rem; }
-.chart-frame { position: relative; touch-action: pan-y; cursor: crosshair; }
+.chart-frame { position: relative; touch-action: pan-y; cursor: crosshair; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .chart-frame svg { position: absolute; top: 0; left: 0; }
 .chart-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; margin: 0 0 0.35rem; padding: 0 0.5rem; font-size: 0.82rem; }
 .chart-legend li { display: flex; align-items: center; gap: 0.45rem; }
@@ -163,11 +166,11 @@ thead th { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-tr
 tbody th { font-weight: 500; }
 .n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 thead .n { font-family: var(--body); white-space: normal; }
-.table-view { margin: 0.4rem 0.4rem 0.3rem; overflow-x: auto; }
+.table-view { margin: 0.4rem 0.4rem 0.3rem; overflow-x: auto; overscroll-behavior-x: contain; }
 .table-view summary { cursor: pointer; font-size: 0.86rem; color: var(--teal-deep); width: fit-content; padding: 0.35rem 0; }
 .table-view table { background: var(--white); border: 1px solid var(--line); margin-top: 0.3rem; }
 .table-view caption { padding-left: 0.6rem; }
-.table-wrap { overflow-x: auto; }
+.table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
 
 /* close to home: the facility list's own rows, narrowed to the home counties */
 .spark { display: block; }
@@ -176,7 +179,7 @@ thead .n { font-family: var(--body); white-space: normal; }
 /* every facility */
 .find { display: block; max-width: 24rem; margin: 0 0 0.9rem; font-size: 0.86rem; font-weight: 500; }
 .find input {
-  caret-color: var(--teal-deep);
+  caret-color: var(--teal-deep); -webkit-appearance: none; appearance: none;
   display: block; width: 100%; min-height: 44px; margin-top: 0.3rem; padding: 0.55rem 0.7rem;
   font: 400 1rem var(--body); color: var(--ink); background: var(--white);
   border: 1px solid var(--line-strong); border-radius: 0; accent-color: var(--teal-deep);
@@ -188,7 +191,6 @@ thead .n { font-family: var(--body); white-space: normal; }
   background: var(--ink-soft);
   -webkit-mask: var(--cross) center / 12px no-repeat; mask: var(--cross) center / 12px no-repeat;
 }
-.find input::-webkit-search-cancel-button:hover { background: var(--ink); }
 .find-status { font-size: 0.86rem; margin: 0 0 0.6rem; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
 .tabs button {
@@ -201,7 +203,6 @@ thead .n { font-family: var(--body); white-space: normal; }
 .bar-key .key-box:not(:first-child) { margin-left: 0.8rem; }
 .roster { background: var(--white); border: 1px solid var(--line); }
 .sort { font: inherit; letter-spacing: inherit; text-transform: inherit; text-align: inherit; color: inherit; background: none; border: 0; padding: 0.2rem 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-.sort:hover { color: var(--ink); }
 th[aria-sort] .sort { position: relative; padding-right: 13px; color: var(--ink); }
 /* The sort mark is drawn, not typed: a small triangle pointing the way the column runs. */
 th[aria-sort] .sort::after {
@@ -210,7 +211,6 @@ th[aria-sort] .sort::after {
 }
 th[aria-sort="ascending"] .sort::after { border-top: 0; border-bottom: 5px solid currentColor; }
 .name { font: 600 0.95rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.15rem 0; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-.name:hover { text-decoration-color: currentColor; }
 .where { display: block; font-size: 0.78rem; font-weight: 400; color: var(--ink-soft); }
 .meter-cell { min-width: 11rem; white-space: nowrap; }
 .meter { position: relative; display: inline-flex; gap: 2px; width: calc(100% - 4rem); height: 8px; vertical-align: middle; }
@@ -226,7 +226,6 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .detail-facts { font-size: 0.86rem; margin: 0 0 0.6rem; }
 .detail-actions { display: flex; gap: 1.4rem; margin: 0.3rem 0 0; }
 .more { font: 500 0.88rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.6rem 0; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.more:hover { text-decoration-thickness: 2px; }
 
 /* by county of conviction */
 .county-table { background: var(--white); border: 1px solid var(--line); }
@@ -244,7 +243,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .downloads + .chart-note { margin-top: 1.1rem; }
 
 /* The footer closes the page the way the flag opens it: a white band, thin rule over thick. */
-.colophon { background: #fff; border-top: 1px solid var(--ink); border-bottom: 4px solid var(--ink); padding: 1.1rem 1.25rem 1.2rem; }
+.colophon { background: #fff; border-top: 1px solid var(--ink); border-bottom: 4px solid var(--ink); padding: 1.1rem max(1.25rem, env(safe-area-inset-right, 0px)) calc(1.2rem + env(safe-area-inset-bottom, 0px)) max(1.25rem, env(safe-area-inset-left, 0px)); }
 .colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: 980px; margin: 0 auto; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
 .colophon-seal { display: block; width: 56px; height: 56px; }
 .colophon-inner > div { flex: 1 1 0; min-width: 0; }
@@ -252,11 +251,22 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .colophon p:last-child { margin: 0; color: var(--ink); }
 .to-top { margin-left: auto; white-space: nowrap; padding: 0.2rem 0; }
 
-@media (hover: hover) {
+/* Hover only where the pointer can hover and is precise. On a touch screen a tap fakes a hover
+   and leaves it stuck, so every hover rule on the page lives here. */
+@media (hover: hover) and (pointer: fine) {
+  a:hover, .more:hover { text-decoration-thickness: 2px; }
+  .sort:hover { color: var(--ink); }
+  .name:hover { text-decoration-color: currentColor; }
+  .find input::-webkit-search-cancel-button:hover { background: var(--ink); }
   .roster tbody tr:not(.detail):hover > *, .county-table tbody tr:hover > * { background: var(--tint); }
   .tabs button:hover { background: var(--teal-tint); }
   .tabs button[aria-pressed="true"]:hover { background: var(--teal-deep); }
 }
+/* Pressed: the answer a finger gets the moment it lands, on every kind of pointer. */
+a:active, .name:active, .sort:active, .more:active, summary:active { background-color: var(--teal-tint); box-shadow: 0 0 0 3px var(--teal-tint); }
+.tabs button:active { background: var(--teal-tint); }
+.tabs button[aria-pressed="true"]:active { background: var(--teal); }
+.flag-lockup:active, .colophon a:has(img):active { background: none; box-shadow: none; opacity: 0.7; }
 
 /* the long view: two shorter stories share a row, their headlines, text, charts and notes aligned */
 .pair section { margin-bottom: 3.25rem; }
@@ -295,7 +305,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   .hero-key > span:last-child { text-align: left; }
   .table-view tbody th { white-space: nowrap; }
   .table-view summary { padding: 0.7rem 0; }
-  .colophon { padding: 1rem 0.9rem 1.1rem; }
+  .colophon { padding: 1rem 0.9rem calc(1.1rem + env(safe-area-inset-bottom, 0px)); }
   .colophon-inner { flex-wrap: wrap; }
   .to-top { flex-basis: 100%; margin-left: 72px; padding: 0.6rem 0; }
   .downloads span { display: block; margin: -0.4rem 0 0.55rem; }
@@ -335,7 +345,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
   .hero-over { animation: beyond 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
   @keyframes beyond { from { transform: scaleX(0); } }
-  .name, .sort, .tabs button, a, .more { transition: color 0.12s ease-out, background-color 0.12s ease-out, text-decoration-color 0.12s ease-out; }
+  .name, .sort, .tabs button, a, .more, summary { transition: color 0.12s ease-out, background-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
 }
 /* On paper: the figures and the charts, without the controls. */
 @media print {

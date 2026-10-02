@@ -103,7 +103,9 @@ export default function Facilities({ facilities, latest }) {
       </p>
       <label className="find">
         <span>Find a prison, jail or county</span>
-        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Stanley, or Lincoln County" />
+        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Stanley, or Lincoln County"
+          enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+          onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }} />
       </label>
       <div className="tabs" role="group" aria-label="Kind of facility">
         {GROUPS.map((g) => (
