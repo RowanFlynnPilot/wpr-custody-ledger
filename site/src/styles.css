@@ -191,11 +191,17 @@ thead .n { font-family: var(--body); white-space: normal; }
 }
 .find input::placeholder { color: var(--ink-soft); opacity: 1; }
 .find input:focus-visible { outline-offset: -1px; border-color: var(--teal-deep); }
-.find input::-webkit-search-cancel-button {
-  -webkit-appearance: none; appearance: none; width: 28px; height: 28px; margin: 0 -0.3rem 0 0.3rem; cursor: pointer;
-  background: var(--ink-soft);
+/* The clear button is the page's own, so it is there in Firefox too and looks the same everywhere. */
+.find input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
+.find label { display: block; }
+.find-box { position: relative; margin-top: 0.3rem; }
+.find-box input { margin-top: 0; padding-right: 44px; }
+.find-clear { position: absolute; top: 0; right: 0; bottom: 0; width: 44px; padding: 0; background: none; border: 0; cursor: pointer; }
+.find-clear::before {
+  content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: var(--ink-soft);
   -webkit-mask: var(--cross) center / 12px no-repeat; mask: var(--cross) center / 12px no-repeat;
 }
+.find-clear:active::before { background: var(--ink); }
 .find-status { font-size: 0.86rem; margin: 0 0 0.6rem; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
 .tabs button {
@@ -262,7 +268,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
   a:hover, .more:hover { text-decoration-thickness: 2px; }
   .sort:hover { color: var(--ink); }
   .name:hover { text-decoration-color: currentColor; }
-  .find input::-webkit-search-cancel-button:hover { background: var(--ink); }
+  .find-clear:hover::before { background: var(--ink); }
   .roster tbody tr:not(.detail):hover > *, .county-table tbody tr:hover > * { background: var(--tint); }
   .tabs button:hover { background: var(--teal-tint); }
   .tabs button[aria-pressed="true"]:hover { background: var(--teal-deep); }
@@ -376,7 +382,7 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .tabs button[aria-pressed="true"] { forced-color-adjust: none; background: Highlight; border-color: Highlight; color: HighlightText; }
   th[aria-sort] .sort::after { forced-color-adjust: none; border-top-color: CanvasText; }
   th[aria-sort="ascending"] .sort::after { border-bottom-color: CanvasText; }
-  .find input::-webkit-search-cancel-button { forced-color-adjust: none; background: CanvasText; }
+  .find-clear::before { forced-color-adjust: none; background: CanvasText; }
 }
 /* On paper: the figures and the charts, without the controls. */
 @media print {

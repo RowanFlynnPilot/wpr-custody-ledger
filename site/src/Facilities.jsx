@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
 import { scrollToElement } from "./SectionNav.jsx";
@@ -48,6 +48,7 @@ export default function Facilities({ facilities, latest }) {
   const [group, setGroup] = useState(() => groupOf(readHash()) || "prisons");
   const [sort, setSort] = useState(null); // { key, reversed }, or null for the group's own order
   const [query, setQuery] = useState("");
+  const findInput = useRef(null);
   const [all, setAll] = useState(() => readHash() != null);
 
   const active = GROUPS.find((g) => g.key === group);
@@ -104,12 +105,19 @@ export default function Facilities({ facilities, latest }) {
         The report of {apDate(latest.report_date)}, facility by facility. Select a name for its
         full history, or a column heading to sort.
       </p>
-      <label className="find">
-        <span>Find a prison, jail or county</span>
-        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Stanley, or Lincoln County"
-          enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
-          onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }} />
-      </label>
+      <div className="find">
+        <label htmlFor="find-input">Find a prison, jail or county</label>
+        <div className="find-box">
+          <input id="find-input" ref={findInput} type="search" value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="Stanley, or Lincoln County"
+            enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+            onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }} />
+          {query && (
+            <button type="button" className="find-clear" aria-label="Clear the search"
+              onClick={() => { setQuery(""); findInput.current?.focus(); }} />
+          )}
+        </div>
+      </div>
       <div className="tabs" role="group" aria-label="Kind of facility">
         {GROUPS.map((g) => (
           <button key={g.key} type="button" aria-pressed={!needle && g.key === group}

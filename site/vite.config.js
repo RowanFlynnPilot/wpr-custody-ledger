@@ -3,19 +3,23 @@ import react from "@vitejs/plugin-react";
 
 // One id per build, stamped onto every data request (see `define` below).
 const BUILD_ID = Date.now().toString(36);
-// The same five files App.jsx fetches (FILES there), at the same addresses. Listed in the page head
-// so the browser fetches them while the script is still downloading, instead of after it has run.
+// The same five files App.jsx reads (FILES there). A line of script in the page head asks for them
+// while the main script is still downloading, and App.jsx picks the answers up from window.__ledgerData.
+// Not <link rel="preload" as="fetch">: Chrome and Firefox hand a preloaded response to fetch(), but
+// Safari's engine does not, and downloaded every file twice (seen Oct. 1, 2026).
 const DATA_FILES = ["statewide", "facilities", "latest", "changes", "counties"];
-const preloadData = {
-  name: "preload-data",
-  transformIndexHtml: () => DATA_FILES.map((name) => ({
-    tag: "link", injectTo: "head",
-    attrs: { rel: "preload", as: "fetch", crossorigin: "anonymous", href: `./data/${name}.json?v=${BUILD_ID}` },
-  })),
+const earlyData = {
+  name: "early-data",
+  transformIndexHtml: () => [{
+    tag: "script", injectTo: "head",
+    // A failed request is kept as its error, so nothing goes unhandled before App.jsx is there to read it.
+    children: `window.__ledgerData=Object.fromEntries(${JSON.stringify(DATA_FILES)}.map(function(n){` +
+      `return[n,fetch("./data/"+n+".json?v=${BUILD_ID}").catch(function(e){return e})]}));`,
+  }],
 };
 
 export default defineConfig({
-  plugins: [react(), preloadData],
+  plugins: [react(), earlyData],
   base: "./",
   // Vite 8's defaults assume 2023+ browsers, and its CSS minifier then rewrites every
   // `max-width: 560px` into range syntax (`width<=560px`), which Safari before 16.4 ignores:

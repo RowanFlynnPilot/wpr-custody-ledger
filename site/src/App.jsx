@@ -15,7 +15,7 @@ import wordmark from "./assets/wpr-wordmark.png";
 
 const HOME = "https://wausaupilotandreview.com/";
 const CONTACT = "rowan.flynn@wausaupilotandreview.com";
-const FILES = ["statewide", "facilities", "latest", "changes", "counties"]; // vite.config.js preloads the same five
+const FILES = ["statewide", "facilities", "latest", "changes", "counties"]; // vite.config.js starts the same five early
 const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more than one week
 
 // The newsroom's flag: seal and wordmark, tagline, dateline. The tool's own name sits below it.
@@ -55,11 +55,17 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    Promise.all(FILES.map((name) =>
-      fetch(`${import.meta.env.BASE_URL}data/${name}.json?v=${__BUILD_ID__}`).then((r) => {
+    // The page head has usually asked for these already (vite.config.js); each answer can be read once.
+    const early = window.__ledgerData || {};
+    Promise.all(FILES.map((name) => {
+      const asked = early[name] || fetch(`${import.meta.env.BASE_URL}data/${name}.json?v=${__BUILD_ID__}`);
+      delete early[name];
+      return asked.then((r) => {
+        if (r instanceof Error) throw r;
         if (!r.ok) throw new Error(`${name}.json: ${r.status}`);
         return r.json();
-      })
+      });
+    }
     )).then(([statewide, facilities, latest, changes, counties]) => setData({ statewide, facilities, latest, changes, counties }))
       .catch(setError);
   }, []);
@@ -70,7 +76,8 @@ export default function App() {
   useEffect(() => {
     if (!data) return undefined;
     const land = () => {
-      const target = document.getElementById(window.location.hash.slice(1));
+      const id = window.location.hash.slice(1);
+      const target = id && document.getElementById(id);
       if (target?.tagName === "SECTION") setTimeout(() => goTo(target.id), 300);
     };
     land();
