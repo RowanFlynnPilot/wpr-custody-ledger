@@ -67,7 +67,7 @@ report since 1999.
 - Contract-bed rows add up to DOC's contract subtotal; women's and men's rows add up to
   DOC's subtotals for each; juvenile facilities add up to DOC's on-grounds total.
 - Facility capacities add up to the headline capacity, except in the listed stretches where
-  DOC's total is wrong.
+  DOC's total is wrong. Women's beds add up to the capacity on DOC's women's subtotal row.
 - No week moves more than 3% from the one before. The largest real move in 27 years is 1.15%.
 - A stored PDF has not changed. The eight newest reports are downloaded again on every run
   and compared by SHA-256, so a correction DOC makes in place is caught.

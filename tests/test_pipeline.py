@@ -111,6 +111,14 @@ def test_capacity_mismatch_outside_a_known_stretch_throws():
         facilities(report)
 
 
+def test_womens_beds_must_match_the_womens_subtotal():
+    # The women's crowding rate on the site divides by this figure, so it is held to DOC's own.
+    report = load('2026-09-25')
+    report['rows'][row_index(report, 'SUB-TOTAL FEMALES (ALL LOCATIONS)')]['values'][0] += 5
+    with pytest.raises(ValueError, match="women's beds sum to 974 and the women's subtotal says 979; they should match"):
+        facilities(report)
+
+
 def test_juvenile_facilities():
     by_id = {f['id']: f for f in juvenile(load('2026-09-25'))}
     assert (by_id['lincoln-hills']['capacity'], by_id['lincoln-hills']['population']) == (519, 63)

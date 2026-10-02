@@ -104,6 +104,11 @@ CAPACITY_MISPRINTS = [
                                  'these are the first 12 weeks of design capacity'),
 ]
 
+# Stretches where the capacity DOC prints on its women's subtotal row is not the sum of the women's
+# beds on its own rows. Same shape and same rule as CAPACITY_MISPRINTS. Empty: the two agree in
+# every report from 1999 through Sept. 25, 2026.
+WOMEN_CAPACITY_MISPRINTS: list[tuple[str, str, str]] = []
+
 
 # --- Monthly county file (used by counties.py) ----------------------------------------------
 #

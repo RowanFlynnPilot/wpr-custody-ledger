@@ -14,6 +14,8 @@ throws unless, for the report in hand:
 - contract-bed rows add up to the 'Contract Facilities' summary row
 - women (women's facilities plus the "(Female)" splits of shared ones) add up to the women's subtotal,
   and everyone else to the men's
+- women's beds (those facilities and splits, plus the women's contract-bed subtotal) equal the capacity
+  on the women's subtotal row, except in any stretch listed in corrections.WOMEN_CAPACITY_MISPRINTS
 - facility capacities plus the contract-bed subtotals equal the headline capacity, except in
   the stretches listed in corrections.CAPACITY_MISPRINTS
 - every row label is one registry.py knows
@@ -21,7 +23,8 @@ throws unless, for the report in hand:
 juvenile() does the same for the Division of Juvenile Corrections block further down the form:
 facility rows there are (capacity, population) and must add up to 'Total On-Grounds Population'.
 """
-from corrections import CAPACITY_MISPRINTS, COUNTED_BELOW, JUVENILE_ROWS_DROPPED, NOT_ITEMIZED, ROW_FIXES
+from corrections import (CAPACITY_MISPRINTS, COUNTED_BELOW, JUVENILE_ROWS_DROPPED, NOT_ITEMIZED, ROW_FIXES,
+                         WOMEN_CAPACITY_MISPRINTS)
 from parse import HEADLINE_LABELS
 from registry import JUVENILE_LABELS, facility, facility_id
 
@@ -134,6 +137,13 @@ def breakdown(report: dict) -> dict:
     if population - women['population'] != rows[men_at]['values'][1]:
         raise ValueError(f"{source}: men's rows sum to {population - women['population']:,}, the men's subtotal "
                          f"says {rows[men_at]['values'][1]:,}")
+    # The site draws a women's crowding rate for every week, so its denominator is held to DOC's own figure.
+    printed = rows[women_at]['values'][0]
+    misprint = any(first <= date <= last for first, last, _ in WOMEN_CAPACITY_MISPRINTS)
+    if (women['capacity'] != printed) != misprint:
+        raise ValueError(f"{source}: women's beds sum to {women['capacity']:,} and the women's subtotal says "
+                         f"{printed:,}; " + ('they should differ in this stretch of WOMEN_CAPACITY_MISPRINTS'
+                                            if misprint else 'they should match'))
 
     capacity = contract_capacity + sum(leaf['capacity'] or 0 for leaf in leaves)
     misprint = any(first <= date <= last for first, last, _ in CAPACITY_MISPRINTS)
