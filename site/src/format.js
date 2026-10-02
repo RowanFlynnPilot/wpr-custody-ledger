@@ -18,6 +18,13 @@ export const apMonthYear = (iso) => {
   const [y, m] = parts(iso);
   return `${AP_MONTHS[m - 1]} ${y}`;
 };
+// In a sentence, a month with only a year is spelled out (AP). apMonthYear's abbreviations are
+// for chart labels and table cells, where the space is tight.
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+export const monthYear = (iso) => {
+  const [y, m] = parts(iso);
+  return `${MONTHS[m - 1]} ${y}`;
+};
 export const yearOf = (iso) => parts(iso)[0];
 export const time = (iso) => {
   const [y, m, d] = parts(iso);

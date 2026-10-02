@@ -3,6 +3,7 @@
 //     npm run build && npm run smoke
 // Uses the Chrome already on the machine (GitHub's runners have it); set SMOKE_CHANNEL=msedge to use Edge.
 import { readFileSync } from "node:fs";
+import { createServer } from "node:http";
 import { preview } from "vite";
 import { chromium } from "playwright-core";
 
@@ -87,6 +88,14 @@ try {
     }));
     check(opened.name === "Lincoln Hills School" && opened.chart, `${name}: #facility=lincoln-hills opened ${JSON.stringify(opened)}`);
     check(opened.overflow <= 1, `${name}: with a facility open the page is ${opened.overflow}px wider than the screen`);
+
+    // A link to a section lands on it, though the section does not exist until the data arrives.
+    await page.goto(`${URL}#counties`, { waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "networkidle" });
+    await page.waitForSelector("#counties", { timeout: 15000 });
+    await page.waitForTimeout(1500);
+    const landed = await page.evaluate(() => Math.round(document.getElementById("counties").getBoundingClientRect().top));
+    check(Math.abs(landed) < 80, `${name}: #counties left that section ${landed}px from the top of the screen`);
     await page.close();
   }
 
@@ -112,6 +121,29 @@ try {
   check(Math.abs(scrolled - (frame.top + target - 16)) < 40,
     `embed: "Find a facility" scrolled the article to ${scrolled}px, expected about ${Math.round(frame.top + target - 16)}px`);
   await host.close();
+
+  // A shared article link: the embed code passes the article's own #hash into the frame. That needs
+  // an article with a real address, so serve the stand-in from a local port.
+  const article = createServer((_, res) => {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.end(`<!doctype html><body style="margin:0"><div style="height:600px">An article.</div>${snippet}<div style="height:600px"></div></body>`);
+  }).listen(PORT + 1, "127.0.0.1");
+  try {
+    for (const [hash, selector, what] of [["#counties", "#counties", "the county section"], ["#facility=lincoln-hills", "tr.open", "the open facility"]]) {
+      const shared = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce" });
+      await shared.goto(`http://127.0.0.1:${PORT + 1}/${hash}`);
+      const inside = shared.frameLocator("#custody-ledger");
+      await inside.locator(selector).first().waitFor({ timeout: 15000 }).catch(() => {});
+      await shared.waitForTimeout(2000);
+      const at = await shared.evaluate(() => ({ y: window.scrollY, top: document.getElementById("custody-ledger").getBoundingClientRect().top + window.scrollY }));
+      const want = await inside.locator(selector).first().evaluate((el) => el.getBoundingClientRect().top + window.scrollY).catch(() => null);
+      check(want != null && Math.abs(at.y - (at.top + want - 16)) < 40,
+        `embed: an article link ending ${hash} scrolled to ${at.y}px, expected ${want == null ? `${what} to exist` : `about ${Math.round(at.top + want - 16)}px`}`);
+      await shared.close();
+    }
+  } finally {
+    await new Promise((done) => article.close(done));
+  }
 } finally {
   await browser.close();
   await new Promise((done) => server.httpServer.close(done));
@@ -121,4 +153,4 @@ if (failures.length) {
   console.error(`Smoke test failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);
 }
-console.log("Smoke test passed: desktop and phone render, a facility link opens, the embed resizes and scrolls.");
+console.log("Smoke test passed: three widths render, facility and section links land, the embed resizes, scrolls and follows the article's link.");

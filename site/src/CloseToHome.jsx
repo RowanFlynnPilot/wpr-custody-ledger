@@ -1,5 +1,6 @@
 import React from "react";
 import { Sparkline, recent } from "./TimeChart.jsx";
+import { noCapacity } from "./Facilities.jsx";
 import { TYPE_LABEL, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
 // Which counties count as home is set once, in scraper/build.py, and arrives in changes.json.
@@ -38,7 +39,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
         jail has not appeared on the department&rsquo;s contract list since 1999.</>}
       </p>
       <div className="table-wrap">
-        <table className="roster local" role="table">
+        <table className="roster local" role="table" aria-label="State custody in Marathon County and the counties around it">
           <thead role="rowgroup">
             <tr role="row">
               <th scope="col" role="columnheader">Facility</th>
@@ -57,7 +58,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
                   <span className="where">{f.county} County · {TYPE_LABEL[f.type].toLowerCase()}</span>
                 </th>
                 <td role="cell" className="n" data-label={UNIT[f.type] || "people"}>{num(f.now)}</td>
-                <td role="cell" className="n wide">{num(f.capacity)}</td>
+                <td role="cell" className="n wide">{f.capacity == null ? noCapacity : num(f.capacity)}</td>
                 <td role="cell" className="meter-cell">
                   {f.percent != null && (
                     <>

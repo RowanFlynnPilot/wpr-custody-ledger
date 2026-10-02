@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Sparkline } from "./TimeChart.jsx";
-import { apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
+import { apDate, apMonthYear, monthYear, num, pct, pct1, signed } from "./format.js";
 
 const share = (r) => (r.noNew == null ? null : pct(r.noNew, r.people));
 // What each column sorts on. Numbers run largest first, names A to Z; a second click reverses.
@@ -84,13 +84,13 @@ export default function Counties({ counties, home }) {
         {first.people != null && <>Of the {num(state.people)} people in state prison
         on {apDate(asOf)}, {num(first.people)} were convicted in {first.county} County
         {first.yearChange != null && <>, {first.yearChange === 0 ? "the same as" : `${num(Math.abs(first.yearChange))} ${first.yearChange > 0 ? "more" : "fewer"} than`} a year earlier</>}.</>}
-        {first.noNew != null && <> {num(first.noNew)} of them, {pct1(share(first))}, were there for
+        {first.noNew != null && <> Of those, {num(first.noNew)}, or {pct1(share(first))}, were there for
         violating probation, parole or extended supervision with no new sentence. Statewide the
         share is {pct1(share(state))}.</>}
       </p>
       {toggle}
       <div className="table-wrap">
-        <table className="county-table">
+        <table className="county-table" aria-label="People in state prison by county of conviction">
           <thead>
             <tr>
               {Object.keys(COLUMNS).map(heading)}
@@ -110,7 +110,7 @@ export default function Counties({ counties, home }) {
         the admission type the department records for each person; the department publishes no
         definitions for its file. Counts that would describe fewer than {counties.min_cell} people
         are withheld. Source: the department&rsquo;s monthly Persons in Our Care data files,
-        {" "}{apMonthYear(counties.months[0])} through {apMonthYear(asOf)}.
+        {" "}{monthYear(counties.months[0])} through {monthYear(asOf)}.
       </p>
     </section>
   );

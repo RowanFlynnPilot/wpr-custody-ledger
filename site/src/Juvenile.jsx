@@ -1,6 +1,6 @@
 import React from "react";
 import TimeChart from "./TimeChart.jsx";
-import { apMonthYear, num } from "./format.js";
+import { apMonthYear, monthYear, num } from "./format.js";
 
 const LFB_PAPER = "https://docs.legis.wisconsin.gov/misc/lfb/informational_papers/january_2025/0060_adult_corrections_program_informational_paper_60.pdf";
 const IRMA = ["lincoln-hills", "copper-lake"]; // the two schools share a campus in Lincoln County
@@ -18,7 +18,7 @@ export default function Juvenile({ statewide, facilities }) {
     <section id="juvenile" tabIndex={-1}>
       <h2>{youth[last] < youth[0] / 2 ? "Juvenile prisons emptied as adult prisons filled" : "Youth in state juvenile facilities"}</h2>
       <p className="section-dek">
-        The state held {num(youth[0])} youth in its juvenile facilities in {apMonthYear(dates[0])}. It
+        The state held {num(youth[0])} youth in its juvenile facilities in {monthYear(dates[0])}. It
         holds {num(youth[last])} now, {num(atSchools(last))} of them at Lincoln Hills and Copper Lake
         schools in Lincoln County.
       </p>

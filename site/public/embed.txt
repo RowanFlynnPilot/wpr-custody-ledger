@@ -24,10 +24,11 @@ window.addEventListener("message", function (e) {
     window.scrollTo({ top: frame.getBoundingClientRect().top + window.scrollY + e.data.scrollTo - 16, behavior: "smooth" });
   }
 });
-// Optional: lets a shared link such as  your-article-url#facility=lincoln-hills  open that facility.
+// Optional: lets a shared link such as  your-article-url#facility=lincoln-hills  open that facility,
+// and  your-article-url#counties  land on that section.
 (function () {
   var f = document.getElementById("custody-ledger");
-  if (f && /^#facility=[a-z0-9-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
+  if (f && /^#[a-z0-9=-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
 })();
 
 ============================================================
@@ -50,7 +51,7 @@ window.addEventListener("message", function (e) {
 });
 (function () {
   var f = document.getElementById("custody-ledger");
-  if (f && /^#facility=[a-z0-9-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
+  if (f && /^#[a-z0-9=-]+$/.test(location.hash)) f.src = f.src.split("#")[0] + location.hash;
 })();
 </script>
 

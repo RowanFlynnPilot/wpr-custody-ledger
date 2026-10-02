@@ -1,6 +1,6 @@
 import React from "react";
 import TimeChart from "./TimeChart.jsx";
-import { apMonthYear, num, yearOf } from "./format.js";
+import { apMonthYear, monthYear, num, yearOf } from "./format.js";
 
 // Where Wisconsin has sent the people its own prisons had no room for.
 export default function ContractBeds({ statewide }) {
@@ -14,9 +14,9 @@ export default function ContractBeds({ statewide }) {
     <section id="contract" tabIndex={-1}>
       <h2>In {yearOf(atPeak.date)}, the overflow went out of state</h2>
       <p className="section-dek">
-        In {apMonthYear(atPeak.date)} the state held {num(atPeak.contract_population)} people in
+        In {monthYear(atPeak.date)} the state held {num(atPeak.contract_population)} people in
         what the department calls contract beds, {num(atPeak.contract_out_of_state)} of them in
-        other states&rsquo; prisons and jails. The last were back by {apMonthYear(statewide[lastAway + 1].date)}. Today the
+        other states&rsquo; prisons and jails. The last were back by {monthYear(statewide[lastAway + 1].date)}. Today the
         overflow goes to Wisconsin county jails: {num(now.contract_county_jails)} people.
       </p>
       <TimeChart

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
 import { scrollToElement } from "./SectionNav.jsx";
-import { TYPE_LABEL, apDate, apMonthYear, num, pct, pct1, signed } from "./format.js";
+import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed } from "./format.js";
 
 const GROUPS = [
   { key: "prisons", label: "Prisons and centers", short: "Prisons", types: ["institution", "center", "secure", "treatment"], sort: "percent" },
@@ -21,6 +21,9 @@ const SORTS = {
 
 const readHash = () => (window.location.hash.match(/^#facility=([a-z0-9-]+)$/) || [])[1] || null;
 const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`);
+
+// A facility the form gives no capacity for: a dash to the eye, words to a screen reader.
+export const noCapacity = <><span aria-hidden="true">—</span><span className="visually-hidden">none listed</span></>;
 
 export default function Facilities({ facilities, latest }) {
   const weeks = facilities.dates.length;
@@ -118,8 +121,8 @@ export default function Facilities({ facilities, latest }) {
       {needle && (
         <p className="find-status" role="status">
           {listed.length
-            ? `${listed.length} on this week's report ${listed.length === 1 ? "matches" : "match"} "${query.trim()}".`
-            : `Nothing on this week's report matches "${query.trim()}". Try a town or a county.`}
+            ? `Showing ${listed.length} on this week’s report that ${listed.length === 1 ? "matches" : "match"} “${query.trim()}”.`
+            : `Nothing on this week’s report matches “${query.trim()}”. Try a town or a county.`}
         </p>
       )}
       {hasCapacity && (
@@ -131,7 +134,7 @@ export default function Facilities({ facilities, latest }) {
       )}
       {listed.length > 0 && (
       <div className="table-wrap">
-      <table className="roster" role="table">
+      <table className="roster" role="table" aria-label="Facilities on this week’s report">
         <thead role="rowgroup">
           <tr role="row">
             {heading("name", "Facility")}
@@ -159,7 +162,7 @@ export default function Facilities({ facilities, latest }) {
                     )}
                   </th>
                   <td role="cell" className="n" data-label={r.type === "juvenile" ? "youth" : "people"}>{num(r.population)}</td>
-                  {hasCapacity && <td role="cell" className="n wide">{num(r.capacity)}</td>}
+                  {hasCapacity && <td role="cell" className="n wide">{r.capacity == null ? noCapacity : num(r.capacity)}</td>}
                   {hasCapacity && (
                     <td role="cell" className="meter-cell">
                       {r.percent != null && (
@@ -224,7 +227,7 @@ function Detail({ facility, dates, onClose }) {
   return (
     <div className="detail-body">
       <p className="detail-facts">
-        On the weekly report since {apMonthYear(facility.first)}. Highest count: {num(facility.population[high])},
+        On the weekly report since {monthYear(facility.first)}. Highest count: {num(facility.population[high])},
         on {apDate(span[high])}{high === last ? ", this week" : ""}.
         {facility.sex === "both" && " Listed with both men and women."}
       </p>

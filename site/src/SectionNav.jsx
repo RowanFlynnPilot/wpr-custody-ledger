@@ -30,7 +30,12 @@ export function goTo(id) {
   target?.focus({ preventScroll: true });
 }
 
-export const jump = (id) => (e) => { e.preventDefault(); goTo(id); };
+export const jump = (id) => (e) => {
+  e.preventDefault();
+  goTo(id);
+  // Keep the address in step, so copying it after a jump gives a link that lands here.
+  window.history.replaceState(null, "", id === "top" ? window.location.pathname + window.location.search : `#${id}`);
+};
 
 // First thing in the page for keyboard and screen-reader users; shown only when it has focus.
 export function SkipLink() {

@@ -2,8 +2,9 @@ import React from "react";
 import TimeChart from "./TimeChart.jsx";
 import { apDate, num, pct, pct1 } from "./format.js";
 
-// Percent of design capacity for women's and men's prisons. Design era only: operating
-// capacity, reported before March 2008, is a different measure and would not share an axis.
+// Percent of capacity for women's and men's prisons since March 2008, when the form began
+// calling the figure design capacity. The measure itself did not change then (see CLAUDE.md);
+// the earlier weeks are in the data and are not drawn here.
 export default function WomenMen({ statewide }) {
   const weeks = statewide.filter((w) => w.capacity_type === "design");
   const now = weeks[weeks.length - 1];

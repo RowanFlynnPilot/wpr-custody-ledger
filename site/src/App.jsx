@@ -8,7 +8,7 @@ import Juvenile from "./Juvenile.jsx";
 import Supervision from "./Supervision.jsx";
 import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
-import SectionNav, { SkipLink, jump } from "./SectionNav.jsx";
+import SectionNav, { SkipLink, goTo, jump } from "./SectionNav.jsx";
 import { apDate, num, ordinal, pct1, signed } from "./format.js";
 import badge from "./assets/wpr-typewriter-badge.png";
 import wordmark from "./assets/wpr-wordmark.png";
@@ -21,7 +21,7 @@ const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more t
 // The newsroom's flag: seal and wordmark, tagline, dateline. The tool's own name sits below it.
 function Flag({ reportDate }) {
   return (
-    <div className="flag" id="top" tabIndex={-1}>
+    <header className="flag" id="top" tabIndex={-1}>
       <a className="flag-lockup" href={HOME} target="_blank" rel="noreferrer">
         <img className="flag-seal" src={badge} alt="" width="68" height="68" />
         <img className="flag-wordmark" src={wordmark} alt="Wausau Pilot & Review" width="640" height="82" />
@@ -31,7 +31,7 @@ function Flag({ reportDate }) {
         <span>{reportDate ? <>Report of {apDate(reportDate)} · updated weekly</> : <>Updated weekly</>}</span>
         <span className="flag-place">Wausau, Wisconsin</span>
       </p>
-    </div>
+    </header>
   );
 }
 
@@ -63,6 +63,20 @@ export default function App() {
     )).then(([statewide, facilities, latest, changes, counties]) => setData({ statewide, facilities, latest, changes, counties }))
       .catch(setError);
   }, []);
+
+  // A link to a section (…#counties) lands on it once the page has drawn; the browser cannot do it
+  // alone because the section does not exist until the data arrives. Inside an article, the embed
+  // script passes the article's own #hash into the frame. Facility links are handled in Facilities.
+  useEffect(() => {
+    if (!data) return undefined;
+    const land = () => {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target?.tagName === "SECTION") setTimeout(() => goTo(target.id), 300);
+    };
+    land();
+    window.addEventListener("hashchange", land);
+    return () => window.removeEventListener("hashchange", land);
+  }, [data]);
 
   if (error || !data) {
     return (
