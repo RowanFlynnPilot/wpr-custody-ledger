@@ -11,7 +11,7 @@ export default function ContractBeds({ statewide }) {
   const atPeak = statewide[peak];
 
   return (
-    <section>
+    <section id="contract" tabIndex={-1}>
       <h2>In {yearOf(atPeak.date)}, the overflow went out of state</h2>
       <p className="section-dek">
         In {apMonthYear(atPeak.date)} the state held {num(atPeak.contract_population)} people in

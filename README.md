@@ -27,9 +27,11 @@ center, contract jail and juvenile facility, and the number of people on probati
 - **Population** is the Total Population column of DOC's ADULT INSTITUTIONS row: people in
   Division of Adult Institutions custody plus Division of Community Corrections holds. It is
   the figure news reports cite for the size of the prison system.
-- **Capacity changed meaning on March 14, 2008.** Before that date DOC reported operating
-  capacity; since then it reports design capacity. The two are not comparable, so
-  `capacity_type` travels with every row. Do not draw one capacity line across that date.
+- **Capacity was renamed on March 14, 2008.** Before that date DOC's form called it operating
+  capacity; since then, design capacity. The definition printed on the form is the same word
+  for word (the original design capacity plus modifications and expansions, leaving out beds
+  added to cope with crowding), and the total was 17,711 the week before the rename and
+  17,714 the week of it. `capacity_type` carries DOC's label for each row.
 - **Capacity is the sum of DOC's facility rows.** In 136 of the 1,446 reports the total DOC
   printed does not equal the sum of its own rows: a subtotal formula left out a new prison,
   most of the correctional centers, or, for the first 12 weeks of design capacity, every

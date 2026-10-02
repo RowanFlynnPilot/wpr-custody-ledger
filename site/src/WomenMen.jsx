@@ -13,7 +13,7 @@ export default function WomenMen({ statewide }) {
   const peak = women.indexOf(Math.max(...women));
 
   return (
-    <section>
+    <section id="women" tabIndex={-1}>
       <h2>{women[women.length - 1] > men[men.length - 1] ? <>Women&rsquo;s prisons are the most crowded</> : <>Women&rsquo;s and men&rsquo;s prisons</>}</h2>
       <p className="section-dek">
         The {num(now.women_population)} women in state custody are held in space designed
@@ -31,6 +31,8 @@ export default function WomenMen({ statewide }) {
       <p className="chart-note">
         The vertical scale starts at 100%, the point where a prison holds exactly what it was
         designed for. The women&rsquo;s rate was highest on {apDate(weeks[peak].date)}, at {pct1(women[peak])}.
+        It jumps in November 2011, when a correctional center that had held women went back to
+        holding men and its beds left the women&rsquo;s total.
         Women held in facilities listed with the men&rsquo;s, such as the Wisconsin Resource
         Center, are counted with the women.
       </p>

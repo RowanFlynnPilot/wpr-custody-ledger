@@ -52,7 +52,7 @@ def week(report: dict) -> tuple[dict, list[dict], list[dict]]:
         'date': report['report_date'],
         'population': headline['population'],
         'capacity': adult['capacity'],
-        'capacity_type': report['capacity_type'],  # 'operating' before 2008-03-14, 'design' after; not comparable
+        'capacity_type': report['capacity_type'],  # DOC's label: 'operating' before 2008-03-14, 'design' after
         'capacity_printed': headline['capacity'],  # differs from capacity only in corrections.CAPACITY_MISPRINTS
         'men_population': headline['population'] - women['population'],
         'men_capacity': adult['capacity'] - women['capacity'],

@@ -9,7 +9,7 @@ export default function Supervision({ statewide }) {
   const perPrisoner = (now.supervision_population / now.population).toFixed(1);
 
   return (
-    <section>
+    <section id="supervision" tabIndex={-1}>
       <h2>{now.supervision_population > now.population ? "More people are on probation or parole than in prison" : "Probation and parole"}</h2>
       <p className="section-dek">
         The department supervised {num(now.supervision_population)} people on probation or parole
@@ -19,7 +19,7 @@ export default function Supervision({ statewide }) {
         on supervision held in custody, at the Milwaukee Secure Detention Facility and in county jails.</>}
       </p>
       <TimeChart
-        dates={statewide.map((w) => w.date)} height={300} yMin={0}
+        dates={statewide.map((w) => w.date)} height={220} yMin={0}
         series={[
           { key: "prison", label: "In prison", color: COLOR.population, values: statewide.map((w) => w.population), endLabel: num(now.population) },
           { key: "supervision", label: "On probation or parole", color: "var(--chart-2)",

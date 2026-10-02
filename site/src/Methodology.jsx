@@ -5,7 +5,7 @@ const csv = (name) => `${import.meta.env.BASE_URL}data/csv/${name}.csv`;
 
 export default function Methodology({ latest }) {
   return (
-    <section className="method">
+    <section className="method" id="method" tabIndex={-1}>
       <h2>How this is compiled</h2>
       <div className="method-grid">
         <div>

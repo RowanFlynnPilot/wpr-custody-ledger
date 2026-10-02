@@ -29,6 +29,13 @@ try {
       areas: document.querySelectorAll(".chart svg path.area").length,
       cards: document.querySelectorAll(".card").length,
       rows: document.querySelectorAll(".roster tbody tr").length,
+      jumps: document.querySelectorAll(".section-nav a").length,
+      meter: !!document.querySelector(".hero-bar"),
+      clipped: [...document.querySelectorAll(".chart-frame")].filter((frame) =>
+        [...frame.querySelectorAll("svg text")].some((t) => {
+          const box = t.getBoundingClientRect(), outer = frame.getBoundingClientRect();
+          return box.left < outer.left - 0.5 || box.right > outer.right + 0.5;
+        })).length,
       overflow: document.documentElement.scrollWidth - window.innerWidth,
     }));
     check(!seen.failed, `${name}: the page shows its load-error message`);
@@ -37,7 +44,19 @@ try {
     check(seen.lines >= 7, `${name}: only ${seen.lines} chart lines drawn`);
     check(seen.areas === 4, `${name}: ${seen.areas} stacked areas, expected 4`);
     check(seen.cards >= 1, `${name}: no close-to-home cards`);
-    check(seen.rows >= 30, `${name}: only ${seen.rows} facility rows`);
+    check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
+    check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
+    check(seen.meter, `${name}: the system-wide capacity bar is missing`);
+    check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
+
+    // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.
+    await page.click(".facilities > .more");
+    const allRows = await page.locator(".roster tbody tr").count();
+    check(allRows >= 30, `${name}: only ${allRows} facility rows after "Show all"`);
+    await page.fill(".find input", "lincoln");
+    const found = await page.locator(".roster .name").allTextContents();
+    check(found.includes("Lincoln County Jail") && found.includes("Lincoln Hills School"),
+      `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
     check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
 
     // A shared link opens its facility, on the right tab, with its history drawn.

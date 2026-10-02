@@ -7,8 +7,9 @@ import { apDate, num, time, yearOf } from "./format.js";
 //
 // series: [{ key, label, color, values, width?, legend?, endLabel? }]  values[i] may be null
 // wash:   { upper, lower, color }   fills between two series where both exist
-// marks:  [{ index, value, text, place? }]  a dot on the data with a short label
-// vrules: [{ index, text }]   hrules: [{ value, text }]
+// marks:  [{ index, value, text, place?, wideOnly? }]  a dot on the data with a short label
+// vrules: [{ index, text, short? }]   hrules: [{ value, text }]
+// table:  a yearly table of the same figures under the chart (on unless the caller supplies its own)
 
 const MARGIN = { top: 26, right: 62, bottom: 26, left: 46 };
 
@@ -31,7 +32,7 @@ function path(points) {
 
 export default function TimeChart({
   dates, series, wash, marks = [], vrules = [], hrules = [], stacked = false,
-  height = 340, yMin, yMax, format = num, label, tooltipNote,
+  height = 340, yMin, yMax, format = num, label, tooltipNote, table = true,
 }) {
   const wrap = useRef(null);
   const [width, setWidth] = useState(0);
@@ -45,11 +46,6 @@ export default function TimeChart({
     observer.observe(wrap.current);
     return () => observer.disconnect();
   }, []);
-
-  const narrow = width < 560;
-  const margin = narrow ? { ...MARGIN, right: 58, left: 40 } : MARGIN;
-  const plotW = width - margin.left - margin.right;
-  const plotH = height - margin.top - margin.bottom;
 
   const times = useMemo(() => dates.map(time), [dates]);
   // Stacked: each series sits on the ones before it.
@@ -71,6 +67,18 @@ export default function TimeChart({
   const y0 = Math.floor(lo / step + 1e-9) * step, y1 = Math.ceil(hi / step - 1e-9) * step;
   const ticks = [];
   for (let v = y0; v <= y1 + 1e-9; v += step) ticks.push(Math.round(v * 1e6) / 1e6);
+
+  const narrow = width < 560;
+  // Margins are measured from what has to fit in them: the longest tick label on the left and the
+  // longest end label on the right. Both are 12px mono, about 7.3px a character.
+  const longest = (texts) => Math.max(0, ...texts.map((t) => String(t).length));
+  const margin = {
+    ...MARGIN,
+    left: Math.max(30, longest(ticks.map(format)) * 7.3 + 14),
+    right: Math.max(14, longest(drawn.map((s) => s.endLabel || "")) * 7.3 + 22),
+  };
+  const plotW = width - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
   const x = (i) => margin.left + ((times[i] - times[0]) / (times[times.length - 1] - times[0] || 1)) * plotW;
   const y = (v) => margin.top + plotH - ((v - y0) / (y1 - y0)) * plotH;
 
@@ -111,6 +119,7 @@ export default function TimeChart({
 
   const legend = drawn.filter((s) => s.legend !== false);
   const tipLeft = active != null && x(active) > margin.left + plotW * 0.58;
+  const yearEnds = dates.map((_, i) => i).filter((i) => i === dates.length - 1 || yearOf(dates[i + 1]) !== yearOf(dates[i]));
 
   return (
     <figure className="chart">
@@ -128,7 +137,9 @@ export default function TimeChart({
         className="chart-frame" ref={wrap} style={{ height }} tabIndex={0} role="group"
         aria-label={`${label} Use the arrow keys to read each week.`}
         onKeyDown={onKey} onBlur={() => setActive(null)}
-        onPointerMove={(e) => setActive(nearest(e.clientX))} onPointerLeave={() => setActive(null)}
+        onPointerMove={(e) => setActive(nearest(e.clientX))} onPointerDown={(e) => setActive(nearest(e.clientX))}
+        // A mouse leaving clears the readout; a finger lifting leaves it up until the reader taps elsewhere.
+        onPointerLeave={(e) => { if (e.pointerType === "mouse") setActive(null); }}
       >
         {width > 0 && <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
           {ticks.map((t) => (
@@ -152,7 +163,7 @@ export default function TimeChart({
           {vrules.map((r) => (
             <g key={r.text}>
               <line className="rule" x1={x(r.index)} x2={x(r.index)} y1={margin.top - 6} y2={margin.top + plotH} />
-              <text className="note" x={x(r.index) + 5} y={margin.top + plotH - 8}>{r.text}</text>
+              <text className="note" x={x(r.index) + 5} y={margin.top + plotH - 8}>{narrow && r.short ? r.short : r.text}</text>
             </g>
           ))}
 
@@ -177,7 +188,7 @@ export default function TimeChart({
                   d={path(s.top.map((v, i) => (v == null ? null : [x(i), y(v)])))} />
               ))}
 
-          {marks.map((m) => {
+          {marks.filter((m) => !(narrow && m.wideOnly)).map((m) => {
             const px = x(m.index), py = y(m.value);
             const above = m.place !== "below";
             const anchor = px > margin.left + plotW * 0.72 ? "end" : px < margin.left + plotW * 0.2 ? "start" : "middle";
@@ -221,7 +232,7 @@ export default function TimeChart({
             <div className="tooltip-date">{apDate(dates[active])}</div>
             {[...drawn].reverse().map((s) => s.values[active] != null && (
               <div className="tooltip-row" key={s.key}>
-                <span className="key-line" style={{ background: s.color }} />
+                <span className={stacked ? "key-box" : "key-line"} style={{ background: s.color }} />
                 <strong>{format(s.values[active])}</strong>
                 <span>{s.label}</span>
               </div>
@@ -230,8 +241,39 @@ export default function TimeChart({
           </div>
         )}
       </div>
+      {table && (
+        <details className="table-view">
+          <summary>Show these figures as a table</summary>
+          <table>
+            <caption>The last report of each year.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Report</th>
+                {series.map((s) => <th scope="col" className="n" key={s.key}>{s.label}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {yearEnds.slice().reverse().map((i) => (
+                <tr key={dates[i]}>
+                  <th scope="row">{apDate(dates[i])}</th>
+                  {series.map((s) => <td className="n" key={s.key}>{s.values[i] == null ? "" : format(s.values[i])}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      )}
     </figure>
   );
+}
+
+// The newest `count` weeks of a facility's history, blank where it was not on the report, so
+// every small trend line on the page covers the same stretch of time.
+export function recent(facility, count, weeks) {
+  return Array.from({ length: count }, (_, k) => {
+    const i = weeks - count + k - facility.start;
+    return i >= 0 && i < facility.population.length ? facility.population[i] : null;
+  });
 }
 
 // A small trend line for a table row or card. No axes: the number beside it carries the value.

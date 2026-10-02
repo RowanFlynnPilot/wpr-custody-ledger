@@ -15,7 +15,7 @@ export default function Juvenile({ statewide, facilities }) {
   const atSchools = (i) => schools.reduce((sum, f) => sum + (f.population[i - f.start] ?? 0), 0);
 
   return (
-    <section>
+    <section id="juvenile" tabIndex={-1}>
       <h2>{youth[last] < youth[0] / 2 ? "Juvenile prisons emptied as adult prisons filled" : "Youth in state juvenile facilities"}</h2>
       <p className="section-dek">
         The state held {num(youth[0])} youth in its juvenile facilities in {apMonthYear(dates[0])}. It

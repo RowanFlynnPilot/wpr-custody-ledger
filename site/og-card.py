@@ -5,11 +5,12 @@
 import json
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 SITE = Path(__file__).resolve().parent
 FONTS = SITE / "node_modules" / "@fontsource"
 OUT = SITE / "public" / "og-image.png"
+SEAL = SITE / "src" / "assets" / "wpr-typewriter-badge.png"
 
 W, H, LEFT, RIGHT = 1200, 630, 80, 1120
 CREAM, INK, INK_SOFT = "#f6f2e9", "#1f2421", "#55594f"
@@ -52,17 +53,21 @@ def main() -> None:
     draw.rectangle([LEFT, 86, RIGHT, 88], fill=INK)  # the newspaper double rule
     draw.rectangle([LEFT, 92, RIGHT, 92], fill=INK)
 
-    draw.text((LEFT, 112), "A NEWSROOM DATA PROJECT  ·  WAUSAU PILOT & REVIEW", font=font("jetbrains-mono", 400, 21), fill=TEAL)
+    # The newsroom's seal beside its name. The file is drawn on white, so multiply it onto the cream.
+    seal = Image.open(SEAL).convert("RGB").resize((72, 72), Image.LANCZOS)
+    patch = image.crop((LEFT, 106, LEFT + 72, 178))
+    image.paste(ImageChops.multiply(patch, seal), (LEFT, 106))
+    draw.text((LEFT + 90, 130), "A NEWSROOM DATA PROJECT  ·  WAUSAU PILOT & REVIEW", font=font("jetbrains-mono", 400, 21), fill=TEAL)
     title = "The Custody Ledger"
-    draw.text((LEFT - 4, 150), title, font=fitted(draw, title, "fraunces", 900, 130), fill=INK)
+    draw.text((LEFT - 4, 178), title, font=fitted(draw, title, "fraunces", 900, 130), fill=INK)
 
     dek = font("fraunces", 400, 35)
     lines = wrap(draw, "How many people Wisconsin holds in state prison, every week since 1999, "
                        "against what its prisons were designed to hold.", dek, RIGHT - LEFT)
     for i, line in enumerate(lines):
-        draw.text((LEFT, 306 + i * 46), line, font=dek, fill=INK)
+        draw.text((LEFT, 332 + i * 46), line, font=dek, fill=INK)
 
-    top, bottom = 470, 530
+    top, bottom = 482, 538
     pitch = (RIGHT - LEFT) / marks
     for i in range(marks):
         x = LEFT + i * pitch
@@ -71,7 +76,7 @@ def main() -> None:
 
     caption = (f"Each mark is {PEOPLE_PER_MARK} people in state prison; the {marks - within} in rust "
                "are beyond design capacity.")
-    draw.text((LEFT, 552), caption, font=fitted(draw, caption, "jetbrains-mono", 400, 21), fill=INK_SOFT)
+    draw.text((LEFT, 558), caption, font=fitted(draw, caption, "jetbrains-mono", 400, 21), fill=INK_SOFT)
 
     OUT.parent.mkdir(exist_ok=True)
     image.save(OUT, optimize=True)

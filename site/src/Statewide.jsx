@@ -9,6 +9,7 @@ export default function Statewide({ statewide, changes }) {
   const last = statewide.length - 1;
   const now = statewide[last];
   const firstDesign = statewide.findIndex((w) => w.capacity_type === "design");
+  const over = now.population - now.capacity;
 
   const series = [
     { key: "operating", label: "Operating capacity", legendLabel: "Capacity", color: COLOR.capacity, width: 1.5,
@@ -20,15 +21,15 @@ export default function Statewide({ statewide, changes }) {
   ];
 
   // The three turns in the line, found in the data rather than typed in.
-  const at = (i, text, place) => ({ index: i, value: statewide[i].population, text, place, color: COLOR.population });
+  const at = (i, text, place, wideOnly) => ({ index: i, value: statewide[i].population, text, place, wideOnly, color: COLOR.population });
   const contractPeak = statewide.reduce((best, w, i) => (w.contract_population > statewide[best].contract_population ? i : best), 0);
   const since2020 = statewide.findIndex((w) => w.date >= "2020-01-01");
   const low = statewide.reduce((best, w, i) => (i >= since2020 && w.population < statewide[best].population ? i : best), since2020);
   const oldPeak = statewide.findIndex((w) => w.date === changes.population.prior_peak.date);
   const marks = [
-    at(contractPeak, `${apMonthYear(dates[contractPeak])}: ${num(statewide[contractPeak].contract_population)} of them in contract beds`, "below"),
+    at(contractPeak, `${apMonthYear(dates[contractPeak])}: ${num(statewide[contractPeak].contract_population)} of them in contract beds`, "below", true),
     at(low, `${apMonthYear(dates[low])}: ${num(statewide[low].population)}`, "below"),
-    ...(changes.population.record ? [at(oldPeak, `${apMonthYear(dates[oldPeak])}: ${num(statewide[oldPeak].population)}`)] : []),
+    ...(changes.population.record ? [at(oldPeak, `${apMonthYear(dates[oldPeak])}: ${num(statewide[oldPeak].population)}`, "above", true)] : []),
   ];
 
   const allValues = statewide.flatMap((w) => [w.population, w.capacity]);
@@ -39,26 +40,28 @@ export default function Statewide({ statewide, changes }) {
   const yearly = statewide.filter((w, i) => i === last || yearOf(statewide[i + 1].date) !== yearOf(w.date));
 
   return (
-    <section>
-      <h2>Every week since 1999</h2>
+    <section id="statewide" tabIndex={-1}>
+      <h2>{over > 0 ? <>{num(over)} more people than the prisons were designed to hold</> : <>Every week since 1999</>}</h2>
       <p className="section-dek">
-        The line marked capacity is what the prisons and contract beds were meant to hold. The
-        shaded gap is everyone beyond it.
+        Every weekly count since 1999. The line marked capacity is what the prisons and contract
+        beds were meant to hold; the shaded gap is everyone beyond it.
       </p>
       <TimeChart
-        dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
+        dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380} table={false}
         wash={{ upper: "population", lower: ["operating", "design"], color: COLOR.population }}
-        vrules={[{ index: firstDesign, text: "Design capacity from March 2008" }]}
+        vrules={[{ index: firstDesign, text: "Called design capacity from March 2008", short: "Renamed in 2008" }]}
         label="Line chart: people held in Wisconsin's adult prison system and its capacity, weekly since 1999."
         tooltipNote={(i) => {
           const w = statewide[i];
-          return `${num(w.population - w.capacity)} over ${w.capacity_type} capacity (${pct1(pct(w.population, w.capacity))})`;
+          return `${num(w.population - w.capacity)} over capacity (${pct1(pct(w.population, w.capacity))})`;
         }}
       />
       <p className="chart-note">
-        The vertical scale starts at {num(floor)}, not zero. Until March 2008 the department
-        reported operating capacity, which counted beds added to cope with crowding; since then
-        it has reported design capacity, which does not. The two are not comparable.
+        The vertical scale starts at {num(floor)}, not zero. Capacity is what each prison was
+        built to hold, plus later expansions; it leaves out beds added to cope with crowding. In
+        March 2008 the department began calling the figure design capacity instead of operating
+        capacity. The definition printed on its form did not change. Move across the chart, or
+        select it and use the arrow keys, to read any week.
       </p>
       <details className="table-view">
         <summary>Show these figures as a table</summary>

@@ -1,17 +1,18 @@
 import React from "react";
-import { Sparkline } from "./TimeChart.jsx";
+import { Sparkline, recent } from "./TimeChart.jsx";
 import { TYPE_LABEL, apMonthYear, num, pct, pct1, signed } from "./format.js";
 
 // Which counties count as home is set once, in scraper/build.py, and arrives in changes.json.
 const YEAR = 52;
+const TREND_WEEKS = 5 * 52; // every card's trend line covers the same five years
 
 const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`);
 
 export default function CloseToHome({ facilities, statewide, changes }) {
   const home = changes.home_counties;
-  const current = statewide.length - 1;
+  const weeks = statewide.length;
   const local = facilities.facilities
-    .filter((f) => home.includes(f.county) && f.start + f.population.length - 1 === current)
+    .filter((f) => home.includes(f.county) && f.start + f.population.length === weeks)
     .map((f) => {
       const population = f.population[f.population.length - 1];
       const yearAgo = f.population[f.population.length - 1 - YEAR];
@@ -24,7 +25,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
   const inMarathon = facilities.facilities.some((f) => f.county === "Marathon");
 
   return (
-    <section>
+    <section id="home" tabIndex={-1}>
       <h2>Close to home</h2>
       <p className="section-dek">
         State custody in Marathon County and the counties around it, from the same weekly reports.
@@ -34,8 +35,8 @@ export default function CloseToHome({ facilities, statewide, changes }) {
       <div className="cards">
         {holding.map((f) => (
           <article className="card" key={f.id}>
-            <p className="card-kicker">{f.county} County · {TYPE_LABEL[f.type]}</p>
             <h3>{f.name}</h3>
+            <p className="card-where">{f.county} County · {TYPE_LABEL[f.type].toLowerCase()}</p>
             <p className="card-figure">
               <span className="card-num">{num(f.now)}</span>
               {f.type === "county_jail" ? " state prisoners held on contract"
@@ -49,23 +50,20 @@ export default function CloseToHome({ facilities, statewide, changes }) {
               </p>
             )}
             <p className="card-line">
-              {f.yearChange == null ? `First on the report in ${apMonthYear(f.first)}`
+              {f.yearChange == null ? `On the report since ${apMonthYear(f.first)}`
                 : f.yearChange === 0 ? "Unchanged from a year ago"
                 : `${signed(f.yearChange)} from a year ago`}
             </p>
-            <div className="card-spark">
-              <Sparkline values={f.population} width={220} height={38} />
-              <span>weekly since {apMonthYear(f.first)}</span>
-            </div>
+            <Sparkline values={recent(f, TREND_WEEKS, weeks)} width={220} height={38} />
           </article>
         ))}
       </div>
-      {empty.length > 0 && (
-        <p className="chart-note">
-          Also on the department&rsquo;s contract list and holding no state prisoners this
-          week: {list(empty.map((f) => f.name))}.
-        </p>
-      )}
+      <p className="chart-note">
+        Each trend line covers the past five years on its own scale; a line that starts partway
+        across belongs to a place that joined the report during that time.
+        {empty.length > 0 && <> Also on the department&rsquo;s contract list and holding no state
+        prisoners this week: {list(empty.map((f) => f.name))}.</>}
+      </p>
     </section>
   );
 }

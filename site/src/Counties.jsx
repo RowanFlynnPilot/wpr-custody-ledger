@@ -28,6 +28,11 @@ export default function Counties({ counties, home }) {
   const under = <span className="withheld">under {counties.min_cell}</span>;
   const withheld = <span className="withheld">withheld</span>;
   const change = (r) => (r.yearChange == null ? "" : r.yearChange === 0 ? "0" : signed(r.yearChange));
+  const toggle = (
+    <button type="button" className="more" aria-expanded={all} onClick={() => setAll(!all)}>
+      {all ? "Show only Marathon County and its neighbors" : "Show all 72 counties"}
+    </button>
+  );
 
   const line = (r, footer) => (
     <tr key={r.county} className={!footer && all && home.includes(r.county) ? "home" : undefined}>
@@ -41,7 +46,7 @@ export default function Counties({ counties, home }) {
   );
 
   return (
-    <section>
+    <section id="counties" tabIndex={-1}>
       <h2>Who each county sends to prison</h2>
       <p className="section-dek">
         {first.people != null && <>Of the {num(state.people)} people in state prison
@@ -51,6 +56,7 @@ export default function Counties({ counties, home }) {
         violating probation, parole or extended supervision with no new sentence. Statewide the
         share is {pct1(share(state))}.</>}
       </p>
+      {toggle}
       <div className="table-wrap">
         <table className="county-table">
           <thead>
@@ -59,7 +65,7 @@ export default function Counties({ counties, home }) {
               <th scope="col" className="n">In state prison</th>
               <th scope="col" className="n">In a year</th>
               <th scope="col" className="n">No new sentence</th>
-              <th scope="col" className="n">Share</th>
+              <th scope="col" className="n">Share of total</th>
               <th scope="col" className="wide">Since {apMonthYear(counties.months[0])}</th>
             </tr>
           </thead>
@@ -67,11 +73,12 @@ export default function Counties({ counties, home }) {
           <tfoot>{line(state, true)}</tfoot>
         </table>
       </div>
-      <button type="button" className="more" aria-expanded={all} onClick={() => setAll(!all)}>
-        {all ? "Show only Marathon County and its neighbors" : "Show all 72 counties"}
-      </button>
+      {all && toggle}
       <p className="chart-note">
-        These are counts, not rates: larger counties send more people. &ldquo;No new sentence&rdquo; follows
+        {all && <>Marathon County and its neighbors are in bold. </>}
+        These are counts, not rates: larger counties send more people. The statewide total is
+        lower than the weekly figure at the top of the page because it is older and leaves out
+        people held temporarily. &ldquo;No new sentence&rdquo; follows
         the admission type the department records for each person; the department publishes no
         definitions for its file. Counts that would describe fewer than {counties.min_cell} people
         are withheld. Source: the department&rsquo;s monthly Persons in Our Care data files,
