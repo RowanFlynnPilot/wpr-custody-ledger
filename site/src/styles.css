@@ -252,7 +252,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 .colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: 980px; margin: 0 auto; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
 .colophon-seal { display: block; width: 56px; height: 56px; }
 .colophon-inner > div { flex: 1 1 0; min-width: 0; }
-.colophon p { margin: 0 0 0.3rem; max-width: var(--measure); overflow-wrap: anywhere; } /* the address is one long word */
+.colophon p { margin: 0 0 0.3rem; max-width: var(--measure); word-break: break-word; overflow-wrap: anywhere; } /* the address is one long word; the first is for Safari before 15.4 */
 .colophon p:last-child { margin: 0; color: var(--ink); }
 .to-top { margin-left: auto; white-space: nowrap; padding: 0.2rem 0; }
 
@@ -271,7 +271,9 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 a:active, .name:active, .sort:active, .more:active, summary:active { background-color: var(--teal-tint); box-shadow: 0 0 0 3px var(--teal-tint); }
 .tabs button:active { background: var(--teal-tint); }
 .tabs button[aria-pressed="true"]:active { background: var(--teal); }
-.flag-lockup:active, .colophon a:has(img):active { background: none; box-shadow: none; opacity: 0.7; }
+/* Two rules, not one list: a browser without :has() would throw out the whole list. */
+.flag-lockup:active { background: none; box-shadow: none; opacity: 0.7; }
+.colophon a:has(img):active { background: none; box-shadow: none; opacity: 0.7; }
 
 /* the long view: two shorter stories share a row, their headlines, text, charts and notes aligned */
 .pair section { margin-bottom: 3.25rem; }

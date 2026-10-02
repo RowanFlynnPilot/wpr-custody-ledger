@@ -29,7 +29,8 @@ export default function Statewide({ statewide, changes }) {
   const marks = [
     at(contractPeak, `${apMonthYear(dates[contractPeak])}: ${num(statewide[contractPeak].contract_population)} of them in contract beds`, "below", true),
     at(low, `${apMonthYear(dates[low])}: ${num(statewide[low].population)}`, "below"),
-    ...(changes.population.record ? [at(oldPeak, `${apMonthYear(dates[oldPeak])}: ${num(statewide[oldPeak].population)}`, "above", true)] : []),
+    // In a record week this is the record it broke; in any other week, the record that still stands.
+    ...(oldPeak >= 0 && oldPeak !== last ? [at(oldPeak, `${apMonthYear(dates[oldPeak])}: ${num(statewide[oldPeak].population)}`, "above", true)] : []),
   ];
 
   const allValues = statewide.flatMap((w) => [w.population, w.capacity]);

@@ -32,7 +32,12 @@ export const time = (iso) => {
 };
 
 const ORDINALS = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth"];
-export const ordinal = (n) => ORDINALS[n] || `${n}th`;
+// First through ninth as words (AP); from 10th, the figure with its proper ending.
+export const ordinal = (n) => {
+  if (ORDINALS[n]) return ORDINALS[n];
+  const ending = n % 100 >= 11 && n % 100 <= 13 ? "th" : { 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th";
+  return `${n}${ending}`;
+};
 
 export const TYPE_LABEL = {
   institution: "Prison",

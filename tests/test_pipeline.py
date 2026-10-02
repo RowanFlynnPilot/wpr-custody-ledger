@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from brief import ap_date, brief, flags, moved, title
+from brief import ap_date, brief, flags, moved, ordinal, title
 from build import HOME_COUNTIES, changes, check_series, county_series, year_before
 from counties import aggregate, check_against_weekly_report, check_fresh, month_end, pending
 from parse import parse_date, parse_report
@@ -296,6 +296,12 @@ def test_changes_lists_home_county_facilities_and_only_those():
     assert result['local'] == [{'id': 'lincoln-county-jail', 'name': 'Lincoln County Jail', 'type': 'county_jail',
                                 'county': 'Lincoln', 'capacity': None, 'population': 19, 'week_change': 6,
                                 'year_change': 9, 'record': True}]
+
+
+def test_ordinals_past_ninth_take_the_right_ending():
+    # A record streak can run for months: "the 21th straight weekly record" must never reach the newsroom.
+    assert [ordinal(n) for n in (2, 9, 10, 11, 12, 13, 20, 21, 22, 23, 24, 101, 111, 112)] == [
+        'second', 'ninth', '10th', '11th', '12th', '13th', '20th', '21st', '22nd', '23rd', '24th', '101st', '111th', '112th']
 
 
 def test_brief_wording():

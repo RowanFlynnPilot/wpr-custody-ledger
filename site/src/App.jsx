@@ -103,11 +103,12 @@ export default function App() {
   const over = crowding.over_capacity;
   const crowded = changes.facilities.most_crowded[0];
   const homeCounty = changes.home_counties[0];
-  const fromHome = counties.counties.find((c) => c.county === homeCounty).people.at(-1);
+  const countyAsOf = counties.months[counties.months.length - 1];
+  const fromHome = counties.counties.find((c) => c.county === homeCounty).people[counties.months.length - 1];
   // How the count moved. The report before is a week back unless the department skipped one.
   const move = (n) => (n > 0 ? `rose by ${num(n)}` : n < 0 ? `fell by ${num(-n)}` : "did not change");
   const weekBack = (new Date(latest.report_date) - new Date(changes.previous_date)) / 864e5 === 7
-    ? "in a week" : `since the report of ${apDate(changes.previous_date)}`;
+    ? "in a week" : `since the report of ${apDate(changes.previous_date)},`;
   const { week_change: week, year_change: year } = population;
   const moved = week !== 0 && Math.sign(week) === Math.sign(year)
     ? `${move(week)} ${weekBack} and by ${num(Math.abs(year))} in a year`
@@ -176,7 +177,7 @@ export default function App() {
         <div className="stat">
           <span className="stat-num">{fromHome == null ? "—" : num(fromHome)}</span>
           <span className="stat-label">people in state prison who were convicted in {homeCounty} County</span>
-          <span className="stat-sub">as of {apDate(counties.months.at(-1))}</span>
+          <span className="stat-sub">as of {apDate(countyAsOf)}</span>
         </div>
       </section>
 

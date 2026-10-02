@@ -18,7 +18,11 @@ def ap_date(iso: str, year: bool = True) -> str:
 
 
 def ordinal(n: int) -> str:
-    return ORDINALS[n] if n < len(ORDINALS) else f'{n}th'
+    """First through ninth as words (AP); from 10th, the figure with its proper ending."""
+    if n < len(ORDINALS):
+        return ORDINALS[n]
+    ending = 'th' if 11 <= n % 100 <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
+    return f'{n}{ending}'
 
 
 def moved(n: int, since: str) -> str:
