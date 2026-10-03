@@ -19,7 +19,7 @@ const FILES = ["statewide", "facilities", "latest", "changes", "counties"]; // v
 const STALE_DAYS = 21; // the pipeline's own limit: DOC has never skipped more than one week
 
 // The newsroom's flag: seal and wordmark, tagline, dateline. The tool's own name sits below it.
-function Flag({ reportDate }) {
+export function Flag({ reportDate }) {
   return (
     <header className="flag" id="top" tabIndex={-1}>
       <a className="flag-lockup" href={HOME} target="_blank" rel="noreferrer">
@@ -36,14 +36,14 @@ function Flag({ reportDate }) {
 }
 
 // The tool's name and what it is. Neither waits for the data, so they are on the page at once.
-function Masthead({ children }) {
+export function Masthead({ children }) {
   return (
     <header className="masthead">
       <h1>The Custody Ledger</h1>
       <p className="dek">
         How many people Wisconsin holds in state prison, week by week since 1999, against what
         its prisons were built to hold. Every figure comes from the Department of
-        Corrections&rsquo; own weekly reports.
+        Corrections&rsquo; own reports.
       </p>
       {children}
     </header>
@@ -126,6 +126,11 @@ export default function App() {
   const rateRecord = crowding.record_date === latest.report_date;
   const rates = statewide.map((w) => w.population / w.capacity);
   const lowest = rates.indexOf(Math.min(...rates));
+  const rateLow = lowest === statewide.length - 1;
+  const alwaysOver = rates[lowest] > 1;
+  // A week at either end of the record says so; otherwise the record rate is given as the lede gives the record count.
+  const rateNote = rateRecord ? ", the highest rate in weekly records that begin in 1999"
+    : rateLow ? ", the lowest rate in weekly records that begin in 1999" : "";
 
   return (
     <>
@@ -147,7 +152,7 @@ export default function App() {
           ? <>{aWeek ? "" : ","} and the most in weekly records that begin in 1999.{population.record_streak > 1 &&
               <> It is the {ordinal(population.record_streak)} record in as many weeks.</>}</>
           : <>. The record, {num(population.prior_peak.value)}, was set {apDate(population.prior_peak.date)}.</>}
-        {" "}The department puts its capacity at {num(crowding.capacity)}.
+        {over <= 0 && <> The department puts its capacity at {num(crowding.capacity)}.</>}
       </p>
 
       {/* The whole system as one bar: everyone the prisons were designed for, then everyone beyond. */}
@@ -163,13 +168,11 @@ export default function App() {
             <span><span className="key-box" style={{ background: "var(--chart-2)" }} /><strong>{num(over)}</strong> people beyond that</span>
           </p>
           <p className="chart-note">
-            That is {pct1(crowding.percent)} of design capacity
-            {rateRecord && ", the highest rate in weekly records that begin in 1999"}, and the count
+            That is {pct1(crowding.percent)} of design capacity{rateNote}, and the count
             is {yearly}.{" "}
-            {rateRecord
-              ? <>The lowest rate was {pct1(100 * rates[lowest])}, on {apDate(statewide[lowest].date)}.</>
-              : <>The highest rate in weekly records that begin in 1999 was {pct1(crowding.record_percent)},
-                on {apDate(crowding.record_date)}, and the lowest {pct1(100 * rates[lowest])}, on {apDate(statewide[lowest].date)}.</>}
+            {!rateRecord && <>The highest rate, {pct1(crowding.record_percent)}, was set {apDate(crowding.record_date)}
+              {alwaysOver ? ", and every" : "."}</>}
+            {alwaysOver && <>{rateRecord ? "Every" : ""} weekly report since 1999 has been over capacity.</>}
           </p>
           <p className="chart-note">
             Design capacity is what each prison was built to hold, plus later expansions,

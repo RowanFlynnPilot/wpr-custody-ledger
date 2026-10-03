@@ -9,7 +9,10 @@ import "@fontsource/public-sans/700.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/700.css";
 import "./styles.css";
-import App from "./App.jsx";
+import App, { Flag, Masthead } from "./App.jsx";
+
+// For the fallback in index.html: the script ran, so the page is not stuck before it.
+window.__ledgerStarted = true;
 
 // A render error must never leave a blank frame inside a news article.
 class ErrorBoundary extends React.Component {
@@ -19,12 +22,16 @@ class ErrorBoundary extends React.Component {
   render() {
     return this.state.failed
       ? (
-        <main className="page">
-          <p className="load-error" role="alert">
-            The Custody Ledger hit an error and could not display.
-            <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
-          </p>
-        </main>
+        <>
+          <Flag />
+          <main className="page">
+            <Masthead />
+            <p className="load-error" role="alert">
+              The Custody Ledger hit an error and could not display.
+              <button type="button" className="more" onClick={() => window.location.reload()}>Try again</button>
+            </p>
+          </main>
+        </>
       )
       : this.props.children;
   }

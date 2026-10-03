@@ -82,11 +82,10 @@ export default function CloseToHome({ facilities, statewide, changes }) {
         </table>
       </div>
       <p className="chart-note">
-        A county jail&rsquo;s count is the state prisoners it holds on contract, not everyone in
-        it, and the department&rsquo;s form gives a jail no capacity of its own, so no percentage is
-        shown. Select a name for its full history.
-        {empty.length > 0 && <> Also on the department&rsquo;s contract list and holding no state
-        prisoners this week: {list(empty.map((f) => typeset(f.name)))}.</>}
+        A county jail&rsquo;s count is only the state prisoners it holds on contract, and the form
+        gives jails no capacity, so no percentage is shown. Select a name for its full history.
+        {empty.length > 0 && <> Also on the contract list with no state prisoners this
+        week: {list(empty.map((f) => typeset(f.name)))}.</>}
       </p>
     </section>
   );

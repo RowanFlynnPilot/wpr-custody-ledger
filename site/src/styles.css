@@ -216,7 +216,7 @@ thead .n { font-family: var(--body); white-space: normal; }
   -webkit-mask: var(--cross) center / 12px no-repeat; mask: var(--cross) center / 12px no-repeat;
 }
 .find-clear:active::before { background: var(--ink); }
-.find-status { font-size: var(--fs-md); margin: 0 0 0.6rem; }
+.find-status { font-size: var(--fs-md); margin: 0 0 0.6rem; word-break: break-word; overflow-wrap: anywhere; }
 .find-status:empty { margin: 0; }
 .find-status:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
@@ -247,7 +247,7 @@ th[aria-sort="ascending"] .sort::after { border-top: 0; border-bottom: 5px solid
 .meter-in { background: var(--chart-1); border-radius: 0; }
 .meter-over { background: var(--chart-2); border-radius: 0 4px 4px 0; }
 .meter-in:nth-last-child(2) { border-radius: 0 4px 4px 0; }
-.meter-num { display: inline-block; width: 3.6rem; margin-left: 0.4rem; text-align: right; font-family: var(--mono); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.meter-num { display: inline-block; width: 6.6ch; margin-left: 0.4rem; text-align: right; font-family: var(--mono); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
 .change { font-size: var(--fs-sm); }
 tr.open > th, tr.open > td { border-bottom-color: transparent; background: var(--row-open); }
 tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--row-open); }
@@ -289,7 +289,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--row-open); }
   .name:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
   .find-clear:hover::before { background: var(--ink); }
   .find input:hover { border-color: var(--ink-soft); }
-  .roster tbody tr:not(.detail):not(.open):hover > *, .county-table tbody tr:hover > * { background: var(--row-hover); }
+  .roster > tbody > tr:not(.detail):not(.open):hover > *, .county-table > tbody > tr:hover > * { background: var(--row-hover); }
   .tabs button:hover { background: var(--teal-tint); }
   .tabs button[aria-pressed="true"]:hover { background: var(--teal-deep); }
 }
@@ -353,35 +353,38 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .county-table .year { display: none; }
 }
 /* The facility table on a phone: the header row becomes a line of sort buttons, and each
-   facility is a block with its name on top and its figures on one line beneath. */
+   facility is a block with its name on top and its figures on one line beneath. Every selector
+   reaches only the list's own rows (>), never the yearly table inside an opened facility. */
 @media (max-width: 560px) {
-  .roster, .roster thead, .roster tbody, .roster tr, .roster th, .roster td { display: block; }
-  .roster thead tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1rem; padding: 0.3rem 0.7rem; border-bottom: 2px solid var(--ink); }
+  .roster, .roster > thead, .roster > tbody, .roster > * > tr, .roster > * > tr > th, .roster > * > tr > td { display: block; }
+  .roster > thead > tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1rem; padding: 0.3rem 0.7rem; border-bottom: 2px solid var(--ink); }
   /* The second content gives the words no text for a screen reader: the buttons say what they sort. */
-  .roster thead tr::before { content: "Sort by"; content: "Sort by" / ""; font-size: 0.75rem; color: var(--ink-soft); }
+  .roster > thead > tr::before { content: "Sort by"; content: "Sort by" / ""; font-size: 0.75rem; color: var(--ink-soft); }
   /* The local list has nothing to sort: its headings stay for screen readers only, and each figure names its unit. */
-  .local thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .roster thead th { border: 0; padding: 0; }
-  .roster thead .wide { display: none; }
-  .roster .sort { padding: 0.7rem 0; }
+  .local > thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .roster > thead > tr > th { border: 0; padding: 0; }
+  .roster > thead > tr > .wide { display: none; }
+  .roster > thead .sort { padding: 0.7rem 0; }
   /* Fixed first column and fixed-width percent, so every bar is drawn on the same scale. */
-  .roster tbody tr { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); align-items: center; gap: 0.3rem 0.6rem; padding: 0.25rem 0.7rem 0.7rem; border-bottom: 1px solid var(--line); }
-  .roster tbody th, .roster tbody td { border: 0; padding: 0; }
-  .roster tbody th { grid-area: 1 / 1 / 2 / -1; }
-  .roster tbody td.wide { display: none; }
+  .roster > tbody > tr { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); align-items: center; gap: 0.3rem 0.6rem; padding: 0.25rem 0.7rem 0.7rem; border-bottom: 1px solid var(--line); }
+  .roster > tbody > tr > th, .roster > tbody > tr > td { border: 0; padding: 0; }
+  .roster > tbody > tr > th { grid-area: 1 / 1 / 2 / -1; }
+  .roster > tbody > tr > td.wide { display: none; }
   .roster .name { padding: 0.7rem 0 0.5rem; }
-  .roster td.n { grid-area: 2 / 1; text-align: left; font-size: var(--fs-md); }
-  .roster td.n::after { content: " " attr(data-label); font-family: var(--body); font-size: var(--fs-xs); color: var(--ink-soft); }
-  .roster td.meter-cell { grid-area: 2 / 2; min-width: 0; display: flex; align-items: center; }
-  /* The year's change shares the county's line, at the right. */
-  .roster td.change { grid-area: 1 / 1 / 2 / -1; justify-self: end; align-self: end; font-size: var(--fs-sm); }
+  .roster > tbody > tr > td.n { grid-area: 2 / 1; text-align: left; font-size: var(--fs-md); }
+  .roster > tbody > tr > td.n::after { content: " " attr(data-label); font-family: var(--body); font-size: var(--fs-xs); color: var(--ink-soft); }
+  .roster > tbody > tr > td.meter-cell { grid-area: 2 / 2; min-width: 0; display: flex; align-items: center; }
+  /* The year's change shares the county's line, at the right; the county line leaves it room,
+     so a long one wraps instead of running under it (at large text sizes it did). */
+  .roster > tbody > tr > td.change { grid-area: 1 / 1 / 2 / -1; justify-self: end; align-self: end; font-size: var(--fs-sm); }
+  .roster > tbody > tr:not(.bare) > th .where { padding-right: 6.5rem; }
   .roster .meter { flex: 1; width: auto; }
-  .roster .meter-num { width: 3.4rem; margin-left: 0.3rem; }
+  .roster .meter-num { margin-left: 0.3rem; }
   /* A row with nothing under its name (a county jail) puts the change beside its count instead,
      so a long name never runs into it. */
-  .roster tr.bare td.change { grid-area: 2 / 2; align-self: center; }
-  .roster tr.detail { display: block; padding: 0 0.7rem 0.8rem; background: var(--row-open); }
-  .roster tr.open { border-bottom: 0; background: var(--row-open); }
+  .roster > tbody > tr.bare > td.change { grid-area: 2 / 2; align-self: center; }
+  .roster > tbody > tr.detail { display: block; padding: 0 0.7rem 0.8rem; background: var(--row-open); }
+  .roster > tbody > tr.open { border-bottom: 0; background: var(--row-open); }
 }
 @media (prefers-reduced-motion: no-preference) {
   /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
@@ -402,6 +405,7 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   th[aria-sort] .sort::after { forced-color-adjust: none; border-top-color: CanvasText; }
   th[aria-sort="ascending"] .sort::after { border-bottom-color: CanvasText; }
   .find-clear::before { forced-color-adjust: none; background: CanvasText; }
+  tr.open > th, tr.open > td { border-top: 2px solid Highlight; }
 }
 /* On paper: the figures and the charts, without the controls. */
 @media print {
@@ -410,7 +414,9 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .skip-link, .section-nav, .find, .tabs, .more, .table-view, .to-top, .detail-actions { display: none; }
   .hero-bar span, .meter span, .key-box, .key-line, .key-mark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .chart-frame svg { max-width: 100%; height: auto; }
-  figure, tr, .stat-strip, .hero-meter { break-inside: avoid; }
-  h2, h3, .section-dek { break-after: avoid; }
+  figure, tr, .stat-strip, .hero-meter, #statewide, #home, #women, #contract, #juvenile, #supervision { break-inside: avoid; }
+  h2, h3, .section-dek, .bar-key { break-after: avoid; }
+  .sort { display: contents; }
+  th[aria-sort] .sort::after { display: none; }
   a { color: inherit; }
 }

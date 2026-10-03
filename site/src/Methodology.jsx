@@ -44,10 +44,9 @@ export default function Methodology({ latest }) {
           <h3>What capacity means</h3>
           <p>
             Design capacity is the department&rsquo;s measure: what each prison was built to hold,
-            plus later expansions, leaving out beds added to cope with crowding. To its prisons&rsquo;
-            beds the department adds the contract beds it rents, in county jails and, in the early
-            2000s, in other states, and counts each of those as full. The form called the same
-            measure operating capacity until March 2008.
+            plus later expansions, leaving out beds added to cope with crowding. The department adds
+            the contract beds it rents and counts each as full. The form called the same measure
+            operating capacity until March 2008.
           </p>
           <h3>Where the Ledger differs from the form</h3>
           <p>

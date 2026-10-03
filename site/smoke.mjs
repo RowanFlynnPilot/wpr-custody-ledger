@@ -122,6 +122,14 @@ const visit = async (browser, name, options) => {
   }));
   check(opened.name === "Lincoln Hills School" && opened.chart, `${name}: #facility=lincoln-hills opened ${JSON.stringify(opened)}`);
   check(opened.overflow <= 1, `${name}: with a facility open the page is ${opened.overflow}px wider than the screen`);
+  // Its yearly table keeps a table's layout: the phone rules for the facility list once reached into it
+  // and printed every year's figures on top of each other.
+  await page.locator("tr.detail details.table-view summary").click();
+  const nested = await page.evaluate(() => {
+    const cells = [...document.querySelectorAll("tr.detail .table-view th, tr.detail .table-view td")];
+    return { cells: cells.length, notCells: cells.filter((c) => getComputedStyle(c).display !== "table-cell").length };
+  });
+  check(nested.cells > 0 && nested.notCells === 0, `${name}: the yearly table inside an opened facility lost its layout ${JSON.stringify(nested)}`);
 
   // A link to a section lands on it, though the section does not exist until the data arrives.
   await page.goto(`${URL}#counties`, { waitUntil: "networkidle" });

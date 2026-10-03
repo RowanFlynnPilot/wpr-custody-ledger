@@ -67,7 +67,7 @@
       <main class="page">
         <header class="masthead">
           <h1>The Custody Ledger</h1>
-          <p class="dek">How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold. Every figure comes from the Department of Corrections&rsquo; own weekly reports.</p>
+          <p class="dek">How many people Wisconsin holds in state prison, week by week since 1999, against what its prisons were built to hold. Every figure comes from the Department of Corrections&rsquo; own reports.</p>
         </header>
         <p class="loading" role="status">Loading this week&rsquo;s figures…</p>
       </main></div>
@@ -80,6 +80,15 @@
         <a href="data/csv/facility_population.csv">facility_population.csv</a>.
       </p>
     </noscript>
+    <script>
+      setTimeout(function () {
+        var line = document.querySelector("#root .loading");
+        if (window.__ledgerStarted || !line) return;
+        line.className = "load-error";
+        line.setAttribute("role", "alert");
+        line.innerHTML = 'The Custody Ledger could not start in this browser. <a href="">Reload the page</a>, or download the figures as spreadsheets: <a href="data/csv/statewide.csv">statewide</a> and <a href="data/csv/facility_population.csv">by facility</a>.';
+      }, 15000);
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

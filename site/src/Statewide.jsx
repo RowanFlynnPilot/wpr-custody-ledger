@@ -17,14 +17,12 @@ export default function Statewide({ statewide, changes }) {
       values: statewide.map((w) => w.population), endLabel: num(now.population) },
   ];
 
-  // The three turns in the line, found in the data rather than typed in.
+  // The turns in the line, found in the data rather than typed in.
   const at = (i, text, place, wideOnly) => ({ index: i, value: statewide[i].population, text, place, wideOnly, color: COLOR.population });
-  const contractPeak = statewide.reduce((best, w, i) => (w.contract_population > statewide[best].contract_population ? i : best), 0);
   const since2020 = statewide.findIndex((w) => w.date >= "2020-01-01");
   const low = statewide.reduce((best, w, i) => (i >= since2020 && w.population < statewide[best].population ? i : best), since2020);
   const oldPeak = statewide.findIndex((w) => w.date === changes.population.prior_peak.date);
   const marks = [
-    at(contractPeak, `${apMonthYear(dates[contractPeak])}: ${num(statewide[contractPeak].contract_population)} of them in contract beds`, "below", true),
     at(low, `${apMonthYear(dates[low])}: ${num(statewide[low].population)}`, "below"),
     // In a record week this is the record it broke; in any other week, the record that still stands.
     ...(oldPeak >= 0 && oldPeak !== last ? [at(oldPeak, `${apMonthYear(dates[oldPeak])}: ${num(statewide[oldPeak].population)}`, "above", true)] : []),
@@ -44,9 +42,8 @@ export default function Statewide({ statewide, changes }) {
         ? <>From {num(statewide[low].population)} in {yearOf(dates[low])} to {num(now.population)} this week</>
         : <>Every week since 1999</>}</h2>
       <p className="section-dek">
-        Every weekly count since 1999. The gray line is capacity: what the prisons were built to
-        hold, plus the contract beds the state rents in county jails and, in the early 2000s, in
-        other states, each counted as full. The shaded gap is everyone beyond it.
+        Every weekly count since 1999. The gray line is capacity, counting the contract beds the
+        state rents as full. The shaded gap is everyone beyond it.
       </p>
       <TimeChart
         dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
@@ -80,10 +77,9 @@ export default function Statewide({ statewide, changes }) {
       </TimeChart>
       <p className="chart-note">
         The vertical scale starts at {num(floor)}, not zero. Before 2005 the capacity line rises
-        and falls with the beds the state rented out of state, and it steps up where a new
-        prison&rsquo;s beds were counted before the prison filled. In March 2008 the department
-        renamed the figure from operating to design capacity without changing its definition.
-        Move across the chart, or select it and use the arrow keys, to read any week.
+        and falls with beds rented in other states, and it steps up where a new prison&rsquo;s beds
+        were counted before the prison filled. Move across the chart, or use the arrow keys, to
+        read any week.
       </p>
     </section>
   );

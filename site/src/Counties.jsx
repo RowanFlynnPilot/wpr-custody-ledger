@@ -8,7 +8,7 @@ const COLUMNS = {
   county: { text: "County of conviction", short: "County", value: (r) => r.county },
   people: { text: "In state prison", short: "In prison", value: (r) => r.people },
   yearChange: { text: "In a year", value: (r) => r.yearChange },
-  noNew: { text: "No new sentence", value: (r) => r.noNew },
+  noNew: { text: "No new sentence", short: "No new", value: (r) => r.noNew },
   share: { text: "Share with no new sentence", short: "% no new", value: share },
 };
 
@@ -117,12 +117,10 @@ export default function Counties({ counties, home }) {
       <p className="chart-note">
         {all && <>Marathon County and its neighbors are in bold. </>}
         These are counts, not rates: larger counties send more people. The statewide total is
-        lower than the weekly figure at the top of the page because it is older and leaves out
-        people held temporarily. &ldquo;No new sentence&rdquo; follows
-        the admission type the department records for each person; the department publishes no
-        definitions for its file. Counts that would describe fewer than {counties.min_cell} people
-        are withheld. Source: the department&rsquo;s monthly Persons in Our Care data files,
-        {" "}{monthYear(counties.months[0])} through {monthYear(asOf)}.
+        below the weekly figure at the top because it is older and leaves out people held
+        temporarily. &ldquo;No new sentence&rdquo; is read from the department&rsquo;s admission
+        types, which it does not define. Figures that would describe fewer than {counties.min_cell} people
+        are withheld. From the department&rsquo;s monthly Persons in Our Care files since {monthYear(counties.months[0])}.
       </p>
     </section>
   );

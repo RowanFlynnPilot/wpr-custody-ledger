@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
-import { jump, scrollToElement } from "./SectionNav.jsx";
+import { goTo, jump, scrollToElement } from "./SectionNav.jsx";
 import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed, typeset } from "./format.js";
 
 const GROUPS = [
@@ -22,10 +22,10 @@ const SORTS = {
   yearChange: (a, b) => (b.yearChange ?? -Infinity) - (a.yearChange ?? -Infinity),
 };
 
-const readHash = () => (window.location.hash.match(/^#facility=([a-z0-9-]+)$/) || [])[1] || null;
+const readHash = () => (window.location.hash.toLowerCase().match(/^#facility=([a-z0-9-]+)$/) || [])[1] || null;
 const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`);
-// Curly quotes typed or pasted from an article match the straight ones in the department's names.
-const plainQuotes = (s) => s.replace(/[\u2018\u2019]/g, "'");
+// Apostrophes, straight or curly, are ignored on both sides: "women's", "women’s" and "womens" all match.
+const plainQuotes = (s) => s.replace(/['\u2018\u2019]/g, "");
 // What a search reads for each facility: its name and county, its initials (GBCI, WSPF) and, for the
 // state's own prisons and centers, the word "prison", so "Waupun prison" finds Waupun Correctional Institution.
 const initials = (name) => name.split(/[\s-]+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("");
@@ -70,13 +70,14 @@ export default function Facilities({ facilities, latest, counties }) {
   const [query, setQuery] = useState("");
   const findInput = useRef(null);
   const findStatus = useRef(null);
-  const [all, setAll] = useState(() => readHash() != null);
+  const [all, setAll] = useState(() => groupOf(readHash()) != null);
 
   const active = GROUPS.find((g) => g.key === group);
   const sortKey = sort?.key || active.sort;
-  const needle = plainQuotes(query.trim().toLowerCase());
-  // A search looks across every group and finds a facility with every word typed; otherwise the chosen group.
-  const words = needle.split(/\s+/);
+  const needle = plainQuotes(query.trim().toLowerCase()).replace(/\s+co\.?(?=\s|$)/g, " county");
+  // A search looks across every group and finds a facility with every word typed, a county's name and
+  // "county" counting as one phrase; otherwise the chosen group.
+  const words = needle.match(/\S+\s+county\b|\S+/g) || [];
   const matching = needle
     ? rows.filter((r) => words.every((w) => searchText(r).includes(w)))
     : rows.filter((r) => active.types.includes(r.type));
@@ -92,7 +93,7 @@ export default function Facilities({ facilities, latest, counties }) {
   const asOf = counties.months.length - 1;
   const plain = needle.replace(/(\s+county)?(\s+jail)?$/, "");
   const countyHits = plain.length >= 4 ? counties.counties.filter((c) => c.county.toLowerCase().startsWith(plain)) : [];
-  const countyHit = countyHits.length === 1 ? countyHits[0] : null;
+  const countyHit = countyHits.find((c) => c.county.toLowerCase() === plain) || (countyHits.length === 1 ? countyHits[0] : null);
   // Under the default order (most crowded first) the big prisons sit far down the list: say where they stand.
   const big = !needle && group === "prisons" && sortKey === "percent" && !sort?.reversed
     ? listed.filter((r) => r.population >= 1000 && r.percent != null) : [];
@@ -235,7 +236,10 @@ export default function Facilities({ facilities, latest, counties }) {
                   <tr role="row" className="detail">
                     <td role="cell" colSpan={hasCapacity ? 6 : 4}>
                       <Detail facility={h} row={r} date={latest.report_date} dates={facilities.dates}
-                        onClose={() => { toggle(r.id); document.querySelector(`#facility-${r.id} .name`)?.focus(); }} />
+                        onClose={() => {
+                          toggle(r.id);
+                          setTimeout(() => { const name = document.querySelector(`#facility-${r.id} .name`); if (name) name.focus(); else goTo("facilities"); });
+                        }} />
                     </td>
                   </tr>
                 )}
@@ -280,7 +284,9 @@ function Detail({ facility, row, date, dates, onClose }) {
     { key: "population", label: facility.type === "juvenile" ? "Youth held" : "People held", color: COLOR.population,
       values: facility.population, endLabel: num(facility.population[last]) },
   ];
-  const copy = () => navigator.clipboard.writeText(window.location.href).then(() => setCopied(true));
+  const embedded = window.parent !== window && document.referrer && !document.referrer.startsWith(window.location.origin);
+  const link = embedded ? `${document.referrer.split("#")[0]}#facility=${facility.id}` : window.location.href;
+  const copy = () => navigator.clipboard.writeText(link).then(() => setCopied(true));
   // What the row cannot show on a narrow screen: what kind of place it is, and this week's count against its capacity.
   const kind = KIND[row.type] && `${row.security ? `${row.security}-security ` : ""}${KIND[row.type]}${row.county ? ` in ${row.county} County` : ""}`;
   return (

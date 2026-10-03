@@ -37,14 +37,11 @@ export default function WomenMen({ statewide }) {
         tooltipNote={(i) => `${num(weeks[i].women_population)} women, ${num(weeks[i].men_population)} men`}
       />
       <p className="chart-note">
-        The vertical scale starts at 100%, the point where a prison holds exactly what it was
-        designed for. The women&rsquo;s rate was highest on {apDate(weeks[peak].date)}, at {pct1(women[peak])}.
-        A line steps down when beds are counted before they fill, as when the form first listed
-        Stanley&rsquo;s 1,500 in September 2002 and 1,400 at New Lisbon and Chippewa Valley in April 2004.
-        The women&rsquo;s rate jumps in November 2011, when a correctional center that had held women
-        went back to holding men and its beds left the women&rsquo;s total.
-        Women held in facilities listed with the men&rsquo;s, such as the Wisconsin Resource
-        Center, are counted with the women.
+        The scale starts at 100%, where a prison holds exactly what it was designed for. The
+        women&rsquo;s rate was highest on {apDate(weeks[peak].date)}, at {pct1(women[peak])}. A line
+        steps down where new beds were counted before they filled (Stanley in 2002; New Lisbon and
+        Chippewa Valley in 2004), and the women&rsquo;s rate jumps in November 2011, when a center
+        that had held women went back to holding men.
       </p>
     </section>
   );
