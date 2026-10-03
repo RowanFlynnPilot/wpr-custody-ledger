@@ -10,9 +10,10 @@ const AP_MONTHS = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug
 // Report dates are calendar dates, not instants: parse the parts so no time zone can shift them.
 const parts = (iso) => iso.split("-").map(Number);
 
+// The space after the month does not break, so a line never ends on "Oct." with "2, 2026" below it.
 export const apDate = (iso) => {
   const [y, m, d] = parts(iso);
-  return `${AP_MONTHS[m - 1]} ${d}, ${y}`;
+  return `${AP_MONTHS[m - 1]}\u00a0${d}, ${y}`;
 };
 export const apMonthYear = (iso) => {
   const [y, m] = parts(iso);
@@ -38,6 +39,9 @@ export const ordinal = (n) => {
   const ending = n % 100 >= 11 && n % 100 <= 13 ? "th" : { 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th";
   return `${n}${ending}`;
 };
+
+// The department's names are typed with straight apostrophes (Milwaukee Women's); the page sets curly ones.
+export const typeset = (name) => name.replace(/'/g, "\u2019");
 
 export const TYPE_LABEL = {
   institution: "Prison",

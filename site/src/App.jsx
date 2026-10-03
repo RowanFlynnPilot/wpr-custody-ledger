@@ -9,7 +9,7 @@ import Supervision from "./Supervision.jsx";
 import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
 import SectionNav, { SkipLink, goTo, jump } from "./SectionNav.jsx";
-import { apDate, num, ordinal, pct1, signed } from "./format.js";
+import { apDate, num, ordinal, pct1, signed, typeset } from "./format.js";
 import badge from "./assets/wpr-typewriter-badge.png";
 import wordmark from "./assets/wpr-wordmark.png";
 
@@ -119,6 +119,13 @@ export default function App() {
   const moved = (n, from) => (n === 0 ? `unchanged from ${from}` : `${n > 0 ? "up" : "down"} ${num(Math.abs(n))} from ${from}`);
   const weekly = moved(week, aWeek ? "a week earlier" : apDate(changes.previous_date));
   const yearly = moved(year, "a year earlier");
+  // The capacity total is the prisons' own beds plus the contract beds the department rents, which its
+  // form counts at exactly the number of people in them (true of every report since 1999).
+  const own = latest.facilities.reduce((sum, f) => sum + (f.capacity || 0), 0);
+  const rented = crowding.capacity - own;
+  const rateRecord = crowding.record_date === latest.report_date;
+  const rates = statewide.map((w) => w.population / w.capacity);
+  const lowest = rates.indexOf(Math.min(...rates));
 
   return (
     <>
@@ -140,7 +147,7 @@ export default function App() {
           ? <>{aWeek ? "" : ","} and the most in weekly records that begin in 1999.{population.record_streak > 1 &&
               <> It is the {ordinal(population.record_streak)} record in as many weeks.</>}</>
           : <>. The record, {num(population.prior_peak.value)}, was set {apDate(population.prior_peak.date)}.</>}
-        {" "}Its prisons were designed to hold {num(crowding.capacity)}.
+        {" "}The department puts its capacity at {num(crowding.capacity)}.
       </p>
 
       {/* The whole system as one bar: everyone the prisons were designed for, then everyone beyond. */}
@@ -152,13 +159,22 @@ export default function App() {
             <span className="hero-over" style={{ flexGrow: over }} />
           </div>
           <p className="hero-key">
-            <span><span className="key-box" style={{ background: "var(--chart-1)" }} /><strong>{num(crowding.capacity)}</strong> the prisons were designed to hold</span>
+            <span><span className="key-box" style={{ background: "var(--chart-1)" }} /><strong>{num(crowding.capacity)}</strong> within design capacity</span>
             <span><span className="key-box" style={{ background: "var(--chart-2)" }} /><strong>{num(over)}</strong> people beyond that</span>
           </p>
           <p className="chart-note">
-            That is {pct1(crowding.percent)} of design capacity: what each prison was built to
-            hold, plus later expansions, leaving out beds added to cope with crowding. The
-            count is {yearly}.
+            That is {pct1(crowding.percent)} of design capacity
+            {rateRecord && ", the highest rate in weekly records that begin in 1999"}, and the count
+            is {yearly}.{" "}
+            {rateRecord
+              ? <>The lowest rate was {pct1(100 * rates[lowest])}, on {apDate(statewide[lowest].date)}.</>
+              : <>The highest rate in weekly records that begin in 1999 was {pct1(crowding.record_percent)},
+                on {apDate(crowding.record_date)}, and the lowest {pct1(100 * rates[lowest])}, on {apDate(statewide[lowest].date)}.</>}
+          </p>
+          <p className="chart-note">
+            Design capacity is what each prison was built to hold, plus later expansions,
+            leaving out beds added to cope with crowding: {num(own)} this week.
+            {rented > 0 && <> The department adds the {num(rented)} beds it rents in county jails and elsewhere, and counts every one as full.</>}
           </p>
         </div>
       )}
@@ -172,7 +188,7 @@ export default function App() {
         <div className="stat">
           <span className="stat-num">{changes.facilities.over_capacity}<span className="stat-of"> of {changes.facilities.with_capacity}</span></span>
           <span className="stat-label">prisons and centers hold more people than they were designed for</span>
-          <span className="stat-sub">{crowded.name}: {pct1(crowded.percent)}</span>
+          <span className="stat-sub">{typeset(crowded.name)}:{"\u00a0"}{pct1(crowded.percent)}</span>
         </div>
         <div className="stat">
           <span className="stat-num">{num(jails.value)}</span>

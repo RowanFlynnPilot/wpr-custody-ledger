@@ -148,7 +148,9 @@ def changes(statewide: list[dict], facilities: list[dict]) -> dict:
         'crowding': {'capacity': now['capacity'], 'capacity_type': now['capacity_type'],
                      'percent': percent(now['population'], now['capacity']),
                      'over_capacity': now['population'] - now['capacity'],
-                     # the highest rate since this kind of capacity came into use
+                     # Contract beds, which DOC adds to capacity at exactly the number of people in them
+                     'contract_beds': now['capacity'] - sum(r['capacity'] for r in with_capacity),
+                     # the highest rate in the whole record
                      'record_percent': percent(most_crowded['population'], most_crowded['capacity']),
                      'record_date': most_crowded['date']},
         'men': {**moved(statewide, 'men_population', year),

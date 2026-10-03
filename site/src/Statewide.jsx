@@ -2,7 +2,8 @@ import React from "react";
 import TimeChart from "./TimeChart.jsx";
 import { apDate, apMonthYear, num, pct, pct1, yearOf } from "./format.js";
 
-export const COLOR = { population: "var(--chart-1)", capacity: "var(--chart-ref)" };
+// Rust is "beyond capacity" everywhere on the page: the top bar, every facility's bar, the shading on a chart.
+export const COLOR = { population: "var(--chart-1)", capacity: "var(--chart-ref)", over: "var(--chart-2)" };
 
 export default function Statewide({ statewide, changes }) {
   const dates = statewide.map((w) => w.date);
@@ -45,11 +46,11 @@ export default function Statewide({ statewide, changes }) {
       <p className="section-dek">
         Every weekly count since 1999. The gray line is capacity: what the prisons were built to
         hold, plus the contract beds the state rents in county jails and, in the early 2000s, in
-        other states. The shaded gap is everyone beyond it.
+        other states, each counted as full. The shaded gap is everyone beyond it.
       </p>
       <TimeChart
         dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
-        wash={{ upper: "population", lower: ["capacity"], color: COLOR.population }}
+        wash={{ upper: "population", lower: ["capacity"], color: COLOR.over }}
         label="Line chart: people held in Wisconsin's adult prison system and its capacity, weekly since 1999."
         tooltipNote={(i) => {
           const w = statewide[i];
@@ -57,9 +58,9 @@ export default function Statewide({ statewide, changes }) {
         }}
       >
         <details className="table-view">
-          <summary>Show these figures as a table</summary>
+          <summary>Show these figures as a table<span className="visually-hidden">: people held and capacity</span></summary>
           <table>
-            <caption>Last report of each year. The full weekly record is in the downloads below.</caption>
+            <caption>People held and capacity, the last report of each year. The full weekly record is in the downloads below.</caption>
             <thead>
               <tr><th scope="col">Report</th><th scope="col" className="n">People held</th><th scope="col" className="n">Capacity</th><th scope="col" className="n">Percent</th><th scope="col" className="full">Capacity type</th></tr>
             </thead>

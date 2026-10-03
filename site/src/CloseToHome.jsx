@@ -1,7 +1,7 @@
 import React from "react";
 import { Sparkline, recent } from "./TimeChart.jsx";
-import { noCapacity } from "./Facilities.jsx";
-import { TYPE_LABEL, apMonthYear, num, pct, pct1, signed } from "./format.js";
+import { BarKey, noCapacity } from "./Facilities.jsx";
+import { TYPE_LABEL, apMonthYear, num, pct, pct1, signed, typeset } from "./format.js";
 
 // Which counties count as home is set once, in scraper/build.py, and arrives in changes.json.
 const YEAR = 52;
@@ -32,12 +32,13 @@ export default function CloseToHome({ facilities, statewide, changes }) {
 
   return (
     <section id="home" tabIndex={-1}>
-      <h2>Close to home</h2>
+      <h2>Near Wausau</h2>
       <p className="section-dek">
         State custody in Marathon County and the counties around it, from the same weekly reports.
         {!inMarathon && <> The reports list no facility in Marathon County: it has no state prison, and its
         jail has not appeared on the department&rsquo;s contract list since 1999.</>}
       </p>
+      <BarKey />
       <div className="table-wrap">
         <table className="roster local" role="table" aria-label="State custody in Marathon County and the counties around it">
           <thead role="rowgroup">
@@ -54,8 +55,8 @@ export default function CloseToHome({ facilities, statewide, changes }) {
             {holding.map((f) => (
               <tr role="row" key={f.id}>
                 <th scope="row" role="rowheader">
-                  <a className="name" href={`#facility=${f.id}`}>{f.name}</a>
-                  <span className="where">{f.county} County · {TYPE_LABEL[f.type].toLowerCase()}</span>
+                  <a className="name" href={`#facility=${f.id}`}>{typeset(f.name)}</a>
+                  <span className="where">{f.county}{"\u00a0"}County · {TYPE_LABEL[f.type].toLowerCase()}</span>
                 </th>
                 <td role="cell" className="n" data-label={UNIT[f.type] || "people"}>{num(f.now)}</td>
                 <td role="cell" className="n wide">{f.capacity == null ? noCapacity : num(f.capacity)}</td>
@@ -81,10 +82,11 @@ export default function CloseToHome({ facilities, statewide, changes }) {
         </table>
       </div>
       <p className="chart-note">
-        County jails hold state prisoners on contract and have no capacity on the state&rsquo;s
-        form. Select a name for its full history.
+        A county jail&rsquo;s count is the state prisoners it holds on contract, not everyone in
+        it, and the department&rsquo;s form gives a jail no capacity of its own, so no percentage is
+        shown. Select a name for its full history.
         {empty.length > 0 && <> Also on the department&rsquo;s contract list and holding no state
-        prisoners this week: {list(empty.map((f) => f.name))}.</>}
+        prisoners this week: {list(empty.map((f) => typeset(f.name)))}.</>}
       </p>
     </section>
   );

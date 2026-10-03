@@ -10,7 +10,7 @@
 
 Wisconsin's adult prison system held 23,927 people on Oct. 2, up 22 from a week earlier and up 393 from a year earlier, according to the Department of Corrections' weekly population report. It is the most in weekly records that begin in 1999 and the sixth record in as many weeks.
 
-The prisons were designed to hold 17,851, which puts the system at 134.0% of design capacity, 6,076 people beyond it. The highest rate in weekly records that begin in 1999 was 134.1%, on Aug. 10, 2018.
+The department puts its design capacity at 17,851: 17,366 beds in its own prisons and centers, plus the 485 contract beds it rents, which it counts as full. That puts the system at 134.0% of capacity, 6,076 people beyond it. The highest rate in weekly records that begin in 1999 was 134.1%, on Aug. 10, 2018.
 
 Women's prisons held 1,749 people, 180.1% of their capacity. Men's prisons were at 131.4%. Of 37 facilities with a capacity, 34 held more people than they were designed for.
 

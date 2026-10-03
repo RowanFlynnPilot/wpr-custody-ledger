@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Sparkline } from "./TimeChart.jsx";
-import { apDate, apMonthYear, monthYear, num, pct, pct1, signed } from "./format.js";
+import { apDate, apMonthYear, monthYear, num, ordinal, pct, pct1, signed } from "./format.js";
 
 const share = (r) => (r.noNew == null ? null : pct(r.noNew, r.people));
 // What each column sorts on. Numbers run largest first, names A to Z; a second click reverses.
@@ -16,6 +16,7 @@ const COLUMNS = {
 // pipeline withholds any count under `min_cell` before it reaches this page; null means withheld.
 export default function Counties({ counties, home }) {
   const [all, setAll] = useState(false);
+  const topToggle = useRef(null);
   const [sort, setSort] = useState({ key: "people", reversed: false });
   const last = counties.months.length - 1;
   const asOf = counties.months[last];
@@ -30,6 +31,9 @@ export default function Counties({ counties, home }) {
   });
   const state = now({ county: "Wisconsin", people: counties.people, no_new_sentence: counties.no_new_sentence });
   const first = now(counties.counties.find((c) => c.county === home[0]));
+  // Where the home county's share stands among the counties whose share is published.
+  const shares = counties.counties.map(now).map(share).filter((s) => s != null);
+  const rank = share(first) == null ? null : shares.filter((s) => s > share(first)).length + 1;
 
   // Withheld figures sort to the bottom whichever way the column runs.
   const value = COLUMNS[sort.key].value;
@@ -47,8 +51,14 @@ export default function Counties({ counties, home }) {
   const withheld = <span className="withheld">withheld</span>;
   const change = (r) => (r.yearChange == null ? "" : r.yearChange === 0 ? "0" : signed(r.yearChange));
   const toggle = (
-    <button type="button" className="more" aria-expanded={all} onClick={() => setAll(!all)}>
+    <button type="button" className="more" aria-expanded={all} ref={topToggle} onClick={() => setAll(!all)}>
       {all ? "Show only Marathon County and its neighbors" : "Show all 72 counties"}
+    </button>
+  );
+  // The same control again under the long table. It goes away when pressed, so focus goes back to the one above.
+  const bottomToggle = (
+    <button type="button" className="more" aria-expanded={all} onClick={() => { setAll(false); topToggle.current?.focus(); }}>
+      Show only Marathon County and its neighbors
     </button>
   );
   const heading = (key) => {
@@ -68,7 +78,7 @@ export default function Counties({ counties, home }) {
 
   const line = (r, footer) => (
     <tr key={r.county} className={!footer && all && home.includes(r.county) ? "home" : undefined}>
-      <th scope="row">{r.county}</th>
+      <th scope="row">{r.county}{!footer && all && home.includes(r.county) && <span className="visually-hidden">, near Wausau</span>}</th>
       <td className="n">{r.people == null ? under : num(r.people)}</td>
       <td className="n year">{change(r)}</td>
       <td className="n">{r.noNew == null ? withheld : num(r.noNew)}</td>
@@ -79,14 +89,16 @@ export default function Counties({ counties, home }) {
 
   return (
     <section id="counties" tabIndex={-1}>
-      <h2>Who each county sends to prison</h2>
+      <h2>Where people in state prison were convicted</h2>
       <p className="section-dek">
         {first.people != null && <>Of the {num(state.people)} people in state prison
         on {apDate(asOf)}, {num(first.people)} were convicted in {first.county} County
         {first.yearChange != null && <>, {first.yearChange === 0 ? "the same as" : `${num(Math.abs(first.yearChange))} ${first.yearChange > 0 ? "more" : "fewer"} than`} a year earlier</>}.</>}
-        {first.noNew != null && <> Of those, {num(first.noNew)}, or {pct1(share(first))}, were there for
-        violating probation, parole or extended supervision with no new sentence. Statewide the
-        share is {pct1(share(state))}.</>}
+        {first.noNew != null && <> Of those, {num(first.noNew)}, or {pct1(share(first))}, were admitted
+        with no new sentence, which usually means they were sent back for breaking the rules of
+        probation, parole or extended supervision. Statewide the share is {pct1(share(state))}.
+        {rank != null && <> {first.county} County&rsquo;s share is the {rank === 1 ? "" : `${ordinal(rank)}-`}highest
+        of the {shares.length} counties with a published figure.</>}</>}
       </p>
       {toggle}
       <div className="table-wrap">
@@ -101,7 +113,7 @@ export default function Counties({ counties, home }) {
           <tfoot>{line(state, true)}</tfoot>
         </table>
       </div>
-      {all && toggle}
+      {all && bottomToggle}
       <p className="chart-note">
         {all && <>Marathon County and its neighbors are in bold. </>}
         These are counts, not rates: larger counties send more people. The statewide total is

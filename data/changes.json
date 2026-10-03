@@ -18,6 +18,7 @@
   "capacity_type": "design",
   "percent": 134.0,
   "over_capacity": 6076,
+  "contract_beds": 485,
   "record_percent": 134.1,
   "record_date": "2018-08-10"
  },

@@ -84,8 +84,12 @@ def brief(changes: dict, latest: dict) -> str:
         lede += (f" The record is {population['prior_peak']['value']:,}, set "
                  f"{ap_date(population['prior_peak']['date'])}.")
 
-    capacity = (f"The prisons were designed to hold {crowding['capacity']:,}, which puts the system at "
-                f"{crowding['percent']}% of {crowding['capacity_type']} capacity, {crowding['over_capacity']:,} "
+    # Not "the prisons were designed to hold": the total includes the contract beds, each counted as full.
+    rented = crowding['contract_beds']
+    capacity = (f"The department puts its {crowding['capacity_type']} capacity at {crowding['capacity']:,}" +
+                (f": {crowding['capacity'] - rented:,} beds in its own prisons and centers, plus the {rented:,} "
+                 'contract beds it rents, which it counts as full' if rented else '') +
+                f". That puts the system at {crowding['percent']}% of capacity, {crowding['over_capacity']:,} "
                 'people beyond it.')
     if crowding['record_date'] == changes['report_date']:
         capacity += ' That is the highest rate in weekly records that begin in 1999.'

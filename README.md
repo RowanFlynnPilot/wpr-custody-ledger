@@ -41,7 +41,11 @@ center, contract jail and juvenile facility, and the number of people on probati
   for 88 adult facilities and contract sites: renames, typos, and units of one prison on
   separate rows. `scraper/registry.py` maps each label to a facility.
 - **Contract beds** are county jails, other states' prisons and federal prisons that held
-  Wisconsin prisoners. They have no capacity of their own on the form.
+  Wisconsin prisoners. No contract site has a capacity of its own on the form, but DOC adds them
+  to the system's capacity at exactly the number of people in them: the capacity on the
+  "Contract Facilities" row equals its population in every report since 1999. So `capacity`
+  is the prisons' own beds plus every occupied contract bed (17,366 + 485 = 17,851 on
+  Oct. 2, 2026).
 - **`sex` and `security`** say where on the form a facility is listed, in its latest report.
 - **Juvenile** figures are the on-grounds population of Division of Juvenile Corrections
   facilities, which the same form reports in a separate section.

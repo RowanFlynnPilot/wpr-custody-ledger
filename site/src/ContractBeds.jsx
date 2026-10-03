@@ -29,6 +29,7 @@ export default function ContractBeds({ statewide }) {
         ]}
         marks={[{ index: peak, value: atPeak.contract_population, color: "var(--ink)",
                   text: `${apMonthYear(atPeak.date)}: ${num(atPeak.contract_population)}` }]}
+        name="People in contract beds"
         label="Stacked area chart: people held in contract beds by where they were held, weekly since 1999."
         tooltipNote={(i) => `${num(statewide[i].contract_population)} in contract beds`}
       />

@@ -1,6 +1,6 @@
 import React from "react";
 import TimeChart from "./TimeChart.jsx";
-import { apMonthYear, monthYear, num } from "./format.js";
+import { apMonthYear, monthYear, num, yearOf } from "./format.js";
 
 const LFB_PAPER = "https://docs.legis.wisconsin.gov/misc/lfb/informational_papers/january_2025/0060_adult_corrections_program_informational_paper_60.pdf";
 const IRMA = ["lincoln-hills", "copper-lake"]; // the two schools share a campus in Lincoln County
@@ -16,16 +16,19 @@ export default function Juvenile({ statewide, facilities }) {
 
   return (
     <section id="juvenile" tabIndex={-1}>
-      <h2>{youth[last] < youth[0] / 2 ? "Juvenile prisons emptied as adult prisons filled" : "Youth in state juvenile facilities"}</h2>
+      <h2>{youth[last] < youth[0] / 2
+        ? <>From {num(youth[0])} youth in {yearOf(dates[0])} to {num(youth[last])} this week</>
+        : "Youth in state juvenile facilities"}</h2>
       <p className="section-dek">
-        The state held {num(youth[0])} youth in its juvenile facilities in {monthYear(dates[0])}. It
-        holds {num(youth[last])} now, {num(atSchools(last))} of them at Lincoln Hills and Copper Lake
+        Youth held in the state&rsquo;s own juvenile facilities, weekly since {monthYear(dates[0])}. Of
+        the {num(youth[last])} held now, {num(atSchools(last))} are at Lincoln Hills and Copper Lake
         schools in Lincoln County.
       </p>
       <TimeChart
         dates={dates} height={250} yMin={0}
-        series={[{ key: "youth", label: "Youth held", color: "var(--chart-3)", values: youth, endLabel: num(youth[last]) }]}
-        marks={[{ index: peak, value: youth[peak], color: "var(--chart-3)", text: `${apMonthYear(dates[peak])}: ${num(youth[peak])}` }]}
+        series={[{ key: "youth", label: "Youth held", color: "var(--chart-1)", values: youth, endLabel: num(youth[last]) }]}
+        marks={[{ index: peak, value: youth[peak], color: "var(--chart-1)", text: `${apMonthYear(dates[peak])}: ${num(youth[peak])}` }]}
+        name="Youth in juvenile facilities"
         label="Line chart: youth held in state juvenile facilities, weekly since 1999."
         tooltipNote={(i) => `${num(atSchools(i))} at Lincoln Hills and Copper Lake`}
       />

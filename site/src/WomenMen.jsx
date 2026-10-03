@@ -19,7 +19,7 @@ export default function WomenMen({ statewide }) {
 
   return (
     <section id="women" tabIndex={-1}>
-      <h2>{women[women.length - 1] > men[men.length - 1] ? <>Women&rsquo;s prisons are the most crowded</> : <>Women&rsquo;s and men&rsquo;s prisons</>}</h2>
+      <h2>{women[women.length - 1] > men[men.length - 1] ? <>Women&rsquo;s prisons are more crowded than men&rsquo;s</> : <>Women&rsquo;s and men&rsquo;s prisons</>}</h2>
       <p className="section-dek">
         The {num(now.women_population)} women in state custody are held in space designed
         for {num(now.women_capacity)}. Each line shows people held as a share of capacity.
@@ -32,6 +32,7 @@ export default function WomenMen({ statewide }) {
         ]}
         marks={early === peak ? [] : [{ index: early, value: women[early], color: "var(--chart-2)", wideOnly: true,
                                         text: `${apMonthYear(weeks[early].date)}: ${pct1(women[early])}` }]}
+        name="Percent of capacity, women and men"
         label="Line chart: people held as a percent of capacity, women's and men's prisons, weekly since 1999."
         tooltipNote={(i) => `${num(weeks[i].women_population)} women, ${num(weeks[i].men_population)} men`}
       />

@@ -2,13 +2,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
 import { jump, scrollToElement } from "./SectionNav.jsx";
-import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed } from "./format.js";
+import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed, typeset } from "./format.js";
 
 const GROUPS = [
   { key: "prisons", label: "Prisons and centers", short: "Prisons", types: ["institution", "center", "secure", "treatment"], sort: "percent" },
   { key: "jails", label: "County jails and contract beds", short: "Contract beds", types: ["county_jail", "out_of_state", "federal", "other"], sort: "population" },
   { key: "juvenile", label: "Juvenile facilities", short: "Juvenile", types: ["juvenile"], sort: "population" },
 ];
+const CONTRACT = GROUPS[1].types;
+// What a facility is, in a sentence: "Medium-security prison in Chippewa County."
+const KIND = { institution: "prison", center: "correctional center", secure: "secure detention facility", treatment: "treatment center", juvenile: "juvenile facility" };
 const YEAR = 52, TREND_WEEKS = 5 * 52;
 const FIRST_ROWS = 10; // shown before "Show all"
 // Each sort in its natural direction: names A to Z, numbers largest first. A second click reverses it.
@@ -21,6 +24,23 @@ const SORTS = {
 
 const readHash = () => (window.location.hash.match(/^#facility=([a-z0-9-]+)$/) || [])[1] || null;
 const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`);
+// Curly quotes typed or pasted from an article match the straight ones in the department's names.
+const plainQuotes = (s) => s.replace(/[\u2018\u2019]/g, "'");
+// What a search reads for each facility: its name and county, its initials (GBCI, WSPF) and, for the
+// state's own prisons and centers, the word "prison", so "Waupun prison" finds Waupun Correctional Institution.
+const initials = (name) => name.split(/[\s-]+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("");
+const searchText = (r) => plainQuotes(`${r.name} ${r.county ? `${r.county} county` : ""} ${initials(r.name)} ${GROUPS[0].types.includes(r.type) ? "prison" : ""}`).toLowerCase();
+
+// The key to the bars, in both facility lists.
+export function BarKey() {
+  return (
+    <p className="bar-key">
+      <span className="key-box" style={{ background: "var(--chart-1)" }} /> up to capacity
+      <span className="key-box" style={{ background: "var(--chart-2)" }} /> beyond it
+      <span className="key-mark" /> capacity
+    </p>
+  );
+}
 
 // A facility the form gives no capacity for: a dash to the eye, words to a screen reader.
 export const noCapacity = <><span aria-hidden="true">—</span><span className="visually-hidden">none listed</span></>;
@@ -49,14 +69,16 @@ export default function Facilities({ facilities, latest, counties }) {
   const [sort, setSort] = useState(null); // { key, reversed }, or null for the group's own order
   const [query, setQuery] = useState("");
   const findInput = useRef(null);
+  const findStatus = useRef(null);
   const [all, setAll] = useState(() => readHash() != null);
 
   const active = GROUPS.find((g) => g.key === group);
   const sortKey = sort?.key || active.sort;
-  const needle = query.trim().toLowerCase();
-  // A search looks across every group, by name or county; otherwise the chosen group.
+  const needle = plainQuotes(query.trim().toLowerCase());
+  // A search looks across every group and finds a facility with every word typed; otherwise the chosen group.
+  const words = needle.split(/\s+/);
   const matching = needle
-    ? rows.filter((r) => `${r.name} ${r.county ? `${r.county} county` : ""}`.toLowerCase().includes(needle))
+    ? rows.filter((r) => words.every((w) => searchText(r).includes(w)))
     : rows.filter((r) => active.types.includes(r.type));
   const ordered = [...matching].sort(SORTS[sortKey]);
   if (sort?.reversed) ordered.reverse();
@@ -68,7 +90,7 @@ export default function Facilities({ facilities, latest, counties }) {
   const hasCapacity = listed.some((r) => r.capacity != null);
   // A county typed into the search box: the county table's count for it, so a county with no facility still gets an answer.
   const asOf = counties.months.length - 1;
-  const plain = needle.replace(/\s+county$/, "");
+  const plain = needle.replace(/(\s+county)?(\s+jail)?$/, "");
   const countyHits = plain.length >= 4 ? counties.counties.filter((c) => c.county.toLowerCase().startsWith(plain)) : [];
   const countyHit = countyHits.length === 1 ? countyHits[0] : null;
   // Under the default order (most crowded first) the big prisons sit far down the list: say where they stand.
@@ -77,14 +99,19 @@ export default function Facilities({ facilities, latest, counties }) {
 
   // A shared link opens its facility; the WordPress embed forwards the article's #hash into the frame.
   useEffect(() => {
-    const show = () => {
+    // A link followed on the page (from Close to home) also takes keyboard focus to the facility it opened.
+    const show = (e) => {
       const id = readHash();
       setOpen(id);
       if (!groupOf(id)) return;
       setGroup(groupOf(id));
       setQuery("");
       setAll(true);
-      setTimeout(() => scrollToElement(document.getElementById(`facility-${id}`)), 50);
+      setTimeout(() => {
+        const row = document.getElementById(`facility-${id}`);
+        scrollToElement(row);
+        if (e) row?.querySelector(".name")?.focus({ preventScroll: true });
+      }, 50);
     };
     if (readHash()) show();
     window.addEventListener("hashchange", show);
@@ -119,7 +146,8 @@ export default function Facilities({ facilities, latest, counties }) {
           <input id="find-input" ref={findInput} type="search" value={query} onChange={(e) => setQuery(e.target.value)}
             placeholder="Stanley, or Lincoln County"
             enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
-            onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }} />
+            // Enter puts a phone's keyboard away and moves to the answer, which a screen reader then reads.
+            onKeyDown={(e) => { if (e.key === "Enter") { if (needle) findStatus.current.focus(); else e.currentTarget.blur(); } }} />
           {query && (
             <button type="button" className="find-clear" aria-label="Clear the search"
               onClick={() => { setQuery(""); findInput.current?.focus(); }} />
@@ -134,8 +162,9 @@ export default function Facilities({ facilities, latest, counties }) {
           </button>
         ))}
       </div>
-      {needle && (
-        <p className="find-status" role="status">
+      {/* Always in the page, so a screen reader is listening before the first answer arrives. */}
+      <p className="find-status" role="status" tabIndex={-1} ref={findStatus}>
+        {needle && (<>
           {listed.length
             ? `Showing ${listed.length} on this week’s report that ${listed.length === 1 ? "matches" : "match"} “${query.trim()}”.`
             : countyHit
@@ -149,22 +178,16 @@ export default function Facilities({ facilities, latest, counties }) {
               {" "}<a href="#counties" onClick={jump("counties")}>See every county</a>.
             </>
           )}
-        </p>
-      )}
-      {hasCapacity && (
-        <p className="bar-key">
-          <span className="key-box" style={{ background: "var(--chart-1)" }} /> up to capacity
-          <span className="key-box" style={{ background: "var(--chart-2)" }} /> beyond it
-          <span className="key-mark" /> capacity
-        </p>
-      )}
+        </>)}
+      </p>
+      {hasCapacity && <BarKey />}
       {listed.length > 0 && (
       <div className="table-wrap">
       <table className="roster" role="table" aria-label="Facilities on this week’s report">
         <thead role="rowgroup">
           <tr role="row">
             {heading("name", "Facility")}
-            {heading("population", !needle && active.key === "juvenile" ? "Youth" : "People", true)}
+            {heading("population", (!needle && { juvenile: "Youth", jails: "State prisoners" }[active.key]) || "People", true)}
             {hasCapacity && <th scope="col" role="columnheader" className="n wide">Capacity</th>}
             {hasCapacity && heading("percent", "Percent of capacity")}
             {heading("yearChange", "In a year", true)}
@@ -175,19 +198,19 @@ export default function Facilities({ facilities, latest, counties }) {
           {visible.map((r) => {
             const h = history[r.id];
             const kind = [r.type === "county_jail" ? null : TYPE_LABEL[r.type], r.security && `${r.security} security`].filter(Boolean).join(" · ");
-            const county = r.type !== "county_jail" && r.county ? `${r.county} County` : "";
+            const county = r.type !== "county_jail" && r.county ? `${r.county}\u00a0County` : "";
             return (
               <React.Fragment key={r.id}>
                 <tr role="row" id={`facility-${r.id}`} className={[open === r.id && "open", !kind && !county && "bare"].filter(Boolean).join(" ") || undefined}>
                   <th scope="row" role="rowheader">
-                    <button type="button" className="name" aria-expanded={open === r.id} onClick={() => toggle(r.id)}>{r.name}</button>
+                    <button type="button" className="name" aria-expanded={open === r.id} onClick={() => toggle(r.id)}>{typeset(r.name)}</button>
                     {(kind || county) && (
                       <span className="where">
                         {county ? <><span className="wide">{kind}{kind && " · "}</span>{county}</> : kind}
                       </span>
                     )}
                   </th>
-                  <td role="cell" className="n" data-label={r.type === "juvenile" ? "youth" : "people"}>{num(r.population)}</td>
+                  <td role="cell" className="n" data-label={r.type === "juvenile" ? "youth" : CONTRACT.includes(r.type) ? "state prisoners" : "people"}>{num(r.population)}</td>
                   {hasCapacity && <td role="cell" className="n wide">{r.capacity == null ? noCapacity : num(r.capacity)}</td>}
                   {hasCapacity && (
                     <td role="cell" className="meter-cell">
@@ -211,7 +234,8 @@ export default function Facilities({ facilities, latest, counties }) {
                 {open === r.id && (
                   <tr role="row" className="detail">
                     <td role="cell" colSpan={hasCapacity ? 6 : 4}>
-                      <Detail facility={h} dates={facilities.dates} onClose={() => toggle(r.id)} />
+                      <Detail facility={h} row={r} date={latest.report_date} dates={facilities.dates}
+                        onClose={() => { toggle(r.id); document.querySelector(`#facility-${r.id} .name`)?.focus(); }} />
                     </td>
                   </tr>
                 )}
@@ -237,14 +261,14 @@ export default function Facilities({ facilities, latest, counties }) {
       {idle.length > 0 && (
         <p className="chart-note">
           Also on the department&rsquo;s contract list and holding no state prisoners this
-          week: {list(idle.map((r) => r.name))}.
+          week: {list(idle.map((r) => typeset(r.name)))}.
         </p>
       )}
     </section>
   );
 }
 
-function Detail({ facility, dates, onClose }) {
+function Detail({ facility, row, date, dates, onClose }) {
   const [copied, setCopied] = useState(false);
   const span = dates.slice(facility.start, facility.start + facility.population.length);
   const last = facility.population.length - 1;
@@ -257,16 +281,29 @@ function Detail({ facility, dates, onClose }) {
       values: facility.population, endLabel: num(facility.population[last]) },
   ];
   const copy = () => navigator.clipboard.writeText(window.location.href).then(() => setCopied(true));
+  // What the row cannot show on a narrow screen: what kind of place it is, and this week's count against its capacity.
+  const kind = KIND[row.type] && `${row.security ? `${row.security}-security ` : ""}${KIND[row.type]}${row.county ? ` in ${row.county} County` : ""}`;
   return (
     <div className="detail-body">
+      <p className="detail-facts">
+        {kind && <>{kind[0].toUpperCase() + kind.slice(1)}. </>}
+        {row.capacity
+          ? <>On {apDate(date)}, it held {num(row.population)} {row.type === "juvenile" ? "youth" : "people"} against
+            a capacity of {num(row.capacity)}: {pct1(row.percent)}.</>
+          : row.type === "county_jail"
+            ? <>The count is the state prisoners this jail holds under contract, not everyone in it. The
+              department&rsquo;s form gives jails no capacity, so there is no crowding rate.</>
+            : CONTRACT.includes(row.type) && <>The count is the state prisoners held here under contract. The
+              department&rsquo;s form gives contract beds no capacity of their own.</>}
+      </p>
       <p className="detail-facts">
         On the weekly report since {monthYear(facility.first)}. Highest count: {num(facility.population[high])},
         on {apDate(span[high])}{high === last ? ", this week" : ""}.
         {facility.sex === "both" && " Listed with both men and women."}
         {capacity && " Capacity is as the department printed it each week."}
       </p>
-      <TimeChart dates={span} series={series} height={260} yMin={0}
-        wash={capacity ? { upper: "population", lower: ["capacity"], color: COLOR.population } : undefined}
+      <TimeChart dates={span} series={series} height={260} yMin={0} name={typeset(facility.name)}
+        wash={capacity ? { upper: "population", lower: ["capacity"], color: COLOR.over } : undefined}
         label={`Line chart: people held at ${facility.name}${capacity ? " and its capacity" : ""}, weekly.`} />
       <p className="detail-actions">
         {navigator.clipboard && (

@@ -3,7 +3,7 @@ import React from "react";
 // Five places a reader is likely to want, not a full table of contents. Each id is on a <section>.
 const JUMPS = [
   ["home", "Near Wausau"],
-  ["counties", "Your county"],
+  ["counties", "By county"],
   ["facilities", "Find a facility"],
   ["women", "The long view"],
   ["method", "Get the data"],

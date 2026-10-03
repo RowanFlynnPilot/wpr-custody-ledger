@@ -338,6 +338,8 @@ def test_brief_on_a_record_week_and_an_ordinary_one():
     text = brief(record, {'source': 'https://example.test/report.pdf'})
     assert text.startswith('# Custody Ledger brief')
     assert 'It is the most in weekly records that begin in 1999 and the second record in as many weeks.' in text
+    assert 'The prisons were designed to hold' not in text  # the total counts rented contract beds as full
+    assert 'The department puts its design capacity at 100' in text
     assert '- Lincoln County Jail (Lincoln County): 19 state prisoners, up 6 from a week earlier' in text
 
     ordinary = changes(synthetic_weeks([100, 110, 105]), [synthetic_facility([10, 12, 12])])

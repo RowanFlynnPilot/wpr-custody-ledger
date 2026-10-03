@@ -6,10 +6,10 @@ import { apDate, num, time, yearOf } from "./format.js";
 // lists every series; the arrow keys do the same for keyboard readers.
 //
 // series: [{ key, label, color, values, width?, legend?, endLabel? }]  values[i] may be null
-// wash:   { upper, lower, color }   fills between two series where both exist
+// wash:   { upper, lower, color }   fills where the upper series runs above the lower ones (people beyond capacity)
 // marks:  [{ index, value, text, place?, wideOnly? }]  a dot on the data with a short label
-// vrules: [{ index, text, short?, top? }]   hrules: [{ value, text }]   (top: label at the head of the rule, for a chart whose line runs along the floor there)
 // table:  a yearly table of the same figures under the chart; a caller with its own passes it as children
+// name:   what the chart shows, in a few words: names its table and the button that opens it, so each can be told apart
 // format: axis ticks; valueFormat: the readout and the table (defaults to format)
 
 const MARGIN = { top: 26, right: 62, bottom: 26, left: 46 };
@@ -32,8 +32,8 @@ function path(points) {
 }
 
 export default function TimeChart({
-  dates, series, wash, marks = [], vrules = [], hrules = [], stacked = false,
-  height = 340, yMin, yMax, format = num, valueFormat = format, label, tooltipNote, children, table = !children,
+  dates, series, wash, marks = [], stacked = false,
+  height = 340, yMin, yMax, format = num, valueFormat = format, label, name, tooltipNote, children, table = !children,
 }) {
   const wrap = useRef(null);
   const [width, setWidth] = useState(0);
@@ -65,7 +65,7 @@ export default function TimeChart({
 
   const all = drawn.flatMap((s) => s.top).filter((v) => v != null);
   const lo = yMin ?? (stacked ? 0 : Math.min(...all));
-  const hi = yMax ?? Math.max(...all, ...hrules.map((r) => r.value));
+  const hi = yMax ?? Math.max(...all);
   // The axis runs from gridline to gridline, so the highest and lowest values sit inside labeled lines.
   const step = niceStep(lo, hi);
   const y0 = Math.floor(lo / step + 1e-9) * step, y1 = Math.ceil(hi / step - 1e-9) * step;
@@ -132,6 +132,10 @@ export default function TimeChart({
     return fits ?? Math.max(0, Math.min(width - w, px - w / 2));
   })();
   const yearEnds = dates.map((_, i) => i).filter((i) => i === dates.length - 1 || yearOf(dates[i + 1]) !== yearOf(dates[i]));
+  // The readout as one line of text: what a screen reader hears for the week the arrow keys are on.
+  const reading = active ?? dates.length - 1;
+  const spoken = [apDate(dates[reading]), ...[...drawn].reverse().filter((s) => s.values[reading] != null)
+    .map((s) => `${s.label}: ${valueFormat(s.values[reading])}`), tooltipNote && tooltipNote(reading)].filter(Boolean).join(". ");
 
   return (
     <figure className="chart">
@@ -146,7 +150,9 @@ export default function TimeChart({
         </ul>
       )}
       <div
-        className="chart-frame" ref={wrap} style={{ height }} tabIndex={0} role="group"
+        className="chart-frame" ref={wrap} style={{ height }} tabIndex={0}
+        // A slider over the weeks, so screen readers hand it the arrow keys and read out each week it lands on.
+        role="slider" aria-valuemin={0} aria-valuemax={dates.length - 1} aria-valuenow={reading} aria-valuetext={spoken}
         aria-label={`${label} Use the arrow keys to read each week.`}
         onKeyDown={onKey} onBlur={() => setActive(null)}
         onPointerMove={(e) => setActive(nearest(e.clientX))} onPointerDown={(e) => setActive(nearest(e.clientX))}
@@ -166,27 +172,15 @@ export default function TimeChart({
               <text className="tick" x={px} y={margin.top + plotH + 18} textAnchor="middle">{yr}</text>
             </g>
           ))}
-          {hrules.map((r) => (
-            <g key={r.text}>
-              <line className="rule" x1={margin.left} x2={margin.left + plotW} y1={y(r.value)} y2={y(r.value)} />
-              <text className="note" x={margin.left + 4} y={y(r.value) - 6}>{r.text}</text>
-            </g>
-          ))}
-          {vrules.map((r) => (
-            <g key={r.text}>
-              <line className="rule" x1={x(r.index)} x2={x(r.index)} y1={margin.top - 6} y2={margin.top + plotH} />
-              <text className="note" x={x(r.index) + 5} y={r.top ? margin.top + 6 : margin.top + plotH - 8}>{narrow && r.short ? r.short : r.text}</text>
-            </g>
-          ))}
 
           {wash && (() => {
             const up = drawn.find((s) => s.key === wash.upper).top;
             const down = wash.lower.map((k) => drawn.find((s) => s.key === k).top);
             const below = (i) => down.map((d) => d[i]).find((v) => v != null);
             const idx = dates.map((_, i) => i).filter((i) => up[i] != null && below(i) != null);
-            const d = `M${idx.map((i) => `${x(i).toFixed(1)},${y(up[i]).toFixed(1)}`).join("L")}` +
+            const d = `M${idx.map((i) => `${x(i).toFixed(1)},${y(Math.max(up[i], below(i))).toFixed(1)}`).join("L")}` +
               `L${idx.reverse().map((i) => `${x(i).toFixed(1)},${y(below(i)).toFixed(1)}`).join("L")}Z`;
-            return <path d={d} fill={wash.color} opacity="0.1" />;
+            return <path d={d} fill={wash.color} opacity="0.12" />;
           })()}
 
           {stacked
@@ -239,7 +233,7 @@ export default function TimeChart({
           )}
         </svg>}
         {active != null && (
-          <div className="tooltip" role="status" ref={tip} style={{ left: tipX, top: margin.top }}>
+          <div className="tooltip" aria-hidden="true" ref={tip} style={{ left: tipX, top: margin.top }}>
             <div className="tooltip-date">{apDate(dates[active])}</div>
             {[...drawn].reverse().map((s) => s.values[active] != null && (
               <div className="tooltip-row" key={s.key}>
@@ -254,9 +248,9 @@ export default function TimeChart({
       </div>
       {table && (
         <details className="table-view">
-          <summary>Show these figures as a table</summary>
+          <summary>Show these figures as a table{name && <span className="visually-hidden">: {name}</span>}</summary>
           <table>
-            <caption>The last report of each year.</caption>
+            <caption>{name ? `${name}: the last report of each year.` : "The last report of each year."}</caption>
             <thead>
               <tr>
                 <th scope="col">Report</th>

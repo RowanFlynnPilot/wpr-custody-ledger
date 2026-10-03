@@ -7,6 +7,22 @@ export default function Methodology({ latest }) {
   return (
     <section className="method" id="method" tabIndex={-1}>
       <h2>How this is compiled</h2>
+      <h3>Download the data</h3>
+      <p>
+        Five spreadsheets in CSV form, rebuilt with every new report.{" "}
+        <a href={`${REPO}#how-to-read-the-numbers`} target="_blank" rel="noreferrer">What each column means</a>.
+      </p>
+      <ul className="downloads">
+        <li><a href={csv("statewide")} download>Statewide, weekly</a> <span>population, capacity, women and men, contract beds, juvenile, supervision</span></li>
+        <li><a href={csv("facility_population")} download>Population by facility, weekly</a> <span>one column per facility</span></li>
+        <li><a href={csv("facility_capacity")} download>Capacity by facility, weekly</a></li>
+        <li><a href={csv("facility_names")} download>Facility names, types and counties</a></li>
+        <li><a href={csv("counties")} download>People in prison by county of conviction</a> <span>counts under 10 withheld</span></li>
+      </ul>
+      <p className="chart-note">
+        Free to reuse with credit to &ldquo;The Custody Ledger, Wausau Pilot &amp; Review.&rdquo; Code and
+        methods: <a href={REPO} target="_blank" rel="noreferrer">github.com/RowanFlynnPilot/wpr-custody-ledger</a>.
+      </p>
       <div className="method-grid">
         <div>
           <h3>The source</h3>
@@ -25,6 +41,14 @@ export default function Methodology({ latest }) {
           </p>
         </div>
         <div>
+          <h3>What capacity means</h3>
+          <p>
+            Design capacity is the department&rsquo;s measure: what each prison was built to hold,
+            plus later expansions, leaving out beds added to cope with crowding. To its prisons&rsquo;
+            beds the department adds the contract beds it rents, in county jails and, in the early
+            2000s, in other states, and counts each of those as full. The form called the same
+            measure operating capacity until March 2008.
+          </p>
           <h3>Where the Ledger differs from the form</h3>
           <p>
             Capacity here is the sum of the department&rsquo;s facility rows. In 136 weekly
@@ -40,19 +64,6 @@ export default function Methodology({ latest }) {
           </p>
         </div>
       </div>
-      <h3>Take the data</h3>
-      <p>Five spreadsheets in CSV form, rebuilt with every new report.</p>
-      <ul className="downloads">
-        <li><a href={csv("statewide")} download>Statewide, weekly</a> <span>population, capacity, women and men, contract beds, juvenile, supervision</span></li>
-        <li><a href={csv("facility_population")} download>Population by facility, weekly</a> <span>one column per facility</span></li>
-        <li><a href={csv("facility_capacity")} download>Capacity by facility, weekly</a></li>
-        <li><a href={csv("facility_names")} download>Facility names, types and counties</a></li>
-        <li><a href={csv("counties")} download>People in prison by county of conviction</a> <span>counts under 10 withheld</span></li>
-      </ul>
-      <p className="chart-note">
-        Free to reuse with credit to &ldquo;The Custody Ledger, Wausau Pilot &amp; Review.&rdquo; Code and
-        methods: <a href={REPO} target="_blank" rel="noreferrer">github.com/RowanFlynnPilot/wpr-custody-ledger</a>.
-      </p>
     </section>
   );
 }

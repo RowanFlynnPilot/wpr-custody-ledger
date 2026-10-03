@@ -10,20 +10,26 @@
   --line: #d9d3c4;
   --line-strong: #8d8877; /* a control's edge: 3:1 against the page and the panels */
   --white: #fffdf8;
-  --tint: #fbf8f0;        /* an opened row, a hovered row */
+  --row-hover: var(--cream); /* a row under the pointer */
+  --row-open: #e9f2ef;    /* an opened facility: ink-soft 6.3:1 and teal-deep 5.4:1 on it */
   --display: "Fraunces", Georgia, "Times New Roman", serif;
   --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   --measure: 44rem;       /* headlines and the lede end on this line */
-  --text: 68ch;           /* running text: about 68 characters a line at its own size */
+  --text: 32em;           /* running text: about 68 characters a line at its own size (ch is a digit's width, wider than the average letter) */
+  /* Small text in four steps, not a dozen sizes a few hundredths apart. 12px is the floor. */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.875rem;
+  --fs-lg: 0.9375rem;
   /* Chart marks. The brand teal is too gray to hold its own as a data color, so marks use a
      more saturated teal beside rust and violet; the three pass the dataviz palette checks
      (lightness, chroma, color-blind separation, contrast) on --white. */
   --chart-1: #12917d;
   --chart-2: #c2573a;
   --chart-3: #6a63b3;
-  --chart-ref: #6f7269;   /* capacity: a reference line, deliberately neutral */
-  --chart-other: #8a8d84;
+  --chart-ref: #747067;   /* capacity: a reference line, deliberately neutral, in the page's warm gray */
+  --chart-other: #8f8b82;
   --grid: #e7e2d5;
   --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1.5 1.5l9 9m0-9l-9 9' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
   color-scheme: light;
@@ -43,7 +49,7 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.55;
 }
 
@@ -66,14 +72,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
 }
 /* A section is focused only when a jump link lands on it; the heading says where you are. */
 section:focus { outline: none; }
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 10; background: var(--ink); color: #fff; padding: 0.6rem 0.9rem; }
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 10; background: var(--ink); color: var(--white); padding: 0.6rem 0.9rem; }
 .skip-link:focus { left: 0; }
 
 h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 4vw, 2rem); line-height: 1.15; letter-spacing: -0.005em; max-width: var(--measure); margin: 0 0 0.5rem; text-wrap: balance; }
-h3 { font-family: var(--body); font-weight: 700; font-size: 0.95rem; margin: 1.1rem 0 0.25rem; }
+h3 { font-family: var(--body); font-weight: 700; font-size: var(--fs-lg); margin: 1.1rem 0 0.25rem; }
 section { margin-bottom: 3.25rem; }
 .section-dek { max-width: var(--text); margin: 0 0 1.1rem; }
-.chart-note { max-width: var(--text); font-size: 0.84rem; color: var(--ink-soft); margin: 0.6rem 0 0; }
+.chart-note { max-width: var(--text); font-size: var(--fs-sm); color: var(--ink-soft); margin: 0.6rem 0 0; }
 /* The family's double rule, here between the page's movements: now, near you, the long view, the method. */
 .rule-double { height: 5px; border: 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 0 0 2.5rem; }
 
@@ -86,8 +92,8 @@ section { margin-bottom: 3.25rem; }
 .flag-tagline { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); margin: 8px 0 0; }
 .flag-dateline {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 16px;
-  max-width: 980px; margin: 8px auto 0; padding-top: 8px; border-top: 1px solid var(--line);
-  font-size: 0.78rem; letter-spacing: 0.02em; color: var(--ink-soft); text-align: left;
+  max-width: calc(980px - 2.5rem); margin: 8px auto 0; padding-top: 8px; border-top: 1px solid var(--line);
+  font-size: var(--fs-xs); letter-spacing: 0.02em; color: var(--ink-soft); text-align: left;
 }
 .flag-place { text-transform: uppercase; letter-spacing: 0.1em; }
 
@@ -98,9 +104,9 @@ section { margin-bottom: 3.25rem; }
   letter-spacing: -0.01em; margin: 0 0 0.8rem;
 }
 .dek { max-width: var(--text); font-size: 1.08rem; margin: 0 0 0.75rem; }
-.updated-late { font-size: 0.86rem; color: var(--rust-text); margin: 0.5rem 0 0; }
+.updated-late { font-size: var(--fs-md); color: var(--rust-text); margin: 0.5rem 0 0; }
 
-.lede { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.5rem); line-height: 1.32; max-width: var(--measure); margin: 0 0 1.4rem; }
+.lede { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.5rem); line-height: 1.38; max-width: var(--measure); margin: 0 0 1.4rem; }
 .lede strong { font-weight: 900; }
 
 /* The whole system as one bar: teal up to design capacity, rust beyond it. The same two
@@ -109,7 +115,7 @@ section { margin-bottom: 3.25rem; }
 .hero-bar { display: flex; gap: 2px; height: 22px; }
 .hero-in { background: var(--chart-1); border-radius: 4px 0 0 4px; }
 .hero-over { background: var(--chart-2); border-radius: 0 4px 4px 0; transform-origin: left center; }
-.hero-key { display: flex; justify-content: space-between; gap: 0.3rem 1.5rem; flex-wrap: wrap; margin: 0.45rem 0 0; font-size: 0.9rem; }
+.hero-key { display: flex; justify-content: space-between; gap: 0.3rem 1.5rem; flex-wrap: wrap; margin: 0.45rem 0 0; font-size: var(--fs-md); }
 .hero-key strong { font-family: var(--mono); font-size: 1.05rem; letter-spacing: -0.01em; }
 .hero-key > span:last-child { text-align: right; margin-left: auto; }
 .hero-key .key-box { margin-right: 0.45rem; vertical-align: -1px; }
@@ -122,40 +128,45 @@ section { margin-bottom: 3.25rem; }
 .stat { display: flex; flex-direction: column; background: var(--white); padding: 1.1rem 1.2rem 0.95rem; }
 .stat-num {
   font-family: var(--mono); font-weight: 700; font-size: 2.05rem; line-height: 1.05; letter-spacing: -0.02em;
-  color: var(--teal-deep); margin-bottom: 0.35rem;
+  color: var(--ink); margin-bottom: 0.35rem;
 }
 .stat-of { font-family: var(--body); font-weight: 500; font-size: 1rem; letter-spacing: 0; color: var(--ink-soft); }
-.stat-label { font-size: 0.88rem; font-weight: 500; line-height: 1.35; }
-.stat-sub { font-size: 0.8rem; color: var(--ink-soft); margin-top: auto; padding-top: 0.6rem; }
+.stat-label { font-size: var(--fs-md); font-weight: 500; line-height: 1.4; text-wrap: balance; }
+.stat-sub { font-size: var(--fs-sm); color: var(--ink-soft); margin-top: auto; padding-top: 0.6rem; text-wrap: pretty; }
+/* Each box's three lines share rows with its neighbors, so the small lines sit level across the strip. */
+@supports (grid-template-rows: subgrid) {
+  .stat { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+  .stat-sub { margin-top: 0; }
+}
 
 /* jump line */
 .section-nav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 2.75rem; }
 .section-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0 1.6rem; margin: 0; padding: 0; }
-.section-nav a { display: inline-block; padding: 0.7rem 0; font-size: 0.92rem; font-weight: 500; }
+.section-nav a { display: inline-block; padding: 0.7rem 0; font-size: var(--fs-lg); font-weight: 500; }
 
 /* charts */
 .chart { margin: 0; background: var(--white); border: 1px solid var(--line); padding: 0.9rem 0.6rem 0.4rem; }
 .chart-frame { position: relative; touch-action: pan-y; cursor: crosshair; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .chart-frame svg { position: absolute; top: 0; left: 0; }
-.chart-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; margin: 0 0 0.35rem; padding: 0 0.5rem; font-size: 0.82rem; }
+.chart-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; margin: 0 0 0.35rem; padding: 0 0.5rem; font-size: var(--fs-sm); }
 .chart-legend li { display: flex; align-items: center; gap: 0.45rem; }
 .key-line { display: inline-block; width: 16px; height: 2px; border-radius: 1px; flex: none; }
 .key-box { display: inline-block; width: 11px; height: 11px; border-radius: 2px; flex: none; }
 .grid { stroke: var(--grid); stroke-width: 1; }
-.rule { stroke: #b9b3a3; stroke-width: 1; }
-.tick, .note { font-family: var(--mono); font-size: 12px; fill: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.tick { font-family: var(--mono); font-size: 12px; fill: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .line { fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .area { stroke: var(--white); stroke-width: 1; opacity: 0.9; }
 .dot { stroke: var(--white); stroke-width: 2; }
 .leader { stroke: var(--ink-soft); stroke-width: 1; }
 /* Labels that sit on the plot carry a halo in the panel color, so a line passing behind never cuts through a word. */
-.mark-text, .end-text, .note { paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }
+.mark-text, .end-text { paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }
 .mark-text, .end-text { font-family: var(--body); font-size: 12px; fill: var(--ink); }
 .end-text { font-family: var(--mono); font-weight: 700; font-variant-numeric: tabular-nums; }
 .crosshair { stroke: var(--ink); stroke-width: 1; }
 .tooltip {
   position: absolute; z-index: 2; pointer-events: none; min-width: 10.5rem; max-width: 15rem;
-  background: var(--white); border: 1px solid var(--ink); padding: 0.45rem 0.6rem; font-size: 0.8rem; line-height: 1.4;
+  background: var(--white); border: 1px solid var(--ink); padding: 0.45rem 0.6rem; font-size: var(--fs-sm); line-height: 1.4;
+  font-variant-numeric: tabular-nums; /* figures of one width, so the box does not change size week to week */
 }
 .tooltip-date { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 0.2rem; }
 .tooltip-row { display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
@@ -164,15 +175,18 @@ section { margin-bottom: 3.25rem; }
 .tooltip-note { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px solid var(--line); color: var(--ink-soft); }
 
 /* tables */
-table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
-caption { text-align: left; font-size: 0.82rem; color: var(--ink-soft); padding: 0.6rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: var(--fs-md); }
+caption { text-align: left; font-size: var(--fs-sm); color: var(--ink-soft); padding: 0.6rem 0; }
 th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
-thead th { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--ink); }
+thead th { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--ink); }
 tbody th { font-weight: 500; }
 .n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 thead .n { font-family: var(--body); white-space: normal; }
-.table-view { margin: 0.4rem 0.4rem 0.3rem; overflow-x: auto; overscroll-behavior-x: contain; }
-.table-view summary { cursor: pointer; font-size: 0.86rem; color: var(--teal-deep); width: fit-content; padding: 0.35rem 0; }
+.table-view { margin: 0.15rem 0.15rem 0.05rem; padding: 4px; overflow-x: auto; overscroll-behavior-x: contain; }
+.table-view summary {
+  cursor: pointer; font-size: var(--fs-md); color: var(--teal-deep); width: fit-content; padding: 0.35rem 0;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
 .table-view table { background: var(--white); border: 1px solid var(--line); margin-top: 0.3rem; }
 .table-view caption { padding-left: 0.6rem; }
 .table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
@@ -182,7 +196,7 @@ thead .n { font-family: var(--body); white-space: normal; }
 .local a.name { display: inline-block; }
 
 /* every facility */
-.find { display: block; max-width: 24rem; margin: 0 0 0.9rem; font-size: 0.86rem; font-weight: 500; }
+.find { display: block; max-width: 24rem; margin: 0 0 0.9rem; font-size: var(--fs-md); font-weight: 500; }
 .find input {
   caret-color: var(--teal-deep); -webkit-appearance: none; appearance: none;
   display: block; width: 100%; min-height: 44px; margin-top: 0.3rem; padding: 0.55rem 0.7rem;
@@ -202,15 +216,18 @@ thead .n { font-family: var(--body); white-space: normal; }
   -webkit-mask: var(--cross) center / 12px no-repeat; mask: var(--cross) center / 12px no-repeat;
 }
 .find-clear:active::before { background: var(--ink); }
-.find-status { font-size: 0.86rem; margin: 0 0 0.6rem; }
+.find-status { font-size: var(--fs-md); margin: 0 0 0.6rem; }
+.find-status:empty { margin: 0; }
+.find-status:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
 .tabs button {
-  font: 500 0.86rem var(--body); color: var(--ink); background: var(--white); border: 1px solid var(--line-strong);
+  font: 500 var(--fs-md) var(--body); color: var(--ink); background: var(--white); border: 1px solid var(--line-strong);
   padding: 0.5rem 0.8rem; min-height: 40px; cursor: pointer;
 }
-.tabs button[aria-pressed="true"] { background: var(--teal-deep); border-color: var(--teal-deep); color: #fff; }
+.tabs button[aria-pressed="true"] { background: var(--teal-deep); border-color: var(--teal-deep); color: var(--white); }
 .tabs .count { font-family: var(--mono); font-size: 0.75rem; opacity: 0.8; margin-left: 0.2rem; }
-.bar-key { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--ink-soft); margin: 0 0 0.4rem; }
+.tabs button[aria-pressed="true"] .count { opacity: 1; }
+.bar-key { display: flex; align-items: center; gap: 0.4rem; font-size: var(--fs-sm); color: var(--ink-soft); margin: 0 0 0.4rem; }
 .bar-key .key-box:not(:first-child) { margin-left: 0.8rem; }
 .roster { background: var(--white); border: 1px solid var(--line); }
 .sort { font: inherit; letter-spacing: inherit; text-transform: inherit; text-align: inherit; color: inherit; background: none; border: 0; padding: 0.2rem 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
@@ -221,61 +238,64 @@ th[aria-sort] .sort::after {
   border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor;
 }
 th[aria-sort="ascending"] .sort::after { border-top: 0; border-bottom: 5px solid currentColor; }
-.name { font: 600 0.95rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.15rem 0; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-.where { display: block; font-size: 0.78rem; font-weight: 400; color: var(--ink-soft); }
+.name { font: 600 var(--fs-lg) var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.15rem 0; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+.where { display: block; font-size: var(--fs-xs); font-weight: 400; color: var(--ink-soft); }
 .meter-cell { min-width: 11rem; white-space: nowrap; }
 .meter { position: relative; display: inline-flex; gap: 2px; width: calc(100% - 4rem); height: 8px; vertical-align: middle; }
 .meter-mark { position: absolute; top: -4px; bottom: -4px; width: 1px; margin-left: -1px; background: var(--ink); }
 .key-mark { display: inline-block; width: 1px; height: 14px; background: var(--ink); margin-left: 0.8rem; }
 .meter-in { background: var(--chart-1); border-radius: 0; }
 .meter-over { background: var(--chart-2); border-radius: 0 4px 4px 0; }
-.meter-in:last-child { border-radius: 0 4px 4px 0; }
-.meter-num { display: inline-block; width: 3.6rem; margin-left: 0.4rem; text-align: right; font-family: var(--mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
-.change { font-size: 0.82rem; }
-tr.open > th, tr.open > td { border-bottom-color: transparent; background: var(--tint); }
-tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
-.detail-facts { font-size: 0.86rem; margin: 0 0 0.6rem; }
+.meter-in:nth-last-child(2) { border-radius: 0 4px 4px 0; }
+.meter-num { display: inline-block; width: 3.6rem; margin-left: 0.4rem; text-align: right; font-family: var(--mono); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.change { font-size: var(--fs-sm); }
+tr.open > th, tr.open > td { border-bottom-color: transparent; background: var(--row-open); }
+tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--row-open); }
+.detail-facts { font-size: var(--fs-md); margin: 0 0 0.6rem; }
 .detail-actions { display: flex; gap: 1.4rem; margin: 0.3rem 0 0; }
-.more { font: 500 0.88rem var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.6rem 0; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.more { font: 500 var(--fs-md) var(--body); color: var(--teal-deep); background: none; border: 0; padding: 0.6rem 0; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* by county of conviction */
 .county-table { background: var(--white); border: 1px solid var(--line); }
 .county-table tr.home th { font-weight: 700; }
 .county-table tfoot th, .county-table tfoot td { border-top: 2px solid var(--ink); border-bottom: 0; font-weight: 700; }
-.withheld, .aside { font-family: var(--body); font-size: 0.78rem; color: var(--ink-soft); }
+.withheld, .aside { font-family: var(--body); font-size: var(--fs-xs); color: var(--ink-soft); }
 
 /* methodology */
-.method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
-.method p { font-size: 0.92rem; margin: 0 0 0.6rem; max-width: var(--text); }
-.downloads { list-style: none; padding: 0; margin: 0.3rem 0 0; font-size: 0.92rem; }
+.method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 2rem; margin-top: 1.6rem; }
+.method > h2 + h3, .method-grid > div > h3:first-child { margin-top: 0; }
+.method-grid > div > p:last-child { margin-bottom: 0; }
+.method p { font-size: var(--fs-lg); margin: 0 0 0.6rem; max-width: var(--text); }
+.downloads { list-style: none; padding: 0; margin: 0.3rem 0 0; font-size: var(--fs-lg); }
 .downloads li { border-bottom: 1px solid var(--line); }
 .downloads a { display: inline-block; padding: 0.6rem 0; }
-.downloads span { color: var(--ink-soft); font-size: 0.82rem; margin-left: 0.4rem; }
+.downloads span { color: var(--ink-soft); font-size: var(--fs-sm); margin-left: 0.4rem; }
 .downloads + .chart-note { margin-top: 1.1rem; }
 
 /* The footer closes the page the way the flag opens it: a white band, thin rule over thick. */
 .colophon { background: #fff; border-top: 1px solid var(--ink); border-bottom: 4px solid var(--ink); padding: 1.1rem max(1.25rem, env(safe-area-inset-right, 0px)) calc(1.2rem + env(safe-area-inset-bottom, 0px)) max(1.25rem, env(safe-area-inset-left, 0px)); }
-.colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: 980px; margin: 0 auto; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
+.colophon-inner { display: flex; gap: 16px; align-items: flex-start; max-width: calc(980px - 2.5rem); margin: 0 auto; font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-soft); }
 .colophon-seal { display: block; width: 56px; height: 56px; }
 .colophon-inner > div { flex: 1 1 0; min-width: 0; }
-.colophon p { margin: 0 0 0.3rem; max-width: var(--measure); word-break: break-word; overflow-wrap: anywhere; } /* the address is one long word; the first is for Safari before 15.4 */
+.colophon p { margin: 0 0 0.3rem; max-width: var(--text); word-break: break-word; overflow-wrap: anywhere; } /* the address is one long word; the first is for Safari before 15.4 */
 .colophon p:last-child { margin: 0; color: var(--ink); }
 .to-top { margin-left: auto; white-space: nowrap; padding: 0.2rem 0; }
 
 /* Hover only where the pointer can hover and is precise. On a touch screen a tap fakes a hover
    and leaves it stuck, so every hover rule on the page lives here. */
 @media (hover: hover) and (pointer: fine) {
-  a:hover, .more:hover { text-decoration-thickness: 2px; }
-  .sort:hover { color: var(--ink); }
-  .name:hover { text-decoration-color: currentColor; }
+  a:hover, .more:hover, .table-view summary:hover { text-decoration-thickness: 2px; }
+  .sort:hover { color: var(--ink); text-decoration-color: currentColor; }
+  .name:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
   .find-clear:hover::before { background: var(--ink); }
-  .roster tbody tr:not(.detail):hover > *, .county-table tbody tr:hover > * { background: var(--tint); }
+  .find input:hover { border-color: var(--ink-soft); }
+  .roster tbody tr:not(.detail):not(.open):hover > *, .county-table tbody tr:hover > * { background: var(--row-hover); }
   .tabs button:hover { background: var(--teal-tint); }
   .tabs button[aria-pressed="true"]:hover { background: var(--teal-deep); }
 }
 /* Pressed: the answer a finger gets the moment it lands, on every kind of pointer. */
 a:active, .name:active, .sort:active, .more:active, summary:active { background-color: var(--teal-tint); box-shadow: 0 0 0 3px var(--teal-tint); }
-.tabs button:active { background: var(--teal-tint); }
+.tabs button:active { background: var(--teal-tint); border-color: var(--teal-deep); }
 .tabs button[aria-pressed="true"]:active { background: var(--teal); }
 /* Two rules, not one list: a browser without :has() would throw out the whole list. */
 .flag-lockup:active { background: none; box-shadow: none; opacity: 0.7; }
@@ -312,7 +332,6 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .stat { padding: 0.9rem 0.9rem 0.8rem; }
   .chart { padding: 0.7rem 0.2rem 0.3rem; }
   th, td { padding: 0.5rem 0.35rem; }
-  thead th { letter-spacing: 0.02em; }
   .section-nav ul { gap: 0 1.2rem; }
   .section-nav a, .more { padding: 0.75rem 0; }
   .tabs button { min-height: 44px; padding: 0.5rem 0.6rem; }
@@ -327,7 +346,7 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .downloads span { display: block; margin: -0.4rem 0 0.55rem; }
 }
 @media (max-width: 380px) {
-  .county-table { font-size: 0.82rem; }
+  .county-table { font-size: var(--fs-sm); }
   .county-table th, .county-table td { padding: 0.5rem 0.3rem; }
 }
 @media (max-width: 340px) {
@@ -338,31 +357,31 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
 @media (max-width: 560px) {
   .roster, .roster thead, .roster tbody, .roster tr, .roster th, .roster td { display: block; }
   .roster thead tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1rem; padding: 0.3rem 0.7rem; border-bottom: 2px solid var(--ink); }
-  .roster thead tr::before { content: "Sort by"; font-size: 0.75rem; color: var(--ink-soft); }
+  /* The second content gives the words no text for a screen reader: the buttons say what they sort. */
+  .roster thead tr::before { content: "Sort by"; content: "Sort by" / ""; font-size: 0.75rem; color: var(--ink-soft); }
   /* The local list has nothing to sort: its headings stay for screen readers only, and each figure names its unit. */
   .local thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .local tbody tr { grid-template-columns: 9.5rem minmax(0, 1fr); }
   .roster thead th { border: 0; padding: 0; }
   .roster thead .wide { display: none; }
   .roster .sort { padding: 0.7rem 0; }
   /* Fixed first column and fixed-width percent, so every bar is drawn on the same scale. */
-  .roster tbody tr { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); align-items: center; gap: 0.3rem 0.6rem; padding: 0.7rem; border-bottom: 1px solid var(--line); }
+  .roster tbody tr { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); align-items: center; gap: 0.3rem 0.6rem; padding: 0.25rem 0.7rem 0.7rem; border-bottom: 1px solid var(--line); }
   .roster tbody th, .roster tbody td { border: 0; padding: 0; }
   .roster tbody th { grid-area: 1 / 1 / 2 / -1; }
   .roster tbody td.wide { display: none; }
   .roster .name { padding: 0.7rem 0 0.5rem; }
-  .roster td.n { grid-area: 2 / 1; text-align: left; font-size: 0.9rem; }
-  .roster td.n::after { content: " " attr(data-label); font-family: var(--body); font-size: 0.78rem; color: var(--ink-soft); }
+  .roster td.n { grid-area: 2 / 1; text-align: left; font-size: var(--fs-md); }
+  .roster td.n::after { content: " " attr(data-label); font-family: var(--body); font-size: var(--fs-xs); color: var(--ink-soft); }
   .roster td.meter-cell { grid-area: 2 / 2; min-width: 0; display: flex; align-items: center; }
   /* The year's change shares the county's line, at the right. */
-  .roster td.change { grid-area: 1 / 1 / 2 / -1; justify-self: end; align-self: end; font-size: 0.8rem; }
+  .roster td.change { grid-area: 1 / 1 / 2 / -1; justify-self: end; align-self: end; font-size: var(--fs-sm); }
   .roster .meter { flex: 1; width: auto; }
   .roster .meter-num { width: 3.4rem; margin-left: 0.3rem; }
   /* A row with nothing under its name (a county jail) puts the change beside its count instead,
      so a long name never runs into it. */
   .roster tr.bare td.change { grid-area: 2 / 2; align-self: center; }
-  .roster tr.detail { display: block; padding: 0 0.4rem 0.8rem; background: var(--tint); }
-  .roster tr.open { border-bottom: 0; background: var(--tint); }
+  .roster tr.detail { display: block; padding: 0 0.7rem 0.8rem; background: var(--row-open); }
+  .roster tr.open { border-bottom: 0; background: var(--row-open); }
 }
 @media (prefers-reduced-motion: no-preference) {
   /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
@@ -371,7 +390,7 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   /* A fast connection never sees the loading line. */
   .loading { animation: appear 0.2s ease-out 0.5s both; }
   @keyframes appear { from { opacity: 0; } }
-  .name, .sort, .tabs button, a, .more, summary { transition: color 0.12s ease-out, background-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
+  .name, .sort, .tabs button, a, .more, summary, .find input { transition: color 0.12s ease-out, background-color 0.12s ease-out, border-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
 }
 /* High contrast (forced colors). The system repaints every background, and every bar on this page
    is a background. So the bars, the keys and the chart panels keep their own colors, which were
