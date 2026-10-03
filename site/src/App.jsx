@@ -112,14 +112,13 @@ export default function App() {
   const homeCounty = changes.home_counties[0];
   const countyAsOf = counties.months[counties.months.length - 1];
   const fromHome = counties.counties.find((c) => c.county === homeCounty).people[counties.months.length - 1];
-  // How the count moved. The report before is a week back unless the department skipped one.
-  const move = (n) => (n > 0 ? `rose by ${num(n)}` : n < 0 ? `fell by ${num(-n)}` : "did not change");
-  const weekBack = (new Date(latest.report_date) - new Date(changes.previous_date)) / 864e5 === 7
-    ? "in a week" : `since the report of ${apDate(changes.previous_date)},`;
+  // How the count moved: against the report before (a week back unless the department skipped one) and a year back.
   const { week_change: week, year_change: year } = population;
-  const moved = week !== 0 && Math.sign(week) === Math.sign(year)
-    ? `${move(week)} ${weekBack} and by ${num(Math.abs(year))} in a year`
-    : `${move(week)} ${weekBack} and ${move(year)} in a year`;
+  const aWeek = (new Date(latest.report_date) - new Date(changes.previous_date)) / 864e5 === 7;
+  // "up 22 from a week earlier": a word between the date and the figure, as in the weekly brief.
+  const moved = (n, from) => (n === 0 ? `unchanged from ${from}` : `${n > 0 ? "up" : "down"} ${num(Math.abs(n))} from ${from}`);
+  const weekly = moved(week, aWeek ? "a week earlier" : apDate(changes.previous_date));
+  const yearly = moved(year, "a year earlier");
 
   return (
     <>
@@ -136,12 +135,11 @@ export default function App() {
 
       <p className="lede">
         Wisconsin&rsquo;s adult prison system held <strong>{num(population.value)}</strong> people on{" "}
-        {apDate(latest.report_date)}
+        {apDate(latest.report_date)}, {weekly}
         {population.record
-          ? <>, the most in weekly records that begin in 1999{population.record_streak > 1 &&
-              <> and the {ordinal(population.record_streak)} record in as many weeks</>}.</>
-          : <>, {num(population.prior_peak.value - population.value)} fewer than the record
-              of {num(population.prior_peak.value)} set {apDate(population.prior_peak.date)}.</>}
+          ? <>{aWeek ? "" : ","} and the most in weekly records that begin in 1999.{population.record_streak > 1 &&
+              <> It is the {ordinal(population.record_streak)} record in as many weeks.</>}</>
+          : <>. The record, {num(population.prior_peak.value)}, was set {apDate(population.prior_peak.date)}.</>}
         {" "}Its prisons were designed to hold {num(crowding.capacity)}.
       </p>
 
@@ -160,7 +158,7 @@ export default function App() {
           <p className="chart-note">
             That is {pct1(crowding.percent)} of design capacity: what each prison was built to
             hold, plus later expansions, leaving out beds added to cope with crowding. The
-            count {moved}.
+            count is {yearly}.
           </p>
         </div>
       )}
@@ -195,7 +193,7 @@ export default function App() {
       <hr className="rule-double" />
       <CloseToHome facilities={facilities} statewide={statewide} changes={changes} />
       <Counties counties={counties} home={changes.home_counties} />
-      <Facilities facilities={facilities} latest={latest} />
+      <Facilities facilities={facilities} latest={latest} counties={counties} />
 
       <hr className="rule-double" />
       <WomenMen statewide={statewide} />

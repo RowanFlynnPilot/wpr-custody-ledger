@@ -10,6 +10,7 @@ import { apDate, num, time, yearOf } from "./format.js";
 // marks:  [{ index, value, text, place?, wideOnly? }]  a dot on the data with a short label
 // vrules: [{ index, text, short?, top? }]   hrules: [{ value, text }]   (top: label at the head of the rule, for a chart whose line runs along the floor there)
 // table:  a yearly table of the same figures under the chart; a caller with its own passes it as children
+// format: axis ticks; valueFormat: the readout and the table (defaults to format)
 
 const MARGIN = { top: 26, right: 62, bottom: 26, left: 46 };
 
@@ -32,11 +33,14 @@ function path(points) {
 
 export default function TimeChart({
   dates, series, wash, marks = [], vrules = [], hrules = [], stacked = false,
-  height = 340, yMin, yMax, format = num, label, tooltipNote, children, table = !children,
+  height = 340, yMin, yMax, format = num, valueFormat = format, label, tooltipNote, children, table = !children,
 }) {
   const wrap = useRef(null);
   const [width, setWidth] = useState(0);
   const [active, setActive] = useState(null);
+  const tip = useRef(null);
+  const [tipWidth, setTipWidth] = useState(0);
+  useLayoutEffect(() => { if (active != null && tip.current) setTipWidth(tip.current.offsetWidth); }, [active]);
   // The frame takes its width from the page and the drawing is laid over it, so the drawing can
   // never push its container wider (inside a table cell it otherwise would, and never shrink back).
   useLayoutEffect(() => {
@@ -118,7 +122,15 @@ export default function TimeChart({
   for (let i = 1; i < ends.length; i++) if (ends[i].ly - ends[i - 1].ly < 15) ends[i].ly = ends[i - 1].ly + 15;
 
   const legend = drawn.filter((s) => s.legend !== false);
-  const tipLeft = active != null && x(active) > margin.left + plotW * 0.58;
+  // The readout sits beside the crosshair, on the side with more room, and is measured so it always fits inside
+  // the frame: on a narrow phone chart where neither side has room it slides along instead of running off the page.
+  const tipX = (() => {
+    if (active == null) return 0;
+    const px = x(active), w = tipWidth || 168, gap = 12;
+    const sides = px > margin.left + plotW * 0.58 ? [px - gap - w, px + gap] : [px + gap, px - gap - w];
+    const fits = sides.find((left) => left >= 0 && left + w <= width);
+    return fits ?? Math.max(0, Math.min(width - w, px - w / 2));
+  })();
   const yearEnds = dates.map((_, i) => i).filter((i) => i === dates.length - 1 || yearOf(dates[i + 1]) !== yearOf(dates[i]));
 
   return (
@@ -227,13 +239,12 @@ export default function TimeChart({
           )}
         </svg>}
         {active != null && (
-          <div className="tooltip" role="status"
-            style={{ left: x(active), top: margin.top, transform: `translateX(${tipLeft ? "calc(-100% - 12px)" : "12px"})` }}>
+          <div className="tooltip" role="status" ref={tip} style={{ left: tipX, top: margin.top }}>
             <div className="tooltip-date">{apDate(dates[active])}</div>
             {[...drawn].reverse().map((s) => s.values[active] != null && (
               <div className="tooltip-row" key={s.key}>
                 <span className={stacked ? "key-box" : "key-line"} style={{ background: s.color }} />
-                <strong>{format(s.values[active])}</strong>
+                <strong>{valueFormat(s.values[active])}</strong>
                 <span>{s.label}</span>
               </div>
             ))}
@@ -256,7 +267,7 @@ export default function TimeChart({
               {yearEnds.slice().reverse().map((i) => (
                 <tr key={dates[i]}>
                   <th scope="row">{apDate(dates[i])}</th>
-                  {series.map((s) => <td className="n" key={s.key}>{s.values[i] == null ? "" : format(s.values[i])}</td>)}
+                  {series.map((s) => <td className="n" key={s.key}>{s.values[i] == null ? "" : valueFormat(s.values[i])}</td>)}
                 </tr>
               ))}
             </tbody>

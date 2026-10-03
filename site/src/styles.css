@@ -246,7 +246,7 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--tint); }
 
 /* methodology */
 .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
-.method p { font-size: 0.92rem; margin: 0 0 0.6rem; }
+.method p { font-size: 0.92rem; margin: 0 0 0.6rem; max-width: var(--text); }
 .downloads { list-style: none; padding: 0; margin: 0.3rem 0 0; font-size: 0.92rem; }
 .downloads li { border-bottom: 1px solid var(--line); }
 .downloads a { display: inline-block; padding: 0.6rem 0; }

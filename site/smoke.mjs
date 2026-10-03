@@ -61,6 +61,27 @@ const visit = async (browser, name, options) => {
   check(seen.sideways === 0, `${name}: ${seen.sideways} table(s) run off the side of the screen`);
   check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
 
+  // The chart readout must stay on screen wherever a reader puts a finger: on a narrow chart it once ran off the side.
+  const screen = page.viewportSize().width;
+  if (screen < 600) {
+    for (const frame of await page.locator(".chart-frame").all()) {
+      await frame.scrollIntoViewIfNeeded();
+      const box = await frame.boundingBox();
+      for (const across of [0.1, 0.3, 0.5, 0.7, 0.9]) {
+        await page.mouse.move(box.x + box.width * across, box.y + box.height / 2);
+        const out = await page.evaluate(() => {
+          const tip = document.querySelector(".tooltip")?.getBoundingClientRect();
+          return { over: document.documentElement.scrollWidth - innerWidth, left: tip ? Math.round(tip.left) : 0, right: tip ? Math.round(tip.right) : 0 };
+        });
+        if (out.over > 1 || out.left < 0 || out.right > screen) {
+          failures.push(`${name}: the chart readout runs off the screen at ${Math.round(across * 100)}% across a chart: ${JSON.stringify(out)}`);
+          break;
+        }
+      }
+    }
+    await page.mouse.move(0, 0);
+  }
+
   // The facility list: "Show all" reveals the rest, and the search box finds a jail by county.
   await page.click(".facilities > .more");
   const allRows = await page.locator(".facilities .roster tbody tr").count();
@@ -69,6 +90,11 @@ const visit = async (browser, name, options) => {
   const found = await page.locator(".facilities .roster .name").allTextContents();
   check(found.includes("Lincoln County Jail") && found.includes("Lincoln Hills School"),
     `${name}: searching "lincoln" found ${JSON.stringify(found)}`);
+  // A county with no facility still gets an answer, from the county table.
+  await page.fill(".find input", "marathon");
+  const answer = (await page.locator(".find-status").textContent()) || "";
+  check(/No facility .* Marathon County/.test(answer) && /were convicted in Marathon County/.test(answer),
+    `${name}: searching "marathon" answered ${JSON.stringify(answer)}`);
   check(seen.overflow <= 1, `${name}: page is ${seen.overflow}px wider than the screen`);
 
   // On a phone each row is a small grid: in every group, nothing may sit on top of a facility's name.

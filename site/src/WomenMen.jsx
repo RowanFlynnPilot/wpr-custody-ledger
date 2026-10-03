@@ -4,7 +4,7 @@ import { apDate, apMonthYear, num, pct, pct1 } from "./format.js";
 
 // Percent of capacity for women's and men's prisons, the whole record. The form renamed the
 // figure from operating to design capacity in March 2008 without redefining it (see CLAUDE.md),
-// so both eras share the axis; the rename is marked the way the statewide chart marks it.
+// so both eras share the axis and nothing marks the rename.
 // The women's capacity drawn here equals the women's subtotal the department printed in every report.
 export default function WomenMen({ statewide }) {
   const weeks = statewide;
@@ -25,14 +25,13 @@ export default function WomenMen({ statewide }) {
         for {num(now.women_capacity)}. Each line shows people held as a share of capacity.
       </p>
       <TimeChart
-        dates={weeks.map((w) => w.date)} height={300} yMin={100} format={(v) => `${v}%`}
+        dates={weeks.map((w) => w.date)} height={300} yMin={100} format={(v) => `${v}%`} valueFormat={pct1}
         series={[
           { key: "men", label: "Men", color: "var(--chart-1)", values: men, endLabel: pct1(men[men.length - 1]) },
           { key: "women", label: "Women", color: "var(--chart-2)", values: women, endLabel: pct1(women[women.length - 1]) },
         ]}
         marks={early === peak ? [] : [{ index: early, value: women[early], color: "var(--chart-2)", wideOnly: true,
                                         text: `${apMonthYear(weeks[early].date)}: ${pct1(women[early])}` }]}
-        vrules={[{ index: firstDesign, text: "Called design capacity from March 2008", short: "Renamed in 2008", top: true }]}
         label="Line chart: people held as a percent of capacity, women's and men's prisons, weekly since 1999."
         tooltipNote={(i) => `${num(weeks[i].women_population)} women, ${num(weeks[i].men_population)} men`}
       />

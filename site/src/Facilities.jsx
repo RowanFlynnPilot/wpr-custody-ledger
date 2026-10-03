@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
-import { scrollToElement } from "./SectionNav.jsx";
+import { jump, scrollToElement } from "./SectionNav.jsx";
 import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed } from "./format.js";
 
 const GROUPS = [
@@ -25,7 +25,7 @@ const list = (names) => (names.length < 2 ? names.join("") : `${names.slice(0, -
 // A facility the form gives no capacity for: a dash to the eye, words to a screen reader.
 export const noCapacity = <><span aria-hidden="true">—</span><span className="visually-hidden">none listed</span></>;
 
-export default function Facilities({ facilities, latest }) {
+export default function Facilities({ facilities, latest, counties }) {
   const weeks = facilities.dates.length;
   const history = useMemo(() => Object.fromEntries(facilities.facilities.map((f) => [f.id, f])), [facilities]);
   const rows = useMemo(() => {
@@ -66,6 +66,14 @@ export default function Facilities({ facilities, latest }) {
   const visible = all || needle ? listed : listed.slice(0, FIRST_ROWS);
   const widest = Math.max(100, ...listed.map((r) => r.percent || 0));
   const hasCapacity = listed.some((r) => r.capacity != null);
+  // A county typed into the search box: the county table's count for it, so a county with no facility still gets an answer.
+  const asOf = counties.months.length - 1;
+  const plain = needle.replace(/\s+county$/, "");
+  const countyHits = plain.length >= 4 ? counties.counties.filter((c) => c.county.toLowerCase().startsWith(plain)) : [];
+  const countyHit = countyHits.length === 1 ? countyHits[0] : null;
+  // Under the default order (most crowded first) the big prisons sit far down the list: say where they stand.
+  const big = !needle && group === "prisons" && sortKey === "percent" && !sort?.reversed
+    ? listed.filter((r) => r.population >= 1000 && r.percent != null) : [];
 
   // A shared link opens its facility; the WordPress embed forwards the article's #hash into the frame.
   useEffect(() => {
@@ -122,7 +130,7 @@ export default function Facilities({ facilities, latest }) {
         {GROUPS.map((g) => (
           <button key={g.key} type="button" aria-pressed={!needle && g.key === group}
             onClick={() => { setGroup(g.key); setSort(null); setQuery(""); setAll(false); }}>
-            <span className="full">{g.label}</span><span className="narrow">{g.short}</span> <span className="count">{rows.filter((r) => g.types.includes(r.type)).length}</span>
+            <span className="full">{g.label}</span><span className="narrow">{g.short}</span> <span className="count">{rows.filter((r) => g.types.includes(r.type) && !(r.type === "county_jail" && r.population === 0)).length}</span>
           </button>
         ))}
       </div>
@@ -130,7 +138,17 @@ export default function Facilities({ facilities, latest }) {
         <p className="find-status" role="status">
           {listed.length
             ? `Showing ${listed.length} on this week’s report that ${listed.length === 1 ? "matches" : "match"} “${query.trim()}”.`
-            : `Nothing on this week’s report matches “${query.trim()}”. Try a town or a county.`}
+            : countyHit
+              ? `No facility on this week’s report is in ${countyHit.county} County.`
+              : `Nothing on this week’s report matches “${query.trim()}”. Try a facility’s name or a county.`}
+          {countyHit && (
+            <>
+              {" "}{countyHit.people[asOf] == null
+                ? `Fewer than ${counties.min_cell} people in state prison on ${apDate(counties.months[asOf])} were convicted in ${countyHit.county} County.`
+                : `Of the people in state prison on ${apDate(counties.months[asOf])}, ${num(countyHit.people[asOf])} were convicted in ${countyHit.county} County.`}
+              {" "}<a href="#counties" onClick={jump("counties")}>See every county</a>.
+            </>
+          )}
         </p>
       )}
       {hasCapacity && (
@@ -209,6 +227,13 @@ export default function Facilities({ facilities, latest }) {
           {all ? `Show the first ${FIRST_ROWS}` : `Show all ${listed.length}`}
         </button>
       )}
+      {big.length > 1 && (
+        <p className="chart-note">
+          The {big.length} prisons holding 1,000 or more people run from{" "}
+          {pct1(Math.min(...big.map((r) => r.percent)))} to {pct1(Math.max(...big.map((r) => r.percent)))} of
+          capacity. Sort by People to see them first.
+        </p>
+      )}
       {idle.length > 0 && (
         <p className="chart-note">
           Also on the department&rsquo;s contract list and holding no state prisoners this
@@ -238,6 +263,7 @@ function Detail({ facility, dates, onClose }) {
         On the weekly report since {monthYear(facility.first)}. Highest count: {num(facility.population[high])},
         on {apDate(span[high])}{high === last ? ", this week" : ""}.
         {facility.sex === "both" && " Listed with both men and women."}
+        {capacity && " Capacity is as the department printed it each week."}
       </p>
       <TimeChart dates={span} series={series} height={260} yMin={0}
         wash={capacity ? { upper: "population", lower: ["capacity"], color: COLOR.population } : undefined}

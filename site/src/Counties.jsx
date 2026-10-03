@@ -9,7 +9,7 @@ const COLUMNS = {
   people: { text: "In state prison", short: "In prison", value: (r) => r.people },
   yearChange: { text: "In a year", value: (r) => r.yearChange },
   noNew: { text: "No new sentence", value: (r) => r.noNew },
-  share: { text: "Share of total", short: "Share", value: share },
+  share: { text: "Share with no new sentence", short: "% no new", value: share },
 };
 
 // People in state prison by the county that convicted them, from DOC's monthly file. The

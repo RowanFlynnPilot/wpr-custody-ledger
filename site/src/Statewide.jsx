@@ -8,14 +8,10 @@ export default function Statewide({ statewide, changes }) {
   const dates = statewide.map((w) => w.date);
   const last = statewide.length - 1;
   const now = statewide[last];
-  const firstDesign = statewide.findIndex((w) => w.capacity_type === "design");
-  const over = now.population - now.capacity;
-
+  // One capacity line: the 2008 rename from operating to design capacity changed the label, not the measure.
   const series = [
-    { key: "operating", label: "Operating capacity", legendLabel: "Capacity", color: COLOR.capacity, width: 1.5,
-      values: statewide.map((w) => (w.capacity_type === "operating" ? w.capacity : null)) },
-    { key: "design", label: "Design capacity", legend: false, color: COLOR.capacity, width: 1.5,
-      values: statewide.map((w) => (w.capacity_type === "design" ? w.capacity : null)), endLabel: num(now.capacity) },
+    { key: "capacity", label: "Capacity", color: COLOR.capacity, width: 1.5,
+      values: statewide.map((w) => w.capacity), endLabel: num(now.capacity) },
     { key: "population", label: "People held", color: COLOR.population,
       values: statewide.map((w) => w.population), endLabel: num(now.population) },
   ];
@@ -42,15 +38,18 @@ export default function Statewide({ statewide, changes }) {
 
   return (
     <section id="statewide" tabIndex={-1}>
-      <h2>{over > 0 ? <>{num(over)} more people than the prisons were designed to hold</> : <>Every week since 1999</>}</h2>
+      {/* The bar above already says how far over capacity the system is; this heading says where the line has gone. */}
+      <h2>{low !== last && now.population > statewide[low].population
+        ? <>From {num(statewide[low].population)} in {yearOf(dates[low])} to {num(now.population)} this week</>
+        : <>Every week since 1999</>}</h2>
       <p className="section-dek">
-        Every weekly count since 1999. The line marked capacity is what the prisons and contract
-        beds were meant to hold; the shaded gap is everyone beyond it.
+        Every weekly count since 1999. The gray line is capacity: what the prisons were built to
+        hold, plus the contract beds the state rents in county jails and, in the early 2000s, in
+        other states. The shaded gap is everyone beyond it.
       </p>
       <TimeChart
         dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
-        wash={{ upper: "population", lower: ["operating", "design"], color: COLOR.population }}
-        vrules={[{ index: firstDesign, text: "Called design capacity from March 2008", short: "Renamed in 2008" }]}
+        wash={{ upper: "population", lower: ["capacity"], color: COLOR.population }}
         label="Line chart: people held in Wisconsin's adult prison system and its capacity, weekly since 1999."
         tooltipNote={(i) => {
           const w = statewide[i];
@@ -79,11 +78,11 @@ export default function Statewide({ statewide, changes }) {
         </details>
       </TimeChart>
       <p className="chart-note">
-        The vertical scale starts at {num(floor)}, not zero. Capacity is what each prison was
-        built to hold, plus later expansions; it leaves out beds added to cope with crowding. In
-        March 2008 the department began calling the figure design capacity instead of operating
-        capacity. The definition printed on its form did not change. Move across the chart, or
-        select it and use the arrow keys, to read any week.
+        The vertical scale starts at {num(floor)}, not zero. Before 2005 the capacity line rises
+        and falls with the beds the state rented out of state, and it steps up where a new
+        prison&rsquo;s beds were counted before the prison filled. In March 2008 the department
+        renamed the figure from operating to design capacity without changing its definition.
+        Move across the chart, or select it and use the arrow keys, to read any week.
       </p>
     </section>
   );
