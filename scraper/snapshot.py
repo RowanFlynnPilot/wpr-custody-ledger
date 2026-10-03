@@ -24,7 +24,7 @@ juvenile() does the same for the Division of Juvenile Corrections block further 
 facility rows there are (capacity, population) and must add up to 'Total On-Grounds Population'.
 """
 from corrections import (CAPACITY_MISPRINTS, COUNTED_BELOW, JUVENILE_ROWS_DROPPED, NOT_ITEMIZED, ROW_FIXES,
-                         WOMEN_CAPACITY_MISPRINTS)
+                         UNNAMED_JUVENILE_ROWS, WOMEN_CAPACITY_MISPRINTS)
 from parse import HEADLINE_LABELS
 from registry import JUVENILE_LABELS, facility, facility_id
 
@@ -164,7 +164,7 @@ def juvenile_leaves(report: dict) -> list[dict]:
     if len(at) != 1:
         raise ValueError(f"{source}: expected one '{ON_GROUNDS}' row below the adult section, found {len(at)}")
 
-    sex, leaves = None, []
+    sex, leaves, subtotals = None, [], {}
     for row in rows[at[0] + 1:]:
         label, values = row['name'], row['values']
         if label.startswith(JUVENILE_END):
@@ -173,6 +173,7 @@ def juvenile_leaves(report: dict) -> list[dict]:
             continue
         if label in JUVENILE_SEX:
             sex = JUVENILE_SEX[label]
+            subtotals[sex] = values
             continue
         if label not in JUVENILE_LABELS:
             raise ValueError(f'{source}: unknown juvenile facility row {label!r}; add it to JUVENILE_LABELS in '
@@ -185,6 +186,20 @@ def juvenile_leaves(report: dict) -> list[dict]:
             raise ValueError(f'{source}: juvenile row {label!r} reads {values}; expected capacity and population')
         leaves.append({'id': JUVENILE_LABELS[label], 'label': label, 'sex': sex, 'security': None,
                        'contract': False, 'capacity': capacity, 'population': population})
+    if report['revision'] in UNNAMED_JUVENILE_ROWS:
+        # The row with no name: what DOC's subtotal for its section holds beyond the named rows.
+        sex, label, capacity = UNNAMED_JUVENILE_ROWS[report['revision']]
+        if any(leaf['label'] == label for leaf in leaves):
+            raise ValueError(f"{source}: UNNAMED_JUVENILE_ROWS expects {label!r} without its name on form revision "
+                             f"{report['revision']}, but the row is named; remove the entry")
+        named = [leaf for leaf in leaves if leaf['sex'] == sex]
+        beds = subtotals[sex][0] - sum(leaf['capacity'] or 0 for leaf in named)
+        held = subtotals[sex][1] - sum(leaf['population'] for leaf in named)
+        if beds != capacity or held < 0:
+            raise ValueError(f"{source}: the {sex} juvenile subtotal leaves {beds:,} beds and {held:,} youth for the "
+                             f"unnamed row; UNNAMED_JUVENILE_ROWS says {label!r} has {capacity:,} beds. Open the PDF")
+        leaves.append({'id': JUVENILE_LABELS[label], 'label': label, 'sex': sex, 'security': None,
+                       'contract': False, 'capacity': capacity, 'population': held})
     if date in JUVENILE_ROWS_DROPPED:
         label, sex, capacity, population = JUVENILE_ROWS_DROPPED[date]
         if any(leaf['label'] == label for leaf in leaves):

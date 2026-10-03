@@ -120,8 +120,8 @@ def changes(statewide: list[dict], facilities: list[dict]) -> dict:
     before = statewide[:len(statewide) - streak] if streak else statewide[:-1]
     prior_peak = max(before, key=lambda w: w['population'])
 
-    era = [w for w in statewide if w['capacity_type'] == now['capacity_type']]
-    most_crowded = max(era, key=lambda w: w['population'] / w['capacity'])
+    # Over the whole record: the 2008 rename from operating to design capacity changed the label, not the measure.
+    most_crowded = max(statewide, key=lambda w: w['population'] / w['capacity'])
 
     current, on_report = len(statewide) - 1, []
     for f in facilities:

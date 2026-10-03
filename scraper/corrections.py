@@ -89,6 +89,16 @@ NOT_ITEMIZED = {'2017-03-10': 19}
 # the typed note leaves no trailing numbers, so the row is not stored. (label, sex, capacity, population)
 JUVENILE_ROWS_DROPPED = {'2001-09-21': ('Lincoln Hills', 'male', 298, 321)}
 
+# Juvenile rows a form revision prints with an empty name cell, so the parser never sees them as rows
+# (a line of bare numbers is not a row). Keyed by form revision, because the blank is in the form and
+# comes back every week: revision -> (section, the facility, its capacity). The row's figures are DOC's
+# subtotal for that section less its named rows, and snapshot.py throws unless the beds that leaves
+# are exactly the capacity given here.
+#   09_25_2026, first used Oct. 2, 2026: the first boys' row reads only "519 63". Those are Lincoln Hills
+#   School's 519 beds and its 63 youth of the week before; no other boys' facility has 519 beds; and the
+#   boys' subtotal (604 beds, 107 youth) adds up only with them. Seen in the PDF, not inferred from the sum.
+UNNAMED_JUVENILE_ROWS = {'09_25_2026': ('male', 'Lincoln Hills School', 519)}
+
 # Stretches where DOC's printed total capacity is not the sum of its own facility rows.
 # (first report, last report, what went wrong). In these weeks the Ledger's capacity is the
 # sum of the rows and the printed figure is kept alongside it. snapshot.py throws if a week

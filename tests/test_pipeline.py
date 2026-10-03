@@ -25,7 +25,8 @@ EXPECTED = {
     '2009-04-17': ('design', [17731, 22562, 22221, 341]),      # "APRIL 17, 2009"; next line holds a decoy "as of 2/28/2009"
     '2019-08-09': ('design', [17830, 23826, 23528, 298]),      # 2019 peak, the record until Aug 2026
     '2026-01-02': ('design', [17743, 23282, 23229, 53]),       # Rev. 05_21_2025: single CONTRACT BEDS block
-    '2026-09-25': ('design', [17860, 23905, 23828, 77]),       # Rev. 03_04_2026: current form
+    '2026-09-25': ('design', [17860, 23905, 23828, 77]),       # Rev. 03_04_2026
+    '2026-10-02': ('design', [17851, 23927, 23850, 77]),       # Rev. 09_25_2026: Lincoln Hills' row printed without its name
 }
 
 
@@ -119,6 +120,19 @@ def test_womens_beds_must_match_the_womens_subtotal():
         facilities(report)
 
 
+def test_a_juvenile_row_the_form_prints_without_its_name():
+    # Rev. 09_25_2026 prints Lincoln Hills School's row as bare numbers, which the parser does not take for a row.
+    # UNNAMED_JUVENILE_ROWS names it, and its figures are what the boys' subtotal holds beyond the named rows.
+    by_id = {f['id']: f for f in juvenile(load('2026-10-02'))}
+    assert (by_id['lincoln-hills']['capacity'], by_id['lincoln-hills']['population']) == (519, 63)
+    assert sum(f['population'] for f in by_id.values()) == 122
+    # If what is left over is not Lincoln Hills' 519 beds, it is not taken for Lincoln Hills.
+    report = load('2026-10-02')
+    report['rows'][row_index(report, 'SUBTOTAL-MALES')]['values'][0] += 10
+    with pytest.raises(ValueError, match="UNNAMED_JUVENILE_ROWS says 'Lincoln Hills School' has 519 beds"):
+        juvenile(report)
+
+
 def test_juvenile_facilities():
     by_id = {f['id']: f for f in juvenile(load('2026-09-25'))}
     assert (by_id['lincoln-hills']['capacity'], by_id['lincoln-hills']['population']) == (519, 63)
@@ -190,6 +204,10 @@ def test_changes_counts_the_record_streak_and_finds_the_prior_peak():
     assert (result['population']['record'], result['population']['record_streak']) == (False, 0)
     assert result['population']['prior_peak']['value'] == 110
     assert result['crowding']['record_percent'] == 110.0
+    # The crowding record spans the 2008 rename: an operating-capacity week can hold it.
+    weeks = synthetic_weeks([120, 105, 106])
+    weeks[0]['capacity_type'] = 'operating'
+    assert (changes(weeks, [])['crowding']['record_percent'], changes(weeks, [])['crowding']['record_date']) == (120.0, weeks[0]['date'])
 
 
 def monthly_file(people: list[tuple[str, str, str]]) -> bytes:

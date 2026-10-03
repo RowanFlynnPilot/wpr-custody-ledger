@@ -48,7 +48,7 @@ def flags(changes: dict) -> list[str]:
                     f"passing {population['prior_peak']['value']:,} set {ap_date(population['prior_peak']['date'])}"))
     if crowding['record_date'] == changes['report_date']:
         out.append(f"Crowding record: {crowding['percent']}% of {crowding['capacity_type']} capacity, the highest "
-                   'since that measure came into use')
+                   'in weekly records that begin in 1999')
     if women['record']:
         out.append(f"Most women on record: {women['value']:,}, at {women['percent']}% of capacity")
     if changes['county_jails']['record']:
@@ -88,9 +88,9 @@ def brief(changes: dict, latest: dict) -> str:
                 f"{crowding['percent']}% of {crowding['capacity_type']} capacity, {crowding['over_capacity']:,} "
                 'people beyond it.')
     if crowding['record_date'] == changes['report_date']:
-        capacity += ' That is the highest rate since the department began reporting that measure.'
+        capacity += ' That is the highest rate in weekly records that begin in 1999.'
     else:
-        capacity += (f" The highest rate since the department began reporting that measure was "
+        capacity += (f" The highest rate in weekly records that begin in 1999 was "
                      f"{crowding['record_percent']}%, on {ap_date(crowding['record_date'])}.")
 
     sexes = (f"Women's prisons held {women['value']:,} people, {women['percent']}% of their capacity" +
