@@ -1,58 +1,58 @@
 {
- "report_date": "2026-09-25",
- "previous_date": "2026-09-18",
- "year_ago_date": "2025-09-26",
+ "report_date": "2026-10-02",
+ "previous_date": "2026-09-25",
+ "year_ago_date": "2025-10-03",
  "population": {
-  "value": 23905,
-  "week_change": 8,
-  "year_change": 355,
+  "value": 23927,
+  "week_change": 22,
+  "year_change": 393,
   "record": true,
-  "record_streak": 5,
+  "record_streak": 6,
   "prior_peak": {
    "date": "2019-08-09",
    "value": 23826
   }
  },
  "crowding": {
-  "capacity": 17860,
+  "capacity": 17851,
   "capacity_type": "design",
-  "percent": 133.8,
-  "over_capacity": 6045,
+  "percent": 134.0,
+  "over_capacity": 6076,
   "record_percent": 134.1,
   "record_date": "2018-08-10"
  },
  "men": {
-  "value": 22155,
-  "week_change": 3,
-  "year_change": 237,
+  "value": 22178,
+  "week_change": 23,
+  "year_change": 275,
   "record": false,
-  "percent": 131.2
+  "percent": 131.4
  },
  "women": {
-  "value": 1750,
-  "week_change": 5,
+  "value": 1749,
+  "week_change": -1,
   "year_change": 118,
-  "record": true,
-  "percent": 179.7
+  "record": false,
+  "percent": 180.1
  },
  "county_jails": {
-  "value": 461,
-  "week_change": -4,
-  "year_change": 167,
+  "value": 456,
+  "week_change": -5,
+  "year_change": 158,
   "record": false,
   "jails_holding": 12,
-  "jails_listed": 24
+  "jails_listed": 25
  },
  "juvenile": {
   "value": 122,
-  "week_change": 2,
-  "year_change": 11,
+  "week_change": 0,
+  "year_change": 12,
   "record": false
  },
  "supervision": {
-  "population": 64051,
+  "population": 64056,
   "as_of": "2026-07-31",
-  "holds": 840
+  "holds": 870
  },
  "facilities": {
   "over_capacity": 34,
@@ -68,16 +68,16 @@
    {
     "id": "drug-abuse",
     "name": "Drug Abuse Correctional Center",
-    "population": 295,
+    "population": 297,
     "capacity": 125,
-    "percent": 236.0
+    "percent": 237.6
    },
    {
     "id": "ellsworth",
     "name": "Robert E. Ellsworth Correctional Center",
-    "population": 506,
+    "population": 508,
     "capacity": 230,
-    "percent": 220.0
+    "percent": 220.9
    },
    {
     "id": "mcnaughton",
@@ -89,72 +89,72 @@
    {
     "id": "oakhill",
     "name": "Oakhill Correctional Institution",
-    "population": 865,
+    "population": 873,
     "capacity": 409,
-    "percent": 211.5
+    "percent": 213.4
    }
   ],
   "largest_gains": [
    {
-    "id": "chippewa-valley",
-    "name": "Chippewa Valley Correctional Treatment Facility",
-    "population": 510,
-    "week_change": 15
+    "id": "kettle-moraine",
+    "name": "Kettle Moraine Correctional Institution",
+    "population": 1204,
+    "week_change": 19
    },
    {
     "id": "dodge",
     "name": "Dodge Correctional Institution",
-    "population": 1771,
-    "week_change": 14
-   },
-   {
-    "id": "st-croix",
-    "name": "St. Croix Correctional Center",
-    "population": 111,
-    "week_change": 6
-   },
-   {
-    "id": "taycheedah",
-    "name": "Taycheedah Correctional Institution",
-    "population": 1088,
-    "week_change": 6
-   },
-   {
-    "id": "fox-lake",
-    "name": "Fox Lake Correctional Institution",
-    "population": 1400,
-    "week_change": 5
-   }
-  ],
-  "largest_drops": [
-   {
-    "id": "jackson",
-    "name": "Jackson Correctional Institution",
-    "population": 969,
-    "week_change": -19
+    "population": 1779,
+    "week_change": 8
    },
    {
     "id": "oakhill",
     "name": "Oakhill Correctional Institution",
-    "population": 865,
-    "week_change": -9
+    "population": 873,
+    "week_change": 8
    },
    {
-    "id": "kettle-moraine",
-    "name": "Kettle Moraine Correctional Institution",
-    "population": 1185,
-    "week_change": -5
+    "id": "black-river",
+    "name": "Black River Correctional Center",
+    "population": 134,
+    "week_change": 8
+   },
+   {
+    "id": "jackson",
+    "name": "Jackson Correctional Institution",
+    "population": 975,
+    "week_change": 6
+   }
+  ],
+  "largest_drops": [
+   {
+    "id": "oshkosh",
+    "name": "Oshkosh Correctional Institution",
+    "population": 2126,
+    "week_change": -7
    },
    {
     "id": "prairie-du-chien",
     "name": "Prairie du Chien Correctional Institution",
-    "population": 531,
-    "week_change": -5
+    "population": 524,
+    "week_change": -7
    },
    {
-    "id": "stanley",
-    "name": "Stanley Correctional Institution",
-    "population": 1574,
+    "id": "fox-lake",
+    "name": "Fox Lake Correctional Institution",
+    "population": 1394,
+    "week_change": -6
+   },
+   {
+    "id": "racine",
+    "name": "Racine Correctional Institution",
+    "population": 1810,
+    "week_change": -6
+   },
+   {
+    "id": "new-lisbon",
+    "name": "New Lisbon Correctional Institution",
+    "population": 1035,
     "week_change": -5
    }
   ],
@@ -162,31 +162,31 @@
    {
     "id": "waupun",
     "name": "Waupun Correctional Institution",
-    "population": 966,
-    "year_change": 117
+    "population": 967,
+    "year_change": 118
    },
    {
     "id": "taycheedah",
     "name": "Taycheedah Correctional Institution",
     "population": 1088,
-    "year_change": 98
+    "year_change": 97
    },
    {
     "id": "kettle-moraine",
     "name": "Kettle Moraine Correctional Institution",
-    "population": 1185,
-    "year_change": 47
+    "population": 1204,
+    "year_change": 66
+   },
+   {
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 873,
+    "year_change": 56
    },
    {
     "id": "lincoln-county-jail",
     "name": "Lincoln County Jail",
     "population": 74,
-    "year_change": 47
-   },
-   {
-    "id": "oakhill",
-    "name": "Oakhill Correctional Institution",
-    "population": 865,
     "year_change": 43
    }
   ],
@@ -195,11 +195,6 @@
     "id": "racine-youthful-offender",
     "name": "Racine Youthful Offender Correctional Facility",
     "population": 474
-   },
-   {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2133
    },
    {
     "id": "taycheedah",
@@ -256,8 +251,8 @@
    "county": "Oneida",
    "capacity": 55,
    "population": 118,
-   "week_change": -1,
-   "year_change": 0,
+   "week_change": 0,
+   "year_change": 1,
    "record": false
   },
   {
@@ -268,7 +263,7 @@
    "capacity": null,
    "population": 74,
    "week_change": 0,
-   "year_change": 47,
+   "year_change": 43,
    "record": true
   },
   {
@@ -278,8 +273,8 @@
    "county": "Lincoln",
    "capacity": 519,
    "population": 63,
-   "week_change": 3,
-   "year_change": -9,
+   "week_change": 0,
+   "year_change": -8,
    "record": false
   },
   {
@@ -320,6 +315,17 @@
    "name": "Langlade County Jail",
    "type": "county_jail",
    "county": "Langlade",
+   "capacity": null,
+   "population": 0,
+   "week_change": 0,
+   "year_change": 0,
+   "record": false
+  },
+  {
+   "id": "wood-county-jail",
+   "name": "Wood County Jail",
+   "type": "county_jail",
+   "county": "Wood",
    "capacity": null,
    "population": 0,
    "week_change": 0,

@@ -1,22 +1,22 @@
 {
- "report_date": "2026-09-25",
- "population": 23905,
- "capacity": 17860,
+ "report_date": "2026-10-02",
+ "population": 23927,
+ "capacity": 17851,
  "capacity_type": "design",
- "capacity_printed": 17860,
- "men_population": 22155,
- "men_capacity": 16886,
- "women_population": 1750,
- "women_capacity": 974,
- "contract_population": 490,
- "contract_county_jails": 461,
+ "capacity_printed": 17851,
+ "men_population": 22178,
+ "men_capacity": 16880,
+ "women_population": 1749,
+ "women_capacity": 971,
+ "contract_population": 485,
+ "contract_county_jails": 456,
  "contract_out_of_state": 0,
  "contract_federal": 0,
  "juvenile_population": 122,
- "supervision_population": 64051,
+ "supervision_population": 64056,
  "supervision_as_of": "2026-07-31",
- "supervision_holds": 840,
- "source": "https://doc.wi.gov/DataResearch/WeeklyPopulationReports/fri_09_25_2026.pdf",
+ "supervision_holds": 870,
+ "source": "https://doc.wi.gov/DataResearch/WeeklyPopulationReports/fri_10_02_2026.pdf",
  "facilities": [
   {
    "id": "dodge",
@@ -26,7 +26,7 @@
    "security": "maximum",
    "sex": "both",
    "capacity": 1165,
-   "population": 1771
+   "population": 1779
   },
   {
    "id": "waupun",
@@ -36,7 +36,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 882,
-   "population": 966
+   "population": 967
   },
   {
    "id": "green-bay",
@@ -56,7 +56,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 541,
-   "population": 683
+   "population": 681
   },
   {
    "id": "wspf",
@@ -66,7 +66,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 501,
-   "population": 498
+   "population": 500
   },
   {
    "id": "fox-lake",
@@ -76,7 +76,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 979,
-   "population": 1400
+   "population": 1394
   },
   {
    "id": "jackson",
@@ -86,7 +86,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 837,
-   "population": 969
+   "population": 975
   },
   {
    "id": "kettle-moraine",
@@ -96,7 +96,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 783,
-   "population": 1185
+   "population": 1204
   },
   {
    "id": "new-lisbon",
@@ -106,7 +106,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 950,
-   "population": 1040
+   "population": 1035
   },
   {
    "id": "oshkosh",
@@ -116,7 +116,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1494,
-   "population": 2133
+   "population": 2126
   },
   {
    "id": "racine",
@@ -126,7 +126,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1171,
-   "population": 1816
+   "population": 1810
   },
   {
    "id": "racine-youthful-offender",
@@ -146,7 +146,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 990,
-   "population": 1022
+   "population": 1023
   },
   {
    "id": "stanley",
@@ -156,7 +156,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1500,
-   "population": 1574
+   "population": 1577
   },
   {
    "id": "chippewa-valley",
@@ -166,7 +166,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 450,
-   "population": 510
+   "population": 508
   },
   {
    "id": "oakhill",
@@ -176,7 +176,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 409,
-   "population": 865
+   "population": 873
   },
   {
    "id": "prairie-du-chien",
@@ -186,7 +186,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 326,
-   "population": 531
+   "population": 524
   },
   {
    "id": "sturtevant",
@@ -206,7 +206,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 66,
-   "population": 126
+   "population": 134
   },
   {
    "id": "drug-abuse",
@@ -216,7 +216,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 125,
-   "population": 295
+   "population": 297
   },
   {
    "id": "felmers-chaney",
@@ -256,7 +256,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 186,
-   "population": 289
+   "population": 291
   },
   {
    "id": "kenosha",
@@ -276,7 +276,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 32,
-   "population": 58
+   "population": 57
   },
   {
    "id": "mcnaughton",
@@ -316,7 +316,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 94,
-   "population": 111
+   "population": 113
   },
   {
    "id": "thompson",
@@ -326,7 +326,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 118,
-   "population": 123
+   "population": 125
   },
   {
    "id": "winnebago",
@@ -336,7 +336,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 210,
-   "population": 289
+   "population": 288
   },
   {
    "id": "interstate-compact",
@@ -435,7 +435,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 21
+   "population": 19
   },
   {
    "id": "langlade-county-jail",
@@ -495,7 +495,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 8
+   "population": 7
   },
   {
    "id": "racine-county-jail",
@@ -505,7 +505,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 80
+   "population": 78
   },
   {
    "id": "rock-county-jail",
@@ -588,14 +588,24 @@
    "population": 0
   },
   {
+   "id": "wood-county-jail",
+   "name": "Wood County Jail",
+   "type": "county_jail",
+   "county": "Wood",
+   "security": null,
+   "sex": "both",
+   "capacity": null,
+   "population": 0
+  },
+  {
    "id": "wrc",
    "name": "Wisconsin Resource Center",
    "type": "treatment",
    "county": "Winnebago",
    "security": null,
    "sex": "male",
-   "capacity": 421,
-   "population": 421
+   "capacity": 417,
+   "population": 417
   },
   {
    "id": "msdf",
@@ -605,7 +615,7 @@
    "security": null,
    "sex": "male",
    "capacity": 461,
-   "population": 498
+   "population": 500
   },
   {
    "id": "taycheedah",
@@ -635,20 +645,10 @@
    "security": "minimum",
    "sex": "female",
    "capacity": 230,
-   "population": 506
+   "population": 508
   }
  ],
  "juvenile": [
-  {
-   "id": "lincoln-hills",
-   "name": "Lincoln Hills School",
-   "type": "juvenile",
-   "county": "Lincoln",
-   "security": null,
-   "sex": "male",
-   "capacity": 519,
-   "population": 63
-  },
   {
    "id": "mendota-juvenile",
    "name": "Mendota Juvenile Treatment Center",
@@ -677,6 +677,16 @@
    "sex": "female",
    "capacity": 29,
    "population": 4
+  },
+  {
+   "id": "lincoln-hills",
+   "name": "Lincoln Hills School",
+   "type": "juvenile",
+   "county": "Lincoln",
+   "security": null,
+   "sex": "male",
+   "capacity": 519,
+   "population": 63
   }
  ]
 }
