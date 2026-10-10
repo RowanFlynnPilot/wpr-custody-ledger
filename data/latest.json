@@ -1,22 +1,22 @@
 {
- "report_date": "2026-10-02",
- "population": 23927,
- "capacity": 17851,
+ "report_date": "2026-10-09",
+ "population": 23931,
+ "capacity": 17849,
  "capacity_type": "design",
- "capacity_printed": 17851,
- "men_population": 22178,
- "men_capacity": 16880,
- "women_population": 1749,
+ "capacity_printed": 17849,
+ "men_population": 22187,
+ "men_capacity": 16878,
+ "women_population": 1744,
  "women_capacity": 971,
- "contract_population": 485,
- "contract_county_jails": 456,
+ "contract_population": 483,
+ "contract_county_jails": 454,
  "contract_out_of_state": 0,
  "contract_federal": 0,
- "juvenile_population": 122,
- "supervision_population": 64056,
+ "juvenile_population": 125,
+ "supervision_population": 64061,
  "supervision_as_of": "2026-07-31",
- "supervision_holds": 870,
- "source": "https://doc.wi.gov/DataResearch/WeeklyPopulationReports/fri_10_02_2026.pdf",
+ "supervision_holds": 854,
+ "source": "https://doc.wi.gov/DataResearch/WeeklyPopulationReports/fri_10_09_2026.pdf",
  "facilities": [
   {
    "id": "dodge",
@@ -26,7 +26,7 @@
    "security": "maximum",
    "sex": "both",
    "capacity": 1165,
-   "population": 1779
+   "population": 1792
   },
   {
    "id": "waupun",
@@ -36,7 +36,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 882,
-   "population": 967
+   "population": 965
   },
   {
    "id": "green-bay",
@@ -46,7 +46,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 749,
-   "population": 1130
+   "population": 1128
   },
   {
    "id": "columbia",
@@ -56,7 +56,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 541,
-   "population": 681
+   "population": 674
   },
   {
    "id": "wspf",
@@ -66,7 +66,7 @@
    "security": "maximum",
    "sex": "male",
    "capacity": 501,
-   "population": 500
+   "population": 499
   },
   {
    "id": "fox-lake",
@@ -96,7 +96,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 783,
-   "population": 1204
+   "population": 1209
   },
   {
    "id": "new-lisbon",
@@ -116,7 +116,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1494,
-   "population": 2126
+   "population": 2137
   },
   {
    "id": "racine",
@@ -126,7 +126,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1171,
-   "population": 1810
+   "population": 1807
   },
   {
    "id": "racine-youthful-offender",
@@ -146,7 +146,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 990,
-   "population": 1023
+   "population": 1031
   },
   {
    "id": "stanley",
@@ -156,7 +156,7 @@
    "security": "medium",
    "sex": "male",
    "capacity": 1500,
-   "population": 1577
+   "population": 1580
   },
   {
    "id": "chippewa-valley",
@@ -166,7 +166,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 450,
-   "population": 508
+   "population": 505
   },
   {
    "id": "oakhill",
@@ -176,7 +176,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 409,
-   "population": 873
+   "population": 870
   },
   {
    "id": "prairie-du-chien",
@@ -206,7 +206,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 66,
-   "population": 134
+   "population": 137
   },
   {
    "id": "drug-abuse",
@@ -216,7 +216,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 125,
-   "population": 297
+   "population": 296
   },
   {
    "id": "felmers-chaney",
@@ -236,7 +236,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 50,
-   "population": 94
+   "population": 88
   },
   {
    "id": "gordon",
@@ -256,7 +256,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 186,
-   "population": 291
+   "population": 289
   },
   {
    "id": "kenosha",
@@ -266,7 +266,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 60,
-   "population": 116
+   "population": 118
   },
   {
    "id": "marshall-sherrer",
@@ -276,7 +276,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 32,
-   "population": 57
+   "population": 58
   },
   {
    "id": "mcnaughton",
@@ -286,7 +286,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 55,
-   "population": 118
+   "population": 119
   },
   {
    "id": "oregon",
@@ -296,7 +296,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 78,
-   "population": 132
+   "population": 130
   },
   {
    "id": "sanger-powers",
@@ -306,7 +306,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 60,
-   "population": 119
+   "population": 120
   },
   {
    "id": "st-croix",
@@ -316,7 +316,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 94,
-   "population": 113
+   "population": 114
   },
   {
    "id": "thompson",
@@ -326,7 +326,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 118,
-   "population": 125
+   "population": 123
   },
   {
    "id": "winnebago",
@@ -336,7 +336,7 @@
    "security": "minimum",
    "sex": "male",
    "capacity": 210,
-   "population": 288
+   "population": 291
   },
   {
    "id": "interstate-compact",
@@ -505,7 +505,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 78
+   "population": 76
   },
   {
    "id": "rock-county-jail",
@@ -565,7 +565,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 22
+   "population": 21
   },
   {
    "id": "waushara-county-jail",
@@ -575,7 +575,7 @@
    "security": null,
    "sex": "both",
    "capacity": null,
-   "population": 24
+   "population": 25
   },
   {
    "id": "winnebago-county-jail",
@@ -604,8 +604,8 @@
    "county": "Winnebago",
    "security": null,
    "sex": "male",
-   "capacity": 417,
-   "population": 417
+   "capacity": 418,
+   "population": 418
   },
   {
    "id": "msdf",
@@ -614,8 +614,8 @@
    "county": "Milwaukee",
    "security": null,
    "sex": "male",
-   "capacity": 461,
-   "population": 500
+   "capacity": 460,
+   "population": 492
   },
   {
    "id": "taycheedah",
@@ -625,7 +625,7 @@
    "security": null,
    "sex": "female",
    "capacity": 653,
-   "population": 1088
+   "population": 1079
   },
   {
    "id": "milwaukee-womens",
@@ -635,7 +635,7 @@
    "security": "minimum",
    "sex": "female",
    "capacity": 42,
-   "population": 107
+   "population": 109
   },
   {
    "id": "ellsworth",
@@ -645,7 +645,7 @@
    "security": "minimum",
    "sex": "female",
    "capacity": 230,
-   "population": 508
+   "population": 510
   }
  ],
  "juvenile": [
@@ -657,7 +657,7 @@
    "security": null,
    "sex": "both",
    "capacity": 93,
-   "population": 50
+   "population": 49
   },
   {
    "id": "grow-academy",
@@ -666,7 +666,7 @@
    "security": null,
    "sex": "male",
    "capacity": 12,
-   "population": 5
+   "population": 6
   },
   {
    "id": "copper-lake",
@@ -676,7 +676,7 @@
    "security": null,
    "sex": "female",
    "capacity": 29,
-   "population": 4
+   "population": 6
   },
   {
    "id": "lincoln-hills",
@@ -686,7 +686,7 @@
    "security": null,
    "sex": "male",
    "capacity": 519,
-   "population": 63
+   "population": 64
   }
  ]
 }
