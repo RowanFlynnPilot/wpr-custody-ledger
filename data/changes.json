@@ -1,59 +1,59 @@
 {
- "report_date": "2026-10-09",
- "previous_date": "2026-10-02",
- "year_ago_date": "2025-10-10",
+ "report_date": "2026-10-16",
+ "previous_date": "2026-10-09",
+ "year_ago_date": "2025-10-17",
  "population": {
-  "value": 23931,
-  "week_change": 4,
-  "year_change": 376,
-  "record": true,
-  "record_streak": 7,
+  "value": 23920,
+  "week_change": -11,
+  "year_change": 358,
+  "record": false,
+  "record_streak": 0,
   "prior_peak": {
-   "date": "2019-08-09",
-   "value": 23826
+   "date": "2026-10-09",
+   "value": 23931
   }
  },
  "crowding": {
-  "capacity": 17849,
+  "capacity": 17848,
   "capacity_type": "design",
-  "percent": 134.1,
-  "over_capacity": 6082,
-  "contract_beds": 483,
+  "percent": 134.0,
+  "over_capacity": 6072,
+  "contract_beds": 486,
   "record_percent": 134.1,
   "record_date": "2026-10-09"
  },
  "men": {
-  "value": 22187,
-  "week_change": 9,
-  "year_change": 267,
+  "value": 22180,
+  "week_change": -7,
+  "year_change": 252,
   "record": false,
-  "percent": 131.5
+  "percent": 131.4
  },
  "women": {
-  "value": 1744,
-  "week_change": -5,
-  "year_change": 109,
+  "value": 1740,
+  "week_change": -4,
+  "year_change": 106,
   "record": false,
-  "percent": 179.6
+  "percent": 179.2
  },
  "county_jails": {
-  "value": 454,
-  "week_change": -2,
-  "year_change": 154,
+  "value": 459,
+  "week_change": 5,
+  "year_change": 150,
   "record": false,
   "jails_holding": 12,
   "jails_listed": 25
  },
  "juvenile": {
-  "value": 125,
-  "week_change": 3,
+  "value": 124,
+  "week_change": -1,
   "year_change": 13,
   "record": false
  },
  "supervision": {
-  "population": 64061,
-  "as_of": "2026-07-31",
-  "holds": 854
+  "population": 63856,
+  "as_of": "2026-08-31",
+  "holds": 856
  },
  "facilities": {
   "over_capacity": 34,
@@ -62,101 +62,101 @@
    {
     "id": "milwaukee-womens",
     "name": "Milwaukee Women's Correctional Center",
-    "population": 109,
+    "population": 108,
     "capacity": 42,
-    "percent": 259.5
+    "percent": 257.1
    },
    {
     "id": "drug-abuse",
     "name": "Drug Abuse Correctional Center",
-    "population": 296,
+    "population": 298,
     "capacity": 125,
-    "percent": 236.8
+    "percent": 238.4
    },
    {
     "id": "ellsworth",
     "name": "Robert E. Ellsworth Correctional Center",
-    "population": 510,
+    "population": 513,
     "capacity": 230,
-    "percent": 221.7
-   },
-   {
-    "id": "mcnaughton",
-    "name": "McNaughton Correctional Center",
-    "population": 119,
-    "capacity": 55,
-    "percent": 216.4
+    "percent": 223.0
    },
    {
     "id": "oakhill",
     "name": "Oakhill Correctional Institution",
-    "population": 870,
+    "population": 875,
     "capacity": 409,
+    "percent": 213.9
+   },
+   {
+    "id": "mcnaughton",
+    "name": "McNaughton Correctional Center",
+    "population": 117,
+    "capacity": 55,
     "percent": 212.7
    }
   ],
   "largest_gains": [
    {
-    "id": "dodge",
-    "name": "Dodge Correctional Institution",
-    "population": 1792,
-    "week_change": 13
-   },
-   {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2137,
-    "week_change": 11
-   },
-   {
-    "id": "redgranite",
-    "name": "Redgranite Correctional Institution",
-    "population": 1031,
+    "id": "columbia",
+    "name": "Columbia Correctional Institution",
+    "population": 682,
     "week_change": 8
    },
    {
-    "id": "kettle-moraine",
-    "name": "Kettle Moraine Correctional Institution",
-    "population": 1209,
+    "id": "st-croix",
+    "name": "St. Croix Correctional Center",
+    "population": 120,
+    "week_change": 6
+   },
+   {
+    "id": "prairie-du-chien",
+    "name": "Prairie du Chien Correctional Institution",
+    "population": 530,
+    "week_change": 6
+   },
+   {
+    "id": "jackson",
+    "name": "Jackson Correctional Institution",
+    "population": 980,
     "week_change": 5
    },
    {
-    "id": "black-river",
-    "name": "Black River Correctional Center",
-    "population": 137,
-    "week_change": 3
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 875,
+    "week_change": 5
    }
   ],
   "largest_drops": [
    {
+    "id": "dodge",
+    "name": "Dodge Correctional Institution",
+    "population": 1770,
+    "week_change": -22
+   },
+   {
+    "id": "oshkosh",
+    "name": "Oshkosh Correctional Institution",
+    "population": 2126,
+    "week_change": -11
+   },
+   {
     "id": "taycheedah",
     "name": "Taycheedah Correctional Institution",
-    "population": 1079,
-    "week_change": -9
-   },
-   {
-    "id": "msdf",
-    "name": "Milwaukee Secure Detention Facility",
-    "population": 492,
-    "week_change": -8
-   },
-   {
-    "id": "columbia",
-    "name": "Columbia Correctional Institution",
-    "population": 674,
-    "week_change": -7
-   },
-   {
-    "id": "flambeau",
-    "name": "Flambeau Correctional Center",
-    "population": 88,
+    "population": 1073,
     "week_change": -6
    },
    {
     "id": "racine",
     "name": "Racine Correctional Institution",
-    "population": 1807,
-    "week_change": -3
+    "population": 1802,
+    "week_change": -5
+   },
+   {
+    "id": "msdf",
+    "name": "Milwaukee Secure Detention Facility",
+    "population": 487,
+    "week_change": -5
    }
   ],
   "largest_gains_year": [
@@ -164,31 +164,31 @@
     "id": "waupun",
     "name": "Waupun Correctional Institution",
     "population": 965,
-    "year_change": 119
+    "year_change": 118
    },
    {
     "id": "taycheedah",
     "name": "Taycheedah Correctional Institution",
-    "population": 1079,
-    "year_change": 90
+    "population": 1073,
+    "year_change": 84
    },
    {
     "id": "kettle-moraine",
     "name": "Kettle Moraine Correctional Institution",
-    "population": 1209,
-    "year_change": 72
-   },
-   {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2137,
-    "year_change": 51
+    "population": 1207,
+    "year_change": 71
    },
    {
     "id": "oakhill",
     "name": "Oakhill Correctional Institution",
-    "population": 870,
-    "year_change": 45
+    "population": 875,
+    "year_change": 55
+   },
+   {
+    "id": "lincoln-county-jail",
+    "name": "Lincoln County Jail",
+    "population": 76,
+    "year_change": 36
    }
   ],
   "at_record": [
@@ -196,11 +196,6 @@
     "id": "racine-youthful-offender",
     "name": "Racine Youthful Offender Correctional Facility",
     "population": 474
-   },
-   {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2137
    },
    {
     "id": "vernon-county-jail",
@@ -215,7 +210,7 @@
    {
     "id": "lincoln-county-jail",
     "name": "Lincoln County Jail",
-    "population": 74
+    "population": 76
    }
   ]
  },
@@ -240,9 +235,9 @@
    "type": "county_jail",
    "county": "Oneida",
    "capacity": null,
-   "population": 120,
-   "week_change": 0,
-   "year_change": 9,
+   "population": 119,
+   "week_change": -1,
+   "year_change": 8,
    "record": false
   },
   {
@@ -251,9 +246,9 @@
    "type": "center",
    "county": "Oneida",
    "capacity": 55,
-   "population": 119,
-   "week_change": 1,
-   "year_change": 0,
+   "population": 117,
+   "week_change": -2,
+   "year_change": -1,
    "record": false
   },
   {
@@ -262,9 +257,9 @@
    "type": "county_jail",
    "county": "Lincoln",
    "capacity": null,
-   "population": 74,
-   "week_change": 0,
-   "year_change": 43,
+   "population": 76,
+   "week_change": 2,
+   "year_change": 36,
    "record": true
   },
   {
@@ -273,9 +268,9 @@
    "type": "juvenile",
    "county": "Lincoln",
    "capacity": 519,
-   "population": 64,
+   "population": 65,
    "week_change": 1,
-   "year_change": -7,
+   "year_change": -6,
    "record": false
   },
   {
@@ -295,9 +290,9 @@
    "type": "juvenile",
    "county": "Lincoln",
    "capacity": 29,
-   "population": 6,
-   "week_change": 2,
-   "year_change": 0,
+   "population": 5,
+   "week_change": -1,
+   "year_change": -1,
    "record": false
   },
   {
