@@ -9,7 +9,9 @@ jail, so a newly contracted jail does not stop the weekly run.
 
 `county` for state-run facilities is from the Department of Health Services' list of state
 correctional institutions (BadgerCare Plus handbook, section 45.9); facilities closed before
-that list, and Grow Academy, have none. A county jail's county is in its name.
+that list, and Grow Academy, have none. A county jail's county is in its name. The Southeast Regional
+Care Center for Youth opened after that list; its county is from the Governor's Office release of
+Oct. 14, 2026 ("the new SERC in Milwaukee County").
 
 `type` is what the place is, not where DOC lists it that week:
   institution   DOC adult correctional institution
@@ -92,6 +94,7 @@ FACILITIES = {
     'grow-academy': {'name': 'Grow Academy', 'type': 'juvenile'},
     'lincoln-hills': {'name': 'Lincoln Hills School', 'type': 'juvenile', 'county': 'Lincoln'},
     'mendota-juvenile': {'name': 'Mendota Juvenile Treatment Center', 'type': 'juvenile', 'county': 'Dane'},
+    'southeast-regional': {'name': 'Southeast Regional Care Center for Youth', 'type': 'juvenile', 'county': 'Milwaukee'},
     'southern-oaks': {'name': 'Southern Oaks Girls School', 'type': 'juvenile'},
     'sprite': {'name': 'SPRITE', 'type': 'juvenile'},
     'youth-leadership': {'name': 'Youth Leadership Training Center', 'type': 'juvenile'},
@@ -183,6 +186,7 @@ JUVENILE_LABELS = {
     'Lincoln Hills': 'lincoln-hills',
     'Lincoln Hills School': 'lincoln-hills',
     'Mendota Juvenile Treatment Center': 'mendota-juvenile',
+    'Southeast Regional Care Center for Youth': 'southeast-regional',  # first listed Oct. 30, 2026, 0 beds and 0 youth
     'Southern Oaks Girls School': 'southern-oaks',
     'SPRITE': 'sprite',
     'Youth Leadership Training Center': 'youth-leadership',

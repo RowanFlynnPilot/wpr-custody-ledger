@@ -303,8 +303,10 @@ function Detail({ facility, row, date, dates, onClose }) {
               department&rsquo;s form gives contract beds no capacity of their own.</>}
       </p>
       <p className="detail-facts">
-        On the weekly report since {monthYear(facility.first)}. Highest count: {num(facility.population[high])},
-        on {apDate(span[high])}{high === last ? ", this week" : ""}.
+        On the weekly report since {monthYear(facility.first)}.{" "}
+        {facility.population[high]
+          ? <>Highest count: {num(facility.population[high])}, on {apDate(span[high])}{high === last ? ", this week" : ""}.</>
+          : <>It has held no one yet.</>}
         {facility.sex === "both" && " Listed with both men and women."}
         {capacity && " Capacity is as the department printed it each week."}
       </p>

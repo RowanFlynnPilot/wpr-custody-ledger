@@ -27,6 +27,7 @@ EXPECTED = {
     '2026-01-02': ('design', [17743, 23282, 23229, 53]),       # Rev. 05_21_2025: single CONTRACT BEDS block
     '2026-09-25': ('design', [17860, 23905, 23828, 77]),       # Rev. 03_04_2026
     '2026-10-02': ('design', [17851, 23927, 23850, 77]),       # Rev. 09_25_2026: Lincoln Hills' row printed without its name
+    '2026-10-30': ('design', [17861, 23936, 23863, 73]),       # Rev. 10_28_2026: Lincoln Hills named again; a new youth center listed
 }
 
 
@@ -131,6 +132,16 @@ def test_a_juvenile_row_the_form_prints_without_its_name():
     report['rows'][row_index(report, 'SUBTOTAL-MALES')]['values'][0] += 10
     with pytest.raises(ValueError, match="UNNAMED_JUVENILE_ROWS says 'Lincoln Hills School' has 519 beds"):
         juvenile(report)
+
+
+def test_a_juvenile_facility_listed_before_it_opens():
+    # Rev. 10_28_2026 adds the Southeast Regional Care Center for Youth with no beds and no youth yet, and
+    # names Lincoln Hills School again, so UNNAMED_JUVENILE_ROWS (keyed to the earlier revision) does not apply.
+    by_id = {f['id']: f for f in juvenile(load('2026-10-30'))}
+    assert (by_id['southeast-regional']['capacity'], by_id['southeast-regional']['population']) == (0, 0)
+    assert by_id['southeast-regional']['county'] == 'Milwaukee'
+    assert (by_id['lincoln-hills']['capacity'], by_id['lincoln-hills']['population']) == (519, 67)
+    assert sum(f['population'] for f in by_id.values()) == 121
 
 
 def test_juvenile_facilities():
@@ -261,7 +272,7 @@ def test_one_snapshot_under_two_months_fails_with_a_pointer_to_the_fix(tmp_path,
         store.write_county_month({**july, 'sha256': 'f' * 64})
 
 
-def test_county_series_needs_every_month():
+def test_county_series_needs_every_month(monkeypatch):
     def month(as_of, people):
         return {'as_of': as_of, 'min_cell': 10, 'people': people, 'no_new_sentence': 0,
                 'counties': [{'county': 'Marathon', 'people': people, 'no_new_sentence': None}]}
@@ -271,6 +282,8 @@ def test_county_series_needs_every_month():
     with pytest.raises(ValueError, match='skip or repeat'):
         county_series([month('2026-05-31', 40), month('2026-07-31', 43)])
     # ...unless the missing month's file is one DOC got wrong and corrections.py says so
+    import corrections
+    monkeypatch.setitem(corrections.MONTHLY_SKIP, 'PIOCDF_2026_08.csv', {'reason': 'test', 'last_modified': 'test'})
     head, _ = county_series([month('2026-07-31', 43), month('2026-09-30', 44)])
     assert head['months'] == ['2026-07-31', '2026-09-30']
     with pytest.raises(ValueError, match='not the last day'):

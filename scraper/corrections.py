@@ -127,9 +127,9 @@ WOMEN_CAPACITY_MISPRINTS: list[tuple[str, str, str]] = []
 # examined: the monthly job throws when DOC replaces it, so a corrected file is not skipped forever.
 # The month a skipped file stands for is the one gap build.py allows in the county series.
 MONTHLY_SKIP = {
-    # Posted under "August 2026": its report date is July 31 and it matches PIOCDF_2026_07.csv row for row.
-    'PIOCDF_2026_08.csv': {'reason': 'repeats the July 31, 2026 snapshot',
-                           'last_modified': 'Wed, 16 Sep 2026 14:25:55 GMT'},
+    # PIOCDF_2026_08.csv was listed here from Sept. 16, 2026: posted under "August 2026", it carried a report date
+    # of July 31 and matched the July file row for row. DOC replaced it on Oct. 12, 2026 (Last-Modified
+    # Mon, 12 Oct 2026 13:54:15 GMT), so it is fetched like any other month.
 }
 
 
