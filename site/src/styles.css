@@ -31,6 +31,10 @@
   --chart-ref: #747067;   /* capacity: a reference line, deliberately neutral, in the page's warm gray */
   --chart-other: #8f8b82;
   --grid: #e7e2d5;
+  /* Beyond capacity, from just past it to far past it: the crowding stripes and the facility heat strip.
+     One hue, rust, because rust means beyond capacity everywhere on the page; at or under is a pale gray-green. */
+  --h-under: #e4e7e1;
+  --h0: #f2d9cf; --h1: #e8b7a5; --h2: #db9178; --h3: #c96a4f; --h4: #a9472f; --h5: #74291a;
   --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1.5 1.5l9 9m0-9l-9 9' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
   color-scheme: light;
 }
@@ -109,12 +113,24 @@ section { margin-bottom: 3.25rem; }
 .lede { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.5rem); line-height: 1.38; max-width: var(--measure); margin: 0 0 1.4rem; }
 .lede strong { font-weight: 900; }
 
-/* The whole system as one bar: teal up to design capacity, rust beyond it. The same two
-   colors mean the same thing in every facility row further down. */
+/* The whole system, bed by bed (Beds.jsx): a teal square for every 25 beds, a rust one for every 25 people
+   beyond them, below a capacity line. The same two colors mean the same thing in every facility row further down. */
 .hero-meter { margin: 0 0 2rem; }
-.hero-bar { display: flex; gap: 2px; height: 22px; }
-.hero-in { background: var(--chart-1); border-radius: 4px 0 0 4px; }
-.hero-over { background: var(--chart-2); border-radius: 0 4px 4px 0; transform-origin: left center; }
+.beds-controls { display: flex; align-items: center; gap: 0.6rem 1rem; flex-wrap: wrap; margin: 0 0 0.75rem; }
+.replay {
+  display: inline-flex; align-items: center; gap: 0.5rem; font: 600 var(--fs-md) var(--body); color: var(--ink);
+  background: var(--white); border: 1px solid var(--line-strong); padding: 0.5rem 0.85rem; min-height: 40px; cursor: pointer;
+}
+.replay.playing { background: var(--teal-deep); border-color: var(--teal-deep); color: var(--white); }
+.replay-play { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid currentColor; }
+.replay-pause { width: 8px; height: 10px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.beds-controls input[type="range"] { flex: 1 1 10rem; min-width: 0; accent-color: var(--teal-deep); }
+.beds-date { font-family: var(--mono); font-size: var(--fs-sm); color: var(--ink-soft); min-width: 8.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.beds-frame { position: relative; }
+.beds-frame canvas { display: block; max-width: 100%; }
+.beds-rule { position: absolute; left: 0; transform: translateY(-100%); border-bottom: 1.5px dashed var(--ink); padding-bottom: 3px; font-size: var(--fs-xs); font-weight: 600; line-height: 1.2; }
+.beds-unit { font-size: var(--fs-sm); color: var(--ink-soft); margin: 0.35rem 0 0; }
+.beds-unit .more { padding: 0.4rem 0 0.4rem 0.4rem; font-size: var(--fs-sm); }
 .hero-key { display: flex; justify-content: space-between; gap: 0.3rem 1.5rem; flex-wrap: wrap; margin: 0.45rem 0 0; font-size: var(--fs-md); }
 .hero-key strong { font-family: var(--mono); font-size: 1.05rem; letter-spacing: -0.01em; }
 .hero-key > span:last-child { text-align: right; margin-left: auto; }
@@ -138,6 +154,44 @@ section { margin-bottom: 3.25rem; }
   .stat { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
   .stat-sub { margin-top: 0; }
 }
+
+/* Crowding stripes (Stripes.jsx): one stripe per weekly report; the readout replaces the key under it. */
+.stripes { margin: 0 0 1.1rem; }
+.stripes-frame { touch-action: pan-y; cursor: crosshair; }
+.stripes-frame canvas { display: block; }
+.stripes figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; margin-top: 0.4rem; font-size: var(--fs-sm); color: var(--ink-soft); min-height: 1.5em; }
+.stripes-year { font-family: var(--mono); }
+.stripes-key { text-align: center; }
+.stripes-reading { color: var(--ink); font-variant-numeric: tabular-nums; }
+.stripes-ramp { display: inline-block; width: 4.5rem; height: 9px; margin: 0 0.4rem; vertical-align: -1px; background: linear-gradient(90deg, var(--h0), var(--h1), var(--h2), var(--h3), var(--h4), var(--h5)); }
+
+/* Every facility, every month (History.jsx): names as links beside one canvas of cells. */
+.history { display: grid; grid-template-columns: 13.5rem minmax(0, 1fr); column-gap: 0.7rem; background: var(--white); border: 1px solid var(--line); padding: 0.8rem 0.9rem 0.9rem; }
+.history-axis { grid-column: 2; position: relative; height: 1.4rem; font-family: var(--mono); font-size: var(--fs-xs); color: var(--ink-soft); }
+.history-axis span { position: absolute; top: 0; }
+.history-names { grid-column: 1; grid-row: 2; list-style: none; margin: 0; padding: 0; }
+.history-names li { height: 16px; }
+.history-names a { display: block; height: 16px; line-height: 16px; font-size: var(--fs-xs); text-align: right; color: var(--ink); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.history-names a:focus-visible { outline-offset: -2px; }
+.history-frame { grid-column: 2; grid-row: 2; min-width: 0; touch-action: pan-y; cursor: crosshair; }
+.history-frame canvas { display: block; }
+.history-readout { font-size: var(--fs-sm); margin: 0.55rem 0 0; min-height: 2.6em; font-variant-numeric: tabular-nums; }
+.history-key { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: var(--fs-sm); color: var(--ink-soft); margin: 0.2rem 0 0; }
+.history-key .key-box { margin-right: 0.35rem; vertical-align: -1px; }
+
+/* What moved this week (Moved.jsx) */
+.moved { margin: 0 0 1.75rem; }
+.moved h2 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+.moved-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.6rem; }
+.moved h3 { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 0.2rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--ink); }
+.moved ul { list-style: none; margin: 0; padding: 0; }
+.moved li { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; padding: 0.3rem 0; border-bottom: 1px solid var(--line); font-size: var(--fs-md); }
+.moved li a { padding: 0.15rem 0; }
+.moved li b { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.moved-none { font-size: var(--fs-md); color: var(--ink-soft); margin: 0.4rem 0 0; }
+
+/* A facility at its highest count ever, in both facility lists. */
+.badge { display: inline-block; margin-left: 0.45rem; padding: 0 0.35rem; font-size: var(--fs-xs); font-weight: 600; color: var(--ink); border: 1px solid var(--line-strong); border-radius: 2px; line-height: 1.45; vertical-align: 1px; white-space: nowrap; }
 
 /* jump line */
 .section-nav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 2.75rem; }
@@ -290,12 +344,14 @@ tr.detail > td { padding: 0 0.6rem 0.8rem; background: var(--row-open); }
   .find-clear:hover::before { background: var(--ink); }
   .find input:hover { border-color: var(--ink-soft); }
   .roster > tbody > tr:not(.detail):not(.open):hover > *, .county-table > tbody > tr:hover > * { background: var(--row-hover); }
-  .tabs button:hover { background: var(--teal-tint); }
+  .tabs button:hover, .replay:hover { background: var(--teal-tint); }
+  .replay.playing:hover { background: var(--teal-deep); }
+  .history-names a:hover { text-decoration: underline; }
   .tabs button[aria-pressed="true"]:hover { background: var(--teal-deep); }
 }
 /* Pressed: the answer a finger gets the moment it lands, on every kind of pointer. */
 a:active, .name:active, .sort:active, .more:active, summary:active { background-color: var(--teal-tint); box-shadow: 0 0 0 3px var(--teal-tint); }
-.tabs button:active { background: var(--teal-tint); border-color: var(--teal-deep); }
+.tabs button:active, .replay:active { background: var(--teal-tint); border-color: var(--teal-deep); }
 .tabs button[aria-pressed="true"]:active { background: var(--teal); }
 /* Two rules, not one list: a browser without :has() would throw out the whole list. */
 .flag-lockup:active { background: none; box-shadow: none; opacity: 0.7; }
@@ -318,6 +374,7 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
 }
 @media (max-width: 760px) {
   .method-grid { grid-template-columns: 1fr; }
+  .moved-grid { grid-template-columns: 1fr; gap: 1.1rem; }
 }
 @media (max-width: 560px) {
   .full { display: none; }
@@ -344,6 +401,8 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .colophon-inner { flex-wrap: wrap; }
   .to-top { flex-basis: 100%; margin-left: 72px; padding: 0.6rem 0; }
   .downloads span { display: block; margin: -0.4rem 0 0.55rem; }
+  .history { grid-template-columns: 6.8rem minmax(0, 1fr); column-gap: 0.45rem; padding: 0.6rem 0.5rem 0.7rem; }
+  .beds-date { min-width: 0; }
 }
 @media (max-width: 380px) {
   .county-table { font-size: var(--fs-sm); }
@@ -387,19 +446,17 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
   .roster > tbody > tr.open { border-bottom: 0; background: var(--row-open); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  /* The page's one authored moment: the bar fills to what the prisons were built for, then runs past it. */
-  .hero-over { animation: beyond 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
-  @keyframes beyond { from { transform: scaleX(0); } }
   /* A fast connection never sees the loading line. */
   .loading { animation: appear 0.2s ease-out 0.5s both; }
   @keyframes appear { from { opacity: 0; } }
-  .name, .sort, .tabs button, a, .more, summary, .find input { transition: color 0.12s ease-out, background-color 0.12s ease-out, border-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
+  .name, .sort, .tabs button, .replay, a, .more, summary, .find input { transition: color 0.12s ease-out, background-color 0.12s ease-out, border-color 0.12s ease-out, box-shadow 0.12s ease-out, text-decoration-color 0.12s ease-out, opacity 0.12s ease-out; }
 }
 /* High contrast (forced colors). The system repaints every background, and every bar on this page
    is a background. So the bars, the keys and the chart panels keep their own colors, which were
    chosen to be told apart; marks drawn in ink take the system's text color instead. */
 @media (forced-colors: active) {
-  .chart, .hero-bar, .meter, .key-box, .key-line, .key-mark { forced-color-adjust: none; }
+  .chart, .meter, .key-box, .key-line, .key-mark, .stripes-ramp, .history { forced-color-adjust: none; }
+  .replay.playing { forced-color-adjust: none; background: Highlight; border-color: Highlight; color: HighlightText; }
   .meter-mark, .key-mark { background: CanvasText; }
   .tabs button[aria-pressed="true"] { forced-color-adjust: none; background: Highlight; border-color: Highlight; color: HighlightText; }
   th[aria-sort] .sort::after { forced-color-adjust: none; border-top-color: CanvasText; }
@@ -411,10 +468,10 @@ a:active, .name:active, .sort:active, .more:active, summary:active { background-
 @media print {
   body, .roster, .county-table, .chart, .stat { background: #fff; }
   .page { max-width: none; padding: 1.25rem 0 0; }
-  .skip-link, .section-nav, .find, .tabs, .more, .table-view, .to-top, .detail-actions { display: none; }
-  .hero-bar span, .meter span, .key-box, .key-line, .key-mark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .skip-link, .section-nav, .find, .tabs, .more, .table-view, .to-top, .detail-actions, .beds-controls, .history-readout { display: none; }
+  .meter span, .key-box, .key-line, .key-mark, .stripes-ramp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .chart-frame svg { max-width: 100%; height: auto; }
-  figure, tr, .stat-strip, .hero-meter, #statewide, #home, #women, #contract, #juvenile, #supervision { break-inside: avoid; }
+  figure, tr, .stat-strip, .hero-meter, .moved, .history, #statewide, #home, #women, #contract, #juvenile, #supervision { break-inside: avoid; }
   h2, h3, .section-dek, .bar-key { break-after: avoid; }
   .sort { display: contents; }
   th[aria-sort] .sort::after { display: none; }

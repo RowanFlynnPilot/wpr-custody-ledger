@@ -42,6 +42,13 @@ export const ordinal = (n) => {
 
 // The department's names are typed with straight apostrophes (Milwaukee Women's); the page sets curly ones.
 export const typeset = (name) => name.replace(/'/g, "\u2019");
+// "Stanley" for Stanley Correctional Institution, "Gordon Center" for Gordon Correctional Center.
+export const shortName = (name) => typeset(name.replace(/ Correctional (Institution|Treatment Facility)$/, "")
+  .replace(/ Correctional Center$/, " Center").replace(/ Correctional Facility$/, " Facility"));
+
+const WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+// One through nine as words (AP), 10 and up as figures.
+export const inWords = (n) => WORDS[n] || num(n);
 
 export const TYPE_LABEL = {
   institution: "Prison",

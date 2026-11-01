@@ -12,7 +12,7 @@ import { chromium, devices, webkit } from "playwright-core";
 
 const PORT = 4173;
 const URL = `http://localhost:${PORT}/`;
-const SECTIONS = 9; // h2 headings on the page; change it when a section is added or removed
+const SECTIONS = 11; // h2 headings on the page; change it when a section is added or removed
 const failures = [];
 const check = (ok, message) => { if (!ok) failures.push(message); };
 
@@ -40,7 +40,16 @@ const visit = async (browser, name, options) => {
     local: document.querySelectorAll(".local tbody tr").length,
     rows: document.querySelectorAll(".facilities .roster tbody tr").length,
     jumps: document.querySelectorAll(".section-nav a").length,
-    meter: !!document.querySelector(".hero-bar"),
+    meter: !!document.querySelector(".beds canvas"),
+    // How many pixels each canvas has painted: the beds, the crowding stripes and the facility heat strip.
+    painted: [".beds canvas", ".stripes canvas", ".history canvas"].map((q) => {
+      const c = document.querySelector(q);
+      if (!c || !c.width) return 0;
+      const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+      let n = 0;
+      for (let i = 3; i < d.length; i += 4) if (d[i]) n++;
+      return n;
+    }),
     clipped: [...document.querySelectorAll(".chart-frame")].filter((frame) =>
       [...frame.querySelectorAll("svg text")].some((t) => {
         const box = t.getBoundingClientRect(), outer = frame.getBoundingClientRect();
@@ -57,7 +66,19 @@ const visit = async (browser, name, options) => {
   check(seen.local >= 1, `${name}: the close-to-home list is empty`);
   check(seen.rows === 10, `${name}: ${seen.rows} facility rows before "Show all", expected 10`);
   check(seen.jumps === 5, `${name}: ${seen.jumps} jump links, expected 5`);
-  check(seen.meter, `${name}: the system-wide capacity bar is missing`);
+  check(seen.meter, `${name}: the beds drawing at the top is missing`);
+  check(seen.painted.every((n) => n > 1000), `${name}: a canvas drew nothing (beds, stripes, heat strip painted ${JSON.stringify(seen.painted)})`);
+
+  // The replay runs, pauses, and "Back to this week" returns to the newest report.
+  const range = page.locator(".beds input[type=range]");
+  const newest = Number(await range.getAttribute("max"));
+  await page.click(".replay");
+  await page.waitForTimeout(400);
+  await page.click(".replay");
+  const paused = Number(await range.inputValue());
+  check(paused > 0 && paused < newest, `${name}: the replay stood at week ${paused} of ${newest} after 0.4 seconds`);
+  await page.click(".beds-unit .more");
+  check(Number(await range.inputValue()) === newest, `${name}: "Back to this week" did not return to the newest report`);
   check(seen.sideways === 0, `${name}: ${seen.sideways} table(s) run off the side of the screen`);
   check(seen.clipped === 0, `${name}: ${seen.clipped} chart(s) have a label running outside the frame`);
 
@@ -138,6 +159,15 @@ const visit = async (browser, name, options) => {
   await page.waitForTimeout(1500);
   const landed = await page.evaluate(() => Math.round(document.getElementById("counties").getBoundingClientRect().top));
   check(Math.abs(landed) < 80, `${name}: #counties left that section ${landed}px from the top of the screen`);
+
+  // A name in the heat strip opens that facility in the list.
+  await page.goto(URL, { waitUntil: "networkidle" });
+  await page.waitForSelector(".history-names a", { timeout: 15000 });
+  const first = page.locator(".history-names a").first();
+  const wanted = (await first.getAttribute("href")).split("=")[1];
+  await first.click();
+  await page.waitForSelector(`#facility-${wanted}.open`, { timeout: 5000 }).catch(() => {});
+  check(await page.locator(`#facility-${wanted}.open`).count() === 1, `${name}: the heat strip's first name did not open ${wanted}`);
   await page.close();
 };
 

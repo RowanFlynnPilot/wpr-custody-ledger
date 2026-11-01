@@ -8,8 +8,11 @@ import Juvenile from "./Juvenile.jsx";
 import Supervision from "./Supervision.jsx";
 import Facilities from "./Facilities.jsx";
 import Methodology from "./Methodology.jsx";
+import Beds from "./Beds.jsx";
+import History from "./History.jsx";
+import Moved from "./Moved.jsx";
 import SectionNav, { SkipLink, goTo, jump } from "./SectionNav.jsx";
-import { apDate, num, ordinal, pct1, signed, typeset } from "./format.js";
+import { apDate, inWords, monthYear, num, ordinal, pct1, shortName, signed, typeset } from "./format.js";
 import badge from "./assets/wpr-typewriter-badge.png";
 import wordmark from "./assets/wpr-wordmark.png";
 
@@ -131,6 +134,15 @@ export default function App() {
   // A week at either end of the record says so; otherwise the record rate is given as the lede gives the record count.
   const rateNote = rateRecord ? ", the highest rate in weekly records that begin in 1999"
     : rateLow ? ", the lowest rate in weekly records that begin in 1999" : "";
+  // The people beyond capacity against the largest prisons: as many of them as their beds stay fewer than the overflow.
+  const largest = latest.facilities.filter((f) => f.type === "institution" && f.capacity).sort((a, b) => b.capacity - a.capacity);
+  let outnumbered = 0;
+  for (let beds = 0; outnumbered < largest.length && beds + largest[outnumbered].capacity < over; outnumbered++) beds += largest[outnumbered].capacity;
+  const prisons = largest.slice(0, outnumbered).map((f) => shortName(f.name));
+  const nameList = prisons.length < 2 ? prisons.join("") : `${prisons.slice(0, -1).join(", ")} and ${prisons[prisons.length - 1]}`;
+  // County jails: from their low since 2021 when that is the story, otherwise the year's change.
+  const jailLow = statewide.filter((w) => w.date >= "2021-01-01").reduce((a, b) => (b.contract_county_jails < a.contract_county_jails ? b : a));
+  const atRecord = new Set(changes.facilities.at_record.map((f) => f.id));
 
   return (
     <>
@@ -155,24 +167,19 @@ export default function App() {
         {over <= 0 && <> The department puts its capacity at {num(crowding.capacity)}.</>}
       </p>
 
-      {/* The whole system as one bar: everyone the prisons were designed for, then everyone beyond. */}
+      {/* The whole system, bed by bed: everyone the prisons were designed for, then everyone beyond. */}
       {over > 0 && (
         <div className="hero-meter">
-          <div className="hero-bar" role="img"
-            aria-label={`${num(crowding.capacity)} people within design capacity and ${num(over)} beyond it`}>
-            <span className="hero-in" style={{ flexGrow: crowding.capacity }} />
-            <span className="hero-over" style={{ flexGrow: over }} />
-          </div>
-          <p className="hero-key">
-            <span><span className="key-box" style={{ background: "var(--chart-1)" }} /><strong>{num(crowding.capacity)}</strong> within design capacity</span>
-            <span><span className="key-box" style={{ background: "var(--chart-2)" }} /><strong>{num(over)}</strong> people beyond that</span>
-          </p>
+          <Beds statewide={statewide} />
           <p className="chart-note">
             That is {pct1(crowding.percent)} of design capacity{rateNote}, and the count
             is {yearly}.{" "}
             {!rateRecord && <>The highest rate, {pct1(crowding.record_percent)}, was set {apDate(crowding.record_date)}
               {alwaysOver ? ", and every" : "."}</>}
             {alwaysOver && <>{rateRecord ? "Every" : ""} weekly report since 1999 has been over capacity.</>}
+            {outnumbered > 0 && <> The {num(over)} people beyond capacity outnumber the beds in {outnumbered === 1
+              ? <>the largest prison, {nameList}</>
+              : <>the {inWords(outnumbered)} largest prisons combined: {nameList}</>}.</>}
           </p>
           <p className="chart-note">
             Design capacity is what each prison was built to hold, plus later expansions,
@@ -196,7 +203,9 @@ export default function App() {
         <div className="stat">
           <span className="stat-num">{num(jails.value)}</span>
           <span className="stat-label">state prisoners held in county jails on contract</span>
-          <span className="stat-sub">{signed(jails.year_change)} in a year</span>
+          <span className="stat-sub">{jailLow.contract_county_jails * 2 + 10 <= jails.value
+            ? <>up from {num(jailLow.contract_county_jails)} in {monthYear(jailLow.date)}</>
+            : <>{signed(jails.year_change)} in a year</>}</span>
         </div>
         <div className="stat">
           <span className="stat-num">{fromHome == null ? "—" : num(fromHome)}</span>
@@ -205,16 +214,19 @@ export default function App() {
         </div>
       </section>
 
+      <Moved changes={changes} />
+
       <SectionNav />
 
       <Statewide statewide={statewide} changes={changes} />
 
       <hr className="rule-double" />
-      <CloseToHome facilities={facilities} statewide={statewide} changes={changes} />
+      <CloseToHome facilities={facilities} statewide={statewide} changes={changes} atRecord={atRecord} />
       <Counties counties={counties} home={changes.home_counties} />
-      <Facilities facilities={facilities} latest={latest} counties={counties} />
+      <Facilities facilities={facilities} latest={latest} counties={counties} atRecord={atRecord} />
 
       <hr className="rule-double" />
+      <History facilities={facilities} latest={latest} />
       <WomenMen statewide={statewide} />
       <ContractBeds statewide={statewide} />
       {/* Two shorter stories side by side where there is room; one under the other on a phone. */}

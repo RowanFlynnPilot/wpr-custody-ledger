@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import TimeChart, { Sparkline, recent } from "./TimeChart.jsx";
 import { COLOR } from "./Statewide.jsx";
 import { goTo, jump, scrollToElement } from "./SectionNav.jsx";
-import { TYPE_LABEL, apDate, monthYear, num, pct, pct1, signed, typeset } from "./format.js";
+import { TYPE_LABEL, apDate, inWords, monthYear, num, pct, pct1, signed, typeset } from "./format.js";
 
 const GROUPS = [
   { key: "prisons", label: "Prisons and centers", short: "Prisons", types: ["institution", "center", "secure", "treatment"], sort: "percent" },
@@ -45,7 +45,7 @@ export function BarKey() {
 // A facility the form gives no capacity for: a dash to the eye, words to a screen reader.
 export const noCapacity = <><span aria-hidden="true">—</span><span className="visually-hidden">none listed</span></>;
 
-export default function Facilities({ facilities, latest, counties }) {
+export default function Facilities({ facilities, latest, counties, atRecord }) {
   const weeks = facilities.dates.length;
   const history = useMemo(() => Object.fromEntries(facilities.facilities.map((f) => [f.id, f])), [facilities]);
   const rows = useMemo(() => {
@@ -97,6 +97,12 @@ export default function Facilities({ facilities, latest, counties }) {
   // Under the default order (most crowded first) the big prisons sit far down the list: say where they stand.
   const big = !needle && group === "prisons" && sortKey === "percent" && !sort?.reversed
     ? listed.filter((r) => r.population >= 1000 && r.percent != null) : [];
+  // Crowding by security level, the form's own grouping, from this week's facilities with a capacity.
+  const levels = Object.entries(rows.reduce((acc, r) => {
+    if (!r.security || !r.capacity) return acc;
+    const [p, c] = acc[r.security] || [0, 0];
+    return { ...acc, [r.security]: [p + r.population, c + r.capacity] };
+  }, {})).map(([level, [p, c]]) => ({ level, percent: pct(p, c) })).sort((a, b) => b.percent - a.percent);
 
   // A shared link opens its facility; the WordPress embed forwards the article's #hash into the frame.
   useEffect(() => {
@@ -205,6 +211,7 @@ export default function Facilities({ facilities, latest, counties }) {
                 <tr role="row" id={`facility-${r.id}`} className={[open === r.id && "open", !kind && !county && "bare"].filter(Boolean).join(" ") || undefined}>
                   <th scope="row" role="rowheader">
                     <button type="button" className="name" aria-expanded={open === r.id} onClick={() => toggle(r.id)}>{typeset(r.name)}</button>
+                    {atRecord.has(r.id) && <span className="badge">highest ever</span>}
                     {(kind || county) && (
                       <span className="where">
                         {county ? <><span className="wide">{kind}{kind && " · "}</span>{county}</> : kind}
@@ -257,9 +264,11 @@ export default function Facilities({ facilities, latest, counties }) {
       )}
       {big.length > 1 && (
         <p className="chart-note">
-          The {big.length} prisons holding 1,000 or more people run from{" "}
+          The {inWords(big.length)} prisons holding 1,000 or more people run from{" "}
           {pct1(Math.min(...big.map((r) => r.percent)))} to {pct1(Math.max(...big.map((r) => r.percent)))} of
           capacity. Sort by People to see them first.
+          {levels.length === 3 && <> By security level, {levels[0].level}-security facilities are the most crowded,
+            at {pct1(levels[0].percent)}, against {pct1(levels[1].percent)} for {levels[1].level} and {pct1(levels[2].percent)} for {levels[2].level} security.</>}
         </p>
       )}
       {idle.length > 0 && (

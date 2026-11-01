@@ -12,7 +12,7 @@ const UNIT = { county_jail: "state prisoners", juvenile: "youth" };
 
 // The same ruled rows as the facility list further down, narrowed to the home counties. A name
 // links to that facility's full history there.
-export default function CloseToHome({ facilities, statewide, changes }) {
+export default function CloseToHome({ facilities, statewide, changes, atRecord }) {
   const home = changes.home_counties;
   const weeks = statewide.length;
   const local = facilities.facilities
@@ -56,6 +56,7 @@ export default function CloseToHome({ facilities, statewide, changes }) {
               <tr role="row" key={f.id}>
                 <th scope="row" role="rowheader">
                   <a className="name" href={`#facility=${f.id}`}>{typeset(f.name)}</a>
+                  {atRecord.has(f.id) && <span className="badge">highest ever</span>}
                   <span className="where">{f.county}{"\u00a0"}County · {TYPE_LABEL[f.type].toLowerCase()}</span>
                 </th>
                 <td role="cell" className="n" data-label={UNIT[f.type] || "people"}>{num(f.now)}</td>

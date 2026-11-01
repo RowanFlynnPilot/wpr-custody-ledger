@@ -1,5 +1,6 @@
 import React from "react";
 import TimeChart from "./TimeChart.jsx";
+import Stripes from "./Stripes.jsx";
 import { apDate, apMonthYear, num, pct, pct1, yearOf } from "./format.js";
 
 // Rust is "beyond capacity" everywhere on the page: the top bar, every facility's bar, the shading on a chart.
@@ -21,7 +22,11 @@ export default function Statewide({ statewide, changes }) {
   const at = (i, text, place, wideOnly) => ({ index: i, value: statewide[i].population, text, place, wideOnly, color: COLOR.population });
   const since2020 = statewide.findIndex((w) => w.date >= "2020-01-01");
   const low = statewide.reduce((best, w, i) => (i >= since2020 && w.population < statewide[best].population ? i : best), since2020);
-  const oldPeak = statewide.findIndex((w) => w.date === changes.population.prior_peak.date);
+  // The record standing before this week. When that is only weeks old it says little beside this week's
+  // figure, so the chart marks the peak before the pandemic instead.
+  const priorPeak = statewide.findIndex((w) => w.date === changes.population.prior_peak.date);
+  const beforePandemic = statewide.slice(0, since2020).reduce((best, w, i) => (w.population > statewide[best].population ? i : best), 0);
+  const oldPeak = priorPeak >= 0 && last - priorPeak < 52 ? beforePandemic : priorPeak;
   const marks = [
     at(low, `${apMonthYear(dates[low])}: ${num(statewide[low].population)}`, "below"),
     // In a record week this is the record it broke; in any other week, the record that still stands.
@@ -45,6 +50,7 @@ export default function Statewide({ statewide, changes }) {
         Every weekly count since 1999. The gray line is capacity, counting the contract beds the
         state rents as full. The shaded gap is everyone beyond it.
       </p>
+      <Stripes statewide={statewide} />
       <TimeChart
         dates={dates} series={series} marks={marks} yMin={floor} yMax={ceiling} height={380}
         wash={{ upper: "population", lower: ["capacity"], color: COLOR.over }}
