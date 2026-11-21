@@ -1,59 +1,59 @@
 {
- "report_date": "2026-11-13",
- "previous_date": "2026-11-06",
- "year_ago_date": "2025-11-14",
+ "report_date": "2026-11-20",
+ "previous_date": "2026-11-13",
+ "year_ago_date": "2025-11-21",
  "population": {
-  "value": 23935,
-  "week_change": 0,
-  "year_change": 444,
-  "record": false,
-  "record_streak": 0,
+  "value": 23959,
+  "week_change": 24,
+  "year_change": 494,
+  "record": true,
+  "record_streak": 1,
   "prior_peak": {
    "date": "2026-10-30",
    "value": 23936
   }
  },
  "crowding": {
-  "capacity": 17865,
+  "capacity": 17884,
   "capacity_type": "design",
   "percent": 134.0,
-  "over_capacity": 6070,
-  "contract_beds": 498,
+  "over_capacity": 6075,
+  "contract_beds": 516,
   "record_percent": 134.1,
   "record_date": "2026-10-09"
  },
  "men": {
-  "value": 22197,
-  "week_change": -9,
-  "year_change": 339,
+  "value": 22228,
+  "week_change": 31,
+  "year_change": 400,
   "record": false,
-  "percent": 131.4
+  "percent": 131.5
  },
  "women": {
-  "value": 1738,
-  "week_change": 9,
-  "year_change": 105,
+  "value": 1731,
+  "week_change": -7,
+  "year_change": 94,
   "record": false,
-  "percent": 177.9
+  "percent": 176.8
  },
  "county_jails": {
-  "value": 471,
-  "week_change": 2,
-  "year_change": 153,
+  "value": 488,
+  "week_change": 17,
+  "year_change": 169,
   "record": false,
   "jails_holding": 12,
   "jails_listed": 25
  },
  "juvenile": {
-  "value": 123,
-  "week_change": 5,
-  "year_change": 19,
+  "value": 121,
+  "week_change": -2,
+  "year_change": 15,
   "record": false
  },
  "supervision": {
-  "population": 63860,
-  "as_of": "2026-08-31",
-  "holds": 828
+  "population": 64000,
+  "as_of": "2026-09-30",
+  "holds": 824
  },
  "facilities": {
   "over_capacity": 35,
@@ -62,101 +62,101 @@
    {
     "id": "milwaukee-womens",
     "name": "Milwaukee Women's Correctional Center",
-    "population": 107,
+    "population": 105,
     "capacity": 42,
-    "percent": 254.8
+    "percent": 250.0
    },
    {
     "id": "drug-abuse",
     "name": "Drug Abuse Correctional Center",
-    "population": 303,
+    "population": 307,
     "capacity": 125,
-    "percent": 242.4
+    "percent": 245.6
    },
    {
     "id": "ellsworth",
     "name": "Robert E. Ellsworth Correctional Center",
-    "population": 507,
+    "population": 505,
     "capacity": 230,
-    "percent": 220.4
-   },
-   {
-    "id": "oakhill",
-    "name": "Oakhill Correctional Institution",
-    "population": 878,
-    "capacity": 409,
-    "percent": 214.7
+    "percent": 219.6
    },
    {
     "id": "mcnaughton",
     "name": "McNaughton Correctional Center",
-    "population": 117,
+    "population": 118,
     "capacity": 55,
-    "percent": 212.7
+    "percent": 214.5
+   },
+   {
+    "id": "oakhill",
+    "name": "Oakhill Correctional Institution",
+    "population": 875,
+    "capacity": 409,
+    "percent": 213.9
    }
   ],
   "largest_gains": [
    {
-    "id": "taycheedah",
-    "name": "Taycheedah Correctional Institution",
-    "population": 1072,
-    "week_change": 12
+    "id": "st-croix",
+    "name": "St. Croix Correctional Center",
+    "population": 116,
+    "week_change": 9
    },
    {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2147,
-    "week_change": 10
+    "id": "dodge",
+    "name": "Dodge Correctional Institution",
+    "population": 1735,
+    "week_change": 7
    },
    {
-    "id": "new-lisbon",
-    "name": "New Lisbon Correctional Institution",
-    "population": 1043,
-    "week_change": 8
+    "id": "stanley",
+    "name": "Stanley Correctional Institution",
+    "population": 1590,
+    "week_change": 7
    },
    {
-    "id": "black-river",
-    "name": "Black River Correctional Center",
-    "population": 135,
+    "id": "msdf",
+    "name": "Milwaukee Secure Detention Facility",
+    "population": 506,
     "week_change": 6
    },
    {
-    "id": "drug-abuse",
-    "name": "Drug Abuse Correctional Center",
-    "population": 303,
-    "week_change": 6
+    "id": "fox-lake",
+    "name": "Fox Lake Correctional Institution",
+    "population": 1403,
+    "week_change": 5
    }
   ],
   "largest_drops": [
    {
-    "id": "dodge",
-    "name": "Dodge Correctional Institution",
-    "population": 1728,
-    "week_change": -16
+    "id": "racine",
+    "name": "Racine Correctional Institution",
+    "population": 1781,
+    "week_change": -15
    },
    {
-    "id": "jackson",
-    "name": "Jackson Correctional Institution",
-    "population": 986,
-    "week_change": -9
-   },
-   {
-    "id": "st-croix",
-    "name": "St. Croix Correctional Center",
-    "population": 107,
-    "week_change": -8
-   },
-   {
-    "id": "prairie-du-chien",
-    "name": "Prairie du Chien Correctional Institution",
-    "population": 536,
+    "id": "black-river",
+    "name": "Black River Correctional Center",
+    "population": 129,
     "week_change": -6
    },
    {
-    "id": "racine",
-    "name": "Racine Correctional Institution",
-    "population": 1796,
+    "id": "taycheedah",
+    "name": "Taycheedah Correctional Institution",
+    "population": 1067,
     "week_change": -5
+   },
+   {
+    "id": "green-bay",
+    "name": "Green Bay Correctional Institution",
+    "population": 1127,
+    "week_change": -3
+   },
+   {
+    "id": "oshkosh",
+    "name": "Oshkosh Correctional Institution",
+    "population": 2144,
+    "week_change": -3
    }
   ],
   "largest_gains_year": [
@@ -164,43 +164,38 @@
     "id": "waupun",
     "name": "Waupun Correctional Institution",
     "population": 968,
-    "year_change": 120
+    "year_change": 119
    },
    {
     "id": "kettle-moraine",
     "name": "Kettle Moraine Correctional Institution",
     "population": 1210,
-    "year_change": 80
+    "year_change": 74
    },
    {
     "id": "taycheedah",
     "name": "Taycheedah Correctional Institution",
-    "population": 1072,
-    "year_change": 65
+    "population": 1067,
+    "year_change": 63
    },
    {
     "id": "oshkosh",
     "name": "Oshkosh Correctional Institution",
-    "population": 2147,
+    "population": 2144,
     "year_change": 59
    },
    {
     "id": "oakhill",
     "name": "Oakhill Correctional Institution",
-    "population": 878,
-    "year_change": 56
+    "population": 875,
+    "year_change": 52
    }
   ],
   "at_record": [
    {
-    "id": "racine-youthful-offender",
-    "name": "Racine Youthful Offender Correctional Facility",
-    "population": 474
-   },
-   {
-    "id": "oshkosh",
-    "name": "Oshkosh Correctional Institution",
-    "population": 2147
+    "id": "fox-lake",
+    "name": "Fox Lake Correctional Institution",
+    "population": 1403
    },
    {
     "id": "vernon-county-jail",
@@ -215,7 +210,12 @@
    {
     "id": "lincoln-county-jail",
     "name": "Lincoln County Jail",
-    "population": 76
+    "population": 78
+   },
+   {
+    "id": "waupaca-county-jail",
+    "name": "Waupaca County Jail",
+    "population": 28
    },
    {
     "id": "green-lake-county-jail",
@@ -246,7 +246,7 @@
    "county": "Oneida",
    "capacity": null,
    "population": 119,
-   "week_change": -1,
+   "week_change": 0,
    "year_change": 7,
    "record": false
   },
@@ -256,9 +256,9 @@
    "type": "center",
    "county": "Oneida",
    "capacity": 55,
-   "population": 117,
-   "week_change": 0,
-   "year_change": -2,
+   "population": 118,
+   "week_change": 1,
+   "year_change": -1,
    "record": false
   },
   {
@@ -267,9 +267,9 @@
    "type": "county_jail",
    "county": "Lincoln",
    "capacity": null,
-   "population": 76,
-   "week_change": 0,
-   "year_change": 26,
+   "population": 78,
+   "week_change": 2,
+   "year_change": 28,
    "record": true
   },
   {
@@ -278,9 +278,9 @@
    "type": "juvenile",
    "county": "Lincoln",
    "capacity": 519,
-   "population": 67,
-   "week_change": 5,
-   "year_change": 2,
+   "population": 62,
+   "week_change": -5,
+   "year_change": -4,
    "record": false
   },
   {
@@ -300,9 +300,9 @@
    "type": "juvenile",
    "county": "Lincoln",
    "capacity": 29,
-   "population": 4,
-   "week_change": 0,
-   "year_change": -1,
+   "population": 3,
+   "week_change": -1,
+   "year_change": -3,
    "record": false
   },
   {
